@@ -1,0 +1,36 @@
+#pragma once
+
+// 전방선언
+class GameObject;
+class InputManager;
+
+class Scene 
+{
+public:
+	Scene();
+	virtual ~Scene();
+
+public:
+	InputManager* GetInputManager() { return m_inputManager; }
+
+public:
+	virtual void Initalize(InputManager* _inputManager);
+	virtual void Finalize() {};
+
+	// 씬에 들어가지전에 호출하는 함수
+	virtual void Enter() = 0;
+
+	// 씬에 나가기전에 호출하는 함수
+	virtual void Exit() = 0;
+
+	virtual void Render(D2DRenderer* _d2DRenderer);
+	virtual void Update(float deltaTime);
+
+
+private:
+	InputManager* m_inputManager;
+
+	// 씬이 오브젝트 타입에 따라서 오브젝트들을 관리한다.
+	vector<GameObject*> m_objectList[static_cast<int>(OBJECT_TYPE::END)];
+};
+

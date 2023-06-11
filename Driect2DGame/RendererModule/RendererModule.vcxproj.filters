@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="D2DRenderer">
+      <UniqueIdentifier>{2955b94d-f1df-4b00-acd1-254d73a2de3b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D2DRenderer.h">
+      <Filter>D2DRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererPCH.h" />
+    <ClInclude Include="RendererHeader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D2DRenderer.cpp">
+      <Filter>D2DRenderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

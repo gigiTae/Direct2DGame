@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Math">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Math\Vector2">
+      <UniqueIdentifier>{54c4b54f-81ea-4625-b976-90a29a7b3a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vector3">
+      <UniqueIdentifier>{9bd80142-f207-48ce-b62b-4f4608b32e93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Matrix3x3">
+      <UniqueIdentifier>{8e826a6f-98dc-4357-bb1a-e01f080b5d7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="MathModuleHeader.h" />
+    <ClInclude Include="MathModulePCH.h" />
+    <ClInclude Include="Vector3.h">
+      <Filter>Math\Vector3</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3x3.h">
+      <Filter>Math\Matrix3x3</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Math\Vector3</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3x3.cpp">
+      <Filter>Math\Matrix3x3</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="D2DEngine">
+      <UniqueIdentifier>{9376c137-1a65-4685-bc3a-a3b00b325751}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D2DEngine.h">
+      <Filter>D2DEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineHeader.h" />
+    <ClInclude Include="EnginePCH.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D2DEngine.cpp">
+      <Filter>D2DEngine</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
