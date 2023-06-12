@@ -24,6 +24,8 @@ double TimeManager::Update()
 	QueryPerformanceCounter(&m_curentCount);
 	m_deltaTime = (m_curentCount.QuadPart - m_prevCount.QuadPart) / (double)m_frequency.QuadPart;
 
+	m_prevCount.QuadPart = m_curentCount.QuadPart;
+
 	return m_deltaTime;
 }
 

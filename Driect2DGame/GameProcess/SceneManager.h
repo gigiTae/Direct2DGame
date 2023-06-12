@@ -15,6 +15,7 @@ public:
 
 	void Initalize(InputManager* _inputManager);
 	void Update(float _deltaTime);
+	void FinalUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);
 	void Finalize();
 

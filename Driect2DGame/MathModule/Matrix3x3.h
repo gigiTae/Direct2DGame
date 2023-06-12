@@ -4,9 +4,9 @@
 // 아핀공간 행렬변환을 위한 3x3
 // 
 // direct2d에서는 행기준 방식을 사용한다
-// 1 4 7               1 2 3
-// 2 5 8               4 5 6
-// 3 6 9 -> 열기준행렬  7 8 9 -> 행기준행렬
+// x1 y1 z1               x1 x2 x3
+// x2 y2 z2               y1 y2 y3
+// x3 y3 z3 -> 열기준행렬  z1 z2 z3 -> 행기준행렬
 struct Matrix3x3
 {
 	inline constexpr Matrix3x3() = default;

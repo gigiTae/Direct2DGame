@@ -1,6 +1,8 @@
 #include "GameProcessPCH.h"
 #include "GameObject.h"
 #include"Transform.h"
+#include "BoxCollider.h"
+#include "CircleCollider.h"
 
 
 GameObject::~GameObject()
@@ -17,12 +19,68 @@ void GameObject::CreateTransform(const Vector2& _position, const Vector2& _scale
 
 void GameObject::CreateBoxCollider()
 {
+	m_boxCollider = new BoxCollider();
+	m_boxCollider->SetOwner(this);
+	m_boxCollider->SetActive(true);
 }
 
 void GameObject::CreateCircleCollider()
 {
+	m_circleCollider = new CircleCollider();
+	m_circleCollider->SetOwner(this);
+	m_circleCollider->SetActive(true);
 }
 
-void GameObject::Render()
+void GameObject::DestroyAllComponent()
+{
+
+	if (m_transform != nullptr)
+	{
+		delete m_transform;
+		m_transform = nullptr;
+	}
+	if (m_boxCollider != nullptr)
+	{
+		delete m_boxCollider;
+		m_boxCollider = nullptr;
+	}
+	if (m_circleCollider != nullptr)
+	{
+		delete m_circleCollider;
+		m_circleCollider = nullptr;
+	}
+}
+
+void GameObject::FinalUpdate(float _deltaTime)
+{
+	if (m_boxCollider != nullptr)
+	{
+		m_boxCollider->FinalUpdate();
+	}
+	if (m_circleCollider != nullptr)
+	{
+		m_circleCollider->FinalUpdate();
+	}
+}
+
+void GameObject::Render(D2DRenderer* _d2DRenderer)
 {
 }
+
+void GameObject::ComponentRender(D2DRenderer* _d2DRenderer)
+{
+	if (m_boxCollider != nullptr)
+	{
+		m_boxCollider->DebugRender(_d2DRenderer);
+	}
+	if (m_circleCollider != nullptr)
+	{
+		m_circleCollider->DebugRender(_d2DRenderer);
+	}
+}
+
+void GameObject::Finalize()
+{
+	DestroyAllComponent();
+}
+

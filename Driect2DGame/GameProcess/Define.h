@@ -19,3 +19,8 @@ enum class OBJECT_TYPE
 	END = 32,
 };
 
+enum class COLLIDER_TYPE
+{
+	CIRCLE,
+	BOX,
+};

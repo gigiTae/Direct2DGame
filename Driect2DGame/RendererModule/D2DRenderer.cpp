@@ -1,6 +1,8 @@
 
+#include "MathModuleHeader.h"
 #include "RendererPCH.h"
 #include "D2DRenderer.h"
+#include "macro.h"
 
 D2DRenderer::D2DRenderer()
 	:m_hwnd(nullptr)
@@ -8,6 +10,8 @@ D2DRenderer::D2DRenderer()
 	,m_renderTarget(nullptr)
 	,m_IsD2DResReady(S_FALSE)
 	,m_renderTargetSize{}
+	,m_nowBrush(nullptr)
+	,m_tempBrush(nullptr)
 {
 }
 
@@ -30,6 +34,7 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	hr = CreateDeviceResources();
 	assert(hr == S_OK);
+
 
 }
 
@@ -60,11 +65,12 @@ void D2DRenderer::EndRender()
 	{
 		HRESULT hr = m_renderTarget->EndDraw();
 
+		//복구할 수 있는 프레젠테이션 오류가 있습니다. 호출자는 다시 만들고
+		//전체 프레임을 다시 렌더링하고, 현재를 다시 시도해야 합니다.
 		if (hr == D2DERR_RECREATE_TARGET)
 		{
 			hr = S_OK;
-			//DiscardDeviceResources();
-			
+			DiscardDeviceResources();
 		}
 
 
@@ -73,10 +79,71 @@ void D2DRenderer::EndRender()
 
 void D2DRenderer::Finalize()
 {
+	SafeRelease(&m_direct2DFactory);
+	SafeRelease(&m_renderTarget);
+
+	//현재 스레드에서 COM 라이브러리를 닫고, 스레드에 의해 로드된 모든 DLL을 언로드하고
+	//, 스레드가 유지 관리하는 다른 모든 리소스를 해제하고, 스레드의 모든 RPC 연결을 강제로 닫습니다.
+	CoUninitialize();
 }
 
-void D2DRenderer::DrawLine(Vector2 _start, Vector2 _end, COLORREF color)
+void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
+	D2D1_POINT_2F start = _point1.ToPoint2F();
+	D2D1_POINT_2F end = _point2.ToPoint2F();
+
+	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	assert(m_tempBrush);
+
+	m_renderTarget->DrawLine(start, end, m_tempBrush, 1.0f);
+
+	SafeRelease(&m_tempBrush);
+}
+
+void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
+{
+	D2D1_ELLIPSE region;
+	region.point = _point.ToPoint2F();
+	region.radiusX = _scale.x * 0.5f;
+	region.radiusY = _scale.y * 0.5f;
+
+	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	assert(m_tempBrush);
+
+	m_renderTarget->DrawEllipse(region, m_tempBrush);
+
+	SafeRelease(&m_tempBrush);
+}
+
+void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
+{
+	D2D1_ELLIPSE region;
+	region.point = _point.ToPoint2F();
+	region.radiusX = _radius;
+	region.radiusY = _radius;
+
+	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	assert(m_tempBrush);
+
+	m_renderTarget->DrawEllipse(region, m_tempBrush);
+
+	SafeRelease(&m_tempBrush);
+}
+
+void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color)
+{
+	D2D1_RECT_F rt;
+	rt.left = _leftTop.x;
+	rt.top = _leftTop.y;
+	rt.right = _rightBottom.x;
+	rt.bottom = _rightBottom.y;
+
+	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	assert(m_tempBrush);
+
+	m_renderTarget->DrawRectangle(rt, m_tempBrush);
+
+	SafeRelease(&m_tempBrush);
 }
 
 HRESULT D2DRenderer::CreateDeviceResources()
@@ -101,4 +168,9 @@ HRESULT D2DRenderer::CreateDeviceResources()
 	}
 
 	return hr;
+}
+
+void D2DRenderer::DiscardDeviceResources()
+{
+	SafeRelease(&m_renderTarget);
 }

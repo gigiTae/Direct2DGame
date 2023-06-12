@@ -34,6 +34,11 @@ void SceneManager::Update(float _deltaTime)
 	m_currentScene->Update(_deltaTime);
 }
 
+void SceneManager::FinalUpdate(float _deltaTime)
+{
+	m_currentScene->FinalUpdate(_deltaTime);
+}
+
 void SceneManager::Render(D2DRenderer* _d2DRenderer)
 {
 	m_currentScene->Render(_d2DRenderer);

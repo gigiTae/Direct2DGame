@@ -133,8 +133,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="D2DRenderer.h" />
-    <ClInclude Include="RendererPCH.h" />
+    <ClInclude Include="macro.h" />
     <ClInclude Include="RendererHeader.h" />
+    <ClInclude Include="RendererPCH.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp" />

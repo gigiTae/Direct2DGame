@@ -25,8 +25,9 @@ public:
 
 	virtual void Render(D2DRenderer* _d2DRenderer);
 	virtual void Update(float deltaTime);
+	virtual void FinalUpdate(float _deltaTime);
 
-
+	void AddObject(GameObject* _object, OBJECT_TYPE _type);
 private:
 	InputManager* m_inputManager;
 

@@ -1,7 +1,6 @@
 #pragma once
 
 // 렌더러에 필요한 헤더파일
-#include "MathModulePCH.h"
 
 #include <windows.h>
 #include <d2d1.h>

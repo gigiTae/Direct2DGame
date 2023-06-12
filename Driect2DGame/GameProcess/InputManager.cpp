@@ -60,7 +60,7 @@ void InputManager::Initalize(HWND _main)
 }
 
 void InputManager::Update()
-{
+{ 
 	HWND hWnd = GetFocus();
 
 	// 현재 포커스중일때
@@ -68,7 +68,7 @@ void InputManager::Update()
 	{
 		for (int i = 0; i < static_cast<int>(KEY::LAST); ++i)
 		{
-			if (GetAsyncKeyState(m_matchVK[i] & 0x8000))
+			if (GetAsyncKeyState(m_matchVK[i]) & 0x8000)
 			{
 				if (m_keyInfo[i].prevPush)
 				{

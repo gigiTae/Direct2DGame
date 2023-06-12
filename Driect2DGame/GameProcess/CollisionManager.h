@@ -2,15 +2,21 @@
 
 
 // 전방선언
+class Collider;
 class BoxCollider;
 class CircleCollier;
 class InputManager;
 class SceneManager;
+class GameObject;
 
-// 충돌이 발생하면 충돌정보를 넘겨준다. 
-struct CollisionInfo
+
+
+// 충돌정보 
+struct Collision
 {
-
+	GameObject* otherObject;
+	Collider* otherCollider;
+	COLLIDER_TYPE type;
 };
 
 /// <summary>

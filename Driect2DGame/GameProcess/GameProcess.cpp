@@ -42,20 +42,23 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 
 void GameProcess::Roop()
 {
-	double deltaTime = m_timeManager->Update();
+	float deltaTime = m_timeManager->Update();
 	m_inputManager->Update();
 
 
 	// 게임오브젝트 업데이트
-
-
-
+	m_sceneManager->Update(deltaTime);
+	m_sceneManager->FinalUpdate(deltaTime);
+	
 	// 충돌처리
 	m_collisionManager->Update();
 
-	// 랜더링 
-	m_d2DRenderer->BeginRender();
 
+
+	// 랜더링은 BegineRender와 EndRender 사이에 해야한다.
+	m_d2DRenderer->BeginRender();
+	
+	m_sceneManager->Render(m_d2DRenderer);
 
 	m_d2DRenderer->EndRender();
 

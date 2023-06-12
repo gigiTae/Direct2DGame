@@ -38,6 +38,12 @@
     <ClInclude Include="MainScene.h">
       <Filter>GameProcess\03.Scene\MainScene</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>GameProcess\04.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameProcess\06.Prefab\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -51,9 +57,6 @@
     </Filter>
     <Filter Include="GameProcess\01.Manager\TimeManager">
       <UniqueIdentifier>{13218e19-062b-456c-809b-39536336000f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Manager\CollisionManager">
-      <UniqueIdentifier>{163362dd-7a68-4529-87ba-f370a1a9b99f}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\04.Component">
       <UniqueIdentifier>{41a77953-21b6-4692-9e59-8c1c78138e77}</UniqueIdentifier>
@@ -76,20 +79,26 @@
     <Filter Include="GameProcess\04.Component\CircleCollider">
       <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\05.Define">
-      <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\03.Scene\MainScene">
       <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\06.Factory">
+    <Filter Include="GameProcess\06.Prefab">
       <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\01.Manager\CollisionManager">
+      <UniqueIdentifier>{163362dd-7a68-4529-87ba-f370a1a9b99f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\04.Component\Collider">
+      <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\05.Define">
+      <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\06.Prefab\Player">
+      <UniqueIdentifier>{db4274a2-e10b-47fb-b7a1-8a30d7acc19e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameProcess.cpp">
-      <Filter>GameProcess</Filter>
-    </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>GameProcess\01.Manager\TimeManager</Filter>
     </ClCompile>
@@ -119,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>GameProcess\03.Scene\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProcess.cpp">
+      <Filter>GameProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>GameProcess\04.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameProcess\06.Prefab\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

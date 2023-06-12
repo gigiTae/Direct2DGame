@@ -33,6 +33,10 @@ private:
 	void WindowInitalize(HINSTANCE _hInstance, int _nCmdShow);
 
 private:
+	// 화면 해상도
+	const int m_screenWidth = 1600;
+	const int m_screenHeight = 900;
+
 	HINSTANCE m_hInstance;
 	// 메인 윈도우 핸들
 	HWND m_hWnd;

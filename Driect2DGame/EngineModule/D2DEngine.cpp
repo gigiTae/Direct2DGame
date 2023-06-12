@@ -86,14 +86,10 @@ void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 	constexpr int left = 100;
 	constexpr int top = 100;
 
-	// 윈도우 창 크기
-	constexpr int screenWidth = 1000;
-	constexpr int screenHeight = 700;
-
 	// 윈도우 창 생성
 	m_hWnd = CreateWindow(title, title
 		, WS_OVERLAPPEDWINDOW // 창이 겹침
-		, left, top, screenWidth, screenHeight
+		, left, top, m_screenWidth, m_screenHeight
 		, NULL, NULL, _hInstance, NULL);
 
 	// 방어적코드
