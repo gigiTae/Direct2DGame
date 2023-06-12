@@ -5,6 +5,12 @@
 #include "CircleCollider.h"
 #include "Transform.h"
 
+Player::Player(const wstring& _name)
+	:GameObject(_name)
+	,m_moveSpeed(0.f)
+{
+}
+
 Player::~Player()
 {
 }

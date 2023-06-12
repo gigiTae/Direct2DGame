@@ -6,137 +6,146 @@
       <Filter>GameProcess</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
-      <Filter>GameProcess\01.Manager\TimeManager</Filter>
+      <Filter>GameProcess\Manager\TimeManager</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>GameProcess\01.Manager\CollisionManager</Filter>
+      <Filter>GameProcess\Manager\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>GameProcess\01.Manager\InputManager</Filter>
+      <Filter>GameProcess\Manager\InputManager</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>GameProcess\01.Manager\SceneManager</Filter>
+      <Filter>GameProcess\Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>GameProcess\03.Scene</Filter>
+      <Filter>GameProcess\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>GameProcess\04.Component\Transform</Filter>
+      <Filter>GameProcess\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
-      <Filter>GameProcess\04.Component\CircleCollider</Filter>
+      <Filter>GameProcess\Component\CircleCollider</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>GameProcess\04.Component\BoxColider</Filter>
+      <Filter>GameProcess\Component\BoxColider</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>GameProcess\02.GameObject</Filter>
+      <Filter>GameProcess\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>GameProcess\05.Define</Filter>
+      <Filter>GameProcess\Define</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
-      <Filter>GameProcess\03.Scene\MainScene</Filter>
+      <Filter>GameProcess\Scene\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>GameProcess\04.Component\Collider</Filter>
+      <Filter>GameProcess\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>GameProcess\06.Prefab\Player</Filter>
+      <Filter>GameProcess\Prefab\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>GameProcess\Prefab\Box</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
       <UniqueIdentifier>{2af1f3ec-85ef-42e7-acd0-bf7532839980}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\01.Manager">
+    <Filter Include="GameProcess\Manager">
       <UniqueIdentifier>{cce74b3c-9b80-46f1-ac05-915ac072855c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Scene">
-      <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Manager\TimeManager">
+    <Filter Include="GameProcess\Manager\TimeManager">
       <UniqueIdentifier>{13218e19-062b-456c-809b-39536336000f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\04.Component">
-      <UniqueIdentifier>{41a77953-21b6-4692-9e59-8c1c78138e77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Manager\InputManager">
+    <Filter Include="GameProcess\Manager\InputManager">
       <UniqueIdentifier>{971b1822-3ac0-4eb5-9f2c-1965f78e71cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\02.GameObject">
-      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Manager\SceneManager">
+    <Filter Include="GameProcess\Manager\SceneManager">
       <UniqueIdentifier>{23ef4742-1acb-4c58-a7ad-70d434bb4e0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\04.Component\Transform">
-      <UniqueIdentifier>{122f0a72-211a-4a8e-a929-0f4b2c234b59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Component\BoxColider">
-      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Component\CircleCollider">
-      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Scene\MainScene">
-      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\06.Prefab">
-      <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Manager\CollisionManager">
+    <Filter Include="GameProcess\Manager\CollisionManager">
       <UniqueIdentifier>{163362dd-7a68-4529-87ba-f370a1a9b99f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\04.Component\Collider">
+    <Filter Include="GameProcess\GameObject">
+      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Scene">
+      <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Scene\MainScene">
+      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component">
+      <UniqueIdentifier>{41a77953-21b6-4692-9e59-8c1c78138e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\Transform">
+      <UniqueIdentifier>{122f0a72-211a-4a8e-a929-0f4b2c234b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\BoxColider">
+      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\CircleCollider">
+      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\Collider">
       <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\05.Define">
+    <Filter Include="GameProcess\Define">
       <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\06.Prefab\Player">
+    <Filter Include="GameProcess\Prefab">
+      <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Prefab\Player">
       <UniqueIdentifier>{db4274a2-e10b-47fb-b7a1-8a30d7acc19e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Prefab\Box">
+      <UniqueIdentifier>{d67cdb2c-8984-40d5-b246-3021e3d954be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
-      <Filter>GameProcess\01.Manager\TimeManager</Filter>
+      <Filter>GameProcess\Manager\TimeManager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>GameProcess\01.Manager\CollisionManager</Filter>
+      <Filter>GameProcess\Manager\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>GameProcess\01.Manager\InputManager</Filter>
+      <Filter>GameProcess\Manager\InputManager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>GameProcess\01.Manager\SceneManager</Filter>
+      <Filter>GameProcess\Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>GameProcess\03.Scene</Filter>
+      <Filter>GameProcess\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>GameProcess\04.Component\Transform</Filter>
+      <Filter>GameProcess\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
-      <Filter>GameProcess\04.Component\CircleCollider</Filter>
+      <Filter>GameProcess\Component\CircleCollider</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
-      <Filter>GameProcess\04.Component\BoxColider</Filter>
+      <Filter>GameProcess\Component\BoxColider</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>GameProcess\02.GameObject</Filter>
+      <Filter>GameProcess\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
-      <Filter>GameProcess\03.Scene\MainScene</Filter>
+      <Filter>GameProcess\Scene\MainScene</Filter>
     </ClCompile>
     <ClCompile Include="GameProcess.cpp">
       <Filter>GameProcess</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>GameProcess\04.Component\Collider</Filter>
+      <Filter>GameProcess\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>GameProcess\06.Prefab\Player</Filter>
+      <Filter>GameProcess\Prefab\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>GameProcess\Prefab\Box</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

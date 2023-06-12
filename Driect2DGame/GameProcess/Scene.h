@@ -3,8 +3,9 @@
 // 전방선언
 class GameObject;
 class InputManager;
+class CollisionManager;
 
-class Scene 
+class Scene
 {
 public:
 	Scene();
@@ -14,7 +15,7 @@ public:
 	InputManager* GetInputManager() { return m_inputManager; }
 
 public:
-	virtual void Initalize(InputManager* _inputManager);
+	virtual void Initalize(InputManager* _inputManager, CollisionManager* _collisionManager);
 	virtual void Finalize() {};
 
 	// 씬에 들어가지전에 호출하는 함수
@@ -27,11 +28,17 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void FinalUpdate(float _deltaTime);
 
+	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) 
+	{ return m_objectVector[static_cast<int>(_type)]; }
+
 	void AddObject(GameObject* _object, OBJECT_TYPE _type);
+
+	CollisionManager* GetCollisionManager() { return m_collisionManager; }
 private:
 	InputManager* m_inputManager;
+	CollisionManager* m_collisionManager;
 
 	// 씬이 오브젝트 타입에 따라서 오브젝트들을 관리한다.
-	vector<GameObject*> m_objectList[static_cast<int>(OBJECT_TYPE::END)];
+	vector<GameObject*> m_objectVector[static_cast<int>(OBJECT_TYPE::END)];
 };
 

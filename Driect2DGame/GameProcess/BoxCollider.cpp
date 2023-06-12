@@ -5,7 +5,16 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-
+BoxCollider::BoxCollider()
+	:m_offset{}
+	, m_currentCollision(0)
+	, m_position{}
+	, m_rotation(0.f)
+	, m_scale{}
+	, m_isRotatable(false)
+	, m_active(false)
+{
+}
 
 void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager)
 {
@@ -28,17 +37,7 @@ void BoxCollider::OnCollisionStay(const Collision& _collision, const InputManage
 	_collision.otherObject->OnCollisionStay(_collision, _inputManager);
 }
 
-BoxCollider::BoxCollider()
-	:m_offset{}
-	,m_currentCollision(0)
-	,m_position{}
-	,m_rotation(0.f)
-	,m_scale{}
-	,m_owner(nullptr)
-	,m_isRotatable(false)
-	,m_active(false)
-{
-}
+
 
 BoxCollider::~BoxCollider()
 {
@@ -47,7 +46,7 @@ BoxCollider::~BoxCollider()
 void BoxCollider::FinalUpdate()
 {
 	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
-	Vector2 ownerPosition = m_owner->GetTransform()->GetPosition();
+	Vector2 ownerPosition = GetOwner()->GetTransform()->GetPosition();
  	m_position = ownerPosition + m_offset;
 }
 

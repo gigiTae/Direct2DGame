@@ -14,14 +14,14 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::Initalize(InputManager* _inputManager)
+void SceneManager::Initalize(InputManager* _inputManager,CollisionManager* _collisionManager)
 {
 	// 씬 메모리 공간할당
 	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)] = new MainScene();
 
 	// 씬 명시적 초기화
 
-	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_inputManager);
+	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_inputManager,_collisionManager);
 
 	// 현재씬을 지정한다
 	m_currentScene = m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)];

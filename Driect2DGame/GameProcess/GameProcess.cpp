@@ -36,13 +36,13 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	// 매니저 초기화
 	m_timeManager->Initalize();
 	m_inputManager->Initalize(m_hWnd);
-	m_sceneManager->Initalize(m_inputManager);
+	m_sceneManager->Initalize(m_inputManager,m_collisionManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 }
 
 void GameProcess::Roop()
 {
-	float deltaTime = m_timeManager->Update();
+	float deltaTime = static_cast<float>(m_timeManager->Update());
 	m_inputManager->Update();
 
 

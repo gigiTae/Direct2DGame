@@ -55,6 +55,5 @@ private:
 	// 디바이스 종속적인 자원들이 준비되었는가?
 	HRESULT m_IsD2DResReady;
 	D2D1_SIZE_F m_renderTargetSize;
-
 };
 

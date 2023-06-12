@@ -5,6 +5,15 @@
 #include "CircleCollider.h"
 
 
+GameObject::GameObject(const wstring& _name)
+	:m_name(_name)
+	,m_ailve(true)
+	,m_boxCollider(nullptr)
+	,m_circleCollider(nullptr)
+	,m_transform(nullptr)
+{
+}
+
 GameObject::~GameObject()
 {
 }

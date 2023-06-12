@@ -18,7 +18,7 @@ class GameObject
 {
 
 public:
-	GameObject() = default;
+	GameObject(const wstring& _name);
 	virtual ~GameObject();
 
 public:
@@ -39,11 +39,22 @@ public:
 	virtual void ComponentRender(D2DRenderer* _d2DRenderer);
 	virtual void Finalize();
 
+public:
+	void SetDead() { m_ailve = false; }
+	void SetAlive() { m_ailve = true; }
+
+	const wstring& GetName() { return m_name; }
+
+	// 삭제예정인 오브젝트인지 확인
+	bool IsAlive() { return m_ailve; }
+
 private:
 	Transform* m_transform;
 	BoxCollider* m_boxCollider;
 	CircleCollider* m_circleCollider;
+	bool m_ailve; 
 
+	const wstring m_name;
 public:
 	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};
 	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) {};

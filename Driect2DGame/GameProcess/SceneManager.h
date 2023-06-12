@@ -2,6 +2,7 @@
 
 class Scene;
 class InputManager;
+class CollisionManager;
 /// <summary>
 /// 씬을 관리해주는 매니져 
 /// 조금씩 크기가 커질거같음?
@@ -13,7 +14,7 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void Initalize(InputManager* _inputManager);
+	void Initalize(InputManager* _inputManager, CollisionManager* _collisionManager);
 	void Update(float _deltaTime);
 	void FinalUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);

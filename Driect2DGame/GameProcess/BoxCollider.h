@@ -23,14 +23,12 @@ public:
 	void FinalUpdate();
 
 	void SetActive(bool _isAtive) { m_active = _isAtive; }
-	void SetOwner(GameObject* _owner) { m_owner = _owner; }
 	void SetPosition(Vector2 _pos) { m_position = _pos; }
 	void SetOffset(Vector2 _offset) { m_offset = _offset; }
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 	void SetRotation(float _rotation) { m_rotation = _rotation; }
 
 	bool IsActive() { return m_active; }
-	GameObject* GetOwner() { return m_owner; }
 	Vector2 GetPosition() { return m_position; }
 	Vector2 GetOffset() { return m_offset; }
 	Vector2 GetScale() { return m_scale; }
@@ -42,9 +40,6 @@ public:
 
 	void DebugRender(D2DRenderer* _d2DRenderer);
 private:
-	// 콜라이더를 소유한 오브젝트
-	GameObject* m_owner;
-
 	Vector2 m_position;
 	Vector2 m_offset;
 	Vector2 m_scale;

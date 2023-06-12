@@ -25,18 +25,14 @@ public:
 	void SetPosition(Vector2 _position) { m_position = _position; }
 	void SetOffset(Vector2 _offset) { m_offset = _offset; }
 	void SetRadius(float _raidus) { m_radius = _raidus; }
-	void SetOwner(GameObject* _owner) { m_owner = _owner; }
 
 	bool IsActive() { return m_active; }
-	GameObject* GetOwner() { return m_owner; }
 	Vector2 GetOffset() { return m_offset; }
 	Vector2 GetPosition() { return m_position; }
 	float GetRadius() { return m_radius; }
 
 	void DebugRender(D2DRenderer* _d2DRenderer);
 private:
-	GameObject* m_owner;
-
 	Vector2 m_offset;
 	Vector2 m_position; 
 	
