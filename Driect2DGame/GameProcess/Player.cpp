@@ -25,9 +25,9 @@ void Player::Initalize()
 	boxCollider->SetRotatble(true);
 	boxCollider->SetScale(Vector2(100.f, 200.f));
 
-	//CreateCircleCollider();
-	//CircleCollider* circleCollider = GetCircleCollider();
-	//circleCollider->SetRadius(50.f);
+	CreateCircleCollider();
+	CircleCollider* circleCollider = GetCircleCollider();
+	circleCollider->SetRadius(20.f);
 }
 
 void Player::Update(float _deltaTime, InputManager* inputManager)

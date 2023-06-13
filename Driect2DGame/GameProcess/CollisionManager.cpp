@@ -144,7 +144,7 @@ bool CollisionManager::IsCollision(BoxCollider* _leftBox, CircleCollider* _right
 	if (_leftBox->IsRotatable())
 	{
 		float rotation = _leftBox->GetRotation();
-		circlePoisiton = Vector2::RotateRadian(circlePoisiton, boxPosition, rotation);
+		circlePoisiton = Vector2::RotateRadian(circlePoisiton, boxPosition, -rotation);
 	}
 
 	float minBoxX = boxPosition.x - boxHalfScale.x;
