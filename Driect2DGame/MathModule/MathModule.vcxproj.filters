@@ -27,6 +27,9 @@
     <ClInclude Include="Matrix3x3.h">
       <Filter>Math\Matrix3x3</Filter>
     </ClInclude>
+    <ClInclude Include="FMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vector2.cpp">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="Matrix3x3.cpp">
       <Filter>Math\Matrix3x3</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

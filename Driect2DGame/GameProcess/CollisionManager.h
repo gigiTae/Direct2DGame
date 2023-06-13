@@ -79,6 +79,5 @@ private:
 	map<unsigned long long, bool> m_prevCollisionInfo;
 	// 오브젝트 타입별로 충돌을 판단
 	int m_collisionCheck[static_cast<int>(OBJECT_TYPE::END)];
-	
 };
 

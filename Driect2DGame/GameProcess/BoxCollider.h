@@ -27,6 +27,7 @@ public:
 	void SetOffset(Vector2 _offset) { m_offset = _offset; }
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 	void SetRotation(float _rotation) { m_rotation = _rotation; }
+	void SetRotatble(bool _isRoatatble) { m_isRotatable = _isRoatatble; }
 
 	bool IsActive() { return m_active; }
 	Vector2 GetPosition() { return m_position; }
@@ -37,6 +38,7 @@ public:
 	float GetRotation() { return m_rotation; }
 	// 회전가능한 박스인지 아닌지
 	bool IsRotatable() { return m_isRotatable; }
+
 
 	void DebugRender(D2DRenderer* _d2DRenderer);
 private:

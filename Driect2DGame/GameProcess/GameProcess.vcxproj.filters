@@ -85,9 +85,6 @@
     <Filter Include="GameProcess\Component\BoxColider">
       <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Component\CircleCollider">
-      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Component\Collider">
       <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,9 @@
     </Filter>
     <Filter Include="GameProcess\Prefab\Player">
       <UniqueIdentifier>{db4274a2-e10b-47fb-b7a1-8a30d7acc19e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\CircleCollider">
+      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\Prefab\Box">
       <UniqueIdentifier>{d67cdb2c-8984-40d5-b246-3021e3d954be}</UniqueIdentifier>

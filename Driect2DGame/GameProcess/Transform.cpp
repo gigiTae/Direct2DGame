@@ -11,3 +11,17 @@ Transform::Transform()
 Transform::~Transform()
 {
 }
+
+void Transform::FinalUpdate()
+{
+	// 각도값을 조정
+	if (m_rotation >= FMath::TwoPI)
+	{
+		m_rotation -= FMath::TwoPI;
+	}
+	
+	if (m_rotation <= -FMath::TwoPI)
+	{
+		m_rotation += FMath::TwoPI;
+	}
+}

@@ -62,6 +62,11 @@ void GameObject::DestroyAllComponent()
 
 void GameObject::FinalUpdate(float _deltaTime)
 {
+	if (m_transform != nullptr)
+	{
+		m_transform->FinalUpdate();
+	}
+
 	if (m_boxCollider != nullptr)
 	{
 		m_boxCollider->FinalUpdate();

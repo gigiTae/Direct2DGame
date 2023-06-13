@@ -13,8 +13,10 @@ public:
 	void EndRender();
 	
 	void Finalize();
-
 	
+	
+	void SetTransform(float _radian, Vector2 _point);
+
 public:
 	/// 그리기 관련 함수들
 	
@@ -23,14 +25,14 @@ public:
 		, COLORREF color =RGB(255, 255, 255));
 
 	void DrawEllipse(Vector2 _point, Vector2 _radius
-		, COLORREF color = RGB(255, 255, 255));
+		, COLORREF color = RGB(255, 255, 255) );
 
 	void DrawEllipse(Vector2 _point, float _radius,
 		COLORREF color = RGB(255, 255, 255));
 
 	// 사각형 그리는 함수
 	void DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom
-		, COLORREF color =RGB(255, 255, 255));
+		, COLORREF color = RGB(255, 255, 255), float _rotation = 0.f);
 
 private:
 	// 랜더타겟을 만드는 함수

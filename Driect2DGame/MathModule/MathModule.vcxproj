@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FMath.h" />
     <ClInclude Include="MathModulePCH.h" />
     <ClInclude Include="Matrix3x3.h" />
     <ClInclude Include="Vector2.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FMath.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />

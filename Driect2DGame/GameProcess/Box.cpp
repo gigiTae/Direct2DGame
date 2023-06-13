@@ -3,6 +3,7 @@
 #include "Box.h"
 #include "BoxCollider.h"
 #include "CircleCollider.h"
+#include "Transform.h"
 
 Box::Box()
 	:GameObject(L"Box")
@@ -19,15 +20,17 @@ void Box::Initalize()
 
 	CreateBoxCollider();
 	BoxCollider* boxCollider = GetBoxCollider();
-	boxCollider->SetScale(Vector2(100.f, 100.f));
+	boxCollider->SetScale(Vector2(100.f, 500.f));
+	boxCollider->SetRotatble(true);
 
-	CreateCircleCollider();
-	CircleCollider* circleCollider = GetCircleCollider();
-	circleCollider->SetRadius(200.f);
+	//CreateCircleCollider();
+	//CircleCollider* circleCollider = GetCircleCollider();
+	//circleCollider->SetRadius(100.f);
 }
 
 void Box::Update(float _deltaTime, InputManager* inputManager)
 {
+	GetTransform()->AddRotation(0.001f);
 }
 
 void Box::Finalize()

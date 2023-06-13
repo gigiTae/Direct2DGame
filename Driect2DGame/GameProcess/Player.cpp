@@ -22,11 +22,12 @@ void Player::Initalize()
 
 	CreateBoxCollider();
 	BoxCollider* boxCollider = GetBoxCollider();
-	boxCollider->SetScale(Vector2(100.f, 100.f));
+	boxCollider->SetRotatble(true);
+	boxCollider->SetScale(Vector2(100.f, 200.f));
 
-	CreateCircleCollider();
-	CircleCollider* circleCollider = GetCircleCollider();
-	circleCollider->SetRadius(200.f);
+	//CreateCircleCollider();
+	//CircleCollider* circleCollider = GetCircleCollider();
+	//circleCollider->SetRadius(50.f);
 }
 
 void Player::Update(float _deltaTime, InputManager* inputManager)
@@ -50,8 +51,15 @@ void Player::Update(float _deltaTime, InputManager* inputManager)
 	{
 		addPosition.x -= 1;
 	}
-
 	addPosition.Normalize();
+	if (inputManager->IsKeyState(KEY::Q, KEY_STATE::HOLD))
+	{
+		GetTransform()->AddRotation(0.1f);
+	}
+	if (inputManager->IsKeyState(KEY::E, KEY_STATE::HOLD))
+	{
+		GetTransform()->AddRotation(-0.1f);
+	}
 
 	// 플레이어 위치 조정
 	Vector2 playerPosition = GetTransform()->GetPosition();

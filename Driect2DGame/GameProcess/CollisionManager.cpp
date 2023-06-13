@@ -58,7 +58,7 @@ void CollisionManager::CheckID(const Collider* _left, const Collider* _right, ma
 	unsigned int rightID = _right->GetID();
 
 	CollisionID ID = CombineID(leftID, rightID);
-	iter = m_prevCollisionInfo.find(ID.ID);
+	iter = m_prevCollisionInfo.find(ID.ID); 
 
 	if (iter == m_prevCollisionInfo.end())
 	{
@@ -73,37 +73,113 @@ void CollisionManager::CheckID(const Collider* _left, const Collider* _right, ma
 
 bool CollisionManager::IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox)
 {
+	// 박스
+	Vector2 leftPosition =_leftBox->GetPosition();
+	Vector2 leftScale = _leftBox->GetScale();
+	
+	// 박스
+	Vector2 rightPosition = _rightBox->GetPosition();
+	Vector2 rightScale = _rightBox->GetScale();
+
 	// OBB 충돌처리 
 	if (_leftBox->IsRotatable() || _rightBox->IsRotatable())
 	{
+		// 회전각도
+		float leftRotation = _leftBox->GetRotation();
+		float rightRotation = _rightBox->GetRotation();
 
+		Vector2 boxToBox = rightPosition - leftPosition;
+
+		// 각각의 가로세로 벡터를 구한다.
+		Vector2 leftWidth = Vector2::RotateRadian(Vector2(leftScale.x *0.5f, 0.f), Vector2::Zero, leftRotation);
+		Vector2 leftHeight = Vector2::RotateRadian(Vector2(0.f, leftScale.y *0.5f), Vector2::Zero, leftRotation);
+		Vector2 rightWidth = Vector2::RotateRadian(Vector2(rightScale.x *0.5f, 0.f), Vector2::Zero, rightRotation);
+		Vector2 rightHeight = Vector2::RotateRadian(Vector2(0.f, rightScale.y *0.5f), Vector2::Zero, rightRotation);
+
+		vector<Vector2> basis{ leftWidth,leftHeight,rightWidth,rightHeight };
+
+		for (int i = 0; i < 4; ++i)
+		{
+			float sum = 0.f;
+			Vector2 normal = basis[i].GetNormalize();
+			for (int j = 0; j < 4; ++j)
+			{
+				sum += abs(normal.Dot(basis[j]));
+			}
+			
+			float distance = abs(boxToBox.Dot(normal));
+			if (distance >= sum)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
-	else // AABB 충돌
+	// AABB 충돌
+	else
 	{
+		Vector2 leftMin = leftPosition - leftScale * 0.5f;
+		Vector2 leftMax = leftPosition + leftScale * 0.5f;
+		Vector2 rightMin = rightPosition - rightScale * 0.5f;
+		Vector2 rightMax = rightPosition + rightScale * 0.5f;
 
+		if (leftMin.x <= rightMax.x && leftMax.x >= rightMin.x
+			&& leftMin.y <= rightMax.y && leftMax.y >= rightMin.y)
+			return true;
 	}
 	return false;
 }
 
 bool CollisionManager::IsCollision(BoxCollider* _leftBox, CircleCollider* _rightCircle)
-{
+{  
+	// 박스 
+	Vector2 boxPosition = _leftBox->GetPosition();
+	Vector2 boxHalfScale = _leftBox->GetScale() * 0.5f;
+	
+	// 원
+	Vector2 circlePoisiton = _rightCircle->GetPosition();
+	float radius = _rightCircle->GetRadius();
 
-	// 회전된 사각형과 원의 충돌
+	// 회전된 사각형과 원의 충돌 -> 역으로 원을 돌려서 계산함
 	if (_leftBox->IsRotatable())
 	{
-
+		float rotation = _leftBox->GetRotation();
+		circlePoisiton = Vector2::RotateRadian(circlePoisiton, boxPosition, rotation);
 	}
-	else // 사각형과 원의 충돌
+
+	float minBoxX = boxPosition.x - boxHalfScale.x;
+	float maxBoxX = boxPosition.x + boxHalfScale.x;
+	float minBoxY = boxPosition.y - boxHalfScale.y;
+	float maxBoxY = boxPosition.y + boxHalfScale.y;
+
+	// 1. 먼저 사각형의 변들을 반지름만큼 확장해서 원의 중심좌표와 비교해서 판단
+	if ((minBoxX - radius <= circlePoisiton.x && maxBoxX + radius >= circlePoisiton.x
+		&& minBoxY <= circlePoisiton.y && maxBoxY >= circlePoisiton.y) ||
+		(minBoxX <= circlePoisiton.x && maxBoxX >= circlePoisiton.x
+			&& maxBoxY + radius >= circlePoisiton.y && minBoxY - radius <= circlePoisiton.y))
 	{
+		return true;
+	}
 	
+	// 2. 가장 가까운 사각형의 꼭지점 좌표를 계산해서 원과의 거리를 계산 
+	Vector2 boxVertex{};
+	boxVertex.x = (boxPosition.x < circlePoisiton.x) ? maxBoxX : minBoxX;
+	boxVertex.y = (boxPosition.y < circlePoisiton.y) ? maxBoxY : minBoxY;
+
+	float distanceSquared = (boxVertex - circlePoisiton).SizeSquared();
+	if (distanceSquared <= radius*radius)
+	{
+		return true;
 	}
 
+	// 충돌하지 않음
 	return false;
 }
 
 bool CollisionManager::IsCollision(CircleCollider* _leftCircle, CircleCollider* _rightCircle)
 {
 	// 원과 원의 충돌
+	
 	Vector2 leftPosition = _leftCircle->GetPosition();
 	float leftRadius = _leftCircle->GetRadius();
 
@@ -194,7 +270,7 @@ void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _righ
 		CircleCollider* leftCircleCollidr = leftGroup[leftIndex]->GetCircleCollider();
 
 		// 왼쪽 오브젝트가 콜라이더를 들고 있지 않는경우
-		if (!leftBoxCollider && leftCircleCollidr)
+		if (!leftBoxCollider && !leftCircleCollidr)
 		{
 			continue;
 		}
@@ -209,7 +285,7 @@ void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _righ
 			{
 				continue;
 			}
-
+			 
 			// 맵을 순회하는 이터레이터 
 			map<unsigned long long, bool > ::iterator iter;
 			// 충돌여부를 판단

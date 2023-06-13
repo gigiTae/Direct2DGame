@@ -87,6 +87,16 @@ void D2DRenderer::Finalize()
 	CoUninitialize();
 }
 
+void D2DRenderer::SetTransform(float _radian, Vector2 _point)
+{
+	float angle = FMath::Rad2Deg(_radian);
+
+	// 행렬변환
+	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(-angle, _point.ToPoint2F());
+
+	m_renderTarget->SetTransform(matrix);
+}
+
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
 	D2D1_POINT_2F start = _point1.ToPoint2F();
@@ -110,7 +120,7 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawEllipse(region, m_tempBrush);
+	m_renderTarget->DrawEllipse(region, m_tempBrush,2.f);
 
 	SafeRelease(&m_tempBrush);
 }
@@ -125,12 +135,12 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawEllipse(region, m_tempBrush);
+	m_renderTarget->DrawEllipse(region, m_tempBrush, 2.f);
 
 	SafeRelease(&m_tempBrush);
 }
 
-void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color)
+void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color,float _rotation)
 {
 	D2D1_RECT_F rt;
 	rt.left = _leftTop.x;
@@ -141,7 +151,7 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawRectangle(rt, m_tempBrush);
+	m_renderTarget->DrawRectangle(rt, m_tempBrush, 2.f);
 
 	SafeRelease(&m_tempBrush);
 }

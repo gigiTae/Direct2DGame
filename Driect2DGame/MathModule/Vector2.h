@@ -55,6 +55,9 @@ public:
 	
 	inline D2D1_POINT_2F ToPoint2F();
 
+	static Vector2 RotateRadian(const Vector2& _point, const Vector2& _center, float _radian);
+
+
 	// 정적멤버변수
 	static const Vector2 UnitX;
 	static const Vector2 UnitY;
@@ -70,6 +73,19 @@ inline D2D1_POINT_2F Vector2::ToPoint2F()
 	point.x = x;
 	point.y = y;
 	return point;
+}
+
+inline Vector2 Vector2::RotateRadian(const Vector2& _point, const Vector2& _center, float _radian)
+{
+	float cosTheta = std::cos(_radian);
+	float sinTheta = std::sin(_radian);
+
+	Vector2 relative = _point - _center;
+	Vector2 rotated{};
+	rotated.x = _center.x + relative.x * cosTheta - relative.y * sinTheta;
+	rotated.y = _center.y + relative.x * sinTheta + relative.y * cosTheta;
+
+	return rotated;
 }
 
 inline constexpr Vector2::Vector2(int _x, int _y)
