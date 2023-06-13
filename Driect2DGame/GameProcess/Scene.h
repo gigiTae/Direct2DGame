@@ -16,7 +16,7 @@ public:
 
 public:
 	virtual void Initalize(InputManager* _inputManager, CollisionManager* _collisionManager);
-	virtual void Finalize() {};
+	virtual void Finalize();
 
 	// 씬에 들어가지전에 호출하는 함수
 	virtual void Enter() = 0;
@@ -32,6 +32,7 @@ public:
 	{ return m_objectVector[static_cast<int>(_type)]; }
 
 	void AddObject(GameObject* _object, OBJECT_TYPE _type);
+	void DestoryGroupObject(OBJECT_TYPE _type);
 
 	CollisionManager* GetCollisionManager() { return m_collisionManager; }
 private:

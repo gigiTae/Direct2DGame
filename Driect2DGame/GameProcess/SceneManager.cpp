@@ -46,6 +46,14 @@ void SceneManager::Render(D2DRenderer* _d2DRenderer)
 
 void SceneManager::Finalize()
 {
+	for (int i = 0; i < static_cast<int>(SCENE_TYPE::END); ++i)
+	{
+		if (nullptr != m_sceneList[i])
+		{
+			m_sceneList[i]->Finalize();
+			delete m_sceneList[i];
+		}
+	}
 }
 
 void SceneManager::ChangeScene(SCENE_TYPE _nextScene)
@@ -56,3 +64,4 @@ void SceneManager::ChangeScene(SCENE_TYPE _nextScene)
 
 	m_currentScene->Enter();
 }
+

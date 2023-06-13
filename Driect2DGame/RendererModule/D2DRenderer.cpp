@@ -89,18 +89,24 @@ void D2DRenderer::Finalize()
 
 void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 {
+	Vector2 point = _point.ToScreenPoint(m_renderTargetSize);
+
 	float angle = FMath::Rad2Deg(_radian);
 
 	// 행렬변환
-	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(-angle, _point.ToPoint2F());
+	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, point.ToPoint2F());
 
 	m_renderTarget->SetTransform(matrix);
 }
 
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
-	D2D1_POINT_2F start = _point1.ToPoint2F();
-	D2D1_POINT_2F end = _point2.ToPoint2F();
+	// 스크린 좌표계로 변환
+	Vector2 point1 = _point1.ToScreenPoint(m_renderTargetSize);
+	Vector2 point2 = _point2.ToScreenPoint(m_renderTargetSize);
+
+	D2D1_POINT_2F start = point1.ToPoint2F();
+	D2D1_POINT_2F end = point2.ToPoint2F();
 
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
@@ -112,8 +118,11 @@ void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 {
+	// 스크린 좌표계로 변환
+	Vector2 point = _point.ToScreenPoint(m_renderTargetSize);
+
 	D2D1_ELLIPSE region;
-	region.point = _point.ToPoint2F();
+	region.point = point.ToPoint2F();
 	region.radiusX = _scale.x * 0.5f;
 	region.radiusY = _scale.y * 0.5f;
 
@@ -127,8 +136,11 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 {
+	// 스크린 좌표계로 변환
+	Vector2 point = _point.ToScreenPoint(m_renderTargetSize);
+
 	D2D1_ELLIPSE region;
-	region.point = _point.ToPoint2F();
+	region.point = point.ToPoint2F();
 	region.radiusX = _radius;
 	region.radiusY = _radius;
 
@@ -142,11 +154,15 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 
 void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color,float _rotation)
 {
+	// 스크린 좌표계로 변환
+	Vector2 leftTop = _leftTop.ToScreenPoint(m_renderTargetSize);
+	Vector2 rightBottom = _rightBottom.ToScreenPoint(m_renderTargetSize);
+
 	D2D1_RECT_F rt;
-	rt.left = _leftTop.x;
-	rt.top = _leftTop.y;
-	rt.right = _rightBottom.x;
-	rt.bottom = _rightBottom.y;
+	rt.left = leftTop.x;
+	rt.top = leftTop.y;
+	rt.right = rightBottom.x;
+	rt.bottom = rightBottom.y;
 
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);

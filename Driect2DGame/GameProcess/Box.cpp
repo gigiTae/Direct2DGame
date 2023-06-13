@@ -16,7 +16,7 @@ Box::~Box()
 
 void Box::Initalize()
 {
-	CreateTransform(Vector2(500.f, 500.f), Vector2(100.f, 100.f));
+	CreateTransform(Vector2(0.f, 0.f), Vector2(100.f, 100.f));
 
 	CreateBoxCollider();
 	BoxCollider* boxCollider = GetBoxCollider();
@@ -30,9 +30,5 @@ void Box::Initalize()
 
 void Box::Update(float _deltaTime, InputManager* inputManager)
 {
-	GetTransform()->AddRotation(0.001f);
-}
-
-void Box::Finalize()
-{
+	GetTransform()->AddRotation(0.01f);
 }

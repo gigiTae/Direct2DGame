@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "Player.h"
 #include "Box.h"
+#include "Line.h"
 #include "CollisionManager.h"
 
 MainScene::MainScene()
@@ -22,6 +23,10 @@ void MainScene::Enter()
 	Box* box = new Box();
 	box->Initalize();
 	AddObject(box, OBJECT_TYPE::MONSTER);
+
+	Line* line = new Line();
+	line->Initalize();
+	AddObject(line, OBJECT_TYPE::MONSTER);
 
 	GetCollisionManager()->CheckCollisionObjectType(OBJECT_TYPE::PLAYER, OBJECT_TYPE::MONSTER);
 }

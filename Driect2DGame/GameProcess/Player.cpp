@@ -37,11 +37,11 @@ void Player::Update(float _deltaTime, InputManager* inputManager)
 	// 키입력에 따라서 움직이자
 	if (inputManager->IsKeyState(KEY::W, KEY_STATE::HOLD))
 	{
-		addPosition.y -= 1;
+		addPosition.y += 1;
 	}
 	if (inputManager->IsKeyState(KEY::S, KEY_STATE::HOLD))
 	{
-		addPosition.y += 1;
+		addPosition.y -= 1;
 	}
 	if (inputManager->IsKeyState(KEY::D, KEY_STATE::HOLD))
 	{

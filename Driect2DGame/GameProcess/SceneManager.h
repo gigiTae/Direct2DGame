@@ -23,6 +23,7 @@ public:
 	Scene* GetCurrentScene() { return m_currentScene; }
 	void ChangeScene(SCENE_TYPE _nextScene);
 
+
 private:
 	// 모든 씬들을 관리
 	Scene* m_sceneList[static_cast<int>(SCENE_TYPE::END)];

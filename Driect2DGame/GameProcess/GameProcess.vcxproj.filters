@@ -47,6 +47,9 @@
     <ClInclude Include="Box.h">
       <Filter>GameProcess\Prefab\Box</Filter>
     </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>GameProcess\Prefab\Line</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -103,6 +106,9 @@
     <Filter Include="GameProcess\Prefab\Box">
       <UniqueIdentifier>{d67cdb2c-8984-40d5-b246-3021e3d954be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProcess\Prefab\Line">
+      <UniqueIdentifier>{f3b9ab60-b7ff-431a-84e4-4af3ac1c9283}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -146,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>GameProcess\Prefab\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>GameProcess\Prefab\Line</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

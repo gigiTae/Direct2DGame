@@ -67,7 +67,15 @@ void GameProcess::Roop()
 
 void GameProcess::Finalize()
 {
+	m_sceneManager->Finalize();
+	m_collisionManager->Finalize();
+	m_inputManager->Finalize();
+	m_timeManager->Finalize();
 
-
+	// 메모리 해제
+	delete m_sceneManager;
+	delete m_collisionManager;
+	delete m_timeManager;
+	delete m_inputManager;
 
 }

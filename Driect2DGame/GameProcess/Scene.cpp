@@ -19,6 +19,14 @@ void Scene::Initalize(InputManager* _inputManager,CollisionManager* _collisionMa
 	m_collisionManager = _collisionManager;
 }
 
+void Scene::Finalize()
+{
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		DestoryGroupObject(static_cast<OBJECT_TYPE>(i)); 
+	}
+}
+
 void Scene::Render(D2DRenderer* _d2DRenderer)
 {
 	assert(_d2DRenderer);
@@ -64,4 +72,13 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 {
 	m_objectVector[static_cast<int>(_type)].push_back(_object);
 
+}
+
+void Scene::DestoryGroupObject(OBJECT_TYPE _type)
+{ 
+	for (auto iter : m_objectVector[static_cast<int>(_type)])
+	{
+		iter->Finalize();
+		delete iter;
+	}
 }
