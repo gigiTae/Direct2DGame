@@ -13,8 +13,6 @@ public:
 	void EndRender();
 	
 	void Finalize();
-	
-	
 	void SetTransform(float _radian, Vector2 _point);
 
 public:

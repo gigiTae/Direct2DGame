@@ -146,6 +146,7 @@
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TimeManager.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />

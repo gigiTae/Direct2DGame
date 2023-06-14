@@ -18,7 +18,7 @@ class GameObject
 {
 
 public:
-	//자동으로 중복 이름의 경우에는 숫자를 더해서 만들어줌 
+	// 생성자 단계에서 오브젝트의 이름을 결정
 	GameObject(const wstring& _name);
 	virtual ~GameObject();
 

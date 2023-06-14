@@ -36,6 +36,7 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	if (SUCCEEDED(hr))
 	{
+		// 쓰기전용 팩토리 생성?
 		hr = DWriteCreateFactory(
 			DWRITE_FACTORY_TYPE_SHARED
 			, __uuidof(m_writeFactory)
@@ -45,9 +46,28 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	if (SUCCEEDED(hr))
 	{
-
+		// Create a DirectWrite text format object.
+		hr = m_writeFactory->CreateTextFormat(
+			L"굴림",
+			NULL,
+			DWRITE_FONT_WEIGHT_NORMAL,
+			DWRITE_FONT_STYLE_NORMAL,
+			DWRITE_FONT_STRETCH_NORMAL,
+			10,
+			L"", //locale
+			&m_textFormat
+		);
 	}
 
+
+	// 텍스트 정렬 방식
+	if (SUCCEEDED(hr))
+	{
+		// Left-Top the text horizontally and vertically.
+		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+		m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+
+	}
 }
 
 void D2DRenderer::BeginRender()
@@ -84,8 +104,6 @@ void D2DRenderer::EndRender()
 			hr = S_OK;
 			DiscardDeviceResources();
 		}
-
-
 	}
 }
 

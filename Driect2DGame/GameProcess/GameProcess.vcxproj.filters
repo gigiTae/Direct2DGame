@@ -24,10 +24,10 @@
       <Filter>GameProcess\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
-      <Filter>GameProcess\Component\CircleCollider</Filter>
+      <Filter>GameProcess\Component\Collider\CircleCollider</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>GameProcess\Component\BoxColider</Filter>
+      <Filter>GameProcess\Component\Collider\BoxColider</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameProcess\GameObject</Filter>
@@ -51,10 +51,13 @@
       <Filter>GameProcess\Prefab\Line</Filter>
     </ClInclude>
     <ClInclude Include="NameGenerator.h">
-      <Filter>GameProcess\Infomation</Filter>
+      <Filter>GameProcess\Debug</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>GameProcess\Prefab\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>GameProcess\Component\RigidBody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +94,6 @@
     <Filter Include="GameProcess\Component\Transform">
       <UniqueIdentifier>{122f0a72-211a-4a8e-a929-0f4b2c234b59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Component\BoxColider">
-      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Component\Collider">
       <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
     </Filter>
@@ -106,20 +106,26 @@
     <Filter Include="GameProcess\Prefab\Player">
       <UniqueIdentifier>{db4274a2-e10b-47fb-b7a1-8a30d7acc19e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Component\CircleCollider">
-      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Prefab\Box">
       <UniqueIdentifier>{d67cdb2c-8984-40d5-b246-3021e3d954be}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\Prefab\Line">
       <UniqueIdentifier>{f3b9ab60-b7ff-431a-84e4-4af3ac1c9283}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Infomation">
-      <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Prefab\Point">
       <UniqueIdentifier>{39299d7b-d297-43f1-be59-d8fdc8fb0087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Debug">
+      <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\RigidBody">
+      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\Collider\CircleCollider">
+      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\Collider\BoxColider">
+      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,10 +148,10 @@
       <Filter>GameProcess\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
-      <Filter>GameProcess\Component\CircleCollider</Filter>
+      <Filter>GameProcess\Component\Collider\CircleCollider</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
-      <Filter>GameProcess\Component\BoxColider</Filter>
+      <Filter>GameProcess\Component\Collider\BoxColider</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameProcess\GameObject</Filter>
@@ -169,10 +175,13 @@
       <Filter>GameProcess\Prefab\Line</Filter>
     </ClCompile>
     <ClCompile Include="NameGenerator.cpp">
-      <Filter>GameProcess\Infomation</Filter>
+      <Filter>GameProcess\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Point.cpp">
       <Filter>GameProcess\Prefab\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>GameProcess\Component\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

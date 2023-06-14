@@ -3,40 +3,21 @@
 
 InputManager::InputManager()
 	:m_matchVK{
-		VK_LEFT, // LEFT,
-		VK_RIGHT, // RIGHT,
-		VK_UP, // UP,
-		VK_DOWN, // DOWN,
+	VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN,
+	'Q','W','E','R','T','Y','U','O','P',
+	'A','S','D','F','G','H','J','K','L',
+	'Z','X','C','V','B','N','M',
 
-		'Q',
-		'W',
-		'E',
-		'R',
-		'T',
-		'Y',
-		'U',
-		'O',
-		'P',
-		'A',
-		'S',
-		'D',
-		'F',
-		'G',
-		'Z',
-		'X',
-		'C',
-		'V',
-		'B',
+	VK_MENU, // ALT,
+	VK_CONTROL, // CTRL,
+	VK_LSHIFT, // LSHIFT,
+	VK_SPACE, // SPACE,
+	VK_RETURN, // ENTER,
+	VK_ESCAPE, // ESC,
+	VK_TAB, //TAB
 
-		VK_MENU, // ALT,
-		VK_CONTROL, // CTRL,
-		VK_LSHIFT, // LSHIFT,
-		VK_SPACE, // SPACE,
-		VK_RETURN, // ENTER,
-		VK_ESCAPE, // ESC,
-
-		VK_LBUTTON, // LBTN
-		VK_RBUTTON, // RBTN
+	VK_LBUTTON, // LBTN
+	VK_RBUTTON, // RBTN
 	}
 	, m_keyInfo{}
 	,m_hwnd(nullptr)

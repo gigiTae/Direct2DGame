@@ -10,43 +10,18 @@ enum class KEY_STATE
 
 enum class KEY
 {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
+	LEFT, RIGHT, UP, DOWN,
 
-	Q,
-	W,
-	E,
-	R,
-	T,
-	Y,
-	U,
-	O,
-	P,
-	A,
-	S,
-	D,
-	F,
-	G,
-	Z,
-	X,
-	C,
-	V,
-	B,
+	Q, W, E, R, T, Y, U, O, P,
+	A, S, D, F, G, H, J, K, L,
+	Z, X, C, V, B, N, M,
 
-	ALT,
-	CTRL,
-	LSHIFT,
-	SPACE,
-	ENTER,
-	ESC,
+	ALT, CTRL, LSHIFT,
+	SPACE, ENTER, ESC, TAB,
 
-	LBTN,
-	RBTN,
+	LMOUSE, RMOUSE,
 
 	LAST, //enum¿« ≥°
-
 };
 
 struct KeyInfo
