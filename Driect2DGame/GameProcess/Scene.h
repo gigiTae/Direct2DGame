@@ -31,9 +31,12 @@ public:
 	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) 
 	{ return m_objectVector[static_cast<int>(_type)]; }
 
+
+protected:
 	void AddObject(GameObject* _object, OBJECT_TYPE _type);
 	void DestoryGroupObject(OBJECT_TYPE _type);
 
+protected:
 	CollisionManager* GetCollisionManager() { return m_collisionManager; }
 private:
 	InputManager* m_inputManager;

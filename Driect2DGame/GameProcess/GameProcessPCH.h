@@ -21,6 +21,7 @@ using std::list;
 #include <string>
 using std::string;
 using std::wstring;
+using std::make_pair;
 
 #include <map>
 using std::map;

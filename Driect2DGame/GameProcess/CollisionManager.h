@@ -60,9 +60,9 @@ private:
 	void CheckID(const Collider* _left, const Collider* _right, map<unsigned long long, bool>::iterator& iter);
 
 	// 두 충돌체가 충돌한지 판단하는 함수 
-    bool IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox);
-	bool IsCollision(BoxCollider* _leftBox, CircleCollider* _rightCircle);
-	bool IsCollision(CircleCollider* _leftCircle, CircleCollider* _rightCircle);
+    bool IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox) const ;
+	bool IsCollision(BoxCollider* _leftBox, CircleCollider* _rightCircle) const;
+	bool IsCollision(CircleCollider* _leftCircle, CircleCollider* _rightCircle) const ;
 
 	// 충돌을 판단한후에 각각의 콜라이더들에게 충돌처리후 정보들을 전달
 	void OnCollisionProcess(bool _istCollision, map<unsigned long long, bool>::iterator& iter, Collider* _left, Collider* _right);

@@ -3,10 +3,11 @@
 #include"Transform.h"
 #include "BoxCollider.h"
 #include "CircleCollider.h"
+#include "NameGenerator.h"
 
 
 GameObject::GameObject(const wstring& _name)
-	:m_name(_name)
+	:m_name(NameGenerator::GetInstance().GenerateName(_name))
 	,m_ailve(true)
 	,m_boxCollider(nullptr)
 	,m_circleCollider(nullptr)

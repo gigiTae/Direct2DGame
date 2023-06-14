@@ -71,7 +71,7 @@ void CollisionManager::CheckID(const Collider* _left, const Collider* _right, ma
 
 }
 
-bool CollisionManager::IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox)
+bool CollisionManager::IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox) const
 {
 	// 박스
 	Vector2 leftPosition =_leftBox->GetPosition();
@@ -130,7 +130,7 @@ bool CollisionManager::IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox
 	return false;
 }
 
-bool CollisionManager::IsCollision(BoxCollider* _leftBox, CircleCollider* _rightCircle)
+bool CollisionManager::IsCollision(BoxCollider* _leftBox, CircleCollider* _rightCircle) const
 {  
 	// 박스 
 	Vector2 boxPosition = _leftBox->GetPosition();
@@ -176,7 +176,7 @@ bool CollisionManager::IsCollision(BoxCollider* _leftBox, CircleCollider* _right
 	return false;
 }
 
-bool CollisionManager::IsCollision(CircleCollider* _leftCircle, CircleCollider* _rightCircle)
+bool CollisionManager::IsCollision(CircleCollider* _leftCircle, CircleCollider* _rightCircle) const
 {
 	// 원과 원의 충돌
 	

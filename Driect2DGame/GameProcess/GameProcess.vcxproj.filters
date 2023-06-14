@@ -50,6 +50,12 @@
     <ClInclude Include="Line.h">
       <Filter>GameProcess\Prefab\Line</Filter>
     </ClInclude>
+    <ClInclude Include="NameGenerator.h">
+      <Filter>GameProcess\Infomation</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>GameProcess\Prefab\Point</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -109,6 +115,12 @@
     <Filter Include="GameProcess\Prefab\Line">
       <UniqueIdentifier>{f3b9ab60-b7ff-431a-84e4-4af3ac1c9283}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProcess\Infomation">
+      <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Prefab\Point">
+      <UniqueIdentifier>{39299d7b-d297-43f1-be59-d8fdc8fb0087}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -155,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="Line.cpp">
       <Filter>GameProcess\Prefab\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="NameGenerator.cpp">
+      <Filter>GameProcess\Infomation</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>GameProcess\Prefab\Point</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

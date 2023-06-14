@@ -5,7 +5,7 @@ class InputManager;
 class GameObject;
 
 // 부모 충돌체 
-class Collider
+class Collider abstract
 {
 public:
 	virtual void FinalUpdate() abstract;

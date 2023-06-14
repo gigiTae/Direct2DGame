@@ -1,5 +1,4 @@
 
-#include "MathModuleHeader.h"
 #include "RendererPCH.h"
 #include "D2DRenderer.h"
 #include "macro.h"
@@ -35,6 +34,19 @@ void D2DRenderer::Initalize(HWND _hwnd)
 	hr = CreateDeviceResources();
 	assert(hr == S_OK);
 
+	if (SUCCEEDED(hr))
+	{
+		hr = DWriteCreateFactory(
+			DWRITE_FACTORY_TYPE_SHARED
+			, __uuidof(m_writeFactory)
+			, reinterpret_cast<IUnknown**>(&m_writeFactory)
+		);
+	}
+
+	if (SUCCEEDED(hr))
+	{
+
+	}
 
 }
 

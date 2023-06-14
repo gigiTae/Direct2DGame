@@ -110,7 +110,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\EngineModule;$(SolutionDir)\RendererModule;$(SolutionDir)\GameProcess</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\EngineModule;$(SolutionDir)\RendererModule;$(SolutionDir)\GameProcess;$(SolutionDir)MathModule</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

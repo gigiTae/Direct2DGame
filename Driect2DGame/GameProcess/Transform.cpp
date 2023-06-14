@@ -20,7 +20,7 @@ void Transform::FinalUpdate()
 		m_rotation -= FMath::TwoPI;
 	}
 	
-	if (m_rotation <= -FMath::TwoPI)
+	if (m_rotation < -0.f)
 	{
 		m_rotation += FMath::TwoPI;
 	}
