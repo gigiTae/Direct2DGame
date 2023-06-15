@@ -3,12 +3,14 @@
 #include"Transform.h"
 #include "BoxCollider.h"
 #include "CircleCollider.h"
+#include "RigidBody.h"
 #include "NameGenerator.h"
 
 
 GameObject::GameObject(const wstring& _name)
-	:m_name(NameGenerator::GetInstance().GenerateName(_name))
+	:m_name(NameGenerator::GetInstance()->GenerateName(_name))
 	,m_ailve(true)
+	,m_rigidBody(nullptr)
 	,m_boxCollider(nullptr)
 	,m_circleCollider(nullptr)
 	,m_transform(nullptr)
@@ -41,6 +43,10 @@ void GameObject::CreateCircleCollider()
 	m_circleCollider->SetActive(true);
 }
 
+void GameObject::CreateRigidBody()
+{
+}
+
 void GameObject::DestroyAllComponent()
 {
 
@@ -59,6 +65,11 @@ void GameObject::DestroyAllComponent()
 		delete m_circleCollider;
 		m_circleCollider = nullptr;
 	}
+	if (m_rigidBody != nullptr)
+	{
+		delete m_rigidBody;
+		m_rigidBody = nullptr;
+	}
 }
 
 void GameObject::FinalUpdate(float _deltaTime)
@@ -76,10 +87,6 @@ void GameObject::FinalUpdate(float _deltaTime)
 	{
 		m_circleCollider->FinalUpdate();
 	}
-}
-
-void GameObject::Render(D2DRenderer* _d2DRenderer)
-{
 }
 
 void GameObject::ComponentRender(D2DRenderer* _d2DRenderer)

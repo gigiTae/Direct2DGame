@@ -8,11 +8,30 @@ class GameObject;
 /// </summary>
 class RigidBody
 {
-	
+public:
+	RigidBody() = default;
+	~RigidBody();
+
+	void FinalUpdate();
+
+	void Initalize(float _mass, GameObject* _owner);
+
 private: // 멤버변수 공간
 	GameObject* m_owner;
-	
-	Vector2 m_force; // 방향
 
+	// 속도
+	Vector2 m_velocity;
+	// 각속도 
+	float m_angularVelocity;
+	// 힘
+	Vector2 m_force;
+	// 토크
+	float m_torque;
+	// 마찰력
+	float m_friction;
+	// 질량
+	float m_mass, m_invMass;
+	// 관성 모멘트
+	float m_I, m_invI;
 };
 

@@ -1,6 +1,18 @@
 #include "GameProcessPCH.h"
 #include "NameGenerator.h"
 
+// 정적멤버 변수 초기화 
+NameGenerator* NameGenerator::m_instance = nullptr;
+
+NameGenerator* NameGenerator::GetInstance()
+{
+	if (m_instance == nullptr)
+	{
+		m_instance = new NameGenerator();
+	}
+	return m_instance;
+}
+
 NameGenerator::~NameGenerator()
 {
 }

@@ -118,14 +118,14 @@
     <Filter Include="GameProcess\Debug">
       <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Component\RigidBody">
-      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Component\Collider\CircleCollider">
       <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\Component\Collider\BoxColider">
       <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\RigidBody">
+      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

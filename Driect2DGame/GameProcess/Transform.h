@@ -16,7 +16,7 @@ public:
 	void SetRotation(float _rotation) { m_rotation = _rotation; }
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 
-	void AddRotation(float _radian) { m_rotation += _radian; }
+	void AddRotation(float _radian);
 	void AddPosition(Vector2 _addPosition) { m_position += _addPosition; }
 
 	Vector2 GetPosition() { return m_position; }

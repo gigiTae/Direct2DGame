@@ -8,15 +8,18 @@
 class NameGenerator
 {
 public:
-	static NameGenerator& GetInstance() { static NameGenerator nameGenerator; return nameGenerator; }
+	static NameGenerator* GetInstance();
+private:
+	static NameGenerator* m_instance;
 
 private:
 	NameGenerator() = default;
 	~NameGenerator();
 public:
 	const wstring GenerateName(const wstring& _name);
-	
+
 private:
 	// 이름정보들을 맵에 저장함 key : 오브젝트 이름 value : 오브젝트 생성 횟수
 	map<const wstring, int> m_nameInfo;
+
 };

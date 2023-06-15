@@ -7,6 +7,8 @@ class BoxCollider;
 class CircleCollider;
 class InputManager;
 class Collider;
+class RigidBody;
+
 struct Collision;
 
 /// <summary>
@@ -26,17 +28,19 @@ public:
 	void CreateTransform(const Vector2& _position, const Vector2& _scale, float _rotation = 0.f);
 	void CreateBoxCollider();
 	void CreateCircleCollider();
+	void CreateRigidBody();
 
 	void DestroyAllComponent();
 
 	Transform* GetTransform() { return m_transform; }
 	BoxCollider* GetBoxCollider() { return m_boxCollider; }
 	CircleCollider* GetCircleCollider() { return m_circleCollider; }
+	RigidBody* GetRigidBody() { return m_rigidBody; }
 
 	virtual void Initalize() = 0;
 	virtual void Update(float _deltaTime, InputManager* inputManager) = 0;
 	virtual void FinalUpdate(float _deltaTime);
-	virtual void Render(D2DRenderer* _d2DRenderer);
+	virtual void Render(D2DRenderer* _d2DRenderer) {};
 	virtual void ComponentRender(D2DRenderer* _d2DRenderer);
 	virtual void Finalize();
 
@@ -53,6 +57,7 @@ private:
 	Transform* m_transform;
 	BoxCollider* m_boxCollider;
 	CircleCollider* m_circleCollider;
+	RigidBody* m_rigidBody;
 	bool m_ailve; 
 
 	const wstring m_name;

@@ -12,16 +12,22 @@ Transform::~Transform()
 {
 }
 
-void Transform::FinalUpdate()
+void Transform::AddRotation(float _radian)
 {
+	m_rotation += _radian;
 	// 각도값을 조정
 	if (m_rotation >= FMath::TwoPI)
 	{
 		m_rotation -= FMath::TwoPI;
 	}
-	
+
 	if (m_rotation < -0.f)
 	{
 		m_rotation += FMath::TwoPI;
 	}
+}
+
+void Transform::FinalUpdate()
+{
+
 }
