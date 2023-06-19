@@ -166,7 +166,7 @@ bool CollisionManager::IsCollision(BoxCollider* _leftBox, CircleCollider* _right
 	boxVertex.x = (boxPosition.x < circlePoisiton.x) ? maxBoxX : minBoxX;
 	boxVertex.y = (boxPosition.y < circlePoisiton.y) ? maxBoxY : minBoxY;
 
-	float distanceSquared = (boxVertex - circlePoisiton).SizeSquared();
+	float distanceSquared = (boxVertex - circlePoisiton).LengthSquared();
 	if (distanceSquared <= radius*radius)
 	{
 		return true;
@@ -186,7 +186,7 @@ bool CollisionManager::IsCollision(CircleCollider* _leftCircle, CircleCollider* 
 	Vector2 rightPosition = _rightCircle->GetPosition();
 	float rightRaius = _rightCircle->GetRadius();
 
-	float distance = (leftPosition - rightPosition).Size();
+	float distance = (leftPosition - rightPosition).Length();
 	
 	if (distance <= rightRaius + leftRadius)
 	{

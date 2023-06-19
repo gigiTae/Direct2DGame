@@ -21,7 +21,7 @@ void Vector2::Normalize()
 
 Vector2 Vector2::GetNormalize() const
 {
-	float squarSum = SizeSquared();
+	float squarSum = LengthSquared();
 	if (squarSum == 1.f)
 	{
 		return *this;
@@ -36,4 +36,32 @@ Vector2 Vector2::GetNormalize() const
 	float invLength = 1 / sqrtf(squarSum);
 
 	return Vector2(x, y) * invLength;
+}
+
+float Vector2::PointToLineSegment ( const Vector2& point ,const Vector2& line1 , const Vector2& line2 )
+{
+	// 선분 노말 벡터
+	Vector2 u = ( line2 - line1 ).GetNormalize ( );
+	Vector2 line1ToPoint = point - line1;
+
+	// L1과 L2 길이
+	float L1ToL2 = ( line1 - line2 ).Length ( );
+	// 투영된 길이
+	float dist = u.Dot ( line1ToPoint );
+
+	if ( dist < 0 )
+	{
+		return line1ToPoint.Length ( );
+	}
+	else if ( dist <= L1ToL2 )
+	{
+		return std::sqrt ( line1ToPoint.LengthSquared ( ) - dist * dist );
+	}
+	else
+	{
+		return ( line2 - point ).Length ( );
+	}
+
+
+	return 0.0f;
 }

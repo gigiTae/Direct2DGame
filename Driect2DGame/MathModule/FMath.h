@@ -53,5 +53,6 @@ namespace FMath
 		return X < Min ? Min : X < Max ? X : Max;
 	}
 
+
 };
 

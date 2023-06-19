@@ -14,6 +14,9 @@
     <Filter Include="Math\Matrix3x3">
       <UniqueIdentifier>{8e826a6f-98dc-4357-bb1a-e01f080b5d7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Geomety">
+      <UniqueIdentifier>{a860b272-1600-400e-a86d-1e05fe8e9940}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2.h">

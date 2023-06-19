@@ -27,10 +27,10 @@ public:
 
 
 	// 루트 제곱근 (길이)
-	inline float Size() const;
+	inline float Length() const;
 
 	// 제곱근 반환
-	inline constexpr float SizeSquared() const;
+	inline constexpr float LengthSquared() const;
 
 	// 벡터 정규화
 	void Normalize();
@@ -55,7 +55,11 @@ public:
 	
 	inline D2D1_POINT_2F ToPoint2F();
 
+	// 기준점을 기준으로 point를 radian만든 회전한 벡터를 반환
 	static Vector2 RotateRadian(const Vector2& _point, const Vector2& _center, float _radian);
+
+	// 선분과 점사이의 최단경로를 반환
+	static float PointToLineSegment ( const Vector2& point , const Vector2& line1 ,const  Vector2& line2 );
 
 	Vector2 ToScreenPoint(const D2D1_SIZE_F& _screenSize);
 
@@ -88,6 +92,8 @@ inline Vector2 Vector2::RotateRadian(const Vector2& _point, const Vector2& _cent
 
 	return rotated;
 }
+
+
 
 inline Vector2 Vector2::ToScreenPoint(const D2D1_SIZE_F& _screenSize)
 {
@@ -179,12 +185,12 @@ inline constexpr bool Vector2::operator!=(const Vector2& _other)
 	return (x != _other.x || y != _other.y);
 }
 
-inline float Vector2::Size() const
+inline float Vector2::Length() const
 {
-	return sqrtf(SizeSquared());
+	return sqrtf(LengthSquared());
 }
 
-inline constexpr float Vector2::SizeSquared() const
+inline constexpr float Vector2::LengthSquared() const
 {
 	return x * x + y * y;
 }
@@ -197,7 +203,7 @@ inline float Vector2::Angle() const
 
 inline Vector2 Vector2::ToPolarCoordinate() const
 {
-	return Vector2(Size(), Angle());
+	return Vector2(Length(), Angle());
 }
 
 inline Vector2 Vector2::ToCartesianCoordinate() const
