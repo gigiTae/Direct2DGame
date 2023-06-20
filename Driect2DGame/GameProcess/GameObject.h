@@ -39,6 +39,7 @@ public:
 
 	virtual void Initalize() = 0;
 	virtual void Update(float _deltaTime, InputManager* inputManager) = 0;
+	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
 	virtual void FinalUpdate(float _deltaTime);
 	virtual void Render(D2DRenderer* _d2DRenderer) {};
 	virtual void ComponentRender(D2DRenderer* _d2DRenderer);

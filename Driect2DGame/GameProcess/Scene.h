@@ -25,6 +25,7 @@ public:
 	virtual void Exit() = 0;
 
 	virtual void Render(D2DRenderer* _d2DRenderer);
+	virtual void FixedUpdate(float _fixedDeltaTime);
 	virtual void Update(float deltaTime);
 	virtual void FinalUpdate(float _deltaTime);
 

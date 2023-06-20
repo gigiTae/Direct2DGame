@@ -34,6 +34,11 @@ void SceneManager::Update(float _deltaTime)
 	m_currentScene->Update(_deltaTime);
 }
 
+void SceneManager::FixedUpdate(float _fiexedDeltaTime)
+{
+	m_currentScene->FixedUpdate(_fiexedDeltaTime);
+}
+
 void SceneManager::FinalUpdate(float _deltaTime)
 {
 	m_currentScene->FinalUpdate(_deltaTime);

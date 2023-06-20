@@ -49,7 +49,7 @@ void D2DEngine::Process()
 		else
 		{
 			// 게임 프로세스 루프
-			m_gameProcess->Roop();
+			m_gameProcess->Process();
 		};
 
 	}

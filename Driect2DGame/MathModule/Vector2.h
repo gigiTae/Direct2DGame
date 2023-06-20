@@ -49,7 +49,8 @@ public:
 
 	// 내적연산
 	inline constexpr float Dot(const Vector2& _other) const;
-
+	// 외적 연산
+	inline constexpr float Cross ( const Vector2& _other ) const;
 	
 	std::string ToString() const;
 	
@@ -220,3 +221,7 @@ inline constexpr float Vector2::Dot(const Vector2& _other) const
 	return x* _other.x + y * _other.y;
 }
 
+inline constexpr float Vector2::Cross ( const Vector2& _other )const
+{
+	return x * _other.y - y * _other.x;
+}

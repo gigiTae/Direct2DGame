@@ -1,6 +1,7 @@
 #pragma once
 
 class GameObject;
+class Transform;
 /// <summary>
 /// 리지드 바디 컴포넌트
 /// 오브젝의 물리에 관한 처리를 함
@@ -12,12 +13,16 @@ public:
 	RigidBody() = default;
 	~RigidBody();
 
-	void FinalUpdate();
+	void IntegrateForces(float _fixedDeltaTime);
+	void FinalUpdate(float _fixedDeltaTime);
 
 	void Initalize(float _mass, GameObject* _owner);
 
+	void ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector);
+
 private: // 멤버변수 공간
 	GameObject* m_owner;
+	Transform* m_transform;
 
 	// 속도
 	Vector2 m_velocity;

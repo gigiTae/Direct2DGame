@@ -31,7 +31,7 @@ void GameObject::CreateTransform(const Vector2& _position, const Vector2& _scale
 
 void GameObject::CreateBoxCollider()
 {
-	m_boxCollider = new BoxCollider();
+	m_boxCollider = new BoxCollider(); 
 	m_boxCollider->SetOwner(this);
 	m_boxCollider->SetActive(true);
 }
@@ -74,6 +74,11 @@ void GameObject::DestroyAllComponent()
 
 void GameObject::FinalUpdate(float _deltaTime)
 {
+	if (m_rigidBody != nullptr)
+	{
+		m_rigidBody->FinalUpdate(_deltaTime);
+	}
+
 	if (m_transform != nullptr)
 	{
 		m_transform->FinalUpdate();

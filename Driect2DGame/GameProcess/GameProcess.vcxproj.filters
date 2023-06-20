@@ -59,6 +59,9 @@
     <ClInclude Include="RigidBody.h">
       <Filter>GameProcess\Component\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="GameWorld.h">
+      <Filter>GameProcess\Define</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -182,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>GameProcess\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWorld.cpp">
+      <Filter>GameProcess\Define</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

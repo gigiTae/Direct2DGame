@@ -42,6 +42,19 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 	}
 }
 
+void Scene::FixedUpdate(float _fixedDeltaTime)
+{
+	assert(m_inputManager);
+
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		for (auto iter : m_objectVector[i])
+		{
+			iter->FixedUpdate(_fixedDeltaTime, m_inputManager);
+		}
+	}
+}
+
 void Scene::Update(float _deltaTime)
 {
 	assert(m_inputManager);

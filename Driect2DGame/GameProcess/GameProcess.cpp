@@ -13,7 +13,7 @@ GameProcess::GameProcess()
 	, m_timeManager(nullptr)
 	, m_d2DRenderer(nullptr)
 	, m_hWnd(nullptr)
-
+	,m_elapsedTime(0.f)
 {
 }
 
@@ -40,21 +40,28 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 }
 
-void GameProcess::Roop()
+void GameProcess::Process()
 {
 	float deltaTime = static_cast<float>(m_timeManager->Update());
 	m_inputManager->Update();
 
+	// ==================물리 처리===================
+	static constexpr float fixedDeltaTime = 0.2f; // 50프레임 주기
+	m_elapsedTime += deltaTime;
+
+	while (m_elapsedTime >= fixedDeltaTime)
+	{
+		m_elapsedTime -= fixedDeltaTime;
+		m_sceneManager->FixedUpdate(fixedDeltaTime);
+		// 충돌처리
+		m_collisionManager->Update();
+	}
+	// =============================================
 
 	// 게임오브젝트 업데이트
 	m_sceneManager->Update(deltaTime);
-	m_sceneManager->FinalUpdate(deltaTime);
+	m_sceneManager->FinalUpdate(deltaTime);  
 	
-	// 충돌처리
-	m_collisionManager->Update();
-
-
-
 	// 랜더링은 BegineRender와 EndRender 사이에 해야한다.
 	m_d2DRenderer->BeginRender();
 	

@@ -2,9 +2,9 @@
 
 #include "pch.h"
 #include "Entry.h"
+#include "MathModuleHeader.h"
 #include "RendererHeader.h"
 #include "EngineHeader.h"
-
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -18,7 +18,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     engine->Process();
 
     engine->Finalize();
-
 
     return 0;
 }

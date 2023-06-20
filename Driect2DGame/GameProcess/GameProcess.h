@@ -19,12 +19,11 @@ public:
 	~GameProcess();
 
 	void Initalize(D2DRenderer* _d2DRenderer, HWND _main);
-	void Roop();
+	void Process();
 	void Finalize();
 
-
 private:
-	
+	float m_elapsedTime;
 	// 메인 윈도우 핸들 
 	HWND m_hWnd; 
 	// 랜더러
