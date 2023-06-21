@@ -28,8 +28,6 @@ InputManager::~InputManager()
 {
 }
 
-
-
 void InputManager::Initalize(HWND _main)
 {
 	m_hwnd = _main;

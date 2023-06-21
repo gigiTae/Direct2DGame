@@ -10,14 +10,14 @@ class Transform;
 class RigidBody
 {
 public:
-	RigidBody() = default;
+	RigidBody(GameObject* _owner, float _mass, Vector2 _scale);
 	~RigidBody();
 
 	void IntegrateForces(float _fixedDeltaTime);
 	void FinalUpdate(float _fixedDeltaTime);
 
-	void Initalize(float _mass, GameObject* _owner);
-
+	void AddForce(const Vector2& _force) { m_force += _force; }
+	void AddToque(const float& _toque) { m_torque += _toque; }
 	void ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector);
 
 private: // 멤버변수 공간

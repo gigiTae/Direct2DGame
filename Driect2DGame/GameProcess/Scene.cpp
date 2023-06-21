@@ -53,6 +53,15 @@ void Scene::FixedUpdate(float _fixedDeltaTime)
 			iter->FixedUpdate(_fixedDeltaTime, m_inputManager);
 		}
 	}
+
+
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		for (auto iter : m_objectVector[i])
+		{
+			iter->IntergrateForces(_fixedDeltaTime);
+		}
+	}
 }
 
 void Scene::Update(float _deltaTime)

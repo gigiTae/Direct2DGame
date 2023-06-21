@@ -2,7 +2,7 @@
 
 namespace GameWorld
 {
-	constexpr float linearDamping = 0.1f;
-	constexpr float angularDamping = 0.1f;
-	constexpr Vector2 gravity{ 0.f, -10.f };
+	constexpr float linearDamping = 1.f;
+	constexpr float angularDamping = 1.f;
+	constexpr Vector2 GRAVITY{ 0.f, 0.f };
 }

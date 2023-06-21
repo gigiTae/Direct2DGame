@@ -25,10 +25,11 @@ public:
 	virtual ~GameObject();
 
 public:
+	// 컴포넌트 생성
 	void CreateTransform(const Vector2& _position, const Vector2& _scale, float _rotation = 0.f);
 	void CreateBoxCollider();
 	void CreateCircleCollider();
-	void CreateRigidBody();
+	void CreateRigidBody(float _mass, Vector2 _scale);
 
 	void DestroyAllComponent();
 
@@ -38,7 +39,8 @@ public:
 	RigidBody* GetRigidBody() { return m_rigidBody; }
 
 	virtual void Initalize() = 0;
-	virtual void Update(float _deltaTime, InputManager* inputManager) = 0;
+	virtual void Update(float _deltaTime, InputManager* _inputManager) = 0;
+	void IntergrateForces(float _fixedDeltaTime);
 	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
 	virtual void FinalUpdate(float _deltaTime);
 	virtual void Render(D2DRenderer* _d2DRenderer) {};
@@ -53,7 +55,6 @@ public:
 
 	// 삭제예정인 오브젝트인지 확인
 	bool IsAlive() { return m_ailve; }
-
 private:
 	Transform* m_transform;
 	BoxCollider* m_boxCollider;

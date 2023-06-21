@@ -56,7 +56,7 @@ public:
 	
 	inline D2D1_POINT_2F ToPoint2F();
 
-	// 기준점을 기준으로 point를 radian만든 회전한 벡터를 반환
+	// 기준점을 기준으로 point를 radian만큼 회전한 벡터를 반환
 	static Vector2 RotateRadian(const Vector2& _point, const Vector2& _center, float _radian);
 
 	// 선분과 점사이의 최단경로를 반환

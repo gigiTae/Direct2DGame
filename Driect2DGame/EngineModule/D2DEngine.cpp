@@ -65,7 +65,7 @@ void D2DEngine::Finalize()
 
 void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 {
-	const wchar_t title[] = L"2D tears of the kingdom";
+	constexpr wchar_t title[] = L"2D tears of the kingdom";
 
 	WNDCLASS wndclass;
 	wndclass.style = CS_HREDRAW | CS_VREDRAW;

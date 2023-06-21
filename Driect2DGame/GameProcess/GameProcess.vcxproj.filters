@@ -82,9 +82,6 @@
     <Filter Include="GameProcess\Manager\CollisionManager">
       <UniqueIdentifier>{163362dd-7a68-4529-87ba-f370a1a9b99f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\GameObject">
-      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Scene">
       <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     </Filter>
     <Filter Include="GameProcess\Component\RigidBody">
       <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\GameObject">
+      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

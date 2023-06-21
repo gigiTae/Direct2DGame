@@ -46,7 +46,7 @@ void GameProcess::Process()
 	m_inputManager->Update();
 
 	// ==================물리 처리===================
-	static constexpr float fixedDeltaTime = 0.2f; // 50프레임 주기
+	constexpr float fixedDeltaTime = 0.02f; // 50프레임 주기
 	m_elapsedTime += deltaTime;
 
 	while (m_elapsedTime >= fixedDeltaTime)

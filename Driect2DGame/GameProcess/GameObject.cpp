@@ -43,8 +43,9 @@ void GameObject::CreateCircleCollider()
 	m_circleCollider->SetActive(true);
 }
 
-void GameObject::CreateRigidBody()
+void GameObject::CreateRigidBody(float _mass, Vector2 _scale)
 {
+	m_rigidBody = new RigidBody(this, _mass, _scale);
 }
 
 void GameObject::DestroyAllComponent()
@@ -70,6 +71,12 @@ void GameObject::DestroyAllComponent()
 		delete m_rigidBody;
 		m_rigidBody = nullptr;
 	}
+}
+
+void GameObject::IntergrateForces(float _fixedDeltaTime)
+{
+	if (m_rigidBody != nullptr)
+		m_rigidBody->IntegrateForces(_fixedDeltaTime);
 }
 
 void GameObject::FinalUpdate(float _deltaTime)

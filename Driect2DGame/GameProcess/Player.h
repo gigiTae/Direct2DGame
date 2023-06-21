@@ -8,7 +8,8 @@ public:
     ~Player();
 
     void Initalize() override;
-    void Update(float _deltaTime, InputManager* inputManager) override;
+    void Update(float _deltaTime, InputManager* _inputManager) override;
+    void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) override;
     void Finalize() override;
 
     void SetSpeed(float _speed) { m_moveSpeed = _speed; }

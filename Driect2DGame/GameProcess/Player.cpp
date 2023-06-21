@@ -4,6 +4,7 @@
 #include "BoxCollider.h"
 #include "CircleCollider.h"
 #include "Transform.h"
+#include "RigidBody.h"
 
 Player::Player(const wstring& _name)
 	:GameObject(_name)
@@ -20,51 +21,55 @@ void Player::Initalize()
 	CreateTransform(Vector2(100.f, 100.f), Vector2(100.f, 100.f));
 	m_moveSpeed = 500.f;
 
+	constexpr Vector2 SCALE(50.f, 100.f);
+
 	CreateBoxCollider();
 	BoxCollider* boxCollider = GetBoxCollider();
 	boxCollider->SetRotatble(true);
-	boxCollider->SetScale(Vector2(100.f, 200.f));
-
+	boxCollider->SetScale(SCALE);
+	
 	CreateCircleCollider();
-	CircleCollider* circleCollider = GetCircleCollider();
-	circleCollider->SetRadius(20.f);
+	GetCircleCollider()->SetOffset(Vector2(0.f, 20.f));
+	GetCircleCollider()->SetRadius(10.f);
+
+	CreateRigidBody(1.f, SCALE);
 }
 
-void Player::Update(float _deltaTime, InputManager* inputManager)
+void Player::Update(float _deltaTime, InputManager* _inputManager)
 {
-	Vector2 addPosition{};
-	
-	// 키입력에 따라서 움직이자
-	if (inputManager->IsKeyState(KEY::W, KEY_STATE::HOLD))
+}
+
+void Player::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
+{
+	RigidBody* rigid = GetRigidBody();
+	float rotation = GetTransform()->GetRotation();
+
+	if (_inputManager->IsKeyState(KEY::W, KEY_STATE::HOLD))
 	{
-		addPosition.y += 1;
+		Vector2 force(0.f, 1000.f);
+		force = Vector2::RotateRadian(force, Vector2::Zero, rotation);
+		rigid->AddForce(force);
 	}
-	if (inputManager->IsKeyState(KEY::S, KEY_STATE::HOLD))
+	if (_inputManager->IsKeyState(KEY::S, KEY_STATE::HOLD))
 	{
-		addPosition.y -= 1;
+		Vector2 force(0.f, -500.f);
+		force = Vector2::RotateRadian(force, Vector2::Zero, rotation);
+		rigid->AddForce(force);
 	}
-	if (inputManager->IsKeyState(KEY::D, KEY_STATE::HOLD))
+	if (_inputManager->IsKeyState(KEY::D, KEY_STATE::HOLD))
 	{
-		addPosition.x += 1;
+		rigid->AddToque(-100.f);
 	}
-	if (inputManager->IsKeyState(KEY::A, KEY_STATE::HOLD))
+	if (_inputManager->IsKeyState(KEY::A, KEY_STATE::HOLD))
 	{
-		addPosition.x -= 1;
-	}
-	addPosition.Normalize();
-	if (inputManager->IsKeyState(KEY::Q, KEY_STATE::HOLD))
-	{
-		GetTransform()->AddRotation(0.1f);
-	}
-	if (inputManager->IsKeyState(KEY::E, KEY_STATE::HOLD))
-	{
-		GetTransform()->AddRotation(-0.1f);
+		rigid->AddToque(100.f);
 	}
 
-	// 플레이어 위치 조정
-	Vector2 playerPosition = GetTransform()->GetPosition();
-	playerPosition += addPosition * m_moveSpeed * _deltaTime;
-	GetTransform()->SetPosition(playerPosition);
+	if (_inputManager->IsKeyState(KEY::SPACE, KEY_STATE::HOLD))
+	{
+		rigid->ApplyImpulse(Vector2(100.f, 0.f), Vector2(0.f, 10.f));
+	}
+
 
 }
 
