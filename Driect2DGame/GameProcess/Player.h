@@ -11,6 +11,7 @@ public:
     void Update(float _deltaTime, InputManager* _inputManager) override;
     void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) override;
     void Finalize() override;
+    void Render(D2DRenderer* _d2DRenderer) override;
 
     void SetSpeed(float _speed) { m_moveSpeed = _speed; }
     float GetSpeed() { return m_moveSpeed; }

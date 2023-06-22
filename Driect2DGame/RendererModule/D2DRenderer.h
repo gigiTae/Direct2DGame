@@ -17,7 +17,7 @@ public:
 
 public:
 	/// 그리기 관련 함수들
-	
+	void DrawBitMap();
 	// 직선을 그리는 함수
 	void DrawLine(Vector2 _point1, Vector2 _point2
 		, COLORREF color =RGB(255, 255, 255));

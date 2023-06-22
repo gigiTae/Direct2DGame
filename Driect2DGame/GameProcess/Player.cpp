@@ -26,11 +26,10 @@ void Player::Initalize()
 	CreateBoxCollider();
 	BoxCollider* boxCollider = GetBoxCollider();
 	boxCollider->SetRotatble(true);
-	boxCollider->SetScale(SCALE);
+	boxCollider->SetScale(Vector2(1.f,40.f));
 	
 	CreateCircleCollider();
-	GetCircleCollider()->SetOffset(Vector2(0.f, 20.f));
-	GetCircleCollider()->SetRadius(10.f);
+	GetCircleCollider()->SetRadius(100.f);
 
 	CreateRigidBody(1.f, SCALE);
 }
@@ -64,17 +63,18 @@ void Player::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
 	{
 		rigid->AddToque(100.f);
 	}
-
-	if (_inputManager->IsKeyState(KEY::SPACE, KEY_STATE::HOLD))
-	{
-		rigid->ApplyImpulse(Vector2(100.f, 0.f), Vector2(0.f, 10.f));
-	}
-
-
 }
 
 void Player::Finalize()
 {
 	DestroyAllComponent();
+
+}
+
+void Player::Render(D2DRenderer* _d2DRenderer)
+{
+	Vector2 position = GetTransform()->GetPosition();
+	Vector2 v = GetRigidBody()->GetVelocity();
+	_d2DRenderer->DrawLine(position, position + v);
 
 }

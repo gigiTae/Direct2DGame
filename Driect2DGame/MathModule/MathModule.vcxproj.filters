@@ -33,6 +33,9 @@
     <ClInclude Include="FMath.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Math\Geomety</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vector2.cpp">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="FMath.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Math\Geomety</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

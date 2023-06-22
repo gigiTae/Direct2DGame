@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FMath.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="MathModulePCH.h" />
     <ClInclude Include="Matrix3x3.h" />
     <ClInclude Include="Vector2.h" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FMath.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />

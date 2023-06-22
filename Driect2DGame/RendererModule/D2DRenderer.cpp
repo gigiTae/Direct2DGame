@@ -129,6 +129,12 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 	m_renderTarget->SetTransform(matrix);
 }
 
+void D2DRenderer::DrawBitMap()
+{
+	//m_renderTarget->DrawBitmap()
+
+}
+
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
 	// 스크린 좌표계로 변환

@@ -20,6 +20,8 @@ public:
 	void AddToque(const float& _toque) { m_torque += _toque; }
 	void ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector);
 
+	Vector2 GetVelocity() { return m_velocity; }
+
 private: // 멤버변수 공간
 	GameObject* m_owner;
 	Transform* m_transform;

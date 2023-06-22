@@ -20,8 +20,7 @@ RigidBody::RigidBody(GameObject* _owner, float _mass, Vector2 _scale)
 	if (m_mass < FLT_MAX)
 	{
 		m_invMass = 1.0f / m_mass;
-		//m_I = m_mass * _scale.LengthSquared() / 12.0f;
-		m_I = m_mass * _scale.Length()/ 12.0f;
+		m_I = m_mass * _scale.LengthSquared() / 12.0f;
 		m_invI = 1.0f / m_I;
 	}
 	else

@@ -17,11 +17,11 @@ Box::~Box()
 void Box::Initalize()
 {
 	static float x = 0.f;
-	CreateTransform(Vector2(3*x++, 0.f), Vector2(100.f, 100.f));
+	CreateTransform(Vector2(0.f,  (3*x--)+400.f), Vector2(100.f, 100.f));
 
 	CreateBoxCollider();
 	BoxCollider* boxCollider = GetBoxCollider();
-	boxCollider->SetScale(Vector2(100.f, 1.f+x));
+	boxCollider->SetScale(Vector2(100.f, 1.f-x*4));
 	boxCollider->SetRotatble(true);
 
 	//CreateCircleCollider();
