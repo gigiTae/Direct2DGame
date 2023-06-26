@@ -6,6 +6,7 @@ class InputManager;
 class TimeManager;
 class CollisionManager;
 class SceneManager;
+class PathManager;
 
 /// <summary>
 ///  게임진행을 담당하는 클래스이다
@@ -34,6 +35,7 @@ private:
 	InputManager* m_inputManager;
 	TimeManager* m_timeManager;
 	CollisionManager* m_collisionManager;
+	PathManager* m_pathManager;
 
 };
 

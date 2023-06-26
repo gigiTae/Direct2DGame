@@ -84,7 +84,6 @@ void D2DRenderer::BeginRender()
 		m_renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 		m_renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
-
 	}
 
 
@@ -225,6 +224,15 @@ void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 
 	assert(m_tempBrush);
 	m_renderTarget->DrawTextW(_str.c_str(), static_cast<UINT32>(_str.length())
 		, m_textFormat, rect, m_tempBrush);
+
+}
+
+void D2DRenderer::LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap)
+{
+//	HRESULT hr;
+
+	//hr = LoadBitmapFromFile
+
 
 }
 

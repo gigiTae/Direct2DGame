@@ -21,7 +21,7 @@ void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManag
 	++m_currentCollision;
 	assert(m_currentCollision >= 0);
 
-	_collision.otherObject->OnCollisionEnter(_collision, _inputManager);
+	GetOwner()->OnCollisionEnter(_collision, _inputManager);
 }
 
 void BoxCollider::OnCollisionExit(const Collision& _collision, const InputManager* _inputManager)
@@ -29,12 +29,12 @@ void BoxCollider::OnCollisionExit(const Collision& _collision, const InputManage
 	--m_currentCollision;
 	assert(m_currentCollision >= 0);
 
-	_collision.otherObject->OnCollisionExit(_collision, _inputManager);
+	GetOwner()->OnCollisionExit(_collision, _inputManager);
 }
 
 void BoxCollider::OnCollisionStay(const Collision& _collision, const InputManager* _inputManager)
 {
-	_collision.otherObject->OnCollisionStay(_collision, _inputManager);
+	GetOwner()->OnCollisionStay(_collision, _inputManager);
 }
 
 
@@ -66,9 +66,11 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	rightBottom.x = m_position.x - m_scale.x * 0.5f;
 	rightBottom.y = m_position.y - m_scale.y * 0.5f;
 
+	Vector2 postion = GetOwner()->GetTransform()->GetPosition();
+
 	if (m_isRotatable)
 	{
-		_d2DRenderer->SetTransform(-m_rotation, m_position);
+		_d2DRenderer->SetTransform(-m_rotation, postion);
 	}
 
 	// 충돌상황에 따라서 랜더링

@@ -34,8 +34,8 @@ private:
 
 private:
 	// 화면 해상도
-	const int m_screenWidth = 1920;
-	const int m_screenHeight = 1080;
+	const int m_screenWidth = 900;
+	const int m_screenHeight = 600;
 
 	HINSTANCE m_hInstance;
 	// 메인 윈도우 핸들

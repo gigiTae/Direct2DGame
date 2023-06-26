@@ -37,10 +37,15 @@ public:
 	/// 쓰기 관련 함수
 	void DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);
 
+	// 비트맵 로드
+	void LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap);
+
 private:
 	// 랜더타겟을 만드는 함수
 	HRESULT CreateDeviceResources();
 	void DiscardDeviceResources();
+
+	//HRESULT LoadBitmapFromFile()
 
 private: 
 	// 메인 윈도우 핸들
@@ -49,6 +54,7 @@ private:
 	ID2D1HwndRenderTarget* m_renderTarget;
 	
 	// 비트맵
+
 
 	// 쓰기 전용 
 	IDWriteFactory* m_writeFactory;
