@@ -132,7 +132,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Box.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
@@ -141,11 +140,10 @@
     <ClInclude Include="GameProcessPCH.h" />
     <ClInclude Include="GameProcess.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Line.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Point.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
@@ -155,7 +153,6 @@
     <ClInclude Include="GameWorld.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -164,11 +161,10 @@
     <ClCompile Include="GameProcess.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />

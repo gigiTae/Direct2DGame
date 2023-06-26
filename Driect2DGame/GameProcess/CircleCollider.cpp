@@ -49,11 +49,11 @@ void CircleCollider::DebugRender(D2DRenderer* _d2DRenderer)
 {
 	if (m_currentCollision == 0)
 	{
-		_d2DRenderer->DrawEllipse(m_position, m_radius, RGB(0, 255, 0));
+		_d2DRenderer->DrawEllipse(m_position, m_radius, D2D1::ColorF::LightGreen);
 	}
 	else
 	{
-		_d2DRenderer->DrawEllipse(m_position, m_radius, RGB(0, 0, 255));
+		_d2DRenderer->DrawEllipse(m_position, m_radius, D2D1::ColorF::Red);
 	}
 }
 

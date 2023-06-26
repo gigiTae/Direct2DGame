@@ -24,6 +24,7 @@ public:
 	float GetRotation() { return m_rotation; }
 
 	void FinalUpdate();
+	void DebugRender(D2DRenderer* _d2DRenderer);
 private: 
 	Vector2 m_position;
 	float m_rotation;

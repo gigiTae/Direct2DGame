@@ -200,6 +200,7 @@ void CollisionManager::OnCollisionProcess(bool _isCollision, map<unsigned long l
 {
 	// 충돌 정보
 	Collision collision{};
+
 	// 현재 프레임 충돌 여부
 	bool isCollision = _isCollision;
 	// 이전 프레임 충돌 여부

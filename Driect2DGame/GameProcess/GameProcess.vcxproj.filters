@@ -44,23 +44,17 @@
     <ClInclude Include="Player.h">
       <Filter>GameProcess\Prefab\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>GameProcess\Prefab\Box</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>GameProcess\Prefab\Line</Filter>
-    </ClInclude>
     <ClInclude Include="NameGenerator.h">
       <Filter>GameProcess\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>GameProcess\Prefab\Point</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>GameProcess\Component\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
       <Filter>GameProcess\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>GameProcess\Manager\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,15 +100,6 @@
     <Filter Include="GameProcess\Prefab\Player">
       <UniqueIdentifier>{db4274a2-e10b-47fb-b7a1-8a30d7acc19e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Prefab\Box">
-      <UniqueIdentifier>{d67cdb2c-8984-40d5-b246-3021e3d954be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\Prefab\Line">
-      <UniqueIdentifier>{f3b9ab60-b7ff-431a-84e4-4af3ac1c9283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\Prefab\Point">
-      <UniqueIdentifier>{39299d7b-d297-43f1-be59-d8fdc8fb0087}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\Debug">
       <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
     </Filter>
@@ -129,6 +114,9 @@
     </Filter>
     <Filter Include="GameProcess\GameObject">
       <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Manager\ResourceManager">
+      <UniqueIdentifier>{8e1e78d5-d006-467f-8fa7-19993f292793}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,23 +159,17 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameProcess\Prefab\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>GameProcess\Prefab\Box</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>GameProcess\Prefab\Line</Filter>
-    </ClCompile>
     <ClCompile Include="NameGenerator.cpp">
       <Filter>GameProcess\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>GameProcess\Prefab\Point</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>GameProcess\Component\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
       <Filter>GameProcess\Define</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>GameProcess\Manager\ResourceManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

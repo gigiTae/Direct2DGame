@@ -1,7 +1,9 @@
 #pragma once
 
-struct Vector2;
-
+/// <summary>
+/// D2D랜더링을 담당한다
+/// 
+/// </summary>
 class D2DRenderer
 {
 public:
@@ -13,24 +15,27 @@ public:
 	void EndRender();
 	
 	void Finalize();
-	void SetTransform(float _radian, Vector2 _point);
+	void SetTransform(float _radian = 0.f, Vector2 _point = Vector2::Zero);
 
 public:
 	/// 그리기 관련 함수들
 	void DrawBitMap();
 	// 직선을 그리는 함수
 	void DrawLine(Vector2 _point1, Vector2 _point2
-		, COLORREF color =RGB(255, 255, 255));
+		, COLORREF = D2D1::ColorF::White);
 
 	void DrawEllipse(Vector2 _point, Vector2 _radius
-		, COLORREF color = RGB(255, 255, 255) );
+		, COLORREF = D2D1::ColorF::White);
 
 	void DrawEllipse(Vector2 _point, float _radius,
-		COLORREF color = RGB(255, 255, 255));
+		COLORREF color = D2D1::ColorF::White);
 
 	// 사각형 그리는 함수
 	void DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom
-		, COLORREF color = RGB(255, 255, 255), float _rotation = 0.f);
+		, COLORREF color = D2D1::ColorF::White, float _rotation = 0.f);
+
+	/// 쓰기 관련 함수
+	void DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);
 
 private:
 	// 랜더타겟을 만드는 함수
@@ -40,15 +45,16 @@ private:
 private: 
 	// 메인 윈도우 핸들
 	HWND m_hwnd;
-	ID2D1Factory* m_direct2DFactory;
+	ID2D1Factory* m_factory;
 	ID2D1HwndRenderTarget* m_renderTarget;
 	
+	// 비트맵
+
 	// 쓰기 전용 
 	IDWriteFactory* m_writeFactory;
 	IDWriteTextFormat* m_textFormat;
 
-	// 브러쉬
-	ID2D1SolidColorBrush* m_nowBrush; // 바꿔가면서 사용하는 용도
+	// 브러
 	ID2D1SolidColorBrush* m_tempBrush; // 잠시 사용하는 용도
 
 private:

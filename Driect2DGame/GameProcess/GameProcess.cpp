@@ -60,12 +60,13 @@ void GameProcess::Process()
 
 	// 게임오브젝트 업데이트
 	m_sceneManager->Update(deltaTime);
-	m_sceneManager->FinalUpdate(deltaTime);  
-	
+	m_sceneManager->FinalUpdate(deltaTime);
+
 	// 랜더링은 BegineRender와 EndRender 사이에 해야한다.
 	m_d2DRenderer->BeginRender();
-	
+
 	m_sceneManager->Render(m_d2DRenderer);
+	m_timeManager->DebugRender(m_d2DRenderer);
 
 	m_d2DRenderer->EndRender();
 

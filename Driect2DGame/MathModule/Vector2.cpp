@@ -1,5 +1,6 @@
 #include "MathModulePCH.h"
 #include "Vector2.h"
+#include "Vector3.h"
 
 const Vector2 Vector2::UnitX{ 1.f,0.f };
 const Vector2 Vector2::UnitY{ 0.f, 1.f };

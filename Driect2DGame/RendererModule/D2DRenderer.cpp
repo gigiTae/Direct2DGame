@@ -5,11 +5,10 @@
 
 D2DRenderer::D2DRenderer()
 	:m_hwnd(nullptr)
-	,m_direct2DFactory(nullptr)
+	,m_factory(nullptr)
 	,m_renderTarget(nullptr)
 	,m_IsD2DResReady(S_FALSE)
 	,m_renderTargetSize{}
-	,m_nowBrush(nullptr)
 	,m_tempBrush(nullptr)
 {
 }
@@ -28,7 +27,7 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	// Direct2D 리소스를 만드는데 사용할 수 있는 팩터리 개체생성
 	hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED
-		, &m_direct2DFactory);
+		, &m_factory);
 	assert(hr == S_OK);
 
 	hr = CreateDeviceResources();
@@ -53,7 +52,7 @@ void D2DRenderer::Initalize(HWND _hwnd)
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
 			DWRITE_FONT_STRETCH_NORMAL,
-			10,
+			15,
 			L"", //locale
 			&m_textFormat
 		);
@@ -83,8 +82,9 @@ void D2DRenderer::BeginRender()
 		m_renderTarget->BeginDraw();
 
 		m_renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-		
+
 		m_renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
+
 	}
 
 
@@ -109,8 +109,11 @@ void D2DRenderer::EndRender()
 
 void D2DRenderer::Finalize()
 {
-	SafeRelease(&m_direct2DFactory);
+	SafeRelease(&m_writeFactory);
+	SafeRelease(&m_textFormat);
 	SafeRelease(&m_renderTarget);
+	SafeRelease(&m_factory);
+	
 
 	//현재 스레드에서 COM 라이브러리를 닫고, 스레드에 의해 로드된 모든 DLL을 언로드하고
 	//, 스레드가 유지 관리하는 다른 모든 리소스를 해제하고, 스레드의 모든 RPC 연결을 강제로 닫습니다.
@@ -208,8 +211,26 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 	SafeRelease(&m_tempBrush);
 }
 
+void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom
+	, COLORREF _color /*= D2D1::ColorF::White*/)
+{
+	Vector2 leftTop = _leftTop.ToScreenPoint(m_renderTargetSize);
+	Vector2 rightBottom = _rightBottom.ToScreenPoint(m_renderTargetSize);
+
+	// 글자 출력범위
+	D2D1_RECT_F rect = D2D1::RectF(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
+
+	// 브러쉬 생성
+	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(_color), &m_tempBrush);
+	assert(m_tempBrush);
+	m_renderTarget->DrawTextW(_str.c_str(), static_cast<UINT32>(_str.length())
+		, m_textFormat, rect, m_tempBrush);
+
+}
+
 HRESULT D2DRenderer::CreateDeviceResources()
 {
+	
 	HRESULT hr = S_OK;
 	if (m_renderTarget == nullptr)
 	{
@@ -223,7 +244,7 @@ HRESULT D2DRenderer::CreateDeviceResources()
 			, rc.bottom - rc.top);
 
 		// 렌더 타겟생성
-		hr = m_direct2DFactory->CreateHwndRenderTarget(
+		hr = m_factory->CreateHwndRenderTarget(
 			D2D1::RenderTargetProperties()
 			, D2D1::HwndRenderTargetProperties(m_hwnd, size)
 			, &m_renderTarget);

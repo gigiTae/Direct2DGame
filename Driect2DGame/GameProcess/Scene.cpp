@@ -38,6 +38,8 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 			iter->Render(_d2DRenderer);
 
 			iter->ComponentRender(_d2DRenderer);
+
+			iter->DebugRender(_d2DRenderer);
 		}
 	}
 }
@@ -93,7 +95,6 @@ void Scene::FinalUpdate(float _deltaTime)
 void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 {
 	m_objectVector[static_cast<int>(_type)].push_back(_object);
-
 }
 
 void Scene::DestoryGroupObject(OBJECT_TYPE _type)

@@ -27,7 +27,7 @@ void Player::Initalize()
 	BoxCollider* boxCollider = GetBoxCollider();
 	boxCollider->SetRotatble(true);
 	boxCollider->SetScale(Vector2(1.f,40.f));
-	
+
 	CreateCircleCollider();
 	GetCircleCollider()->SetRadius(100.f);
 
@@ -57,11 +57,11 @@ void Player::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
 	}
 	if (_inputManager->IsKeyState(KEY::D, KEY_STATE::HOLD))
 	{
-		rigid->AddToque(-100.f);
+		rigid->AddToque(-1500.f);
 	}
 	if (_inputManager->IsKeyState(KEY::A, KEY_STATE::HOLD))
 	{
-		rigid->AddToque(100.f);
+		rigid->AddToque(1500.f);
 	}
 }
 

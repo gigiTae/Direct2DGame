@@ -73,13 +73,14 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 
 	// 충돌상황에 따라서 랜더링
 	if (m_currentCollision == 0)
-	{
-		_d2DRenderer->DrawRectangle(leftTop, rightBottom, RGB(0, 255, 0));
+	{ 
+		_d2DRenderer->DrawRectangle(leftTop, rightBottom,D2D1::ColorF::LightGreen);
 	}
 	else
 	{
-		_d2DRenderer->DrawRectangle(leftTop, rightBottom, RGB(0, 0, 255));
+		_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::Red);
 	}
 
+	_d2DRenderer->SetTransform(0.f, Vector2::Zero);
 }
 

@@ -43,6 +43,8 @@ public:
 	void IntergrateForces(float _fixedDeltaTime);
 	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
 	virtual void FinalUpdate(float _deltaTime);
+
+	virtual void DebugRender(D2DRenderer* _d2dRenderer);
 	virtual void Render(D2DRenderer* _d2DRenderer) {};
 	virtual void ComponentRender(D2DRenderer* _d2DRenderer);
 	virtual void Finalize();

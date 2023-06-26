@@ -85,7 +85,7 @@ void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 	// 윈도우 창 시작좌표 (좌상단 기준)
 	constexpr int left = 100;
 	constexpr int top = 100;
-
+	
 	// 윈도우 창 생성
 	m_hWnd = CreateWindow(title, title
 		, WS_OVERLAPPEDWINDOW // 창이 겹침
@@ -97,6 +97,12 @@ void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 
 	ShowWindow(m_hWnd, _nCmdShow);
 	UpdateWindow(m_hWnd);
+
+	// 화면해상도에 맞게 window 좌표계를 설정한다
+	RECT rt = { 0, 0,(long)m_screenWidth, (long)m_screenHeight };
+	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false); // window 설정스타일에 맞는 rt값을 반환해준다.
+	SetWindowPos(m_hWnd, nullptr, left, top, rt.right - rt.left, rt.bottom - rt.top, 0);
+
 }
 
 // 

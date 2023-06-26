@@ -11,6 +11,7 @@ public:
 	
 	// deltaTime을 반환해준다
 	double Update();
+	void DebugRender(D2DRenderer* _d2dRenderer);
 	void Finalize();
 
 private:
@@ -19,5 +20,8 @@ private:
 	LARGE_INTEGER m_frequency;
 
 	double m_deltaTime;
+	double m_elapsedTime;
+	int m_updateCount;
+	int m_fps;
 };
 

@@ -1,6 +1,5 @@
 #pragma once
 
-
 struct Vector2
 {
 public:
@@ -24,7 +23,6 @@ public:
 	inline constexpr Vector2& operator-=(const Vector2& _other);
 	inline constexpr bool operator==(const Vector2& _other);
 	inline constexpr bool operator!=(const Vector2& _other);
-
 
 	// 루트 제곱근 (길이)
 	inline float Length() const;

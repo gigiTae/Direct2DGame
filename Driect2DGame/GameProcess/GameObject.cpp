@@ -101,16 +101,27 @@ void GameObject::FinalUpdate(float _deltaTime)
 	}
 }
 
-void GameObject::ComponentRender(D2DRenderer* _d2DRenderer)
+void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 {
+	// 충돌체 디버그용 렌더링
 	if (m_boxCollider != nullptr)
 	{
-		m_boxCollider->DebugRender(_d2DRenderer);
+		m_boxCollider->DebugRender(_d2dRenderer);
 	}
 	if (m_circleCollider != nullptr)
 	{
-		m_circleCollider->DebugRender(_d2DRenderer);
+		m_circleCollider->DebugRender(_d2dRenderer);
 	}
+	// 디버그용도의 오브젝트 정보
+	if (m_transform != nullptr)
+	{
+		m_transform->DebugRender(_d2dRenderer);
+	}
+}
+
+void GameObject::ComponentRender(D2DRenderer* _d2DRenderer)
+{
+	// 애니메이션 or 테스트 or 도형 그리기
 }
 
 void GameObject::Finalize()
