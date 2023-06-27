@@ -53,8 +53,8 @@
     <ClInclude Include="GameWorld.h">
       <Filter>GameProcess\Define</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>GameProcess\Manager\ResourceManager</Filter>
+    <ClInclude Include="PathManager.h">
+      <Filter>GameProcess\Manager\PathManager</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>GameProcess\Component</Filter>
@@ -115,8 +115,8 @@
     <Filter Include="GameProcess\GameObject">
       <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Manager\ResourceManager">
-      <UniqueIdentifier>{8e1e78d5-d006-467f-8fa7-19993f292793}</UniqueIdentifier>
+    <Filter Include="GameProcess\Manager\PathManager">
+      <UniqueIdentifier>{0e845db7-a4d9-4863-a5e6-8377ab6b19e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\Component\RigidBody">
       <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
@@ -174,8 +174,8 @@
     <ClCompile Include="GameWorld.cpp">
       <Filter>GameProcess\Define</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>GameProcess\Manager\ResourceManager</Filter>
+    <ClCompile Include="PathManager.cpp">
+      <Filter>GameProcess\Manager\PathManager</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>GameProcess\Component</Filter>

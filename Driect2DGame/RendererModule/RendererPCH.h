@@ -13,4 +13,6 @@
 #include <assert.h>
 #include <d2d1helper.h>
 
+#include <wincodec.h>
+
 #include "MathModuleHeader.h"

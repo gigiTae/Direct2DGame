@@ -2,6 +2,7 @@
 #include "CircleCollider.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "GameObject.h"
 #include "CollisionManager.h"
 
 CircleCollider::CircleCollider()
@@ -22,7 +23,7 @@ void CircleCollider::OnCollisionEnter(const Collision& _collision, const InputMa
 	++m_currentCollision;
 	assert(m_currentCollision >= 0);
 
-	_collision.otherObject->OnCollisionEnter(_collision, _inputManager);
+	GetOwner()->OnCollisionEnter(_collision, _inputManager);
 }
 
 void CircleCollider::OnCollisionExit(const Collision& _collision, const InputManager* _inputManager)
@@ -30,12 +31,12 @@ void CircleCollider::OnCollisionExit(const Collision& _collision, const InputMan
 	--m_currentCollision;
 	assert(m_currentCollision >= 0);
 
-	_collision.otherObject->OnCollisionExit(_collision, _inputManager);
+	GetOwner()->OnCollisionExit(_collision, _inputManager);
 }
 
 void CircleCollider::OnCollisionStay(const Collision& _collision, const InputManager* _inputManager)
 {
-
+	GetOwner()->OnCollisionStay(_collision, _inputManager);
 }
 
 void CircleCollider::Update()

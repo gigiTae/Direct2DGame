@@ -5,12 +5,14 @@
 #include "CollisionManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "PathManager.h"
 
 GameProcess::GameProcess()
 	:m_collisionManager(nullptr)
 	, m_sceneManager(nullptr)
 	, m_inputManager(nullptr)
 	, m_timeManager(nullptr)
+	,m_pathManager(nullptr)
 	, m_d2DRenderer(nullptr)
 	, m_hWnd(nullptr)
 	,m_elapsedTime(0.f)
@@ -32,8 +34,10 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_inputManager = new InputManager();
 	m_collisionManager = new CollisionManager();
 	m_sceneManager = new SceneManager();
+	m_pathManager = new PathManager();
 
 	// 매니저 초기화
+	m_pathManager->Initalize();
 	m_timeManager->Initalize();
 	m_inputManager->Initalize(m_hWnd);
 	m_sceneManager->Initalize(m_inputManager,m_collisionManager);

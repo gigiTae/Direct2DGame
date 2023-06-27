@@ -28,7 +28,8 @@ void Player::Initalize()
 
 	BoxCollider* boxCollider = CreateComponent<BoxCollider>();
 	boxCollider->SetRotatble(true);
-	boxCollider->SetScale(Vector2(1.f,40.f));
+	boxCollider->SetScale(Vector2(10.f,40.f));
+	boxCollider->SetOffset(Vector2(0.f,20.f));
 
 	CircleCollider* circleCollider = CreateComponent<CircleCollider>();
 	circleCollider->SetRadius(100.f);

@@ -143,8 +143,8 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="NameGenerator.h" />
+    <ClInclude Include="PathManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
@@ -165,8 +165,8 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
+    <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
