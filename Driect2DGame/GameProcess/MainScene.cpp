@@ -14,11 +14,11 @@ MainScene::~MainScene()
 
 void MainScene::Enter()
 {
-	for (int i = 0; i < 100; ++i)
-	{
-		Player* player = new Player(L"player");
-		player->Initalize();
-		AddObject(player, OBJECT_TYPE::PLAYER);
-	}
+
+	Player* player = new Player("player");
+	player->Initalize();
+	AddObject(player, OBJECT_TYPE::PLAYER);
+
+
 	GetCollisionManager()->CheckCollisionObjectType(OBJECT_TYPE::PLAYER, OBJECT_TYPE::PLAYER);
 }

@@ -28,16 +28,19 @@ public:
 public:
 	void DestroyAllComponent();
 
+	/// 이벤트 전용 함수 
 	virtual void Initalize() = 0;
-	virtual void Update(float _deltaTime, InputManager* _inputManager) = 0;
-	void IntergrateForces(float _fixedDeltaTime);
+	virtual void Finalize();
 	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
+	
+	virtual void Update(float _deltaTime, InputManager* _inputManager) = 0;
 	virtual void FinalUpdate(float _deltaTime);
-
-	virtual void DebugRender(D2DRenderer* _d2dRenderer);
 	virtual void Render(D2DRenderer* _d2DRenderer) {};
 	virtual void ComponentRender(D2DRenderer* _d2DRenderer);
-	virtual void Finalize();
+	virtual void DebugRender(D2DRenderer* _d2dRenderer);
+	
+	// 물리엔진 전용함수  
+	void IntergrateForces(float _fixedDeltaTime);
 
 public:
 	void SetDead() { m_ailve = false; }

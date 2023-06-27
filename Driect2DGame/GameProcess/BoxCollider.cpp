@@ -21,7 +21,7 @@ void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManag
 	++m_currentCollision;
 	assert(m_currentCollision >= 0);
 
-	GetOwner()->OnCollisionEnter(_collision, _inputManager);
+	GetGameObject()->OnCollisionEnter(_collision, _inputManager);
 }
 
 void BoxCollider::OnCollisionExit(const Collision& _collision, const InputManager* _inputManager)
@@ -29,12 +29,12 @@ void BoxCollider::OnCollisionExit(const Collision& _collision, const InputManage
 	--m_currentCollision;
 	assert(m_currentCollision >= 0);
 
-	GetOwner()->OnCollisionExit(_collision, _inputManager);
+	GetGameObject()->OnCollisionExit(_collision, _inputManager);
 }
 
 void BoxCollider::OnCollisionStay(const Collision& _collision, const InputManager* _inputManager)
 {
-	GetOwner()->OnCollisionStay(_collision, _inputManager);
+	GetGameObject()->OnCollisionStay(_collision, _inputManager);
 }
 
 
@@ -66,7 +66,7 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	rightBottom.x = m_position.x - m_scale.x * 0.5f;
 	rightBottom.y = m_position.y - m_scale.y * 0.5f;
 
-	Vector2 postion = GetOwner()->GetTransform()->GetPosition();
+	Vector2 postion = GetComponent<Transform>()->GetPosition();
 
 	if (m_isRotatable)
 	{

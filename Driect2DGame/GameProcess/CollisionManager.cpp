@@ -196,10 +196,18 @@ bool CollisionManager::IsCollision(CircleCollider* _leftCircle, CircleCollider* 
 	return false;
 }
 
-void CollisionManager::OnCollisionProcess(bool _isCollision, map<unsigned long long, bool>::iterator& iter, Collider* _leftCollider, Collider* _rightCollider)
+void CollisionManager::OnCollisionProcess(bool _isCollision
+	, map<unsigned long long, bool>::iterator& iter
+	, Collider* _leftCollider, Collider* _rightCollider)
 {
 	// 충돌 정보
-	Collision collision{};
+	Collision leftCollision{};
+	leftCollision.otherCollider = _rightCollider;
+	leftCollision.otherObject = _rightCollider->GetGameObject();
+
+	Collision rightCollision{};
+	rightCollision.otherCollider = _leftCollider;
+	rightCollision.otherObject = _leftCollider->GetGameObject();
 
 	// 현재 프레임 충돌 여부
 	bool isCollision = _isCollision;
@@ -216,13 +224,13 @@ void CollisionManager::OnCollisionProcess(bool _isCollision, map<unsigned long l
 	{
 		if (leftObject->IsAlive() && rightObject->IsAlive())
 		{
-			_leftCollider->OnCollisionStay(collision, m_inputManager);
-			_rightCollider->OnCollisionStay(collision, m_inputManager);
+			_leftCollider->OnCollisionStay(leftCollision, m_inputManager);
+			_rightCollider->OnCollisionStay(rightCollision, m_inputManager);
 		}
 		else // 둘중하나가 삭제예정이라면 예외처리
 		{ 
-			_leftCollider->OnCollisionExit(collision, m_inputManager);
-			_rightCollider->OnCollisionExit(collision, m_inputManager);
+			_leftCollider->OnCollisionExit(leftCollision, m_inputManager);
+			_rightCollider->OnCollisionExit(rightCollision, m_inputManager);
 			iter->second = false;
 		}
 	}
@@ -231,15 +239,15 @@ void CollisionManager::OnCollisionProcess(bool _isCollision, map<unsigned long l
 		// 둘중하나가 삭제 예정이라면 충돌하지 않은것으로 취급
 		if (leftObject->IsAlive() && rightObject->IsAlive())
 		{
-			_leftCollider->OnCollisionEnter(collision, m_inputManager);
-			_rightCollider->OnCollisionEnter(collision, m_inputManager);
+			_leftCollider->OnCollisionEnter(leftCollision, m_inputManager);
+			_rightCollider->OnCollisionEnter(rightCollision, m_inputManager);
 			iter->second = true;
 		}
 	}
 	else if (!_isCollision && isPrevCollison)
 	{
-		_leftCollider->OnCollisionExit(collision, m_inputManager);
-		_rightCollider->OnCollisionExit(collision, m_inputManager);
+		_leftCollider->OnCollisionExit(leftCollision, m_inputManager);
+		_rightCollider->OnCollisionExit(rightCollision, m_inputManager);
 		iter->second = false;
 	}
 

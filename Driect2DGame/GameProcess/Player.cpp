@@ -20,7 +20,7 @@ void Player::Initalize()
 {
 	Transform* transform = CreateComponent<Transform>();
 	transform->SetPosition(Vector2(100.f, 100.f));
-	transform->SetScale(Vector2(100.f, 100.f));
+	transform->SetScale(Vector2(10.f, 10.f));
 
 	m_moveSpeed = 500.f;
 
@@ -32,7 +32,7 @@ void Player::Initalize()
 	boxCollider->SetOffset(Vector2(0.f,20.f));
 
 	CircleCollider* circleCollider = CreateComponent<CircleCollider>();
-	circleCollider->SetRadius(100.f);
+	circleCollider->SetRadius(10.f);
 
 	RigidBody* rigidBody = CreateComponent<RigidBody>();
 
@@ -61,11 +61,11 @@ void Player::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
 	}
 	if (_inputManager->IsKeyState(KEY::D, KEY_STATE::HOLD))
 	{
-		rigid->AddToque(-1500.f);
+		rigid->AddToque(-1.f);
 	}
 	if (_inputManager->IsKeyState(KEY::A, KEY_STATE::HOLD))
 	{
-		rigid->AddToque(1500.f);
+		rigid->AddToque(1.f);
 	}
 }
 
