@@ -20,7 +20,7 @@ public:
 	BoxCollider();
 	~BoxCollider();
 
-	void FinalUpdate();
+	void Update() override;
 
 	void SetActive(bool _isAtive) { m_active = _isAtive; }
 	void SetPosition(Vector2 _pos) { m_position = _pos; }

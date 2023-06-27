@@ -4,7 +4,7 @@ class Player :
     public GameObject
 {
 public:
-    Player(const wstring& _name);
+    Player(const string& _name);
     ~Player();
 
     void Initalize() override;

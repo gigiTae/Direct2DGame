@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Component.h"
 
 /// <summary>
 /// 위치,크기를 관리하는 컴포넌트이다
 /// 
 /// 
 /// </summary>
-class Transform
+class Transform : public Component
 {
 public:
 	Transform();
@@ -23,7 +24,7 @@ public:
 	Vector2 GetScale() { return m_scale; }
 	float GetRotation() { return m_rotation; }
 
-	void FinalUpdate();
+	void Update();
 	void DebugRender(D2DRenderer* _d2DRenderer);
 private: 
 	Vector2 m_position;

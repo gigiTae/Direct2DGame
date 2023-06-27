@@ -16,10 +16,10 @@ private:
 	NameGenerator() = default;
 	~NameGenerator();
 public:
-	const wstring GenerateName(const wstring& _name);
+	const string GenerateName(const string& _name);
 
 private:
 	// 이름정보들을 맵에 저장함 key : 오브젝트 이름 value : 오브젝트 생성 횟수
-	map<const wstring, int> m_nameInfo;
+	map<const string, int> m_nameInfo;
 
 };

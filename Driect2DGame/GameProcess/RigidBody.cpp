@@ -4,23 +4,50 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 
-RigidBody::RigidBody(GameObject* _owner, float _mass, Vector2 _scale)
+RigidBody::RigidBody()
+	:m_angularVelocity(0.f)
+	, m_torque(0.f)
+	, m_force(Vector2::Zero)
+	, m_velocity(Vector2::Zero)
+	, m_mass(1.f)
+	, m_invMass(1.f)
+	, m_I(1.f)
+	, m_invI(1.f)
+	, m_transform(nullptr)
 {
-	m_owner = _owner;
-	m_transform = _owner->GetTransform();
-	assert(m_transform);
+	//m_velocity = Vector2::Zero;
+	//m_angularVelocity = 0.f;
+	//m_force = Vector2::Zero;
+	//m_torque = 0.f;
+	//m_friction = 0.2f;
 
-	m_velocity = Vector2::Zero;
-	m_angularVelocity = 0.f;
-	m_force = Vector2::Zero;
-	m_torque = 0.f;
-	m_friction = 0.2f;
+	//m_mass = _mass;
+	//if (m_mass < FLT_MAX)
+	//{
+	//	m_invMass = 1.0f / m_mass;
+	//	m_I = m_mass * _scale.LengthSquared() / 12.0f;
+	//	m_invI = 1.0f / m_I;
+	//}
+	//else
+	//{
+	//	m_invMass = 0.0f;
+	//	m_I = FLT_MAX;
+	//	m_invI = 0.0f;
+	//}
+}
 
+RigidBody::~RigidBody()
+{
+
+}
+
+void RigidBody::SetMass(float _mass)
+{
 	m_mass = _mass;
 	if (m_mass < FLT_MAX)
 	{
 		m_invMass = 1.0f / m_mass;
-		m_I = m_mass * _scale.LengthSquared() / 12.0f;
+		m_I = m_mass;// *_scale.LengthSquared() / 12.0f;
 		m_invI = 1.0f / m_I;
 	}
 	else
@@ -29,10 +56,6 @@ RigidBody::RigidBody(GameObject* _owner, float _mass, Vector2 _scale)
 		m_I = FLT_MAX;
 		m_invI = 0.0f;
 	}
-}
-
-RigidBody::~RigidBody()
-{
 }
 
 void RigidBody::IntegrateForces(float _fixedDeltaTime)
@@ -48,8 +71,13 @@ void RigidBody::IntegrateForces(float _fixedDeltaTime)
 	m_angularVelocity *= std::exp(-GameWorld::angularDamping * _fixedDeltaTime);
 }
 
-void RigidBody::FinalUpdate(float _deltaTime)
+void RigidBody::Update(float _deltaTime)
 {
+	if (m_transform == nullptr)
+	{
+		m_transform = GetComponent<Transform>();
+	}
+
 	// 현재의 속도를 가지고 오브젝트의 위치를 갱신한다.
 	if (m_invMass == 0.f)
 		return;

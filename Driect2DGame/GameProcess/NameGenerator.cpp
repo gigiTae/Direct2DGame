@@ -17,7 +17,7 @@ NameGenerator::~NameGenerator()
 {
 }
 
-const wstring NameGenerator::GenerateName(const wstring& _name)
+const string NameGenerator::GenerateName(const string& _name)
 {
 	auto iter = m_nameInfo.find(_name);
 
@@ -30,7 +30,7 @@ const wstring NameGenerator::GenerateName(const wstring& _name)
 
 	// 이미 생성한적 있는 이름이면 숫자를 붙여서 생성한다.
 	int number = iter->second++;
-	const wstring name = _name + std::to_wstring(number);
+	const string name = _name + std::to_string(number);
 
 	return name;
 }

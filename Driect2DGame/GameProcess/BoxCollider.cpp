@@ -43,15 +43,15 @@ BoxCollider::~BoxCollider()
 {
 }
 
-void BoxCollider::FinalUpdate()
+void BoxCollider::Update()
 {
 	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
-	Vector2 ownerPosition = GetOwner()->GetTransform()->GetPosition();
+	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();
 	m_position = ownerPosition + m_offset;
 	// 오브젝트 회전에 따라서 콜라이더도 같이 회전
 	if (m_isRotatable)
 	{
-		float ownerRotation = GetOwner()->GetTransform()->GetRotation();
+		float ownerRotation = GetComponent<Transform>()->GetRotation();
 		m_rotation = ownerRotation;
 	}
 }

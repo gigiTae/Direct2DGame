@@ -14,7 +14,7 @@ MainScene::~MainScene()
 
 void MainScene::Enter()
 {
-	Player* player = new Player(L"player");
+	Player* player = new Player("player");
 	player->Initalize();
 	AddObject(player, OBJECT_TYPE::PLAYER);
 	GetCollisionManager()->CheckCollisionObjectType(OBJECT_TYPE::PLAYER, OBJECT_TYPE::MONSTER);

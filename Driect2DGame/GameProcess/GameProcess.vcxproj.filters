@@ -56,6 +56,9 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>GameProcess\Manager\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>GameProcess\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -109,14 +112,17 @@
     <Filter Include="GameProcess\Component\Collider\BoxColider">
       <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\Component\RigidBody">
-      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\GameObject">
       <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\Manager\ResourceManager">
       <UniqueIdentifier>{8e1e78d5-d006-467f-8fa7-19993f292793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\RigidBody">
+      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Component\UserScripts">
+      <UniqueIdentifier>{48423338-0c84-40ef-bd2b-bd26b559f3c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>GameProcess\Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>GameProcess\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

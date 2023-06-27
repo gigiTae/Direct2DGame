@@ -27,7 +27,7 @@ void Transform::AddRotation(float _radian)
 	}
 }
 
-void Transform::FinalUpdate()
+void Transform::Update()
 {
 
 }

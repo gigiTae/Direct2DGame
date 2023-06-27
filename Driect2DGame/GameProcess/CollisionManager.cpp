@@ -206,9 +206,9 @@ void CollisionManager::OnCollisionProcess(bool _isCollision, map<unsigned long l
 	// 이전 프레임 충돌 여부
 	bool isPrevCollison = iter->second;
 
-	GameObject* leftObject = _leftCollider->GetOwner();
+	GameObject* leftObject = _leftCollider->GetGameObject();
 	assert(leftObject);
-	GameObject* rightObject = _rightCollider->GetOwner();
+	GameObject* rightObject = _rightCollider->GetGameObject();
 	assert(rightObject);
 
 	// 계속해서 충돌중인 상태
@@ -267,8 +267,8 @@ void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _righ
 	// 왼쪽 배열과 오른쪽 배열의 오브젝트들을 순회하면서 충돌처리를 한다.
 	for (size_t leftIndex = 0; leftIndex < leftGroup.size(); ++leftIndex)
 	{
-		BoxCollider* leftBoxCollider = leftGroup[leftIndex]->GetBoxCollider();
-		CircleCollider* leftCircleCollidr = leftGroup[leftIndex]->GetCircleCollider();
+		BoxCollider* leftBoxCollider = leftGroup[leftIndex]->GetComponent<BoxCollider>();
+		CircleCollider* leftCircleCollidr = leftGroup[leftIndex]->GetComponent<CircleCollider>();
 
 		// 왼쪽 오브젝트가 콜라이더를 들고 있지 않는경우
 		if (!leftBoxCollider && !leftCircleCollidr)
@@ -278,8 +278,8 @@ void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _righ
 
 		for (size_t rightIndex = 0; rightIndex < rightGroup.size(); ++rightIndex)
 		{
-			BoxCollider* rightBoxCollider = rightGroup[rightIndex]->GetBoxCollider();
-			CircleCollider* rightCircleCollidr = rightGroup[rightIndex]->GetCircleCollider();
+			BoxCollider* rightBoxCollider = rightGroup[rightIndex]->GetComponent<BoxCollider>();
+			CircleCollider* rightCircleCollidr = rightGroup[rightIndex]->GetComponent<CircleCollider>();
 
 			// 오른쪽 오브젝트가 콜라이더를 소유하지 않는 경우이거나 같은 오브젝트인 경우
 			if ( (!rightBoxCollider && !rightCircleCollidr) && leftGroup[leftIndex] == rightGroup[rightIndex])

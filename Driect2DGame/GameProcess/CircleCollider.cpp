@@ -38,10 +38,11 @@ void CircleCollider::OnCollisionStay(const Collision& _collision, const InputMan
 
 }
 
-void CircleCollider::FinalUpdate()
+void CircleCollider::Update()
 {
 	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
-	Vector2 ownerPosition = GetOwner()->GetTransform()->GetPosition();
+
+	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();
 	m_position = ownerPosition + m_offset;
 }
 

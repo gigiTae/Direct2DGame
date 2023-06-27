@@ -19,7 +19,7 @@ public:
 	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) override;
 	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) override;
 
-	void FinalUpdate() override;
+	void Update() override;
 public:
 	void SetActive(bool _isAtive) { m_active = _isAtive; }
 	void SetPosition(Vector2 _position) { m_position = _position; }

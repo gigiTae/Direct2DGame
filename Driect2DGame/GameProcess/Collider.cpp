@@ -5,7 +5,6 @@
 
 Collider::Collider()
 	:m_ID(CollisionManager::GetColliderID()) 
-	,m_owner(nullptr)
 {
 }
 
