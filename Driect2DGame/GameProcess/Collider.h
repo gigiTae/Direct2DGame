@@ -7,7 +7,8 @@ class InputManager;
 class GameObject;
 
 // 부모 충돌체 
-class Collider :public Component
+class Collider abstract
+	:public Component
 {
 public:
 	virtual void Update() abstract;

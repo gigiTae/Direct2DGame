@@ -61,16 +61,11 @@ private:
 
 public:
 	/// 자식 오브젝트 
-	void AddChild(GameObject* _child) { m_children.push_back(_child); }
-
-	GameObject* GetChild() { return m_children[0]; }
-	const vector<GameObject*>& GetChildren() { return m_children; }
-	void SetParent(GameObject* _parent) { m_parent = _parent; }
-	GameObject* GetParent() { return m_parent; }
-
-private:
-	vector<GameObject*> m_children;
-	GameObject* m_parent;
+	void AddChild(GameObject* _child);
+	GameObject* GetChild(int _index);
+	const vector<GameObject*>& GetChildren();
+	GameObject* GetParent();
+	void SetParent(GameObject* _parent);
 
 private:
 	/// 컴포넌트 관련 함수 

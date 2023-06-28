@@ -26,9 +26,37 @@ public:
 
 	void Update();
 	void DebugRender(D2DRenderer* _d2DRenderer);
-private: 
+private:
 	Vector2 m_position;
 	float m_rotation;
 	Vector2 m_scale;
-};
+public:
+	/// 부모 자식관계 
+	GameObject* GetParent() { return m_parent; }
+	
+	// 모든 자식을 반환
+	const vector<GameObject*>& GetChildren() { return m_children; }
+	GameObject* GetChild(int _index);
+	
+	/// 자식 오브젝트 추가
+	void AddChild(GameObject* _child);
+	void SetParent(GameObject* _parent);
+	 
+	// 부모 오브젝트와의 위치 차이를 설정
+	void SetOffset(const Vector2& _position) { m_positionOffset = _position; }
+	// 부모 오브젝트와 회전 차이를 설정
+	void SetOffset(const float& _rotation) { m_rotationOffset = _rotation; }
+	
+	Vector2 GetPositionOffset() { return m_positionOffset; }
+	float GetRotationOffset() { return m_rotationOffset; }
+private:
+	// 부모오브젝의 위치에 따라서 자식 오브젝트의 위치를 조정하는 함수
+	void AlignParentPosition();
 
+	// 부모 자식 관계를 트랜스 폼에서 관리한다.
+	Vector2 m_positionOffset;
+	float m_rotationOffset;
+
+	GameObject* m_parent;
+	vector<GameObject*> m_children;
+};

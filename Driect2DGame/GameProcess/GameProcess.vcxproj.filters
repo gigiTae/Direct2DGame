@@ -29,7 +29,7 @@
       <Filter>GameProcess\02.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>GameProcess\00.Define</Filter>
+      <Filter>GameProcess\01.Define</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>GameProcess\05.Scene\MainScene</Filter>
@@ -38,7 +38,7 @@
       <Filter>GameProcess\03.Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="NameGenerator.h">
-      <Filter>GameProcess\00.Define\Debug</Filter>
+      <Filter>GameProcess\01.Define\Debug</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>GameProcess\03.Component\RigidBody</Filter>
@@ -50,16 +50,13 @@
       <Filter>GameProcess\03.Component</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
-      <Filter>GameProcess\00.Define\GameWorld</Filter>
+      <Filter>GameProcess\01.Define\GameWorld</Filter>
     </ClInclude>
     <ClInclude Include="MonoBehaviour.h">
       <Filter>GameProcess\03.Component\UserScripts\MonoBehaviour</Filter>
     </ClInclude>
-    <ClInclude Include="GameProcess.h">
-      <Filter>GameProcess\01.GameProcess</Filter>
-    </ClInclude>
     <ClInclude Include="GameProcessPCH.h">
-      <Filter>GameProcess\00.Define</Filter>
+      <Filter>GameProcess\01.Define</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>GameProcess\03.Component\UI</Filter>
@@ -67,13 +64,16 @@
     <ClInclude Include="UIManager.h">
       <Filter>GameProcess\04.Manager\UIManager</Filter>
     </ClInclude>
+    <ClInclude Include="GameProcess.h">
+      <Filter>GameProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
       <UniqueIdentifier>{2af1f3ec-85ef-42e7-acd0-bf7532839980}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.GameProcess">
-      <UniqueIdentifier>{f476f5dc-88bc-4d81-ac7c-f98afac6a839}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\02.GameObject">
       <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
@@ -126,15 +126,6 @@
     <Filter Include="GameProcess\05.Scene\MainScene">
       <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\00.Define">
-      <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\00.Define\GameWorld">
-      <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\00.Define\Debug">
-      <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\06.Prefab">
       <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
     </Filter>
@@ -143,6 +134,18 @@
     </Filter>
     <Filter Include="GameProcess\03.Component\UI">
       <UniqueIdentifier>{6a3ff213-405f-4401-b560-597972d5cff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\01.Define">
+      <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\01.Define\GameWorld">
+      <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\01.Define\Debug">
+      <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\UserScripts\Movement">
+      <UniqueIdentifier>{0087a112-0433-446a-998f-37d30e27ed82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +183,7 @@
       <Filter>GameProcess\03.Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="NameGenerator.cpp">
-      <Filter>GameProcess\00.Define\Debug</Filter>
+      <Filter>GameProcess\01.Define\Debug</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>GameProcess\03.Component\RigidBody</Filter>
@@ -192,19 +195,22 @@
       <Filter>GameProcess\03.Component</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
-      <Filter>GameProcess\00.Define\GameWorld</Filter>
+      <Filter>GameProcess\01.Define\GameWorld</Filter>
     </ClCompile>
     <ClCompile Include="MonoBehaviour.cpp">
       <Filter>GameProcess\03.Component\UserScripts\MonoBehaviour</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProcess.cpp">
-      <Filter>GameProcess\01.GameProcess</Filter>
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>GameProcess\04.Manager\UIManager</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>GameProcess\03.Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProcess.cpp">
+      <Filter>GameProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

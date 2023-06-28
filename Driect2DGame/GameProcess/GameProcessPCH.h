@@ -26,6 +26,9 @@ using std::make_pair;
 #include <map>
 using std::map;
 
+#include <queue>
+using std::queue;
+
 #include <set>
 using std::set;
 

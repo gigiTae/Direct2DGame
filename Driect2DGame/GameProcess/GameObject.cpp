@@ -9,8 +9,6 @@
 
 GameObject::GameObject(const string& _name)
 	:m_name(NameGenerator::GetInstance()->GenerateName(_name))
-	,m_parent(nullptr)
-	,m_children{}
 	,m_ailve(true)
 {}
 
@@ -35,6 +33,45 @@ void GameObject::IntergrateForces(float _fixedDeltaTime)
 	{
 		rigidBody->IntegrateForces(_fixedDeltaTime);
 	}
+}
+
+void GameObject::AddChild(GameObject* _child)
+{
+	Transform* transform = GetComponent<Transform>();
+	assert(transform);
+	transform->AddChild(_child);
+}
+
+GameObject* GameObject::GetChild(int _index)
+{
+	Transform* transform = GetComponent<Transform>();
+	assert(transform);
+
+	return transform->GetChild(_index);
+}
+
+const vector<GameObject*>& GameObject::GetChildren()
+{
+	Transform* transform = GetComponent<Transform>();
+	assert(transform);
+
+	return transform->GetChildren();
+}
+
+GameObject* GameObject::GetParent()
+{
+	Transform* transform = GetComponent<Transform>();
+	assert(transform);
+
+	return transform->GetParent();
+}
+
+void GameObject::SetParent(GameObject* _parent)
+{
+	Transform* transform = GetComponent<Transform>();
+	assert(transform);
+
+	transform->SetParent(_parent);
 }
 
 void GameObject::Update(float _deltaTime, InputManager* _inputManager)
@@ -91,18 +128,21 @@ void GameObject::FinalUpdate(float _deltaTime)
 {
 	/// 업데이트 순서가 중요하다
 
+	// 속도를 바탕으로 오브젝트의 위치를 조정
 	RigidBody* rigiBody = GetComponent<RigidBody>();
 	if (rigiBody != nullptr)
 	{
 		rigiBody->Update(_deltaTime);
 	}
 
+	// 부모 자식 오브젝트 관계 처리
 	Transform* transform = GetComponent<Transform>();
 	if (transform != nullptr)
 	{
 		transform->Update();
 	}
 
+	// 충돌체를 GameObject와 동기화
 	BoxCollider* boxCollider = GetComponent<BoxCollider>();
 	if (boxCollider != nullptr)
 	{
