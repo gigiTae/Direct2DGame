@@ -30,6 +30,5 @@ private:
 	Vector2 m_position;
 	float m_rotation;
 	Vector2 m_scale;
-
 };
 

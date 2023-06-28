@@ -8,7 +8,7 @@ public:
 	~TimeManager();
 
 	void Initalize();
-	
+
 	// deltaTime을 반환해준다
 	double Update();
 	void DebugRender(D2DRenderer* _d2dRenderer);

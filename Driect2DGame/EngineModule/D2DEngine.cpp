@@ -62,10 +62,9 @@ void D2DEngine::Finalize()
 	m_d2DRenderer->Finalize();
 }
 
-
 void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 {
-	constexpr wchar_t title[] = L"2D tears of the kingdom";
+	constexpr wchar_t title[] = L"Drive of the Dead";
 
 	WNDCLASS wndclass;
 	wndclass.style = CS_HREDRAW | CS_VREDRAW;

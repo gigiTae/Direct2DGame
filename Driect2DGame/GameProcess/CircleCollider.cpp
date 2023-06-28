@@ -27,7 +27,7 @@ void CircleCollider::OnCollisionEnter(const Collision& _collision, const InputMa
 }
 
 void CircleCollider::OnCollisionExit(const Collision& _collision, const InputManager* _inputManager)
-{
+{	
 	--m_currentCollision;
 	assert(m_currentCollision >= 0);
 

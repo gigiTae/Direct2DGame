@@ -7,6 +7,7 @@ class TimeManager;
 class CollisionManager;
 class SceneManager;
 class PathManager;
+class UIManager;
 
 /// <summary>
 ///  게임진행을 담당하는 클래스이다
@@ -36,6 +37,6 @@ private:
 	TimeManager* m_timeManager;
 	CollisionManager* m_collisionManager;
 	PathManager* m_pathManager;
-
+	UIManager* m_UIManager;
 };
 

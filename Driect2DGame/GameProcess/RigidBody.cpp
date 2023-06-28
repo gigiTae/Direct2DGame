@@ -14,32 +14,10 @@ RigidBody::RigidBody()
 	, m_I(1.f)
 	, m_invI(1.f)
 	, m_transform(nullptr)
-{
-	//m_velocity = Vector2::Zero;
-	//m_angularVelocity = 0.f;
-	//m_force = Vector2::Zero;
-	//m_torque = 0.f;
-	//m_friction = 0.2f;
-
-	//m_mass = _mass;
-	//if (m_mass < FLT_MAX)
-	//{
-	//	m_invMass = 1.0f / m_mass;
-	//	m_I = m_mass * _scale.LengthSquared() / 12.0f;
-	//	m_invI = 1.0f / m_I;
-	//}
-	//else
-	//{
-	//	m_invMass = 0.0f;
-	//	m_I = FLT_MAX;
-	//	m_invI = 0.0f;
-	//}
-}
+{}
 
 RigidBody::~RigidBody()
-{
-
-}
+{}
 
 void RigidBody::SetMass(float _mass)
 {

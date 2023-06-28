@@ -20,7 +20,6 @@ void SceneManager::Initalize(InputManager* _inputManager,CollisionManager* _coll
 	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)] = new MainScene();
 
 	// 씬 명시적 초기화
-
 	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_inputManager,_collisionManager);
 
 	// 현재씬을 지정한다

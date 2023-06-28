@@ -28,38 +28,52 @@ public:
 public:
 	void DestroyAllComponent();
 
-	/// 이벤트 전용 함수 
-	virtual void Initalize() = 0;
+	/// 이벤트 함수 
+	virtual void Initalize() {};
 	virtual void Finalize();
 	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
-	
-	virtual void Update(float _deltaTime, InputManager* _inputManager) = 0;
-	virtual void FinalUpdate(float _deltaTime);
-	virtual void Render(D2DRenderer* _d2DRenderer) {};
-	virtual void ComponentRender(D2DRenderer* _d2DRenderer);
-	virtual void DebugRender(D2DRenderer* _d2dRenderer);
-	
-	// 물리엔진 전용함수  
+
+	void Update(float _deltaTime, InputManager* _inputManager);
+	void FinalUpdate(float _deltaTime);
+	void PreRender(D2DRenderer* _d2DRenderer);
+	void Render(D2DRenderer* _d2DRenderer);
+	void PostRender(D2DRenderer* _d2DRenderer);
+	void DebugRender(D2DRenderer* _d2dRenderer);
+
+	// 물리엔진 함수  
 	void IntergrateForces(float _fixedDeltaTime);
 
 public:
-	void SetDead() { m_ailve = false; }
-	void SetAlive() { m_ailve = true; }
-	bool IsAlive() { return m_ailve; }
-
-	const string& GetName() { return m_name; }
-
-private:
-	// 삭제예정인 오브젝트인지 확인
-	bool m_ailve; 
-	const string m_name;
-public:
+	/// 충돌 이벤트 함수
 	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};
 	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) {};
 	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) {};
 
-	/// 컴포넌트 관련 함수 
+public:
+	void SetAlive(bool _isAlive) { m_ailve = _isAlive; }
+	bool IsAlive() { return m_ailve; }
+	const string& GetName() { return m_name; }
+
 private:
+	// 삭제예정인 오브젝트인지 확인
+	bool m_ailve;
+	const string m_name;
+
+public:
+	/// 자식 오브젝트 
+	void AddChild(GameObject* _child) { m_children.push_back(_child); }
+
+	GameObject* GetChild() { return m_children[0]; }
+	const vector<GameObject*>& GetChildren() { return m_children; }
+	void SetParent(GameObject* _parent) { m_parent = _parent; }
+	GameObject* GetParent() { return m_parent; }
+
+private:
+	vector<GameObject*> m_children;
+	GameObject* m_parent;
+
+private:
+	/// 컴포넌트 관련 함수 
 	vector<Component*> m_components;
 
 public:
@@ -70,8 +84,6 @@ public:
 	T* GetComponent();
 
 };
-
-
 
 // 여기 한번더 감싸서 Component의 메모리 관리를 게임오브젝트가 하면 편리하지 않을까?? real루다가
 // 그래서 컴포너트의 생성이 실패하면 메모리에 추가하지 않는거지!
@@ -100,7 +112,6 @@ T* GameObject::CreateComponent()
 
 	return tmp;
 }
-
 
 template <typename T>
 T* GameObject::GetComponent()

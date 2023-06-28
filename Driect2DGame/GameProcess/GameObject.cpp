@@ -5,16 +5,17 @@
 #include "CircleCollider.h"
 #include "RigidBody.h"
 #include "NameGenerator.h"
+#include "MonoBehaviour.h"
 
 GameObject::GameObject(const string& _name)
 	:m_name(NameGenerator::GetInstance()->GenerateName(_name))
+	,m_parent(nullptr)
+	,m_children{}
 	,m_ailve(true)
-{
-}
+{}
 
 GameObject::~GameObject()
-{
-}
+{}
 
 void GameObject::DestroyAllComponent()
 {
@@ -36,9 +37,59 @@ void GameObject::IntergrateForces(float _fixedDeltaTime)
 	}
 }
 
+void GameObject::Update(float _deltaTime, InputManager* _inputManager)
+{
+	/// 컴포넌트를 순회하면서 UserScript들만 Update를 호출한다.
+	for (auto component : m_components)
+	{
+		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
+		if (userScript != nullptr)
+		{
+			userScript->Update(_deltaTime, _inputManager);
+		}
+	}
+}
+
+void GameObject::PreRender(D2DRenderer* _d2DRenderer)
+{
+	for (auto component : m_components)
+	{
+		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
+		if (userScript != nullptr)
+		{
+			userScript->PreRender(_d2DRenderer);
+		}
+	}
+}
+
+void GameObject::Render(D2DRenderer* _d2DRenderer)
+{
+	/// 컴포넌트를 순회하면서 UserScript들만 Render 함수를 호출한다.
+	for (auto component : m_components)
+	{
+		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
+		if (userScript != nullptr)
+		{
+			userScript->Render(_d2DRenderer);
+		}
+	}
+}
+
+void GameObject::PostRender(D2DRenderer* _d2DRenderer)
+{
+	for (auto component : m_components)
+	{
+		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
+		if (userScript != nullptr)
+		{
+			userScript->PostRender(_d2DRenderer);
+		}
+	}
+}
+
 void GameObject::FinalUpdate(float _deltaTime)
 {
-	/// FinalUpdate의 순서를 명확하게 하기 위해서 vector의 반복문을 사용하지 않는다.
+	/// 업데이트 순서가 중요하다
 
 	RigidBody* rigiBody = GetComponent<RigidBody>();
 	if (rigiBody != nullptr)
@@ -65,6 +116,9 @@ void GameObject::FinalUpdate(float _deltaTime)
 	}
 }
 
+
+
+
 void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 {
 	// 충돌체 디버그용 렌더링
@@ -85,11 +139,6 @@ void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 	{
 		transform->DebugRender(_d2dRenderer);
 	}
-}
-
-void GameObject::ComponentRender(D2DRenderer* _d2DRenderer)
-{
-	// 애니메이션 or 테스트 or 도형 그리기
 }
 
 void GameObject::Finalize()

@@ -44,8 +44,8 @@ double TimeManager::Update()
 void TimeManager::DebugRender(D2DRenderer* _d2dRenderer)
 {
 	wstring str = L"FPS : " + std::to_wstring(m_fps) + L" DT : " + std::to_wstring(m_deltaTime);
-	Vector2 leftTop{ -800.f, 450.f }, rightBottom{0.f,300.f };
-	_d2dRenderer->DrawTextW(str, leftTop, rightBottom, D2D1::ColorF::GreenYellow);
+	Vector2 leftTop{ -450.f, 250.f }, rightBottom{0.f,300.f };
+	_d2dRenderer->DrawTextW(str, leftTop, rightBottom, D2D1::ColorF::Gold);
 }
 
 void TimeManager::Finalize()

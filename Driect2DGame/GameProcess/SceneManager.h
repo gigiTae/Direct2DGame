@@ -26,6 +26,7 @@ public:
 
 
 private:
+
 	// 모든 씬들을 관리
 	Scene* m_sceneList[static_cast<int>(SCENE_TYPE::END)];
 	Scene* m_currentScene;

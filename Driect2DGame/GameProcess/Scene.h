@@ -24,14 +24,13 @@ public:
 	// 씬에 나가기전에 호출하는 함수
 	virtual void Exit() = 0;
 
-	virtual void Render(D2DRenderer* _d2DRenderer);
-	virtual void FixedUpdate(float _fixedDeltaTime);
-	virtual void Update(float deltaTime);
-	virtual void FinalUpdate(float _deltaTime);
+	void Render(D2DRenderer* _d2DRenderer);
+	void FixedUpdate(float _fixedDeltaTime);
+	void Update(float deltaTime);
+	void FinalUpdate(float _deltaTime);
 
 	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) 
 	{ return m_objectVector[static_cast<int>(_type)]; }
-
 
 protected:
 	void AddObject(GameObject* _object, OBJECT_TYPE _type);

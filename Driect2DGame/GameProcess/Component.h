@@ -22,7 +22,7 @@ public:
 	T* GetComponent();
 };
 
-
+ 
 template <typename T>
 T* Component::CreateComponent()
 {
