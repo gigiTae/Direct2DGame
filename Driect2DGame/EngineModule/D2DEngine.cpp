@@ -37,8 +37,8 @@ void D2DEngine::Initalize(HINSTANCE _hInstance, int _nCmdShow)
 void D2DEngine::Process()
 {
 	MSG msg;
-	
-	while (true)
+
+	while (m_gameProcess->IsGameRunning())
 	{
 		// 픽메세지 함수를 사용해서 메세지를 관리한다.
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -51,9 +51,7 @@ void D2DEngine::Process()
 			// 게임 프로세스 루프
 			m_gameProcess->Process();
 		};
-
 	}
-
 }
 
 void D2DEngine::Finalize()

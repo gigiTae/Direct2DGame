@@ -5,6 +5,8 @@
 /// <summary>
 /// 위치,크기를 관리하는 컴포넌트이다
 /// 
+/// + 부모 자식관계도 관리한다 23.06.29
+/// 
 /// 
 /// </summary>
 class Transform : public Component
@@ -14,7 +16,7 @@ public:
 	~Transform();
 public:
 	void SetPosition(Vector2 _position) { m_position = _position; }
-	void SetRotation(float _rotation) { m_rotation = _rotation; }
+	void SetRotation(float _radian);
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 
 	void AddRotation(float _radian);

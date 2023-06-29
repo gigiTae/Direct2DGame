@@ -52,7 +52,7 @@ void D2DRenderer::Initalize(HWND _hwnd)
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
 			DWRITE_FONT_STRETCH_NORMAL,
-			15,
+			10,
 			L"", //locale
 			&m_textFormat
 		);

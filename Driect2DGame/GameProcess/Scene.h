@@ -3,6 +3,7 @@
 // 전방선언
 class GameObject;
 class InputManager;
+class SceneManager;
 class CollisionManager;
 
 class Scene
@@ -15,7 +16,7 @@ public:
 	InputManager* GetInputManager() { return m_inputManager; }
 
 public:
-	virtual void Initalize(InputManager* _inputManager, CollisionManager* _collisionManager);
+	virtual void Initalize(SceneManager* _sceneManager,InputManager* _inputManager, CollisionManager* _collisionManager);
 	virtual void Finalize();
 
 	// 씬에 들어가지전에 호출하는 함수
@@ -39,6 +40,7 @@ protected:
 protected:
 	CollisionManager* GetCollisionManager() { return m_collisionManager; }
 private:
+	SceneManager* m_sceneManager;
 	InputManager* m_inputManager;
 	CollisionManager* m_collisionManager;
 

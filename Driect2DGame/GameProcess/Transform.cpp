@@ -17,6 +17,21 @@ Transform::~Transform()
 {
 }
 
+void Transform::SetRotation(float _rotation)
+{
+	m_rotation = _rotation;
+	// 각도값을 조정
+	if (m_rotation >= FMath::TwoPI)
+	{
+		m_rotation -= FMath::TwoPI;
+	}
+
+	if (m_rotation < -0.f)
+	{
+		m_rotation += FMath::TwoPI;
+	}
+}
+
 void Transform::AddRotation(float _radian)
 {
 	m_rotation += _radian;
@@ -50,7 +65,7 @@ void Transform::Update()
 		
 		Transform* transform = object->GetComponent<Transform>();
 		
-		// 트랜스 폼을 추가를 안했다고?
+		// 트랜스폼을 추가를 안했다고?
 		assert(transform);
 
 		transform->AlignParentPosition();
@@ -115,7 +130,8 @@ void Transform::AlignParentPosition()
 	Vector2 parentPosition = parentTransform->GetPosition();
 	float parentRotation = parentTransform->GetRotation();
 
-	m_position = parentPosition + m_positionOffset;
-	m_rotation = parentRotation + m_rotationOffset;
+	m_position = Vector2::RotateRadian(parentPosition+m_positionOffset, parentPosition, parentRotation);
+
+	SetRotation(parentRotation + m_rotationOffset);
 }
 

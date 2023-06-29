@@ -4,6 +4,7 @@
 
 Scene::Scene()
 	:m_inputManager(nullptr)
+	,m_sceneManager(nullptr)
 	,m_collisionManager(nullptr)
 	,m_objectVector{}
 {
@@ -13,8 +14,9 @@ Scene::~Scene()
 {
 }
 
-void Scene::Initalize(InputManager* _inputManager,CollisionManager* _collisionManager)
+void Scene::Initalize(SceneManager* _sceneManager, InputManager* _inputManager, CollisionManager* _collisionManager)
 {
+	m_sceneManager = _sceneManager;
 	m_inputManager = _inputManager;
 	m_collisionManager = _collisionManager;
 }

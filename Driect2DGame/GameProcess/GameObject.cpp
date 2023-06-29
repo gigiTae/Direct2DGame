@@ -186,3 +186,9 @@ void GameObject::Finalize()
 	DestroyAllComponent();
 }
 
+void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
+{
+
+
+}
+

@@ -18,6 +18,7 @@ GameProcess::GameProcess()
 	, m_hWnd(nullptr)
 	,m_UIManager(nullptr)
 	,m_elapsedTime(0.f)
+	,m_gameRunnig(false)
 {
 }
 
@@ -46,6 +47,9 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_sceneManager->Initalize(m_inputManager,m_collisionManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_UIManager->Initalize(m_sceneManager);
+
+	// 게임 루프 활성화
+	m_gameRunnig = true;
 }
 
 void GameProcess::Process()
@@ -84,6 +88,8 @@ void GameProcess::Process()
 
 	m_d2DRenderer->EndRender();
 	
+	// =============== 이벤트 처리 =================
+
 }
 
 void GameProcess::Finalize()

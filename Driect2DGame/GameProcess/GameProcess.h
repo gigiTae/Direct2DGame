@@ -24,8 +24,14 @@ public:
 	void Process();
 	void Finalize();
 
+	bool IsGameRunning() { return m_gameRunnig; }
+	void EndGame() { m_gameRunnig = false; }
 private:
+	/// 현재 게임 프로세스가 진행판단
+	bool m_gameRunnig;
+
 	float m_elapsedTime;
+
 	// 메인 윈도우 핸들 
 	HWND m_hWnd; 
 	// 랜더러

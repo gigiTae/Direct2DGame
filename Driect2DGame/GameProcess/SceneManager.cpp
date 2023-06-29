@@ -20,7 +20,7 @@ void SceneManager::Initalize(InputManager* _inputManager,CollisionManager* _coll
 	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)] = new MainScene();
 
 	// 씬 명시적 초기화
-	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_inputManager,_collisionManager);
+	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(this,_inputManager,_collisionManager);
 
 	// 현재씬을 지정한다
 	m_currentScene = m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)];
@@ -63,6 +63,12 @@ void SceneManager::Finalize()
 void SceneManager::ChangeScene(SCENE_TYPE _nextScene)
 {
 	m_currentScene->Exit();
+
+	if (_nextScene == SCENE_TYPE::END)
+	{
+		
+		return;
+	}
 
 	m_currentScene = m_sceneList[static_cast<int>(_nextScene)];
 

@@ -29,9 +29,9 @@ public:
 	void DestroyAllComponent();
 
 	/// 이벤트 함수 
-	virtual void Initalize() {};
-	virtual void Finalize();
-	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
+	void Initalize() {};
+	void Finalize();
+	void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager);
 
 	void Update(float _deltaTime, InputManager* _inputManager);
 	void FinalUpdate(float _deltaTime);
@@ -69,6 +69,7 @@ public:
 
 private:
 	/// 컴포넌트 관련 함수 
+	/// 컴포넌트를 벡터가 아닌 정렬된 형태로 가지고 있으면 호출순서를 정할수 있지않을까? 
 	vector<Component*> m_components;
 
 public:
