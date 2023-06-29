@@ -14,6 +14,8 @@ BoxCollider::BoxCollider()
 	, m_isRotatable(false)
 	, m_active(false)
 {
+	SetName(typeid(this).name());
+
 }
 
 void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager)

@@ -11,8 +11,12 @@ public:
 	void SetGameObject(GameObject* _gameObject) { m_gameObject = _gameObject; }
 	GameObject* GetGameObject() { return m_gameObject; }
 	string GetName() { return m_name; }
+
+protected:
+	void SetName(const string& _name) { m_name = _name; }
+
 private:
-	const std::string m_name;
+	std::string m_name;
 	GameObject* m_gameObject;
 public:
 	template <typename T>
