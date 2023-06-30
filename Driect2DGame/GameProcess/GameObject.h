@@ -31,10 +31,10 @@ public:
 	/// 이벤트 함수 
 	void Initalize() {};
 	void Finalize();
-	void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager);
 
+	void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager);
 	void Update(float _deltaTime, InputManager* _inputManager);
-	void FinalUpdate(float _deltaTime);
+	void LateUpdate(float _deltaTime, InputManager* _inputManager);
 	void PreRender(D2DRenderer* _d2DRenderer);
 	void Render(D2DRenderer* _d2DRenderer);
 	void PostRender(D2DRenderer* _d2DRenderer);
@@ -70,7 +70,9 @@ public:
 private:
 	/// 컴포넌트 관련 함수 
 	/// 컴포넌트를 벡터가 아닌 정렬된 형태로 가지고 있으면 호출순서를 정할수 있지않을까? 
-	vector<Component*> m_components;
+	/// qriorty queue는 iterator 지원 x 그리고 multimap인 이유? 같은 순서를 가지는 컴포넌트는 중복으로 보관해야하므로
+	/// 일반 map의 경우에는 같은 key값의 중복을 허용하지 않는다.
+	std::multimap<int, Component*> m_components; 
 
 public:
 	template <typename T>
@@ -83,7 +85,7 @@ public:
 
 // 여기 한번더 감싸서 Component의 메모리 관리를 게임오브젝트가 하면 편리하지 않을까?? real루다가
 // 그래서 컴포너트의 생성이 실패하면 메모리에 추가하지 않는거지!
-// Add-> 메모리를 할당을 외부에서 하는걸로 하고 Create 접두사는 객체각 직접 메모리를 관리한다의 의미로 사용하자
+// Add-> 메모리를 할당을 외부에서 하는걸로 하고 Create 접두사는 객체가 직접 메모리를 관리한다의 의미로 사용하자
 
 template <typename T>
 T* GameObject::CreateComponent()
@@ -103,8 +105,12 @@ T* GameObject::CreateComponent()
 		return nullptr;
 	}
 
+	// 컴포넌트와 게임 오브젝트 연결
 	component->SetGameObject(this);
-	m_components.push_back(component);
+
+	// 게임오브젝의 multpmap에 정보 컴포넌트 삽입
+	int callOreder = static_cast<int>(component->GetCallOrder());
+	m_components.insert(make_pair(callOreder, component));
 
 	return tmp;
 }
@@ -112,15 +118,14 @@ T* GameObject::CreateComponent()
 template <typename T>
 T* GameObject::GetComponent()
 {
-	// 찾으려는 컴포넌트의 정보를 바탕으로 벡터를 순회하면서 찾는다.
-	// 
-	const type_info& _infoT = typeid(T);
+	// 찾으려는 컴포넌트의 정보를 바탕으로 맵을 순회하면서 찾는다.
+	const type_info& _info = typeid(T*);
 
-	for (Component* component : m_components)
+	for (auto iter : m_components)
 	{
-		const type_info& _info = typeid(*component);
+		Component* component = iter.second;
 
-		if (_info.name() == _infoT.name())
+		if (_info.name() == component->GetName())
 		{
 			return dynamic_cast<T*>(component);
 		}

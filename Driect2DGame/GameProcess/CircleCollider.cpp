@@ -6,12 +6,13 @@
 #include "CollisionManager.h"
 
 CircleCollider::CircleCollider()
-	:m_position{}
+	:Collider(typeid(this).name())
+	,m_position{}
 	,m_offset{}
 	,m_active(false)
 	,m_currentCollision(0)
 	,m_radius(0.f)
-{
+{ 
 }
 
 CircleCollider::~CircleCollider()
@@ -39,10 +40,8 @@ void CircleCollider::OnCollisionStay(const Collision& _collision, const InputMan
 	GetGameObject()->OnCollisionStay(_collision, _inputManager);
 }
 
-void CircleCollider::Update()
+void CircleCollider::LateUpdate(float _deltaTime, InputManager* _inputManager)
 {
-	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
-
 	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();
 	m_position = ownerPosition + m_offset;
 }

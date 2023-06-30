@@ -15,8 +15,8 @@ public:
 	RigidBody();
 	~RigidBody();
 
+	void LateUpdate(float _deltaTime, InputManager* _inputManager) override;
 	void IntegrateForces(float _fixedDeltaTime);
-	void Update(float _fixedDeltaTime);
 
 	void AddForce(const Vector2& _force) { m_force += _force; }
 	void AddToque(const float& _toque) { m_torque += _toque; }

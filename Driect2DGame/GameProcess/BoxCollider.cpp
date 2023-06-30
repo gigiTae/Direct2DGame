@@ -6,7 +6,8 @@
 #include "Transform.h"
 
 BoxCollider::BoxCollider()
-	:m_offset{}
+	:Collider(typeid(this).name())
+	,m_offset{}
 	, m_currentCollision(0)
 	, m_position{}
 	, m_rotation(0.f)
@@ -14,8 +15,6 @@ BoxCollider::BoxCollider()
 	, m_isRotatable(false)
 	, m_active(false)
 {
-	SetName(typeid(this).name());
-
 }
 
 void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager)
@@ -45,7 +44,7 @@ BoxCollider::~BoxCollider()
 {
 }
 
-void BoxCollider::Update()
+void BoxCollider::LateUpdate(float _deltaTime, InputManager* _inputManager)
 {
 	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
 	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();

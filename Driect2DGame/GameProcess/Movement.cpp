@@ -5,8 +5,10 @@
 #include "Transform.h"
 
 Movement::Movement()
-	:m_speed(100.f)
-{}
+	:MonoBehaviour(typeid(this).name())
+	,m_speed(100.f)
+{
+}
 
 Movement::~Movement()
 {

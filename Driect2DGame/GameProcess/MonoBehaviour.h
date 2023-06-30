@@ -13,7 +13,7 @@ class MonoBehaviour abstract :
     public Component
 {
 public:
-    MonoBehaviour() = default;
+    MonoBehaviour(string _name);
     ~MonoBehaviour() override;
 
     /// 생성 관련 함수
@@ -21,11 +21,11 @@ public:
     virtual void Finalize() {};
 
     /// 이벤트 관련함수
-    virtual void Update(float _deltaTime, InputManager* _inputManager) {};
-    virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
-    virtual void PreRender(D2DRenderer* _d2DRenderer) {};
-    virtual void Render(D2DRenderer* _d2DRenderer) {};
-    virtual void PostRender(D2DRenderer* _d2DRenderer) {};
+    void Update(float _deltaTime, InputManager* _inputManager) override {};
+    void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) override {};
+    void PreRender(D2DRenderer* _d2DRenderer) override {};
+    void Render(D2DRenderer* _d2DRenderer) override {};
+    void PostRender(D2DRenderer* _d2DRenderer) override {};
 
     /// 충돌 관련 함수
 	virtual void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};

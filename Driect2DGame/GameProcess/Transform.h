@@ -15,6 +15,11 @@ public:
 	Transform();
 	~Transform();
 public:
+	/// 이벤트 관련 함수
+	void LateUpdate(float _deltaTime, InputManager* _inputManager) override;
+	void DebugRender(D2DRenderer* _d2DRenderer) override;
+
+	/// 트랜스폼 관련 
 	void SetPosition(Vector2 _position) { m_position = _position; }
 	void SetRotation(float _radian);
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
@@ -26,12 +31,11 @@ public:
 	Vector2 GetScale() { return m_scale; }
 	float GetRotation() { return m_rotation; }
 
-	void Update();
-	void DebugRender(D2DRenderer* _d2DRenderer);
 private:
 	Vector2 m_position;
 	float m_rotation;
 	Vector2 m_scale;
+
 public:
 	/// 부모 자식관계 
 	GameObject* GetParent() { return m_parent; }

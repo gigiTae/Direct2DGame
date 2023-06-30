@@ -101,7 +101,7 @@ void Scene::Update(float _deltaTime)
 	}
 }
 
-void Scene::FinalUpdate(float _deltaTime)
+void Scene::LateUpdate(float _deltaTime)
 {
 	assert(m_inputManager);
 
@@ -109,7 +109,7 @@ void Scene::FinalUpdate(float _deltaTime)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->FinalUpdate(_deltaTime);
+			iter->LateUpdate(_deltaTime,m_inputManager);
 		}
 	}
 }

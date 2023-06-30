@@ -32,6 +32,9 @@ enum class COLLIDER_TYPE
 /// </summary>
 enum class CALL_ORDER
 {
-	DS,
-
+	MONO_BEHAVIOUR,
+	RIGID_BODY,
+	TRANSFORMM,
+	COLLIDER,
+	UI
 };

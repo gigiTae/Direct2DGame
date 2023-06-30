@@ -38,9 +38,9 @@ void SceneManager::FixedUpdate(float _fiexedDeltaTime)
 	m_currentScene->FixedUpdate(_fiexedDeltaTime);
 }
 
-void SceneManager::FinalUpdate(float _deltaTime)
+void SceneManager::LateUpdate(float _deltaTime)
 {
-	m_currentScene->FinalUpdate(_deltaTime);
+	m_currentScene->LateUpdate(_deltaTime);
 }
 
 void SceneManager::Render(D2DRenderer* _d2DRenderer)

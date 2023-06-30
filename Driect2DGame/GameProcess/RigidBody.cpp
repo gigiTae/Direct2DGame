@@ -5,7 +5,8 @@
 #include "GameWorld.h"
 
 RigidBody::RigidBody()
-	:m_angularVelocity(0.f)
+	:Component(CALL_ORDER::RIGID_BODY,typeid(this).name())
+	,m_angularVelocity(0.f)
 	, m_torque(0.f)
 	, m_force(Vector2::Zero)
 	, m_velocity(Vector2::Zero)
@@ -18,6 +19,27 @@ RigidBody::RigidBody()
 
 RigidBody::~RigidBody()
 {}
+
+void RigidBody::LateUpdate(float _deltaTime, InputManager* _inputManager)
+{
+	if (m_transform == nullptr)
+	{
+		m_transform = GetComponent<Transform>();
+	}
+
+	// 현재의 속도를 가지고 오브젝트의 위치를 갱신한다.
+	if (m_invMass == 0.f)
+		return;
+	Vector2 position = m_velocity * _deltaTime;
+	m_transform->AddPosition(position);
+
+	float rotation = m_angularVelocity * _deltaTime;
+	m_transform->AddRotation(rotation);
+
+	// 힘 초기화
+	m_force = Vector2::Zero;
+	m_torque = 0.f;
+}
 
 void RigidBody::SetMass(float _mass)
 {
@@ -47,27 +69,6 @@ void RigidBody::IntegrateForces(float _fixedDeltaTime)
 
 	m_velocity *= std::exp(-GameWorld::linearDamping * _fixedDeltaTime);
 	m_angularVelocity *= std::exp(-GameWorld::angularDamping * _fixedDeltaTime);
-}
-
-void RigidBody::Update(float _deltaTime)
-{
-	if (m_transform == nullptr)
-	{
-		m_transform = GetComponent<Transform>();
-	}
-
-	// 현재의 속도를 가지고 오브젝트의 위치를 갱신한다.
-	if (m_invMass == 0.f)
-		return;
-	Vector2 position = m_velocity * _deltaTime;
-	m_transform->AddPosition(position);
-
-	float rotation = m_angularVelocity * _deltaTime;
-	m_transform->AddRotation(rotation);
-
-	// 힘 초기화
-	m_force = Vector2::Zero;
-	m_torque = 0.f;
 }
 
 void RigidBody::ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector)

@@ -74,7 +74,7 @@ void GameProcess::Process()
 
 	// ========== 게임오브젝트 업데이트 ==============
 	m_sceneManager->Update(deltaTime);
-	m_sceneManager->FinalUpdate(deltaTime);
+	m_sceneManager->LateUpdate(deltaTime);
 	
 	// ============= UI 이벤트 ====================== 
 	m_UIManager->Update();
@@ -87,7 +87,6 @@ void GameProcess::Process()
 	m_timeManager->DebugRender(m_d2DRenderer);
 
 	m_d2DRenderer->EndRender();
-	
 	// =============== 이벤트 처리 =================
 
 }

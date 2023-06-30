@@ -17,11 +17,11 @@ GameObject::~GameObject()
 
 void GameObject::DestroyAllComponent()
 {
-	for (int i = 0; i < static_cast<int>(m_components.size()); ++i)
+	for (auto iter : m_components)
 	{
-		if (m_components[i] != nullptr)
+		if (iter.second != nullptr)
 		{
-			delete m_components[i];
+			delete iter.second;
 		}
 	}
 }
@@ -31,7 +31,7 @@ void GameObject::IntergrateForces(float _fixedDeltaTime)
 	RigidBody* rigidBody = GetComponent<RigidBody>();
 	if (rigidBody != nullptr)
 	{
-		rigidBody->IntegrateForces(_fixedDeltaTime);
+ 		rigidBody->IntegrateForces(_fixedDeltaTime);
 	}
 }
 
@@ -74,110 +74,82 @@ void GameObject::SetParent(GameObject* _parent)
 	transform->SetParent(_parent);
 }
 
+
+void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
+{
+	for (auto iter : m_components)
+	{
+		if (iter.second != nullptr)
+		{
+			iter.second->FixedUpdate(_fixedDeltaTime, _inputManager);
+		}
+	}
+}
+
 void GameObject::Update(float _deltaTime, InputManager* _inputManager)
 {
-	/// 컴포넌트를 순회하면서 UserScript들만 Update를 호출한다.
-	for (auto component : m_components)
+	/// 컴포넌트를 순회하면서 정렬된 순서에 따라서 Update를 호출한다.
+	for (auto iter : m_components)
 	{
-		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
-		if (userScript != nullptr)
+		if (iter.second != nullptr)
 		{
-			userScript->Update(_deltaTime, _inputManager);
+			iter.second->Update(_deltaTime, _inputManager);
+		}
+	}
+}
+
+void GameObject::LateUpdate(float _deltaTime, InputManager* _inputManager)
+{
+	for (auto iter : m_components)
+	{
+		if (iter.second != nullptr)
+		{
+			iter.second->LateUpdate(_deltaTime, _inputManager);
 		}
 	}
 }
 
 void GameObject::PreRender(D2DRenderer* _d2DRenderer)
 {
-	for (auto component : m_components)
+	for (auto iter : m_components)
 	{
-		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
-		if (userScript != nullptr)
+		if (iter.second != nullptr)
 		{
-			userScript->PreRender(_d2DRenderer);
+			iter.second->PreRender(_d2DRenderer);
 		}
 	}
 }
 
 void GameObject::Render(D2DRenderer* _d2DRenderer)
 {
-	/// 컴포넌트를 순회하면서 UserScript들만 Render 함수를 호출한다.
-	for (auto component : m_components)
+	for (auto iter : m_components)
 	{
-		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
-		if (userScript != nullptr)
+		if (iter.second != nullptr)
 		{
-			userScript->Render(_d2DRenderer);
+			iter.second->Render(_d2DRenderer);
 		}
 	}
 }
 
 void GameObject::PostRender(D2DRenderer* _d2DRenderer)
 {
-	for (auto component : m_components)
+	for (auto iter : m_components)
 	{
-		MonoBehaviour* userScript = dynamic_cast<MonoBehaviour*> (component);
-		if (userScript != nullptr)
+		if (iter.second != nullptr)
 		{
-			userScript->PostRender(_d2DRenderer);
+			iter.second->PostRender(_d2DRenderer);
 		}
 	}
 }
 
-void GameObject::FinalUpdate(float _deltaTime)
-{
-	/// 업데이트 순서가 중요하다
-
-	// 속도를 바탕으로 오브젝트의 위치를 조정
-	RigidBody* rigiBody = GetComponent<RigidBody>();
-	if (rigiBody != nullptr)
-	{
-		rigiBody->Update(_deltaTime);
-	}
-
-	// 부모 자식 오브젝트 관계 처리
-	Transform* transform = GetComponent<Transform>();
-	if (transform != nullptr)
-	{
-		transform->Update();
-	}
-
-	// 충돌체를 GameObject와 동기화
-	BoxCollider* boxCollider = GetComponent<BoxCollider>();
-	if (boxCollider != nullptr)
-	{
-		boxCollider->Update();
-	}
-
-	CircleCollider* circleCollider = GetComponent<CircleCollider>();
-	if (circleCollider != nullptr)
-	{
-		circleCollider->Update();
-	}
-}
-
-
-
-
 void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 {
-	// 충돌체 디버그용 렌더링
-	BoxCollider* boxCollider = GetComponent<BoxCollider>();
-	if (boxCollider != nullptr)
+	for (auto iter : m_components)
 	{
-		boxCollider->DebugRender(_d2dRenderer);
-	}
-	CircleCollider* circleCollider = GetComponent<CircleCollider>();
-	if (circleCollider != nullptr)
-	{
-		circleCollider->DebugRender(_d2dRenderer);
-	}
-	// 디버그용도의 오브젝트 정보
-
-	Transform* transform = GetComponent<Transform>();
-	if (transform != nullptr)
-	{
-		transform->DebugRender(_d2dRenderer);
+		if (iter.second != nullptr)
+		{
+			iter.second->DebugRender(_d2dRenderer);
+		}
 	}
 }
 
@@ -185,10 +157,3 @@ void GameObject::Finalize()
 {
 	DestroyAllComponent();
 }
-
-void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
-{
-
-
-}
-

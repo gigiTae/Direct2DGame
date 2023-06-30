@@ -3,15 +3,15 @@
 #include "GameObject.h"
 
 Transform::Transform()
-	:m_position{}
+	:Component(CALL_ORDER::TRANSFORMM,typeid(this).name())
+	,m_position{}
 	,m_rotation(0.f)
 	,m_scale{}
 	,m_parent(nullptr)
 	,m_children{}
 	,m_rotationOffset(0.f)
 	,m_positionOffset(0.f,0.f)
-{
-}
+{}
 
 Transform::~Transform()
 {
@@ -47,7 +47,7 @@ void Transform::AddRotation(float _radian)
 	}
 }
 
-void Transform::Update()
+void Transform::LateUpdate(float _deltaTime, InputManager* _inputManager)
 {
 	// 최상단의 부모만 자식들의 움직임을 관리하는 구조이다.
 	if (m_parent != nullptr || m_children.empty())
@@ -62,9 +62,9 @@ void Transform::Update()
 	while (!q.empty())
 	{
 		GameObject* object = q.front();
-		
+
 		Transform* transform = object->GetComponent<Transform>();
-		
+
 		// 트랜스폼을 추가를 안했다고?
 		assert(transform);
 

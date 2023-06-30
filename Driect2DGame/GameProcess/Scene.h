@@ -13,9 +13,6 @@ public:
 	virtual ~Scene();
 
 public:
-	InputManager* GetInputManager() { return m_inputManager; }
-
-public:
 	virtual void Initalize(SceneManager* _sceneManager,InputManager* _inputManager, CollisionManager* _collisionManager);
 	virtual void Finalize();
 
@@ -25,10 +22,10 @@ public:
 	// 씬에 나가기전에 호출하는 함수
 	virtual void Exit() = 0;
 
-	void Render(D2DRenderer* _d2DRenderer);
 	void FixedUpdate(float _fixedDeltaTime);
 	void Update(float deltaTime);
-	void FinalUpdate(float _deltaTime);
+	void LateUpdate(float _deltaTime);
+	void Render(D2DRenderer* _d2DRenderer);
 
 	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) 
 	{ return m_objectVector[static_cast<int>(_type)]; }

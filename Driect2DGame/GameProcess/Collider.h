@@ -11,8 +11,8 @@ class Collider abstract
 	:public Component
 {
 public:
-	virtual void Update() abstract;
-	virtual void DebugRender(D2DRenderer* _d2DRenderer) abstract;
+	Collider(string _name);
+	~Collider();
 
 public:
 	virtual void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) abstract;
@@ -20,8 +20,7 @@ public:
 	virtual void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) abstract;
 
 	const unsigned int GetID() const{ return m_ID; }
-	Collider();
-	~Collider();
+
 private:
 	// 충돌체의 아이디는 고유한 값을 가진다.
 	const unsigned int m_ID;

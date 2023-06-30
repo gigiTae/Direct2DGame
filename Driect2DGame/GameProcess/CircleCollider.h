@@ -15,11 +15,13 @@ public:
 	~CircleCollider();
 
 public:
+	/// 이벤트 관련
+	void LateUpdate(float _deltaTime, InputManager* _inputManager) override;
+	void DebugRender(D2DRenderer* _d2DRenderer) override;
+
 	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) override;
 	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) override;
 	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) override;
-
-	void Update() override;
 public:
 	void SetActive(bool _isAtive) { m_active = _isAtive; }
 	void SetPosition(Vector2 _position) { m_position = _position; }
@@ -31,7 +33,6 @@ public:
 	Vector2 GetPosition() { return m_position; }
 	float GetRadius() { return m_radius; }
 
-	void DebugRender(D2DRenderer* _d2DRenderer);
 private:
 	Vector2 m_offset;
 	Vector2 m_position; 
