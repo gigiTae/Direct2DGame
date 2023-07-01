@@ -15,9 +15,14 @@ GameObject::GameObject(const string& _name)
 GameObject::~GameObject()
 {}
 
+void GameObject::Destory(float _destoryTime /*= 0.f*/)
+{
+
+}
+
 void GameObject::DestroyAllComponent()
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -77,7 +82,7 @@ void GameObject::SetParent(GameObject* _parent)
 
 void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -89,7 +94,7 @@ void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
 void GameObject::Update(float _deltaTime, InputManager* _inputManager)
 {
 	/// 컴포넌트를 순회하면서 정렬된 순서에 따라서 Update를 호출한다.
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -100,7 +105,7 @@ void GameObject::Update(float _deltaTime, InputManager* _inputManager)
 
 void GameObject::LateUpdate(float _deltaTime, InputManager* _inputManager)
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -111,7 +116,7 @@ void GameObject::LateUpdate(float _deltaTime, InputManager* _inputManager)
 
 void GameObject::PreRender(D2DRenderer* _d2DRenderer)
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -122,7 +127,7 @@ void GameObject::PreRender(D2DRenderer* _d2DRenderer)
 
 void GameObject::Render(D2DRenderer* _d2DRenderer)
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -133,7 +138,7 @@ void GameObject::Render(D2DRenderer* _d2DRenderer)
 
 void GameObject::PostRender(D2DRenderer* _d2DRenderer)
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
@@ -144,7 +149,7 @@ void GameObject::PostRender(D2DRenderer* _d2DRenderer)
 
 void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 {
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{

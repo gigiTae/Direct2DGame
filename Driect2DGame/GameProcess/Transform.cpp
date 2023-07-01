@@ -111,7 +111,8 @@ void Transform::AddChild(GameObject* _child)
 
 void Transform::SetParent(GameObject* _parent)
 {
-	// 이미 부모가 있는 경우 경고
+	// 이미 부모가 있는 경우 경고 예외 처리가 필요해 보임 
+	// 예를들어 현재 부모쪽의 연결을 해제하고 지정한 부모와 연결하는 방식
 	assert(!m_parent);
 
 	m_parent = _parent;

@@ -70,6 +70,7 @@
     <ClInclude Include="Movement.h">
       <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
     </ClInclude>
+    <ClInclude Include="ReadMe.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">

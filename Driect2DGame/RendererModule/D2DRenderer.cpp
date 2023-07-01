@@ -254,7 +254,7 @@ HRESULT D2DRenderer::CreateDeviceResources()
 		// ·»´õ Å¸°Ù»ý¼º
 		hr = m_factory->CreateHwndRenderTarget(
 			D2D1::RenderTargetProperties()
-			, D2D1::HwndRenderTargetProperties(m_hwnd, size)
+			, D2D1::HwndRenderTargetProperties(m_hwnd, size,D2D1_PRESENT_OPTIONS_IMMEDIATELY)
 			, &m_renderTarget);
 	}
 

@@ -26,6 +26,17 @@ public:
 	virtual ~GameObject();
 
 public:
+	bool IsAlive() { return m_ailve; }
+
+	// 씬에게 오브젝트 삭제요청을 한다.
+	void Destory(float _destoryTime = 0.f);
+	const string& GetName() { return m_name; }
+
+private:
+	// 삭제예정인 오브젝트인지 확인
+	bool m_ailve;
+	const string m_name;
+public:
 	void DestroyAllComponent();
 
 	/// 이벤트 함수 
@@ -48,16 +59,6 @@ public:
 	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};
 	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) {};
 	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) {};
-
-public:
-	void SetAlive(bool _isAlive) { m_ailve = _isAlive; }
-	bool IsAlive() { return m_ailve; }
-	const string& GetName() { return m_name; }
-
-private:
-	// 삭제예정인 오브젝트인지 확인
-	bool m_ailve;
-	const string m_name;
 
 public:
 	/// 자식 오브젝트 
@@ -121,7 +122,7 @@ T* GameObject::GetComponent()
 	// 찾으려는 컴포넌트의 정보를 바탕으로 맵을 순회하면서 찾는다.
 	const type_info& _info = typeid(T*);
 
-	for (auto iter : m_components)
+	for (auto& iter : m_components)
 	{
 		Component* component = iter.second;
 

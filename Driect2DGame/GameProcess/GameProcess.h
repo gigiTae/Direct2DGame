@@ -27,8 +27,14 @@ public:
 	bool IsGameRunning() { return m_gameRunnig; }
 	void EndGame() { m_gameRunnig = false; }
 private:
+	bool ShowDubg();
+
+private:
 	/// 현재 게임 프로세스가 진행판단
 	bool m_gameRunnig;
+
+	/// 이번 프레임에 디버그 정보를 표시하는지
+	bool m_showDebug;
 
 	float m_elapsedTime;
 

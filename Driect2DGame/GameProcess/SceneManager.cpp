@@ -48,6 +48,11 @@ void SceneManager::Render(D2DRenderer* _d2DRenderer)
 	m_currentScene->Render(_d2DRenderer);
 }
 
+void SceneManager::DebugRender(D2DRenderer* _d2DRenderer)
+{
+	m_currentScene->DubugRender(_d2DRenderer);
+}
+
 void SceneManager::Finalize()
 {
 	for (int i = 0; i < static_cast<int>(SCENE_TYPE::END); ++i)

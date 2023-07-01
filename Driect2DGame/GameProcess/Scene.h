@@ -27,6 +27,9 @@ public:
 	void LateUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);
 
+	/// 디버그 정보를 랜더링
+	void DubugRender(D2DRenderer* _d2DRenderer);
+
 	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) 
 	{ return m_objectVector[static_cast<int>(_type)]; }
 

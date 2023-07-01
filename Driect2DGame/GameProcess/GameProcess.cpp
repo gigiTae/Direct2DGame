@@ -19,6 +19,7 @@ GameProcess::GameProcess()
 	,m_UIManager(nullptr)
 	,m_elapsedTime(0.f)
 	,m_gameRunnig(false)
+	,m_showDebug(false)
 {
 }
 
@@ -61,13 +62,13 @@ void GameProcess::Process()
 	m_inputManager->Update();
 
 	// ==================물리 처리===================
-	constexpr float fixedDeltaTime = 0.02f; // 50프레임 주기
+	constexpr float FIXED_DELTA_TIME = 0.02f; // 50프레임 주기
 	m_elapsedTime += deltaTime;
 
-	while (m_elapsedTime >= fixedDeltaTime)
+	while (m_elapsedTime >= FIXED_DELTA_TIME)
 	{
-		m_elapsedTime -= fixedDeltaTime;
-		m_sceneManager->FixedUpdate(fixedDeltaTime);
+		m_elapsedTime -= FIXED_DELTA_TIME;
+		m_sceneManager->FixedUpdate(FIXED_DELTA_TIME);
 		//  ======== 충돌처리 ============
 		m_collisionManager->Update();
 	}
@@ -84,7 +85,13 @@ void GameProcess::Process()
 	m_d2DRenderer->BeginRender();
 
 	m_sceneManager->Render(m_d2DRenderer);
-	m_timeManager->DebugRender(m_d2DRenderer);
+
+	// 디버그정보 랜더링
+	if (ShowDubg())
+	{
+		m_sceneManager->DebugRender(m_d2DRenderer);
+		m_timeManager->DebugRender(m_d2DRenderer);
+	}
 
 	m_d2DRenderer->EndRender();
 	// =============== 이벤트 처리 =================
@@ -105,4 +112,13 @@ void GameProcess::Finalize()
 	delete m_timeManager;
 	delete m_inputManager;
 	delete m_UIManager;
+}
+
+bool GameProcess::ShowDubg()
+{
+	if (m_inputManager->IsKeyState(KEY::F5, KEY_STATE::TAP))
+	{
+		m_showDebug = !m_showDebug;
+	}
+	return m_showDebug;
 }

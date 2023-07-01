@@ -20,6 +20,7 @@ enum class KEY
 	SPACE, ENTER, ESC, TAB,
 
 	LMOUSE, RMOUSE,
+	F5,
 
 	LAST, //enum¿« ≥°
 };

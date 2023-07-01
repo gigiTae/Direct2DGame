@@ -18,6 +18,8 @@ InputManager::InputManager()
 
 	VK_LBUTTON, // LBTN
 	VK_RBUTTON, // RBTN
+
+	VK_F5, // F5
 	}
 	, m_keyInfo{}
 	,m_hwnd(nullptr)

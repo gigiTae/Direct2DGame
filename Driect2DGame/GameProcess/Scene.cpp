@@ -56,7 +56,10 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 			iter->PostRender(_d2DRenderer);
 		}
 	}
+}
 
+void Scene::DubugRender(D2DRenderer* _d2DRenderer)
+{
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
 		for (auto iter : m_objectVector[i])

@@ -19,6 +19,7 @@ public:
 	void FixedUpdate(float _fiexedDeltaTime);
 	void LateUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);
+	void DebugRender(D2DRenderer* _d2DRenderer);
 	void Finalize();
 
 	Scene* GetCurrentScene() { return m_currentScene; }

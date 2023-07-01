@@ -32,7 +32,7 @@ void MainScene::Enter()
 	GameObject* playerArm = new GameObject("player");
 	playerArm->CreateComponent<Transform>();
 	Transform* transform1 = playerArm->GetComponent<Transform>();
-	
+
 	transform1->SetOffset(Vector2(65.f, 0.f));
 	transform1->SetOffset(1.f);
 	transform1->SetScale(Vector2(100.f, 100.f));
