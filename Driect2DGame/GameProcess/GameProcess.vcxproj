@@ -154,7 +154,6 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="GameWorld.h" />
-    <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +176,6 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>

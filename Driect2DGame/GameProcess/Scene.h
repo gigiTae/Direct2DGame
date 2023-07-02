@@ -26,6 +26,7 @@ public:
 	void Update(float deltaTime);
 	void LateUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);
+	void ProcessEvent();
 
 	/// 디버그 정보를 랜더링
 	void DubugRender(D2DRenderer* _d2DRenderer);
@@ -34,7 +35,7 @@ public:
 	{ return m_objectVector[static_cast<int>(_type)]; }
 
 protected:
-	void AddObject(GameObject* _object, OBJECT_TYPE _type);
+	void AddObject(GameObject* _object, OBJECT_TYPE _type); 
 	void DestoryGroupObject(OBJECT_TYPE _type);
 
 protected:

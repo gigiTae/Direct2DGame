@@ -42,6 +42,7 @@ void MainScene::Enter()
 	boxCollider1->SetRotatble(true);
 
 	AddObject(playerArm, OBJECT_TYPE::PLAYER);
+	playerArm->Destory(10.f);
 
 	player->AddChild(playerArm);
 

@@ -58,9 +58,6 @@
     <ClInclude Include="GameProcessPCH.h">
       <Filter>GameProcess\01.Define</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>GameProcess\03.Component\UI</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>GameProcess\04.Manager\UIManager</Filter>
     </ClInclude>
@@ -133,9 +130,6 @@
     <Filter Include="GameProcess\04.Manager\UIManager">
       <UniqueIdentifier>{51c7efd8-d59f-483d-b087-423dd369d8f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Component\UI">
-      <UniqueIdentifier>{6a3ff213-405f-4401-b560-597972d5cff5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\01.Define">
       <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
     </Filter>
@@ -203,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>GameProcess\04.Manager\UIManager</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>GameProcess\03.Component\UI</Filter>
     </ClCompile>
     <ClCompile Include="GameProcess.cpp">
       <Filter>GameProcess</Filter>

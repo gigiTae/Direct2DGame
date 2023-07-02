@@ -94,8 +94,10 @@ void GameProcess::Process()
 	}
 
 	m_d2DRenderer->EndRender();
-	// =============== 이벤트 처리 =================
 
+	// =============== 후속처리 =================
+	// ex) 오브젝트 삭제, 추가, 씬 변경
+	m_sceneManager->ProcessEvent();
 }
 
 void GameProcess::Finalize()
@@ -108,6 +110,7 @@ void GameProcess::Finalize()
 
 	// 메모리 해제
 	delete m_sceneManager;
+	delete m_pathManager;
 	delete m_collisionManager;
 	delete m_timeManager;
 	delete m_inputManager;

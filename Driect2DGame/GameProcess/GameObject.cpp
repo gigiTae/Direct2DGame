@@ -9,15 +9,30 @@
 
 GameObject::GameObject(const string& _name)
 	:m_name(NameGenerator::GetInstance()->GenerateName(_name))
-	,m_ailve(true)
+	,m_state(OBJECT_STATE::ALIVE)
+	,m_destoryTime(0.f)
 {}
 
 GameObject::~GameObject()
 {}
 
+bool GameObject::IsAlive()
+{
+	/// 삭제 예정인 오브젝트는 아직 삭제되지 않았으므로 true를 반환한다.
+	if (m_state != OBJECT_STATE::DESTORY)
+		return true;
+
+	return false;
+}
+
 void GameObject::Destory(float _destoryTime /*= 0.f*/)
 {
-
+	/// 일정 시간이후에 삭제 && 먼저 들어온 삭제요청만 받는다.
+	if (m_state == OBJECT_STATE::ALIVE)
+	{
+		m_state = OBJECT_STATE::TO_BE_DESTORYED;
+		m_destoryTime = _destoryTime;
+	}
 }
 
 void GameObject::DestroyAllComponent()
@@ -37,6 +52,54 @@ void GameObject::IntergrateForces(float _fixedDeltaTime)
 	if (rigidBody != nullptr)
 	{
  		rigidBody->IntegrateForces(_fixedDeltaTime);
+	}
+}
+
+void GameObject::OnMouse()
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnMouse();
+		}
+	}
+}
+
+void GameObject::OnMouseUp()
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnMouseUp();
+		}
+	}
+}
+
+void GameObject::OnMouseDown()
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnMouseDown();
+		}
+	}
+}
+
+void GameObject::OnMouseClicked()
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnMouseClicked();
+		}
 	}
 }
 
@@ -101,6 +164,16 @@ void GameObject::Update(float _deltaTime, InputManager* _inputManager)
 			iter.second->Update(_deltaTime, _inputManager);
 		}
 	}
+
+	/// 삭제 예정인 오브젝트 처리 
+	if (m_state == OBJECT_STATE::TO_BE_DESTORYED)
+	{
+		m_destoryTime -= _deltaTime;
+		if (m_destoryTime <= 0.f)
+		{
+			m_destoryTime = 0.f;
+		}
+	}
 }
 
 void GameObject::LateUpdate(float _deltaTime, InputManager* _inputManager)
@@ -160,5 +233,7 @@ void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 
 void GameObject::Finalize()
 {
+	/// 자식 오브젝트, 부모오브젝트 예외처리 추가해야한다!
+
 	DestroyAllComponent();
 }

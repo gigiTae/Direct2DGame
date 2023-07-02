@@ -14,35 +14,45 @@ struct Collision;
 
 /// <summary>
 /// 오브젝트의 기본형
-/// 컴포넌트 구조를가지고 유연하게 오브젝트를 설계해보자!
+/// 컴포넌트 구조를 가진다
 /// 
 /// </summary>
 class GameObject
 {
 
 public:
-	// 생성자 단계에서 오브젝트의 이름을 결정
+	/// 생성자 단계에서 오브젝트의 이름을 결정
 	GameObject(const string& _name);
 	virtual ~GameObject();
 
 public:
-	bool IsAlive() { return m_ailve; }
+	/// 삭제예정인 오브젝트인지
+	bool IsAlive();
 
 	// 씬에게 오브젝트 삭제요청을 한다.
 	void Destory(float _destoryTime = 0.f);
 	const string& GetName() { return m_name; }
 
+	/// !!경고!! 오브젝를 삭제하고 싶으면 Destory를 사용
+	void SetObjectState(OBJECT_STATE _state) { m_state = _state; }
+	OBJECT_STATE GetObjectState() { return m_state; }
+	
+	// 몇초후 삭제예정인지 반환
+	float GetDestroyTime() { return m_destoryTime; }
+
 private:
-	// 삭제예정인 오브젝트인지 확인
-	bool m_ailve;
+	OBJECT_STATE m_state;
+	float m_destoryTime;
 	const string m_name;
+
 public:
 	void DestroyAllComponent();
 
-	/// 이벤트 함수 
+	///  명시적 초기화
 	void Initalize() {};
 	void Finalize();
 
+	/// 이벤트 함수 
 	void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager);
 	void Update(float _deltaTime, InputManager* _inputManager);
 	void LateUpdate(float _deltaTime, InputManager* _inputManager);
@@ -61,6 +71,13 @@ public:
 	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) {};
 
 public:
+	/// 마우스 입력 함수
+	void OnMouse();
+	void OnMouseUp();
+	void OnMouseDown();
+	void OnMouseClicked();
+
+public:
 	/// 자식 오브젝트 
 	void AddChild(GameObject* _child);
 	GameObject* GetChild(int _index);
@@ -70,9 +87,8 @@ public:
 
 private:
 	/// 컴포넌트 관련 함수 
-	/// 컴포넌트를 벡터가 아닌 정렬된 형태로 가지고 있으면 호출순서를 정할수 있지않을까? 
-	/// qriorty queue는 iterator 지원 x 그리고 multimap인 이유? 같은 순서를 가지는 컴포넌트는 중복으로 보관해야하므로
-	/// 일반 map의 경우에는 같은 key값의 중복을 허용하지 않는다.
+
+	/// Component을 호출순서대로 정렬해서 보관
 	std::multimap<int, Component*> m_components; 
 
 public:
@@ -128,6 +144,8 @@ T* GameObject::GetComponent()
 
 		if (_info.name() == component->GetName())
 		{
+			/// static_cast를 사용해도 괜찮지 않을까?
+			/// 물론 안전한 코드는 dynamic_cast 이다.
 			return dynamic_cast<T*>(component);
 		}
 	}
@@ -136,4 +154,4 @@ T* GameObject::GetComponent()
 }
 
 // 일반화(템플릿)말고 추상화로 구현하면, 외부에서 GetComponent등으로 받을 때, 캐스팅을 해서 써야한다
-// => Transform* transform = dynamic_cast<Transform*>(GetComponent<Transform*>()); -> 이런식으로 템플리이 더 편리한듯 ? 
+// => Transform* transform = dynamic_cast<Transform*>(GetComponent(COMPONENT_TPYE::TRANSFORM)); -> 이런식으로 템플리이 더 편리한듯 ? 

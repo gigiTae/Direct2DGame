@@ -58,6 +58,40 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 	}
 }
 
+void Scene::ProcessEvent()
+{
+	/// 오브젝트 삭제관리 // 점점 게임프로세스가 무거워지는데 괜찮은가? 
+	/// 오브젝트 풀링도 고민해봐야?
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		auto iter = m_objectVector[i].begin();
+
+		while (iter != m_objectVector[i].end())
+		{
+			OBJECT_STATE state = (*iter)->GetObjectState();
+
+			if (state == OBJECT_STATE::DESTORY)
+			{
+				// 오브젝트 삭제처리
+				(*iter)->Finalize();
+				delete (*iter);
+				iter = m_objectVector->erase(iter);
+			}
+			else 
+			{
+				if (state == OBJECT_STATE::TO_BE_DESTORYED && (*iter)->GetDestroyTime() <= 0.f)
+				{
+					// 다음 프레임이 오브젝트 메모리 해제
+					(*iter)->SetObjectState(OBJECT_STATE::DESTORY);
+				}
+				++iter;
+			}
+		}
+
+	}
+
+}
+
 void Scene::DubugRender(D2DRenderer* _d2DRenderer)
 {
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)

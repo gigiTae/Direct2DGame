@@ -15,12 +15,15 @@ public:
 	~SceneManager();
 
 	void Initalize(InputManager* _inputManager, CollisionManager* _collisionManager);
-	void Update(float _deltaTime);
+	void Finalize();
+	
+	/// 이벤트 관련
 	void FixedUpdate(float _fiexedDeltaTime);
+	void Update(float _deltaTime);
 	void LateUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);
 	void DebugRender(D2DRenderer* _d2DRenderer);
-	void Finalize();
+	void ProcessEvent();
 
 	Scene* GetCurrentScene() { return m_currentScene; }
 	void ChangeScene(SCENE_TYPE _nextScene);

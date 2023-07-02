@@ -1,4 +1,12 @@
 #pragma once
+
+
+/// <summary>
+/// 파일 경로를 받아오는 매니져 
+/// static을 사용하긴 했는데 
+/// 과연 메모리공간에 객체를 할당해야할까?
+/// 모르겠다....
+/// </summary>
 class PathManager
 {
 public:
@@ -6,7 +14,10 @@ public:
 	~PathManager();
 
 	void Initalize();
+
+	static const wchar_t* GetRelativPath() { return m_relativePath; }
+
 private:
-	wchar_t m_contentPath[256];
+	static wchar_t m_relativePath[256];
 };
 

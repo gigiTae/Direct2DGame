@@ -25,10 +25,12 @@ enum class OBJECT_TYPE
 	END = 32,
 };
 
-enum class COLLIDER_TYPE
+
+enum class OBJECT_STATE
 {
-	CIRCLE,
-	BOX,
+	ALIVE,
+	TO_BE_DESTORYED,
+	DESTORY,
 };
 
 /// <summary>
@@ -44,3 +46,12 @@ enum class CALL_ORDER
 	COLLIDER,
 	UI
 };
+
+
+enum class COLLIDER_TYPE
+{
+	CIRCLE,
+	BOX,
+};
+
+
