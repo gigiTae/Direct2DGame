@@ -81,7 +81,8 @@ public:
 	/// 자식 오브젝트 
 	void AddChild(GameObject* _child);
 	GameObject* GetChild(int _index);
-	const vector<GameObject*>& GetChildren();
+	GameObject* GetChild(const string& _name);
+	vector<GameObject*>& GetChildren();
 	GameObject* GetParent();
 	void SetParent(GameObject* _parent);
 
@@ -135,18 +136,12 @@ T* GameObject::CreateComponent()
 template <typename T>
 T* GameObject::GetComponent()
 {
-	// 찾으려는 컴포넌트의 정보를 바탕으로 맵을 순회하면서 찾는다.
-	const type_info& _info = typeid(T*);
-
 	for (auto& iter : m_components)
 	{
-		Component* component = iter.second;
-
-		if (_info.name() == component->GetName())
+		T* component = dynamic_cast<T*>(iter.second);
+		if (component != nullptr)
 		{
-			/// static_cast를 사용해도 괜찮지 않을까?
-			/// 물론 안전한 코드는 dynamic_cast 이다.
-			return dynamic_cast<T*>(component);
+			return component;
 		}
 	}
 

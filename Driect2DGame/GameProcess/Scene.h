@@ -20,7 +20,7 @@ public:
 	virtual void Enter() = 0;
 
 	// 씬에 나가기전에 호출하는 함수
-	virtual void Exit() = 0;
+	virtual void Exit();
 
 	void FixedUpdate(float _fixedDeltaTime);
 	void Update(float deltaTime);
@@ -35,6 +35,7 @@ public:
 	{ return m_objectVector[static_cast<int>(_type)]; }
 
 protected:
+	/// 자식오브젝트들도 같이 등록
 	void AddObject(GameObject* _object, OBJECT_TYPE _type); 
 	void DestoryGroupObject(OBJECT_TYPE _type);
 

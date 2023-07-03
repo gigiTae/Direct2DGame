@@ -19,7 +19,7 @@ TimeManager::~TimeManager()
 void TimeManager::Initalize()
 {
 	QueryPerformanceFrequency(&m_frequency); // 프로세서의 카운터 값의 빈도
-	QueryPerformanceCounter(&m_prevCount); // 이전 프레임의 카운터 값
+	QueryPerformanceCounter(&m_prevCount); // 이전 프레임의 카운터 값 
 }
 
 double TimeManager::Update()
@@ -37,14 +37,21 @@ double TimeManager::Update()
 		m_fps = m_updateCount;
 		m_updateCount = 0;
 	}
-	
+
+
+	//if (m_deltaTime >= 0.02f)
+	//{
+	//	m_deltaTime = 0.02f;
+	//}
+
 	return m_deltaTime;
 }
 
 void TimeManager::DebugRender(D2DRenderer* _d2dRenderer)
 {
 	wstring str = L"FPS : " + std::to_wstring(m_fps) + L" DT : " + std::to_wstring(m_deltaTime);
-	Vector2 leftTop{ -450.f, 250.f }, rightBottom{0.f,300.f };
+	Vector2 leftTop{ 0.f, 0.f }, rightBottom{ 200.f,-200.f };
+
 	_d2dRenderer->DrawTextW(str, leftTop, rightBottom, D2D1::ColorF::Gold);
 }
 

@@ -15,4 +15,6 @@
 
 #include <wincodec.h>
 
+using namespace D2D1;
+
 #include "MathModuleHeader.h"

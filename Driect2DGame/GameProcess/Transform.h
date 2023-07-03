@@ -41,8 +41,9 @@ public:
 	GameObject* GetParent() { return m_parent; }
 	
 	// 모든 자식을 반환
-	const vector<GameObject*>& GetChildren() { return m_children; }
+	vector<GameObject*>& GetChildren() { return m_children; }
 	GameObject* GetChild(int _index);
+	GameObject* GetChild(const string& _name);
 	
 	/// 자식 오브젝트 추가
 	void AddChild(GameObject* _child);

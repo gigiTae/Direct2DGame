@@ -36,7 +36,7 @@ private:
 	/// 이번 프레임에 디버그 정보를 표시하는지
 	bool m_showDebug;
 
-	float m_elapsedTime;
+ 	float m_elapsedTime;
 
 	// 메인 윈도우 핸들 
 	HWND m_hWnd; 

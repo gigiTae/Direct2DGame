@@ -9,7 +9,6 @@ public:
 
 public:
     void Enter() override;
-    void Exit() override {};
 
 };
 

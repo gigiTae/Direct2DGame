@@ -68,6 +68,9 @@
       <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
+    <ClInclude Include="BoxRender.h">
+      <Filter>GameProcess\03.Component\UserScripts\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -142,6 +145,9 @@
     <Filter Include="GameProcess\03.Component\UserScripts\Movement">
       <UniqueIdentifier>{0087a112-0433-446a-998f-37d30e27ed82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProcess\03.Component\UserScripts\Render">
+      <UniqueIdentifier>{83c46ca2-a10c-4b88-b044-cde43e044e23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -203,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="Movement.cpp">
       <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxRender.cpp">
+      <Filter>GameProcess\03.Component\UserScripts\Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

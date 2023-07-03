@@ -68,21 +68,36 @@ void Scene::ProcessEvent()
 
 		while (iter != m_objectVector[i].end())
 		{
-			OBJECT_STATE state = (*iter)->GetObjectState();
+			GameObject* object = (*iter);
+			OBJECT_STATE state = object->GetObjectState();
 
 			if (state == OBJECT_STATE::DESTORY)
 			{
 				// 오브젝트 삭제처리
-				(*iter)->Finalize();
-				delete (*iter);
-				iter = m_objectVector->erase(iter);
+				object->Finalize();
+				delete object;
+				iter = m_objectVector[i].erase(iter);
 			}
 			else 
 			{
-				if (state == OBJECT_STATE::TO_BE_DESTORYED && (*iter)->GetDestroyTime() <= 0.f)
+				if (state == OBJECT_STATE::TO_BE_DESTORYED && object->GetDestroyTime() <= 0.f)
 				{
 					// 다음 프레임이 오브젝트 메모리 해제
-					(*iter)->SetObjectState(OBJECT_STATE::DESTORY);
+					// 자식 오브젝트들만 삭제한다, 부모는 삭제하지 않는다.
+					queue<GameObject*> q;
+					q.push(object);
+					while (!q.empty())
+					{
+						GameObject* tmp = q.front();
+						tmp->SetObjectState(OBJECT_STATE::DESTORY);
+						
+						vector<GameObject*>& children = tmp->GetChildren();
+						for (int i = 0; i < static_cast<int>(children.size()); ++i)
+						{
+							q.push(children[i]);
+						}
+						q.pop();
+					}
 				}
 				++iter;
 			}
@@ -100,6 +115,14 @@ void Scene::DubugRender(D2DRenderer* _d2DRenderer)
 		{
 			iter->DebugRender(_d2DRenderer);
 		}
+	}
+}
+
+void Scene::Exit()
+{
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		DestoryGroupObject(static_cast<OBJECT_TYPE>(i));
 	}
 }
 
@@ -153,7 +176,21 @@ void Scene::LateUpdate(float _deltaTime)
 
 void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 {
-	m_objectVector[static_cast<int>(_type)].push_back(_object);
+	queue<GameObject*> q;
+	q.push(_object);
+
+	while (!q.empty())
+	{
+		GameObject* tmp = q.front();
+		m_objectVector[static_cast<int>(_type)].push_back(tmp);
+
+		for (auto child : tmp->GetChildren())
+		{
+			q.push(child);
+		}
+
+		q.pop();
+	}
 }
 
 void Scene::DestoryGroupObject(OBJECT_TYPE _type)

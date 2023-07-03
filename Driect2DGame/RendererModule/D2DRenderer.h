@@ -46,6 +46,8 @@ private:
 	void DiscardDeviceResources();
 
 	//HRESULT LoadBitmapFromFile()
+private:
+	D2D1_MATRIX_3X2_F m_screenTrasformMatrix; // 스크린 좌표계로 변환하는 행렬
 
 private: 
 	// 메인 윈도우 핸들

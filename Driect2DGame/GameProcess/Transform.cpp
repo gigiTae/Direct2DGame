@@ -101,8 +101,27 @@ GameObject* Transform::GetChild(int _index)
 	return nullptr;
 }
 
+GameObject* Transform::GetChild(const string& _name)
+{
+	for (int i = 0; i < static_cast<int>(m_children.size()); ++i)
+	{
+		const string& name = m_children[i]->GetName();
+		if (name == _name)
+		{
+			return m_children[i];
+		}
+	}
+	return nullptr;
+}
+
 void Transform::AddChild(GameObject* _child)
 {
+	// 만약같은 오브젝트를 두번이나 추가해주는 사람은 없겠지???? 이런것도 예외처리해아하나
+	for (auto child : m_children)
+	{
+		assert(child->GetName() != _child->GetName() || !(L"같은 오브젝트를 두번이 자식으로 추가하였습니다 ? 자네는 무슨의도인가"));
+	}
+
 	// 서로를 연결해준다 하지만 SetParent함수를 public로 사용하기 때문에
 	// 순환참조하는 지옥이 발생 가능해짐 이에 대한 해결 방법이 필요해 보인다
 	m_children.push_back(_child);
@@ -111,9 +130,23 @@ void Transform::AddChild(GameObject* _child)
 
 void Transform::SetParent(GameObject* _parent)
 {
-	// 이미 부모가 있는 경우 경고 예외 처리가 필요해 보임 
-	// 예를들어 현재 부모쪽의 연결을 해제하고 지정한 부모와 연결하는 방식
-	assert(!m_parent);
+	///  부모쪽 예외처리
+	if (m_parent != nullptr)
+	{
+		vector<GameObject*>& sibling = m_parent->GetChildren();
+		
+		for (auto iter = sibling.begin(); iter != sibling.end();)
+		{
+			if ((*iter)->GetName() == GetName())
+			{
+				iter = sibling.erase(iter);
+			}
+			else 
+			{
+				++iter;
+			}
+		}
+	}
 
 	m_parent = _parent;
 }

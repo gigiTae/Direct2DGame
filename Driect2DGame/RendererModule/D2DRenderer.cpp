@@ -10,6 +10,7 @@ D2DRenderer::D2DRenderer()
 	,m_IsD2DResReady(S_FALSE)
 	,m_renderTargetSize{}
 	,m_tempBrush(nullptr)
+	,m_screenTrasformMatrix{}
 {
 }
 
@@ -58,15 +59,25 @@ void D2DRenderer::Initalize(HWND _hwnd)
 		);
 	}
 
-
 	// 텍스트 정렬 방식
 	if (SUCCEEDED(hr))
 	{
 		// Left-Top the text horizontally and vertically.
 		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 		m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
-
 	}
+
+	m_renderTargetSize = m_renderTarget->GetSize();
+
+	/// 스크린 변환 행렬을 생성한다 원점을 스크린 중심으로 옮기고 화면을 거꾸로 뒤집는 행렬
+	Vector2 translation{m_renderTargetSize.width * 0.5f, m_renderTargetSize.height * 0.5f };
+
+	Matrix3x2F transformMatrix = Matrix3x2F::Translation(translation.x, translation.y);
+	/// 기저벡터 e2(0,1)-> e1(0,-1) 로 변환 
+	Matrix3x2F flipMatrix{ 1.f,0.f,0.f,-1.f,0.f,0.f };
+	
+	/// 최종 변환 행렬 
+	m_screenTrasformMatrix = flipMatrix * transformMatrix;
 }
 
 void D2DRenderer::BeginRender()
@@ -81,7 +92,7 @@ void D2DRenderer::BeginRender()
 
 		m_renderTarget->BeginDraw();
 
-		m_renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+		m_renderTarget->SetTransform(m_screenTrasformMatrix);
 
 		m_renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 	}
@@ -127,7 +138,7 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 
 	// 행렬변환
 	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, point.ToPoint2F());
-
+	
 	m_renderTarget->SetTransform(matrix);
 }
 
@@ -139,12 +150,8 @@ void D2DRenderer::DrawBitMap()
 
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
-	// 스크린 좌표계로 변환
-	Vector2 point1 = _point1.ToScreenPoint(m_renderTargetSize);
-	Vector2 point2 = _point2.ToScreenPoint(m_renderTargetSize);
-
-	D2D1_POINT_2F start = point1.ToPoint2F();
-	D2D1_POINT_2F end = point2.ToPoint2F();
+	D2D1_POINT_2F start = _point1.ToPoint2F();
+	D2D1_POINT_2F end = _point2.ToPoint2F();
 
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
@@ -156,11 +163,8 @@ void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 {
-	// 스크린 좌표계로 변환
-	Vector2 point = _point.ToScreenPoint(m_renderTargetSize);
-
-	D2D1_ELLIPSE region;
-	region.point = point.ToPoint2F();
+	D2D1_ELLIPSE region{};
+	region.point = _point.ToPoint2F();
 	region.radiusX = _scale.x * 0.5f;
 	region.radiusY = _scale.y * 0.5f;
 
@@ -174,11 +178,8 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 {
-	// 스크린 좌표계로 변환
-	Vector2 point = _point.ToScreenPoint(m_renderTargetSize);
-
-	D2D1_ELLIPSE region;
-	region.point = point.ToPoint2F();
+	D2D1_ELLIPSE region{};
+	region.point = _point.ToPoint2F();
 	region.radiusX = _radius;
 	region.radiusY = _radius;
 
@@ -192,16 +193,12 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 
 void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color,float _rotation)
 {
-	// 스크린 좌표계로 변환
-	Vector2 leftTop = _leftTop.ToScreenPoint(m_renderTargetSize);
-	Vector2 rightBottom = _rightBottom.ToScreenPoint(m_renderTargetSize);
-
-	D2D1_RECT_F rt;
-	rt.left = leftTop.x;
-	rt.top = leftTop.y;
-	rt.right = rightBottom.x;
-	rt.bottom = rightBottom.y;
-
+	D2D1_RECT_F rt{};
+	rt.left = _leftTop.x;
+	rt.top = _leftTop.y;
+	rt.right = _rightBottom.x;
+	rt.bottom = _rightBottom.y;
+	 
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
@@ -213,11 +210,8 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom
 	, COLORREF _color /*= D2D1::ColorF::White*/)
 {
-	Vector2 leftTop = _leftTop.ToScreenPoint(m_renderTargetSize);
-	Vector2 rightBottom = _rightBottom.ToScreenPoint(m_renderTargetSize);
-
 	// 글자 출력범위
-	D2D1_RECT_F rect = D2D1::RectF(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
+	D2D1_RECT_F rect = D2D1::RectF(_leftTop.x, _leftTop.y, _rightBottom.x, _rightBottom.y);
 
 	// 브러쉬 생성
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(_color), &m_tempBrush);

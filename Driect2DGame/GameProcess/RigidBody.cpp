@@ -67,6 +67,7 @@ void RigidBody::IntegrateForces(float _fixedDeltaTime)
 	m_velocity += (m_force * m_invMass + GameWorld::GRAVITY) * _fixedDeltaTime;
 	m_angularVelocity += m_torque * m_invI * _fixedDeltaTime;
 
+
 	m_velocity *= std::exp(-GameWorld::linearDamping * _fixedDeltaTime);
 	m_angularVelocity *= std::exp(-GameWorld::angularDamping * _fixedDeltaTime);
 }

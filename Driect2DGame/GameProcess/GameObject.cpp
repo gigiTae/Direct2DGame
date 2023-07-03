@@ -118,7 +118,15 @@ GameObject* GameObject::GetChild(int _index)
 	return transform->GetChild(_index);
 }
 
-const vector<GameObject*>& GameObject::GetChildren()
+GameObject* GameObject::GetChild(const string& _name)
+{
+	Transform* transform = GetComponent<Transform>();
+	assert(transform);
+
+	return transform->GetChild(_name);
+}
+
+vector<GameObject*>& GameObject::GetChildren()
 {
 	Transform* transform = GetComponent<Transform>();
 	assert(transform);
@@ -233,7 +241,31 @@ void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 
 void GameObject::Finalize()
 {
-	/// 자식 오브젝트, 부모오브젝트 예외처리 추가해야한다!
+	/// 자식 오브젝트, 부모오브젝트 예외처리 
+	vector<GameObject*>& children = GetChildren();
+	for (auto child : children)
+	{
+		child->SetParent(nullptr);
+	}
+
+	GameObject* parent = GetParent();
+
+	if (parent != nullptr)
+	{
+		vector<GameObject*>& sibling = parent->GetChildren();
+
+		for (auto iter = sibling.begin(); iter != sibling.end();)
+		{
+			if ((*iter) == this)
+			{
+				iter = sibling.erase(iter);
+			}
+			else
+			{
+				++iter;
+			}
+		}
+	}
 
 	DestroyAllComponent();
 }

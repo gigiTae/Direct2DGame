@@ -39,7 +39,7 @@ class CollisionManager
 {
 public:
 	// ColliderID를 발급하는 함수
-	static unsigned int GetColliderID() { static unsigned int ID = 0; return ID++; }
+	static unsigned int GetColliderID() { static unsigned int ID = 0; return ID++; }  
 
 public:
 	CollisionManager();

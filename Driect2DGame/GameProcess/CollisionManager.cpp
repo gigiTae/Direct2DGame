@@ -33,7 +33,7 @@ void CollisionManager::Update()
 	{
 		for (int j = i; j < static_cast<int>(OBJECT_TYPE::END); ++j)
 		{
-			if (m_collisionCheck[i] & (i << j))
+			if (m_collisionCheck[i] & (1 << j))
 			{
 				CollisionGroupUpdate(static_cast<OBJECT_TYPE>(i), static_cast<OBJECT_TYPE>(j));
 			}
@@ -54,8 +54,8 @@ void CollisionManager::CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _
 
 void CollisionManager::CheckID(const Collider* _left, const Collider* _right, map<unsigned long long, bool>::iterator& iter)
 {
-	unsigned int leftID = _left->GetID();
-	unsigned int rightID = _right->GetID();
+	unsigned int leftID = FMath::Max(_left->GetID(), _right->GetID());
+	unsigned int rightID = FMath::Min(_left->GetID(), _right->GetID());
 
 	CollisionID ID = CombineID(leftID, rightID);
 	iter = m_prevCollisionInfo.find(ID.ID); 
@@ -289,8 +289,9 @@ void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _righ
 			BoxCollider* rightBoxCollider = rightGroup[rightIndex]->GetComponent<BoxCollider>();
 			CircleCollider* rightCircleCollidr = rightGroup[rightIndex]->GetComponent<CircleCollider>();
 
-			// 오른쪽 오브젝트가 콜라이더를 소유하지 않는 경우이거나 같은 오브젝트인 경우
-			if ( (!rightBoxCollider && !rightCircleCollidr) && leftGroup[leftIndex] == rightGroup[rightIndex])
+			// 오른쪽 오브젝트가 콜라이더를 소유하지 않는 경우이거나 같은 오브젝트인 경우 ////고쳐야함
+
+			if ( (!rightBoxCollider && !rightCircleCollidr) || leftGroup[leftIndex] == rightGroup[rightIndex])
 			{
 				continue;
 			}
