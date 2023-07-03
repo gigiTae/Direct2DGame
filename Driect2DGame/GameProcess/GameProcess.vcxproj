@@ -148,9 +148,12 @@
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="PathManager.h" />
     <ClInclude Include="ReadMe.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Define.h" />
@@ -173,9 +176,12 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="PathManager.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIManager.cpp" />

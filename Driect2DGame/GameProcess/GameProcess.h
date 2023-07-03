@@ -1,17 +1,20 @@
 #pragma once
 
 
+/// 전방선언
+
 class D2DRenderer;
 class InputManager;
 class TimeManager;
 class CollisionManager;
 class SceneManager;
 class PathManager;
+class ResourceManager;
 class UIManager;
 
 /// <summary>
 ///  게임진행을 담당하는 클래스이다
-/// 
+///  모든 매니져들을 관리한다.
 /// 
 /// </summary>
 class GameProcess
@@ -43,12 +46,15 @@ private:
 	// 랜더러
 	D2DRenderer* m_d2DRenderer;
 
+	Vector2 m_screenSize; 
+
 	// 매니져 
 	SceneManager* m_sceneManager;
 	InputManager* m_inputManager;
 	TimeManager* m_timeManager;
 	CollisionManager* m_collisionManager;
 	PathManager* m_pathManager;
+	ResourceManager* m_resourceManager;
 	UIManager* m_UIManager;
 };
 

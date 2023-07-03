@@ -9,7 +9,7 @@ const Vector2 Vector2::Zero{ 0.f,0.f };
 
 
 std::string Vector2::ToString() const
-{
+{              
 	char result[64];
 	std::snprintf(result, sizeof(result), "(%.3f, %.3f)", x, y);
 	return result;
@@ -67,4 +67,3 @@ float Vector2::PointToLineSegment ( const Vector2& point ,const Vector2& line1 ,
 
 	return 0.0f;
 }
-

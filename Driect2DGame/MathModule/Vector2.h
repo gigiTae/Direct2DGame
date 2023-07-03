@@ -60,7 +60,8 @@ public:
 	// 선분과 점사이의 최단경로를 반환
 	static float PointToLineSegment ( const Vector2& point , const Vector2& line1 ,const  Vector2& line2 );
 
-	Vector2 ToScreenPoint(const D2D1_SIZE_F& _screenSize);
+	/// y좌표 부호 변환
+	inline Vector2 ToScreenPoint();
 
 	// 정적멤버변수
 	static const Vector2 UnitX;
@@ -73,7 +74,7 @@ public:
 
 inline D2D1_POINT_2F Vector2::ToPoint2F()
 {
-	D2D1_POINT_2F point;
+	D2D1_POINT_2F point{};
 	point.x = x;
 	point.y = y;
 	return point;
@@ -92,14 +93,11 @@ inline Vector2 Vector2::RotateRadian(const Vector2& _point, const Vector2& _cent
 	return rotated;
 }
 
-
-
-inline Vector2 Vector2::ToScreenPoint(const D2D1_SIZE_F& _screenSize)
+inline Vector2 Vector2::ToScreenPoint ( )
 {
-	float witdh = x + _screenSize.width * 0.5f;
-	float height = -y + _screenSize.height * 0.5f;
-	return Vector2(witdh, height);
+	return Vector2 ( x , -y );
 }
+
 
 inline constexpr Vector2::Vector2(int _x, int _y)
 	:x((float)_x)

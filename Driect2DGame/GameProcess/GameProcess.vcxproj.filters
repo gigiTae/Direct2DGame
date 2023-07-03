@@ -69,7 +69,16 @@
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
     <ClInclude Include="BoxRender.h">
-      <Filter>GameProcess\03.Component\UserScripts\Render</Filter>
+      <Filter>GameProcess\03.Component\UserScripts\BoxRender</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>GameProcess\04.Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>GameProcess\06.Rsource</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameProcess\06.Rsource\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +136,6 @@
     <Filter Include="GameProcess\05.Scene\MainScene">
       <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\06.Prefab">
-      <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\04.Manager\UIManager">
       <UniqueIdentifier>{51c7efd8-d59f-483d-b087-423dd369d8f3}</UniqueIdentifier>
     </Filter>
@@ -145,7 +151,19 @@
     <Filter Include="GameProcess\03.Component\UserScripts\Movement">
       <UniqueIdentifier>{0087a112-0433-446a-998f-37d30e27ed82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Component\UserScripts\Render">
+    <Filter Include="GameProcess\04.Manager\ResourceManager">
+      <UniqueIdentifier>{39c9403e-6102-4deb-96f3-0190eef1a32e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\06.Rsource">
+      <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\06.Rsource\Texture">
+      <UniqueIdentifier>{94e23632-ae67-4c57-936c-1abf38d57f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\Animator">
+      <UniqueIdentifier>{07f911db-c510-4562-8792-b11a9806651c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\UserScripts\BoxRender">
       <UniqueIdentifier>{83c46ca2-a10c-4b88-b044-cde43e044e23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -211,7 +229,16 @@
       <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
     </ClCompile>
     <ClCompile Include="BoxRender.cpp">
-      <Filter>GameProcess\03.Component\UserScripts\Render</Filter>
+      <Filter>GameProcess\03.Component\UserScripts\BoxRender</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>GameProcess\04.Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>GameProcess\06.Rsource</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameProcess\06.Rsource\Texture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

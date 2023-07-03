@@ -58,6 +58,9 @@ void D2DEngine::Finalize()
 {
 	m_gameProcess->Finalize();
 	m_d2DRenderer->Finalize();
+
+	delete m_gameProcess;
+	delete m_d2DRenderer;
 }
 
 void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)

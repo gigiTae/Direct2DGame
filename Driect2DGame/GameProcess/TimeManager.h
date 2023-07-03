@@ -7,7 +7,7 @@ public:
 	TimeManager();
 	~TimeManager();
 
-	void Initalize();
+	void Initalize(const Vector2& _screenSize);
 
 	// deltaTime을 반환해준다
 	double Update();
@@ -18,6 +18,8 @@ private:
 	LARGE_INTEGER m_curentCount;
 	LARGE_INTEGER m_prevCount;
 	LARGE_INTEGER m_frequency;
+
+	Vector2 m_screenSize;
 
 	double m_deltaTime;
 	double m_elapsedTime;

@@ -37,11 +37,16 @@ public:
 	/// 쓰기 관련 함수
 	void DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);
 
-	// 비트맵 로드
-	void LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap);
+	//void DrawBitMap()
+
+	/// 비트맵 로드
+	bool LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap);
 
 private:
-	// 랜더타겟을 만드는 함수
+	HRESULT LoadBitmapFromFile(PCWSTR _filePath, UINT _destinationWidth, UINT _destinationHeight, ID2D1Bitmap** _bitmap);
+
+private:
+	/// 랜더타겟을 만드는 함수
 	HRESULT CreateDeviceResources();
 	void DiscardDeviceResources();
 
@@ -56,7 +61,7 @@ private:
 	ID2D1HwndRenderTarget* m_renderTarget;
 	
 	// 비트맵
-
+	IWICImagingFactory* m_imagingFactorty;
 
 	// 쓰기 전용 
 	IDWriteFactory* m_writeFactory;

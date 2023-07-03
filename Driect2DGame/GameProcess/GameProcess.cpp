@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "UIManager.h"
 #include "PathManager.h"
+#include "ResourceManager.h"
 
 GameProcess::GameProcess()
 	:m_collisionManager(nullptr)
@@ -20,6 +21,7 @@ GameProcess::GameProcess()
 	,m_elapsedTime(0.f)
 	,m_gameRunnig(false)
 	,m_showDebug(false)
+	,m_screenSize{}
 {
 }
 
@@ -33,6 +35,12 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_d2DRenderer = _d2DRenderer;
 	m_hWnd = _main;
 
+	RECT rc{};
+	// 창 클라이언트 영역 좌표
+	GetClientRect(m_hWnd, &rc);
+
+	m_screenSize = Vector2(static_cast<float>(rc.right - rc.left), static_cast<float>(rc.bottom - rc.top));
+
 	// 매니저 메모리 공간 할당
 	m_timeManager = new TimeManager();
 	m_inputManager = new InputManager();
@@ -40,11 +48,13 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_sceneManager = new SceneManager();
 	m_pathManager = new PathManager();
 	m_UIManager = new UIManager();
+	m_resourceManager = new ResourceManager();
 
 	// 매니저 초기화
 	m_pathManager->Initalize();
-	m_timeManager->Initalize();
+	m_timeManager->Initalize(m_screenSize);
 	m_inputManager->Initalize(m_hWnd);
+	m_resourceManager->Initalize(_d2DRenderer);
 	m_sceneManager->Initalize(m_inputManager,m_collisionManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_UIManager->Initalize(m_sceneManager);

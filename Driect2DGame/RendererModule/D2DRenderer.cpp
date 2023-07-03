@@ -21,6 +21,8 @@ D2DRenderer::~D2DRenderer()
 
 void D2DRenderer::Initalize(HWND _hwnd)
 {
+	HRESULT _hResult = CoInitialize(NULL);
+
 	// 메인 윈도우 핸들 연결
 	m_hwnd = _hwnd;
 
@@ -34,9 +36,21 @@ void D2DRenderer::Initalize(HWND _hwnd)
 	hr = CreateDeviceResources();
 	assert(hr == S_OK);
 
+	/// WIC팩토리 생성
 	if (SUCCEEDED(hr))
 	{
-		// 쓰기전용 팩토리 생성?
+		hr = CoCreateInstance(
+			CLSID_WICImagingFactory,
+			NULL,
+			CLSCTX_INPROC_SERVER,
+			IID_IWICImagingFactory,
+			reinterpret_cast<void**>(&m_imagingFactorty)
+		);
+	}
+
+	// 쓰기전용 팩토리 생성
+	if (SUCCEEDED(hr))
+	{
 		hr = DWriteCreateFactory(
 			DWRITE_FACTORY_TYPE_SHARED
 			, __uuidof(m_writeFactory)
@@ -69,15 +83,14 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	m_renderTargetSize = m_renderTarget->GetSize();
 
-	/// 스크린 변환 행렬을 생성한다 원점을 스크린 중심으로 옮기고 화면을 거꾸로 뒤집는 행렬
+	/// 원점을 윈도우 중앙좌표로 이동하는 행렬
 	Vector2 translation{m_renderTargetSize.width * 0.5f, m_renderTargetSize.height * 0.5f };
 
 	Matrix3x2F transformMatrix = Matrix3x2F::Translation(translation.x, translation.y);
-	/// 기저벡터 e2(0,1)-> e1(0,-1) 로 변환 
-	Matrix3x2F flipMatrix{ 1.f,0.f,0.f,-1.f,0.f,0.f };
-	
+
 	/// 최종 변환 행렬 
-	m_screenTrasformMatrix = flipMatrix * transformMatrix;
+
+	m_screenTrasformMatrix = transformMatrix;
 }
 
 void D2DRenderer::BeginRender()
@@ -132,14 +145,14 @@ void D2DRenderer::Finalize()
 
 void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 {
-	Vector2 point = _point.ToScreenPoint(m_renderTargetSize);
+	//Vector2 point = _point.ToScreenPoint();
 
-	float angle = FMath::Rad2Deg(_radian);
+	//float angle = FMath::Rad2Deg(_radian);
 
-	// 행렬변환
-	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, point.ToPoint2F());
-	
-	m_renderTarget->SetTransform(matrix);
+	//// 행렬변환
+	//D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, point.ToPoint2F());
+	//
+	//m_renderTarget->SetTransform(matrix);
 }
 
 void D2DRenderer::DrawBitMap()
@@ -150,8 +163,11 @@ void D2DRenderer::DrawBitMap()
 
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
-	D2D1_POINT_2F start = _point1.ToPoint2F();
-	D2D1_POINT_2F end = _point2.ToPoint2F();
+	Vector2 point1 = _point1.ToScreenPoint();
+	Vector2 point2 = _point2.ToScreenPoint();
+
+	D2D1_POINT_2F start = point1.ToPoint2F();
+	D2D1_POINT_2F end = point2.ToPoint2F();
 
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
@@ -163,8 +179,10 @@ void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 {
+	Vector2 point = _point.ToScreenPoint();
+
 	D2D1_ELLIPSE region{};
-	region.point = _point.ToPoint2F();
+	region.point = point.ToPoint2F();
 	region.radiusX = _scale.x * 0.5f;
 	region.radiusY = _scale.y * 0.5f;
 
@@ -178,8 +196,10 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 {
+	Vector2 point = _point.ToScreenPoint();
+
 	D2D1_ELLIPSE region{};
-	region.point = _point.ToPoint2F();
+	region.point = point.ToPoint2F();
 	region.radiusX = _radius;
 	region.radiusY = _radius;
 
@@ -193,11 +213,14 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 
 void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color,float _rotation)
 {
+	Vector2 leftTop = _leftTop.ToScreenPoint();
+	Vector2 rightBottom = _rightBottom.ToScreenPoint();
+
 	D2D1_RECT_F rt{};
-	rt.left = _leftTop.x;
-	rt.top = _leftTop.y;
-	rt.right = _rightBottom.x;
-	rt.bottom = _rightBottom.y;
+	rt.left = leftTop.x;
+	rt.top = leftTop.y;
+	rt.right = rightBottom.x;
+	rt.bottom = rightBottom.y;
 	 
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
@@ -210,8 +233,11 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom
 	, COLORREF _color /*= D2D1::ColorF::White*/)
 {
+	Vector2 leftTop = _leftTop.ToScreenPoint();
+	Vector2 rightBottom = _rightBottom.ToScreenPoint();
+
 	// 글자 출력범위
-	D2D1_RECT_F rect = D2D1::RectF(_leftTop.x, _leftTop.y, _rightBottom.x, _rightBottom.y);
+	D2D1_RECT_F rect = D2D1::RectF(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
 
 	// 브러쉬 생성
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(_color), &m_tempBrush);
@@ -221,13 +247,114 @@ void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 
 
 }
 
-void D2DRenderer::LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap)
+bool D2DRenderer::LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap)
 {
-//	HRESULT hr;
-
-	//hr = LoadBitmapFromFile
 
 
+
+	return true;
+}
+
+HRESULT D2DRenderer::LoadBitmapFromFile(PCWSTR _filePath
+	, UINT _destinationWidth, UINT _destinationHeight, ID2D1Bitmap** _bitmap)
+{
+	HRESULT hr = S_OK;
+
+	IWICBitmapDecoder* decoder = NULL;
+	IWICBitmapFrameDecode* source = NULL;
+	IWICStream* stream = NULL;
+	IWICFormatConverter* converter = NULL;
+	IWICBitmapScaler* scaler = NULL;
+
+	hr = m_imagingFactorty->CreateDecoderFromFilename(
+		_filePath, NULL, GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);
+
+	if (SUCCEEDED(hr))
+	{
+		// Create the initial frame.
+		hr = decoder->GetFrame(0, &source);
+	}
+
+	if (SUCCEEDED(hr))
+	{
+		// Convert the image format to 32bppPBGRA
+		// (DXGI_FORMAT_B8G8R8A8_UNORM + D2D1_ALPHA_MODE_PREMULTIPLIED).
+		hr = m_imagingFactorty->CreateFormatConverter(&converter);
+	}
+
+	if (SUCCEEDED(hr))
+	{
+		// If a new width or height was specified, create an
+		// IWICBitmapScaler and use it to resize the image.
+		if (_destinationWidth != 0 || _destinationHeight != 0)
+		{
+			UINT originalWidth, originalHeight;
+			hr = source->GetSize(&originalWidth, &originalHeight);
+			if (SUCCEEDED(hr))
+			{
+				if (_destinationWidth == 0)
+				{
+					FLOAT scalar = static_cast<FLOAT>(_destinationHeight) / static_cast<FLOAT>(originalHeight);
+					_destinationWidth = static_cast<UINT>(scalar * static_cast<FLOAT>(originalWidth));
+				}
+				else if (_destinationHeight == 0)
+				{
+					FLOAT scalar = static_cast<FLOAT>(_destinationWidth) / static_cast<FLOAT>(originalWidth);
+					_destinationHeight = static_cast<UINT>(scalar * static_cast<FLOAT>(originalHeight));
+				}
+
+				hr = m_imagingFactorty->CreateBitmapScaler(&scaler);
+				if (SUCCEEDED(hr))
+				{
+					hr = scaler->Initialize(
+						source,
+						_destinationWidth,
+						_destinationHeight,
+						WICBitmapInterpolationModeCubic
+					);
+				}
+				if (SUCCEEDED(hr))
+				{
+					hr = converter->Initialize(
+						scaler,
+						GUID_WICPixelFormat32bppPBGRA,
+						WICBitmapDitherTypeNone,
+						NULL,
+						0.f,
+						WICBitmapPaletteTypeMedianCut
+					);
+				}
+			}
+		}
+		else // Don't scale the image.
+		{
+			hr = converter->Initialize(
+				source,
+				GUID_WICPixelFormat32bppPBGRA,
+				WICBitmapDitherTypeNone,
+				NULL,
+				0.f,
+				WICBitmapPaletteTypeMedianCut
+			);
+		}
+	}
+	if (SUCCEEDED(hr))
+	{
+		// Create a Direct2D bitmap from the WIC bitmap.
+		hr = m_renderTarget->CreateBitmapFromWicBitmap(
+			converter,
+			NULL,
+			_bitmap
+		);
+	}
+
+	SafeRelease(&decoder);
+	SafeRelease(&source);
+	SafeRelease(&stream);
+	SafeRelease(&converter);
+	SafeRelease(&scaler);
+
+	return hr;
 }
 
 HRESULT D2DRenderer::CreateDeviceResources()
