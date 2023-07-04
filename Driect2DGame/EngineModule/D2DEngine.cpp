@@ -67,7 +67,7 @@ void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 {
 	constexpr wchar_t title[] = L"Drive of the Dead";
 
-	WNDCLASS wndclass;
+	WNDCLASS wndclass{};
 	wndclass.style = CS_HREDRAW | CS_VREDRAW;
 	wndclass.lpfnWndProc = WndProc;
 	wndclass.cbClsExtra = 0;

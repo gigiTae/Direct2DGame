@@ -284,7 +284,8 @@ void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _righ
 			continue;
 		}
 
-		for (size_t rightIndex = 0; rightIndex < rightGroup.size(); ++rightIndex)
+		// 같은 타입의 경우에는 중복으로 충돌체크를 하지않기 위해서 조건을 설정
+		for (size_t rightIndex = (_left ==_right) ? leftIndex : 0; rightIndex < rightGroup.size(); ++rightIndex)
 		{
 			BoxCollider* rightBoxCollider = rightGroup[rightIndex]->GetComponent<BoxCollider>();
 			CircleCollider* rightCircleCollidr = rightGroup[rightIndex]->GetComponent<CircleCollider>();

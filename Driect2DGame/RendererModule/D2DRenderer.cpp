@@ -1,7 +1,7 @@
-
 #include "RendererPCH.h"
 #include "D2DRenderer.h"
 #include "macro.h"
+#include "D2DTexture.h"
 
 D2DRenderer::D2DRenderer()
 	:m_hwnd(nullptr)
@@ -130,10 +130,21 @@ void D2DRenderer::EndRender()
 	}
 }
 
+
 void D2DRenderer::Finalize()
 {
+	/// 리소스 메모리 해제
+	for (auto iter = m_textures.begin(); iter != m_textures.end(); ++iter)
+	{
+		if (iter->second != nullptr)
+		{
+			delete iter->second;
+		}
+	}
+
 	SafeRelease(&m_writeFactory);
 	SafeRelease(&m_textFormat);
+	SafeRelease(&m_imagingFactorty);
 	SafeRelease(&m_renderTarget);
 	SafeRelease(&m_factory);
 	
@@ -145,21 +156,17 @@ void D2DRenderer::Finalize()
 
 void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 {
-	//Vector2 point = _point.ToScreenPoint();
+	/// radian이 증가할수록 반시계방향으로 회전한다
+	float angle = -FMath::Rad2Deg(_radian);
 
-	//float angle = FMath::Rad2Deg(_radian);
+	// 행렬변환
+	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, _point.ToPoint2F());
+	
+	matrix = matrix * m_screenTrasformMatrix;
 
-	//// 행렬변환
-	//D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, point.ToPoint2F());
-	//
-	//m_renderTarget->SetTransform(matrix);
+	m_renderTarget->SetTransform(matrix);
 }
 
-void D2DRenderer::DrawBitMap()
-{
-	//m_renderTarget->DrawBitmap()
-
-}
 
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
@@ -225,7 +232,12 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
+	Vector2 middle((rightBottom.x + leftTop.x) * 0.5f, (leftTop.y + rightBottom.y) * 0.5f);
+	SetTransform(_rotation, middle);
+
 	m_renderTarget->DrawRectangle(rt, m_tempBrush, 2.f);
+
+	SetTransform();
 
 	SafeRelease(&m_tempBrush);
 }
@@ -247,12 +259,58 @@ void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 
 
 }
 
-bool D2DRenderer::LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap)
+D2DTexture* D2DRenderer::LoadBitMap(const wstring& _key, const wchar_t* _filePath)
 {
+	HRESULT hr = S_OK;
 
+	auto iter = m_textures.find(_key);
+	if (iter != m_textures.end())
+	{
+		return iter->second;
+	}
 
+	ID2D1Bitmap* bitmap = nullptr;
 
-	return true;
+	hr = LoadBitmapFromFile(_filePath, 0, 0, &bitmap);
+
+	/// 비트맵 로드에 성공
+	if (!SUCCEEDED(hr))
+	{
+		return nullptr;
+	}
+
+	/// D2D 텍스처 생성
+	D2DTexture* texture = new D2DTexture();
+	texture->SetBitMap(bitmap);
+	texture->SetFilePath(_filePath);
+	texture->SetKey(_key);
+
+	m_textures.insert(std::make_pair(_key, texture));
+
+	return texture;
+}
+
+void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position, float _rotation /*= 0.f*/, float _alpha /*= 1.f*/)
+{
+	auto iter = m_textures.find(_key);
+
+	assert(iter != m_textures.end() || !L"텍스처 파일이 로드되지 않았습니다");
+
+	D2DTexture* texture = iter->second;
+	Vector2 position = _position.ToScreenPoint();
+	Vector2 halfSize = texture->GetSize() * 0.5f;
+
+	D2D1_RECT_F rect{};
+	rect.left = position.x - halfSize.x;
+	rect.right = position.x + halfSize.x;
+	rect.top = position.y + halfSize.y;
+	rect.bottom = position.y - halfSize.y;
+
+	SetTransform(_rotation, _position);
+
+	m_renderTarget->DrawBitmap(texture->GetBitmap(), rect, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
+
+	SetTransform();
 }
 
 HRESULT D2DRenderer::LoadBitmapFromFile(PCWSTR _filePath
@@ -265,6 +323,8 @@ HRESULT D2DRenderer::LoadBitmapFromFile(PCWSTR _filePath
 	IWICStream* stream = NULL;
 	IWICFormatConverter* converter = NULL;
 	IWICBitmapScaler* scaler = NULL;
+
+	assert(m_imagingFactorty);
 
 	hr = m_imagingFactorty->CreateDecoderFromFilename(
 		_filePath, NULL, GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);

@@ -4,17 +4,18 @@
 /// <summary>
 /// =디버그용도=
 /// 오브젝트 네이밍을 해주는 전역 클래스
+/// 싱글톤 패턴 사용
 /// </summary>
-class NameGenerator
+class NamingManager
 {
 public:
-	static NameGenerator* GetInstance();
+	static NamingManager* GetInstance();
 private:
-	static NameGenerator* m_instance;
+	static NamingManager* m_instance;
 
 private:
-	NameGenerator() = default;
-	~NameGenerator();
+	NamingManager() = default;
+	~NamingManager();
 public:
 	const string GenerateName(const string& _name);
 

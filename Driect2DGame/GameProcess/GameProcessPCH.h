@@ -8,6 +8,7 @@
 #include <iostream>
 
 // 헤더 포함
+#include <wincodec.h>
 #include <d2d1.h>
 //  구현이있는 라이브러리 포함
 #pragma comment(lib, "d2d1.lib")

@@ -9,7 +9,6 @@ class TimeManager;
 class CollisionManager;
 class SceneManager;
 class PathManager;
-class ResourceManager;
 class UIManager;
 
 /// <summary>
@@ -54,7 +53,6 @@ private:
 	TimeManager* m_timeManager;
 	CollisionManager* m_collisionManager;
 	PathManager* m_pathManager;
-	ResourceManager* m_resourceManager;
 	UIManager* m_UIManager;
 };
 

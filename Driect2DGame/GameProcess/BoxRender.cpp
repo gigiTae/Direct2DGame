@@ -25,5 +25,5 @@ void BoxRender::Render(D2DRenderer* _d2DRenderer)
 	Vector2 rightBottom{ position.x + scale.x * 0.5f, position.y - scale.y * 0.5f };
 
 	float radian = transform->GetRotation();
-	_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::LightBlue);
+	_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::LightBlue, radian);
 }

@@ -69,11 +69,6 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 
 	Vector2 postion = GetComponent<Transform>()->GetPosition();
 
-	if (m_isRotatable)
-	{
-		_d2DRenderer->SetTransform(-m_rotation, postion);
-	}
-
 	// 충돌상황에 따라서 랜더링
 	if (m_currentCollision == 0)
 	{ 
@@ -83,7 +78,5 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	{
 		_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::Red);
 	}
-
-	_d2DRenderer->SetTransform(0.f, Vector2::Zero);
 }
 

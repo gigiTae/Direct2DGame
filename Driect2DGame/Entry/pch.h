@@ -11,6 +11,8 @@
 #include "framework.h"
 #include <windows.h>
 #include <d2d1.h>
+#include <wincodec.h>
+
 #pragma comment(lib, "d2d1.lib")
 #include <assert.h>
 

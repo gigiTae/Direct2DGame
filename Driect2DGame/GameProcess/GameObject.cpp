@@ -4,11 +4,11 @@
 #include "BoxCollider.h"
 #include "CircleCollider.h"
 #include "RigidBody.h"
-#include "NameGenerator.h"
+#include "NamingManager.h"
 #include "MonoBehaviour.h"
 
 GameObject::GameObject(const string& _name)
-	:m_name(NameGenerator::GetInstance()->GenerateName(_name))
+	:m_name(NamingManager::GetInstance()->GenerateName(_name))
 	,m_state(OBJECT_STATE::ALIVE)
 	,m_destoryTime(0.f)
 {}

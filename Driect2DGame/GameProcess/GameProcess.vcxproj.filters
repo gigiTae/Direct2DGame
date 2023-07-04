@@ -37,9 +37,6 @@
     <ClInclude Include="Collider.h">
       <Filter>GameProcess\03.Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="NameGenerator.h">
-      <Filter>GameProcess\01.Define\Debug</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>GameProcess\03.Component\RigidBody</Filter>
     </ClInclude>
@@ -69,16 +66,16 @@
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
     <ClInclude Include="BoxRender.h">
-      <Filter>GameProcess\03.Component\UserScripts\BoxRender</Filter>
+      <Filter>GameProcess\03.Component\RendererComponent\BoxRender</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>GameProcess\04.Manager\ResourceManager</Filter>
+    <ClInclude Include="FileManager.h">
+      <Filter>GameProcess\04.Manager\FileManager</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>GameProcess\06.Rsource</Filter>
+    <ClInclude Include="NamingManager.h">
+      <Filter>GameProcess\04.Manager\NamingManager</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>GameProcess\06.Rsource\Texture</Filter>
+    <ClInclude Include="TextureRenderer.h">
+      <Filter>GameProcess\03.Component\RendererComponent\TextureRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,25 +142,25 @@
     <Filter Include="GameProcess\01.Define\GameWorld">
       <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\01.Define\Debug">
-      <UniqueIdentifier>{bacb7fa6-4ad0-4137-93a5-3891a1346715}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\03.Component\UserScripts\Movement">
       <UniqueIdentifier>{0087a112-0433-446a-998f-37d30e27ed82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\ResourceManager">
-      <UniqueIdentifier>{39c9403e-6102-4deb-96f3-0190eef1a32e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\06.Rsource">
-      <UniqueIdentifier>{c357e87c-a98d-4aa7-bd4f-4558a536d13c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\06.Rsource\Texture">
-      <UniqueIdentifier>{94e23632-ae67-4c57-936c-1abf38d57f3f}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\03.Component\Animator">
       <UniqueIdentifier>{07f911db-c510-4562-8792-b11a9806651c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Component\UserScripts\BoxRender">
+    <Filter Include="GameProcess\04.Manager\FileManager">
+      <UniqueIdentifier>{ac5b2feb-0562-4e36-b57a-12255b91cc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\04.Manager\NamingManager">
+      <UniqueIdentifier>{b17557d3-8854-4522-bcab-ee40b865ac3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\RendererComponent">
+      <UniqueIdentifier>{06a8e95b-9714-4ccd-b1c9-082f4d23e540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\RendererComponent\TextureRenderer">
+      <UniqueIdentifier>{5fecc3ea-62d9-4788-ba15-c84bfc82df13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\RendererComponent\BoxRender">
       <UniqueIdentifier>{83c46ca2-a10c-4b88-b044-cde43e044e23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -201,9 +198,6 @@
     <ClCompile Include="Collider.cpp">
       <Filter>GameProcess\03.Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="NameGenerator.cpp">
-      <Filter>GameProcess\01.Define\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>GameProcess\03.Component\RigidBody</Filter>
     </ClCompile>
@@ -229,16 +223,16 @@
       <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
     </ClCompile>
     <ClCompile Include="BoxRender.cpp">
-      <Filter>GameProcess\03.Component\UserScripts\BoxRender</Filter>
+      <Filter>GameProcess\03.Component\RendererComponent\BoxRender</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>GameProcess\04.Manager\ResourceManager</Filter>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>GameProcess\04.Manager\FileManager</Filter>
     </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>GameProcess\06.Rsource</Filter>
+    <ClCompile Include="NamingManager.cpp">
+      <Filter>GameProcess\04.Manager\NamingManager</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>GameProcess\06.Rsource\Texture</Filter>
+    <ClCompile Include="TextureRenderer.cpp">
+      <Filter>GameProcess\03.Component\RendererComponent\TextureRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,23 +1,23 @@
 #include "GameProcessPCH.h"
-#include "NameGenerator.h"
+#include "NamingManager.h"
 
 // 정적멤버 변수 초기화 
-NameGenerator* NameGenerator::m_instance = nullptr;
+NamingManager* NamingManager::m_instance = nullptr;
 
-NameGenerator* NameGenerator::GetInstance()
+NamingManager* NamingManager::GetInstance()
 {
 	if (m_instance == nullptr)
 	{
-		m_instance = new NameGenerator();
+		m_instance = new NamingManager();
 	}
 	return m_instance;
 }
 
-NameGenerator::~NameGenerator()
+NamingManager::~NamingManager()
 {
 }
 
-const string NameGenerator::GenerateName(const string& _name)
+const string NamingManager::GenerateName(const string& _name)
 {
 	auto iter = m_nameInfo.find(_name);
 

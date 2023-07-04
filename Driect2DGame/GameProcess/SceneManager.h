@@ -14,7 +14,7 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void Initalize(InputManager* _inputManager, CollisionManager* _collisionManager);
+	void Initalize(D2DRenderer* _d2DRenderer,InputManager* _inputManager, CollisionManager* _collisionManager);
 	void Finalize();
 	
 	/// 이벤트 관련
@@ -29,6 +29,8 @@ public:
 	void ChangeScene(SCENE_TYPE _nextScene);
 
 private:
+	D2DRenderer* m_d2DRenderer;
+
 	// 모든 씬들을 관리
 	Scene* m_sceneList[static_cast<int>(SCENE_TYPE::END)];
 	Scene* m_currentScene;

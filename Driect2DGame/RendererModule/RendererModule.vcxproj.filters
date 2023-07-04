@@ -4,18 +4,45 @@
     <Filter Include="D2DRenderer">
       <UniqueIdentifier>{2955b94d-f1df-4b00-acd1-254d73a2de3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{f2e19852-6ab1-4078-bea8-286fb6193ac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D2DResource">
+      <UniqueIdentifier>{0c06a8ac-9221-406a-b950-c1938cd1bc4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D2DResource\D2DTexture">
+      <UniqueIdentifier>{69d5bea9-fb17-4b3c-b6da-edce8ca51e21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D2DRenderer.h">
       <Filter>D2DRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="macro.h" />
-    <ClInclude Include="RendererHeader.h" />
-    <ClInclude Include="RendererPCH.h" />
+    <ClInclude Include="D2DResource.h">
+      <Filter>D2DResource</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererPCH.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererHeader.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="macro.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DTexture.h">
+      <Filter>D2DResource\D2DTexture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>D2DRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DResource.cpp">
+      <Filter>D2DResource</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DTexture.cpp">
+      <Filter>D2DResource\D2DTexture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

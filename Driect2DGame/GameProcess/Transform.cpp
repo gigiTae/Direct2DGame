@@ -84,7 +84,12 @@ void Transform::DebugRender(D2DRenderer* _d2DRenderer)
 	Vector2 pos = GetPosition();
 	float rotation = GetRotation();
 
-	wstring info = L"\nX:" + std::to_wstring(static_cast<int>(pos.x))
+	string nameA = GetGameObject()->GetName();
+	wstring nameW;
+
+	nameW.assign(nameA.begin(), nameA.end());
+
+	wstring info = nameW + L"\nX:" + std::to_wstring(static_cast<int>(pos.x))
 		+ L"\nY:" + std::to_wstring(static_cast<int>(pos.y))
 		+ L"\nAngle:" + std::to_wstring(static_cast<int>(FMath::Rad2Deg(rotation)));
 

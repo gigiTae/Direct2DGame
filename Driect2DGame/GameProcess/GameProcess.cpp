@@ -7,7 +7,6 @@
 #include "SceneManager.h"
 #include "UIManager.h"
 #include "PathManager.h"
-#include "ResourceManager.h"
 
 GameProcess::GameProcess()
 	:m_collisionManager(nullptr)
@@ -48,16 +47,14 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_sceneManager = new SceneManager();
 	m_pathManager = new PathManager();
 	m_UIManager = new UIManager();
-	m_resourceManager = new ResourceManager();
 
 	// 매니저 초기화
 	m_pathManager->Initalize();
 	m_timeManager->Initalize(m_screenSize);
 	m_inputManager->Initalize(m_hWnd);
-	m_resourceManager->Initalize(_d2DRenderer);
-	m_sceneManager->Initalize(m_inputManager,m_collisionManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_UIManager->Initalize(m_sceneManager);
+	m_sceneManager->Initalize(_d2DRenderer,m_inputManager, m_collisionManager);
 
 	// 게임 루프 활성화
 	m_gameRunnig = true;
@@ -79,13 +76,14 @@ void GameProcess::Process()
 	{
 		m_elapsedTime -= FIXED_DELTA_TIME;
 		m_sceneManager->FixedUpdate(FIXED_DELTA_TIME);
-		//  ======== 충돌처리 ============
-		m_collisionManager->Update();
 	}
 
 	// ========== 게임오브젝트 업데이트 ==============
 	m_sceneManager->Update(deltaTime);
 	m_sceneManager->LateUpdate(deltaTime);
+	
+	//  ======== 충돌처리 ============================
+	m_collisionManager->Update();
 	
 	// ============= UI 이벤트 ====================== 
 	m_UIManager->Update();

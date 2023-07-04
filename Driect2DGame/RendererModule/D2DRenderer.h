@@ -1,5 +1,7 @@
 #pragma once
 
+class D2DTexture;
+
 /// <summary>
 /// D2D랜더링을 담당한다
 /// 
@@ -11,15 +13,20 @@ public:
 	~D2DRenderer();
 
 	void Initalize(HWND _hwnd);
+	void Finalize();
+
 	void BeginRender();
 	void EndRender();
-	
-	void Finalize();
-	void SetTransform(float _radian = 0.f, Vector2 _point = Vector2::Zero);
+
+private:
+	void SetTransform(float _radian, Vector2 _point);
+
+	/// 기본 행렬로 변환
+	void SetTransform() { m_renderTarget->SetTransform(m_screenTrasformMatrix); }
 
 public:
 	/// 그리기 관련 함수들
-	void DrawBitMap();
+
 	// 직선을 그리는 함수
 	void DrawLine(Vector2 _point1, Vector2 _point2
 		, COLORREF = D2D1::ColorF::White);
@@ -36,11 +43,6 @@ public:
 
 	/// 쓰기 관련 함수
 	void DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);
-
-	//void DrawBitMap()
-
-	/// 비트맵 로드
-	bool LoadBitMap(const wchar_t* _filePath, ID2D1Bitmap* _bitmap);
 
 private:
 	HRESULT LoadBitmapFromFile(PCWSTR _filePath, UINT _destinationWidth, UINT _destinationHeight, ID2D1Bitmap** _bitmap);
@@ -60,9 +62,6 @@ private:
 	ID2D1Factory* m_factory;
 	ID2D1HwndRenderTarget* m_renderTarget;
 	
-	// 비트맵
-	IWICImagingFactory* m_imagingFactorty;
-
 	// 쓰기 전용 
 	IDWriteFactory* m_writeFactory;
 	IDWriteTextFormat* m_textFormat;
@@ -74,5 +73,18 @@ private:
 	// 디바이스 종속적인 자원들이 준비되었는가?
 	HRESULT m_IsD2DResReady;
 	D2D1_SIZE_F m_renderTargetSize;
+
+private:
+	/// 비트맵 관련 
+	IWICImagingFactory* m_imagingFactorty;
+
+	/// 텍스처를 저장하는 공간
+	map<wstring, D2DTexture*> m_textures; 
+
+public:
+	/// 비트맵 로드
+	D2DTexture* LoadBitMap(const wstring& _key, const wchar_t* _filePath);
+
+	void DrawBitMap(const wstring& _key, Vector2 _position, float _rotation = 0.f, float _alpha = 1.f);
 };
 
