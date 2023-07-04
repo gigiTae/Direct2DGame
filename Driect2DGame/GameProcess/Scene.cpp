@@ -146,7 +146,7 @@ void Scene::LoadSceneResources(const wstring& _sceneName)
 	parentFilePath += L"\\Resource\\" + _sceneName;
 
 	FileManager::GetFileMemberPath(filesPath, parentFilePath, false);
-	FileManager::GerFileMemberName(fileName, parentFilePath, false);
+	FileManager::GetFileMemberName(fileName, parentFilePath, false);
 
 	assert(filesPath.size() == fileName.size()); 
 

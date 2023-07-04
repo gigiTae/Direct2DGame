@@ -85,6 +85,12 @@ public:
 	/// 비트맵 로드
 	D2DTexture* LoadBitMap(const wstring& _key, const wchar_t* _filePath);
 
-	void DrawBitMap(const wstring& _key, Vector2 _position, float _rotation = 0.f, float _alpha = 1.f);
+	void DrawBitMap(const wstring& _key, Vector2 _position
+		, float _rotation = 0.f, float _alpha = 1.f);
+	
+	// 텍스처를 잘라서 랜더링
+	void DrawBitMap(const wstring& _key, Vector2 _position
+		, Vector2 _textureLeftTop, Vector2 _sliceSize
+		, float _rotation = 0.f, float _alpha = 1.f);
 };
 

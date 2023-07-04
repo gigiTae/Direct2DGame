@@ -32,7 +32,7 @@ void FileManager::GetFileMemberPath(vector<wstring>& _files, const wstring& _fil
 	}
 }
 
-void FileManager::GerFileMemberName(vector<wstring>& _files, const wstring& _filePath, bool _allDirectories)
+void FileManager::GetFileMemberName(vector<wstring>& _files, const wstring& _filePath, bool _allDirectories)
 {
 	wstring tmp = _filePath + wstring(L"\\*.*");
 	WIN32_FIND_DATA fd;

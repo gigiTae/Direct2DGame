@@ -20,3 +20,4 @@ Vector2 Geometry::GetSupportingPoint ( const Vector2& _direct , const std::vecto
 
 	return bestVertex;
 }
+ 

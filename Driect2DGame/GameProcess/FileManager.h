@@ -22,6 +22,6 @@ namespace FileManager
 	/// <param name="_files"></param>
 	/// <param name="_filePath"></param>
 	/// <param name="_allDirectories"></param>
-	void GerFileMemberName(vector<wstring>& _files, const wstring& _filePath, bool _allDirectories);
+	void GetFileMemberName(vector<wstring>& _files, const wstring& _filePath, bool _allDirectories);
 };
 

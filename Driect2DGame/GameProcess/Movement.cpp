@@ -41,7 +41,18 @@ void Movement::Update(float _deltaTime, InputManager* _inputManager)
 	{
 		transform->AddRotation(m_speed * _deltaTime*0.01f);
 	}
-
+	if (_inputManager->IsKeyState(KEY::A, KEY_STATE::HOLD))
+	{
+		float offset = transform->GetRotationOffset();
+		offset += 0.0001f;
+		transform->SetOffset(offset);
+	}
+	if (_inputManager->IsKeyState(KEY::S, KEY_STATE::HOLD))
+	{
+		float offset = transform->GetRotationOffset();
+		offset -= 0.0001f;
+		transform->SetOffset(offset);
+	}
 	direct = direct.GetNormalize() * m_speed * _deltaTime;
 	transform->AddPosition(direct);
 

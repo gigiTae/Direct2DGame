@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "Movement.h"
 #include "BoxRender.h"
+#include "Animator.h"
 #include "TextureRenderer.h"
 
 MainScene::MainScene()
@@ -20,8 +21,10 @@ MainScene::~MainScene()
 
 void MainScene::Enter()
 {
+	/// 리소스 로드
 	LoadSceneResources(L"MainScene");
 
+	/// 플레이어 오브젝트 추가 
 	GameObject* player = new GameObject("player");
 	player->CreateComponent<Transform>();
 	Transform* transform = player->GetComponent<Transform>();
@@ -30,26 +33,27 @@ void MainScene::Enter()
 	transform->SetScale(Vector2(50.f, 100.f));
 	player->CreateComponent<Movement>();
 	player->CreateComponent<BoxRender>();
-	player->CreateComponent<CircleCollider>()->SetRadius(10.f);
-	player->GetComponent<CircleCollider>()->SetOffset(Vector2(0.f, 100.f));
-	player->CreateComponent<TextureRenderer>()->SetKey(L"car");
+	player->CreateComponent<CircleCollider>()->SetRadius(50.f);
+	Animator* playerAnimator = player->CreateComponent<Animator>();
+	playerAnimator->CreateAnimation(L"bossWalk", L"boss", Vector2::Zero, Vector2(225.f, 225.f), Vector2(225.f, 0.f), 0.1f, 4);
+	playerAnimator->Play(L"bossWalk", true);
+
+	GameObject* tmp = player;
+	for (int i = 0; i < 10; ++i)
+	{
+		GameObject* car = new GameObject("car");
+		car->CreateComponent<Transform>();
+		Transform* transform1 = car->GetComponent<Transform>();
+		transform1->SetOffset(Vector2(-60.f, -10.f));
+		transform1->SetOffset(0.5f);
+		car->CreateComponent<CircleCollider>()->SetRadius(50.f);
+		car->CreateComponent<TextureRenderer>()->SetKey(L"car");
+		car->CreateComponent<Movement>();
+		tmp->AddChild(car);
+		tmp = car;
+	}
 
 	AddObject(player, OBJECT_TYPE::PLAYER);
-
-
-	GameObject* player1 = new GameObject("player");
-	player1->CreateComponent<Transform>();
-	Transform* transform1 = player1->GetComponent<Transform>();
-	transform1->SetPosition(Vector2(0.f, 0.f));
-	transform1->SetRotation(0.f);
-	transform1->SetScale(Vector2(100.f, 100.f));
-	player1->CreateComponent<BoxRender>();
-	player1->CreateComponent<CircleCollider>()->SetRadius(10.f);
-	player1->GetComponent<CircleCollider>()->SetOffset(Vector2(0.f, 100.f));
-
-	AddObject(player1, OBJECT_TYPE::PLAYER);
-	player1->Destory(15.f);
-
 
 	GetCollisionManager()->CheckCollisionObjectType(OBJECT_TYPE::PLAYER, OBJECT_TYPE::PLAYER);
 }

@@ -77,6 +77,12 @@
     <ClInclude Include="TextureRenderer.h">
       <Filter>GameProcess\03.Component\RendererComponent\TextureRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>GameProcess\03.Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>GameProcess\03.Component\Animator\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameProcess">
@@ -163,6 +169,9 @@
     <Filter Include="GameProcess\03.Component\RendererComponent\BoxRender">
       <UniqueIdentifier>{83c46ca2-a10c-4b88-b044-cde43e044e23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProcess\03.Component\Animator\Animation">
+      <UniqueIdentifier>{83077952-d581-4522-b7e3-168017f72d55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -233,6 +242,12 @@
     </ClCompile>
     <ClCompile Include="TextureRenderer.cpp">
       <Filter>GameProcess\03.Component\RendererComponent\TextureRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>GameProcess\03.Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>GameProcess\03.Component\Animator\Animation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -290,7 +290,8 @@ D2DTexture* D2DRenderer::LoadBitMap(const wstring& _key, const wchar_t* _filePat
 	return texture;
 }
 
-void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position, float _rotation /*= 0.f*/, float _alpha /*= 1.f*/)
+void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position
+	, float _rotation /*= 0.f*/, float _alpha /*= 1.f*/)
 {
 	auto iter = m_textures.find(_key);
 
@@ -306,11 +307,51 @@ void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position, float _rota
 	rect.top = position.y + halfSize.y;
 	rect.bottom = position.y - halfSize.y;
 
-	SetTransform(_rotation, _position);
+	if (_rotation != 0.f)
+		SetTransform(_rotation, position);
 
-	m_renderTarget->DrawBitmap(texture->GetBitmap(), rect, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
+	m_renderTarget->DrawBitmap(texture->GetBitmap(), rect
+		, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
 
-	SetTransform();
+	if (_rotation != 0.f)
+		SetTransform();
+}
+
+void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position
+	, Vector2 _textureLeftTop, Vector2 _sliceSize
+	, float _rotation /*= 0.f*/, float _alpha /*= 1.f*/)
+{
+	// texture 불러오기 
+	auto iter = m_textures.find(_key);
+	assert(iter != m_textures.end() || !L"텍스처 파일이 로드되지 않았습니다");
+	D2DTexture* texture = iter->second;
+
+	// 스크린 좌표계로 변환 
+	Vector2 position = _position.ToScreenPoint();
+	Vector2 halfSize = _sliceSize * 0.5f;
+
+	// 화면에 출력하는 용도
+	D2D1_RECT_F screen{};
+	screen.left = position.x - halfSize.x;
+	screen.right = position.x + halfSize.x;
+	screen.top = position.y + halfSize.y;
+	screen.bottom = position.y - halfSize.y;
+
+	// 비트맵을 자르는 용도
+	D2D1_RECT_F textureRect{};
+	textureRect.left = _textureLeftTop.x;
+	textureRect.top = _textureLeftTop.y;
+	textureRect.right = _textureLeftTop.x + _sliceSize.x;
+	textureRect.bottom = _textureLeftTop.y + _sliceSize.y;
+
+	if (_rotation != 0.f)
+		SetTransform(_rotation, position);
+
+	m_renderTarget->DrawBitmap(texture->GetBitmap(), screen
+		, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, textureRect);
+
+	if (_rotation != 0.f)
+		SetTransform();
 }
 
 HRESULT D2DRenderer::LoadBitmapFromFile(PCWSTR _filePath
