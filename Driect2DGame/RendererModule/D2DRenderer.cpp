@@ -2,6 +2,7 @@
 #include "D2DRenderer.h"
 #include "macro.h"
 #include "D2DTexture.h"
+#include "D2DCamera.h"
 
 D2DRenderer::D2DRenderer()
 	:m_hwnd(nullptr)
@@ -10,7 +11,8 @@ D2DRenderer::D2DRenderer()
 	,m_IsD2DResReady(S_FALSE)
 	,m_renderTargetSize{}
 	,m_tempBrush(nullptr)
-	,m_screenTrasformMatrix{}
+	,m_screenMatrix{}
+	,m_camera(nullptr)
 {
 }
 
@@ -85,12 +87,14 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	/// 원점을 윈도우 중앙좌표로 이동하는 행렬
 	Vector2 translation{m_renderTargetSize.width * 0.5f, m_renderTargetSize.height * 0.5f };
-
 	Matrix3x2F transformMatrix = Matrix3x2F::Translation(translation.x, translation.y);
 
-	/// 최종 변환 행렬 
+	/// 스크린 행렬 
+	m_screenMatrix = transformMatrix;
 
-	m_screenTrasformMatrix = transformMatrix;
+	/// 카메라 생성
+	m_camera = new D2DCamera();
+	m_camera->ResetCamera();
 }
 
 void D2DRenderer::BeginRender()
@@ -105,12 +109,15 @@ void D2DRenderer::BeginRender()
 
 		m_renderTarget->BeginDraw();
 
-		m_renderTarget->SetTransform(m_screenTrasformMatrix);
+		/// 최종 행렬 계산
+		
+		D2D1_MATRIX_3X2_F cameraMatix = m_camera->GetCameraMatrix();
+		m_finalMatrix = cameraMatix * m_screenMatrix;
+
+		m_renderTarget->SetTransform(m_finalMatrix);
 
 		m_renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 	}
-
-
 }
 
 void D2DRenderer::EndRender()
@@ -148,6 +155,9 @@ void D2DRenderer::Finalize()
 	SafeRelease(&m_renderTarget);
 	SafeRelease(&m_factory);
 	
+	// 카메라 해제
+	if (m_camera != nullptr)
+		delete m_camera;
 
 	//현재 스레드에서 COM 라이브러리를 닫고, 스레드에 의해 로드된 모든 DLL을 언로드하고
 	//, 스레드가 유지 관리하는 다른 모든 리소스를 해제하고, 스레드의 모든 RPC 연결을 강제로 닫습니다.
@@ -162,7 +172,7 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 	// 행렬변환
 	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, _point.ToPoint2F());
 	
-	matrix = matrix * m_screenTrasformMatrix;
+	matrix = matrix * m_finalMatrix;
 
 	m_renderTarget->SetTransform(matrix);
 }

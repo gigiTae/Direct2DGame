@@ -18,7 +18,11 @@ InputManager::InputManager()
 
 	VK_LBUTTON, // LBTN
 	VK_RBUTTON, // RBTN
-
+	
+	VK_F1, // F1
+	VK_F2, // F2
+	VK_F3, // F3
+	VK_F4, // F4
 	VK_F5, // F5
 	}
 	, m_keyInfo{}

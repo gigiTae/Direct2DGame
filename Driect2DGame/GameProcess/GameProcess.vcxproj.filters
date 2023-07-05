@@ -88,9 +88,6 @@
     <Filter Include="GameProcess">
       <UniqueIdentifier>{2af1f3ec-85ef-42e7-acd0-bf7532839980}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\02.GameObject">
-      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\03.Component">
       <UniqueIdentifier>{41a77953-21b6-4692-9e59-8c1c78138e77}</UniqueIdentifier>
     </Filter>
@@ -171,6 +168,9 @@
     </Filter>
     <Filter Include="GameProcess\03.Component\Animator\Animation">
       <UniqueIdentifier>{83077952-d581-4522-b7e3-168017f72d55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\02.GameObject">
+      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 
 class D2DTexture;
+class D2DCamera;
 
 /// <summary>
 /// D2D랜더링을 담당한다
@@ -20,9 +21,8 @@ public:
 
 private:
 	void SetTransform(float _radian, Vector2 _point);
-
-	/// 기본 행렬로 변환
-	void SetTransform() { m_renderTarget->SetTransform(m_screenTrasformMatrix); }
+	// 기본 행렬로 변환
+	void SetTransform() { m_renderTarget->SetTransform(m_finalMatrix); }
 
 public:
 	/// 그리기 관련 함수들
@@ -42,10 +42,27 @@ public:
 		, COLORREF color = D2D1::ColorF::White, float _rotation = 0.f);
 
 	/// 쓰기 관련 함수
-	void DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);
+	void DrawTextW(const std::wstring& _str, Vector2 _leftTop
+		, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);
+
+public:
+	/// 비트맵 로드
+	D2DTexture* LoadBitMap(const wstring& _key, const wchar_t* _filePath);
+
+	void DrawBitMap(const wstring& _key, Vector2 _position
+		, float _rotation = 0.f, float _alpha = 1.f);
+
+	// 텍스처를 잘라서 랜더링
+	void DrawBitMap(const wstring& _key, Vector2 _position
+		, Vector2 _textureLeftTop, Vector2 _sliceSize
+		, float _rotation = 0.f, float _alpha = 1.f);
+	
+	/// 카메라 관련
+	D2DCamera* GetCamera()const { return m_camera; }
 
 private:
-	HRESULT LoadBitmapFromFile(PCWSTR _filePath, UINT _destinationWidth, UINT _destinationHeight, ID2D1Bitmap** _bitmap);
+	HRESULT LoadBitmapFromFile(PCWSTR _filePath
+		, UINT _destinationWidth, UINT _destinationHeight, ID2D1Bitmap** _bitmap);
 
 private:
 	/// 랜더타겟을 만드는 함수
@@ -54,9 +71,9 @@ private:
 
 	//HRESULT LoadBitmapFromFile()
 private:
-	D2D1_MATRIX_3X2_F m_screenTrasformMatrix; // 스크린 좌표계로 변환하는 행렬
+	D2D1_MATRIX_3X2_F m_screenMatrix; // 스크린 좌표계로 변환하는 행렬
+	D2D1_MATRIX_3X2_F m_finalMatrix;
 
-private: 
 	// 메인 윈도우 핸들
 	HWND m_hwnd;
 	ID2D1Factory* m_factory;
@@ -81,16 +98,7 @@ private:
 	/// 텍스처를 저장하는 공간
 	map<wstring, D2DTexture*> m_textures; 
 
-public:
-	/// 비트맵 로드
-	D2DTexture* LoadBitMap(const wstring& _key, const wchar_t* _filePath);
-
-	void DrawBitMap(const wstring& _key, Vector2 _position
-		, float _rotation = 0.f, float _alpha = 1.f);
-	
-	// 텍스처를 잘라서 랜더링
-	void DrawBitMap(const wstring& _key, Vector2 _position
-		, Vector2 _textureLeftTop, Vector2 _sliceSize
-		, float _rotation = 0.f, float _alpha = 1.f);
+	/// 카메라 관련
+	D2DCamera* m_camera;
 };
 

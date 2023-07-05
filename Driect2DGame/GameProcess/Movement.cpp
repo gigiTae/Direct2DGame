@@ -53,6 +53,7 @@ void Movement::Update(float _deltaTime, InputManager* _inputManager)
 		offset -= 0.0001f;
 		transform->SetOffset(offset);
 	}
+
 	direct = direct.GetNormalize() * m_speed * _deltaTime;
 	transform->AddPosition(direct);
 

@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="D2DCamera.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="D2DResource.h" />
     <ClInclude Include="D2DTexture.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="RendererPCH.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D2DCamera.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="D2DResource.cpp" />
     <ClCompile Include="D2DTexture.cpp" />

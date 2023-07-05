@@ -13,6 +13,9 @@
     <Filter Include="D2DResource\D2DTexture">
       <UniqueIdentifier>{69d5bea9-fb17-4b3c-b6da-edce8ca51e21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D2DCamera">
+      <UniqueIdentifier>{56a7fe67-8d6d-4626-9524-b20db3183d03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D2DRenderer.h">
@@ -33,6 +36,9 @@
     <ClInclude Include="D2DTexture.h">
       <Filter>D2DResource\D2DTexture</Filter>
     </ClInclude>
+    <ClInclude Include="D2DCamera.h">
+      <Filter>D2DCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2DRenderer.cpp">
@@ -43,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="D2DTexture.cpp">
       <Filter>D2DResource\D2DTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DCamera.cpp">
+      <Filter>D2DCamera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

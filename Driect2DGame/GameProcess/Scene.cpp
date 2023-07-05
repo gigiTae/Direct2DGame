@@ -38,7 +38,6 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 {
 	assert(_d2DRenderer);
 
-
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
 		for (auto iter : m_objectVector[i])
