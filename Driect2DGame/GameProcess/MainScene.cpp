@@ -35,7 +35,7 @@ void MainScene::Enter()
 	player->CreateComponent<BoxRender>();
 	player->CreateComponent<CircleCollider>()->SetRadius(50.f);
 	Animator* playerAnimator = player->CreateComponent<Animator>();
-	playerAnimator->CreateAnimation(L"bossWalk", L"boss", Vector2::Zero, Vector2(225.f, 225.f), Vector2(225.f, 0.f), 0.1f, 4);
+	playerAnimator->CreateAnimation(L"bossWalk", L"scol", Vector2::Zero, Vector2(96.f, 96.f), Vector2(96.f, 0.f), 0.1f, 3);
 	playerAnimator->Play(L"bossWalk", true);
 
 	GameObject* tmp = player;
@@ -44,7 +44,7 @@ void MainScene::Enter()
 		GameObject* car = new GameObject("car");
 		car->CreateComponent<Transform>();
 		Transform* transform1 = car->GetComponent<Transform>();
-		transform1->SetOffset(Vector2(-60.f, -10.f));
+		transform1->SetOffset(Vector2(0.f, 50.f));
 		transform1->SetOffset(0.5f);
 		car->CreateComponent<CircleCollider>()->SetRadius(50.f);
 		car->CreateComponent<TextureRenderer>()->SetKey(L"car");

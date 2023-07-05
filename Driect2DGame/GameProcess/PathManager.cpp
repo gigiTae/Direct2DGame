@@ -25,7 +25,6 @@ void PathManager::Initalize()
 			break;
 		}
 	}
-
 }
 
 const wchar_t* PathManager::GetRelativPath()

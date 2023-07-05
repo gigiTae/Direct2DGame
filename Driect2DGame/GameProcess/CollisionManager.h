@@ -10,7 +10,6 @@ class SceneManager;
 class GameObject;
 
 
-
 // 충돌정보 
 struct Collision
 {
@@ -53,7 +52,7 @@ public:
 
 	// 오브젝트 타입과 타입간의 충돌설정을 한다.
 	void CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right);
-
+	
 private:
 
 	// 충돌체간의 ID를 조합해서 ID에 해당하는 이터레이터를 반환

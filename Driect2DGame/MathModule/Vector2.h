@@ -68,8 +68,6 @@ public:
 	static const Vector2 UnitY;
 	static const Vector2 One;
 	static const Vector2 Zero;
-
-
 };
 
 inline D2D1_POINT_2F Vector2::ToPoint2F()

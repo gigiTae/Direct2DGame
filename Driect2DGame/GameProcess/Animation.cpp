@@ -72,6 +72,6 @@ void Animation::Create(const wstring& _name, const wstring& _textureKey, Vector2
 		frame.slice = _sliceSize;
 		frame.leftTop = _leftTop + _step * static_cast<float>(i);
 
-		m_frames.push_back(frame);
+		m_frames.push_back(std::move(frame));
 	}
 }

@@ -17,6 +17,10 @@ BoxCollider::BoxCollider()
 {
 }
 
+BoxCollider::~BoxCollider()
+{
+}
+
 void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager)
 {
 	++m_currentCollision;
@@ -36,12 +40,6 @@ void BoxCollider::OnCollisionExit(const Collision& _collision, const InputManage
 void BoxCollider::OnCollisionStay(const Collision& _collision, const InputManager* _inputManager)
 {
 	GetGameObject()->OnCollisionStay(_collision, _inputManager);
-}
-
-
-
-BoxCollider::~BoxCollider()
-{
 }
 
 void BoxCollider::LateUpdate(float _deltaTime, InputManager* _inputManager)
