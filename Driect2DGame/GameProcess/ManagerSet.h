@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Manager.h"
+
 // 전방선언
 class D2DRenderer;
 class InputManager;
@@ -45,28 +47,32 @@ private:
 template <typename T>
 const T* ManagerSet::GetManager() const
 {
-	const char* name = typeid(T).name();
+	string name = typeid(T).name();
 
-	switch (name)
+	if (name == "class InputManager")
 	{
-	case "class TimeManager":
-		return m_timeManager;
-	
-	case "class SceneManager":
-		return m_sceneManager;
-
-	case "class UIManager":
-		return m_UIManager;
-		
-	case "class InputManager":
-		return m_inputManager;
-
-	case "class CollisionManager":
-		return m_collisionManager;
-	default:
-		break;
+		return  reinterpret_cast<T*>(m_inputManager);
 	}
-
+	else if (name == "class TimeManager")
+	{
+		return reinterpret_cast<T*>(m_timeManager);
+	}
+	else if (name == "class SceneManager")
+	{
+		return reinterpret_cast<T*>(m_sceneManager);
+	}
+	else if (name == "class UIManager")
+	{
+		return  reinterpret_cast<T*>(m_UIManager);
+	} 
+	else if (name == "class CollisionManager")
+	{
+		return reinterpret_cast<T*>(m_collisionManager);
+	}
+	else if (name == "class PathManager")
+	{
+		return  reinterpret_cast<T*>(m_pathManager);
+	}
 	return nullptr;
 }
 

@@ -1,20 +1,23 @@
 #pragma once
 
+#include "Manager.h"
+
 class Scene;
 class InputManager;
 class CollisionManager;
+class ManagerSet;
 /// <summary>
 /// 씬을 관리해주는 매니져 
-/// 조금씩 크기가 커질거같음?
 ///   
 /// </summary>
-class SceneManager
+class SceneManager : public Manager
 {
 public:
 	SceneManager();
 	~SceneManager();
 
-	void Initalize(D2DRenderer* _d2DRenderer, InputManager* _inputManager, CollisionManager* _collisionManager);
+
+	void Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet);
 	void Finalize();
 
 	/// 이벤트 관련
@@ -32,6 +35,8 @@ public:
 
 private:
 	D2DRenderer* m_d2DRenderer;
+	ManagerSet* m_managerSet;
+
 	bool m_gameRun; 
 
 	// 모든 씬들을 관리

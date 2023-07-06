@@ -9,6 +9,7 @@ SceneManager::SceneManager()
 	,m_d2DRenderer(nullptr)
 	,m_sceneList{}
 	,m_gameRun(false)
+	,m_managerSet(nullptr)
 {
 }
 
@@ -16,16 +17,17 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::Initalize(D2DRenderer* _d2DRenderer, InputManager* _inputManager, CollisionManager* _collisionManager)
+void SceneManager::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet)
 {
 	m_gameRun = true;
 	m_d2DRenderer = _d2DRenderer;
+	m_managerSet = _managerSet;
 
 	// 씬 메모리 공간할당
 	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)] = new MainScene();
 
 	// 씬 명시적 초기화
-	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_d2DRenderer,this, _inputManager, _collisionManager);
+	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_d2DRenderer,m_managerSet);
 
 	// 현재씬을 지정한다
 	m_currentScene = m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)];

@@ -47,7 +47,7 @@ void Transform::AddRotation(float _radian)
 	}
 }
 
-void Transform::LateUpdate(float _deltaTime, const InputManager* _inputManager)
+void Transform::LateUpdate(float _deltaTime)
 {
 	// 최상단의 부모만 자식들의 움직임을 관리하는 구조이다.
 	if (m_parent != nullptr || m_children.empty())

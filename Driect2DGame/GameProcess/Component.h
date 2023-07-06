@@ -15,9 +15,9 @@ public:
 
 public:
 	/// 기본적인 이벤트 함수
-	virtual void FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager) {};
-	virtual void Update(float _deltaTime, const InputManager* _inputManager) {};
-	virtual void LateUpdate(float _deltaTime, const InputManager* _inputManager) {};
+	virtual void FixedUpdate(float _fixedDeltaTime) {};
+	virtual void Update(float _deltaTime) {};
+	virtual void LateUpdate(float _deltaTime) {};
 
 	/// 컴포넌트 랜러링 관련 함수 
 	virtual void PreRender(D2DRenderer* _d2DRenderer) {};
@@ -31,18 +31,22 @@ public:
 	const string& GetName() { return m_name; }
 	CALL_ORDER GetCallOrder() { return m_callOrder; }
 
-private:
-	/// 컴포넌트 호출 순서
-	const CALL_ORDER m_callOrder;
-	/// 컴포넌트 클래스명
-	const string m_name;
-	GameObject* m_gameObject;
 public:
 	template <typename T>
 	T* CreateComponent();
 
 	template <typename T>
 	T* GetComponent();
+
+	template <typename T>
+	const T* GetManager() const;
+
+private:
+	/// 컴포넌트 호출 순서
+	const CALL_ORDER m_callOrder;
+	/// 컴포넌트 클래스명
+	const string m_name;
+	GameObject* m_gameObject;
 };
 
  
@@ -65,4 +69,10 @@ T* Component::GetComponent()
 	}
 
 	return nullptr;
+}
+
+template <typename T>
+const T* Component::GetManager() const
+{
+	return m_gameObject->template GetManager<T>();
 }

@@ -30,7 +30,7 @@ public:
     // 애니메이션 재생
     void Play(const wstring& _name, bool _repeat);
 
-    void LateUpdate(float _deltaTime, const InputManager* _inputManager) override;
+    void LateUpdate(float _deltaTime) override;
     void Render(D2DRenderer* _d2DRenderer) override;
 
 private:

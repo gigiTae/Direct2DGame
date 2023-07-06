@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Manager.h"
 
 /// <summary>
 /// 파일 경로를 받아오는 매니져 
@@ -9,7 +10,7 @@
 /// 
 /// 다시보니 너무 쓸데없는거 같다 
 /// </summary>
-class PathManager
+class PathManager : public Manager
 {
 public:
 	PathManager();

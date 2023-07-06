@@ -16,7 +16,7 @@ public:
 
 public:
 	/// 이벤트 관련
-	void LateUpdate(float _deltaTime, const InputManager* _inputManager) override;
+	void LateUpdate(float _deltaTime) override;
 	void DebugRender(D2DRenderer* _d2DRenderer) override;
 
 	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) override;

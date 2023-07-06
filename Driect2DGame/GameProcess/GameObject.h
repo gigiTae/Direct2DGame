@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "ManagerSet.h"
 
 // 전방선언
 class Transform;
@@ -22,7 +23,7 @@ class GameObject
 
 public:
 	/// 생성자 단계에서 오브젝트의 이름을 결정
-	GameObject(const string& _name);
+	GameObject(const string& _name, const ManagerSet* _managerSet);
 	virtual ~GameObject();
 
 public:
@@ -40,11 +41,6 @@ public:
 	// 몇초후 삭제예정인지 반환
 	float GetDestroyTime() { return m_destoryTime; }
 
-private:
-	OBJECT_STATE m_state;
-	float m_destoryTime;
-	const string m_name;
-
 public:
 	void DestroyAllComponent();
 
@@ -53,9 +49,9 @@ public:
 	void Finalize();
 
 	/// 이벤트 함수 
-	void FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager);
-	void Update(float _deltaTime, const InputManager* _inputManager);
-	void LateUpdate(float _deltaTime, const InputManager* _inputManager);
+	void FixedUpdate(float _fixedDeltaTime);
+	void Update(float _deltaTime);
+	void LateUpdate(float _deltaTime);
 	void PreRender(D2DRenderer* _d2DRenderer);
 	void Render(D2DRenderer* _d2DRenderer);
 	void PostRender(D2DRenderer* _d2DRenderer);
@@ -86,19 +82,38 @@ public:
 	GameObject* GetParent();
 	void SetParent(GameObject* _parent);
 
-private:
-	/// 컴포넌트 관련 함수 
+public: 
+	/// 매니져 관련함수
+	template <typename T>
+	const T* GetManager() const;
 
-	/// Component을 호출순서대로 정렬해서 보관
-	std::multimap<int, Component*> m_components; 
 
 public:
+	/// 컴포넌트 관련 함수 
 	template <typename T>
 	T* CreateComponent();
 
 	template <typename T>
 	T* GetComponent();
+
+private:
+	/// Component을 호출순서대로 정렬해서 보관
+	std::multimap<int, Component*> m_components; 
+
+private:
+	OBJECT_STATE m_state;
+	float m_destoryTime;
+	const string m_name;
+
+	// 매니져 포인터 집합
+	const ManagerSet* m_managerSet;
 };
+
+template <typename T>
+const T* GameObject::GetManager() const
+{
+	return m_managerSet->template GetManager<T>();
+}
 
 // 여기 한번더 감싸서 Component의 메모리 관리를 게임오브젝트가 하면 편리하지 않을까?? real루다가
 // 그래서 컴포너트의 생성이 실패하면 메모리에 추가하지 않는거지!
@@ -143,7 +158,6 @@ T* GameObject::GetComponent()
 			return component;
 		}
 	}
-
 	return nullptr;
 }
 

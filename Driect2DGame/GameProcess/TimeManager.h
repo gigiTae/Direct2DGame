@@ -1,7 +1,8 @@
 #pragma once
+#include "Manager.h"
 
 // deltaTime을 계산해주는 클래스
-class TimeManager
+class TimeManager : public Manager
 {
 public:
 	TimeManager();

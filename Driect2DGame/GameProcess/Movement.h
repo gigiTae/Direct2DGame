@@ -7,7 +7,7 @@ public:
     Movement();
     ~Movement();
 
-    void Update(float _deltaTime, const InputManager* _inputManager) override;
+    void Update(float _deltaTime) override;
 
 private:
     float m_speed; // ¼Óµµ

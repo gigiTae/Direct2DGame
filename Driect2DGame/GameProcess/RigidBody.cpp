@@ -20,7 +20,7 @@ RigidBody::RigidBody()
 RigidBody::~RigidBody()
 {}
 
-void RigidBody::LateUpdate(float _deltaTime, const InputManager* _inputManager)
+void RigidBody::LateUpdate(float _deltaTime)
 {
 	if (m_transform == nullptr)
 	{

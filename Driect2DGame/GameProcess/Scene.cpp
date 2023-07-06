@@ -5,10 +5,8 @@
 #include "FileManager.h"
 
 Scene::Scene()
-	:m_inputManager(nullptr)
-	,m_sceneManager(nullptr)
-	,m_d2DRenderer(nullptr)
-	,m_collisionManager(nullptr)
+	:m_d2DRenderer(nullptr)
+	,m_managerSet(nullptr)
 	,m_objectVector{}
 	,m_loadResources(false)
 {
@@ -18,12 +16,11 @@ Scene::~Scene()
 {
 }
 
-void Scene::Initalize(D2DRenderer* _d2DRenderer, SceneManager* _sceneManager, InputManager* _inputManager, CollisionManager* _collisionManager)
+
+void Scene::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet)
 {
+	m_managerSet = _managerSet;
 	m_d2DRenderer = _d2DRenderer;
-	m_sceneManager = _sceneManager;
-	m_inputManager = _inputManager;
-	m_collisionManager = _collisionManager;
 }
 
 void Scene::Finalize()
@@ -175,13 +172,12 @@ void Scene::LoadSceneResources(const wstring& _sceneName)
 
 void Scene::FixedUpdate(float _fixedDeltaTime)
 {
-	assert(m_inputManager);
 
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->FixedUpdate(_fixedDeltaTime, m_inputManager);
+			iter->FixedUpdate(_fixedDeltaTime);
 		}
 	}
 
@@ -197,26 +193,22 @@ void Scene::FixedUpdate(float _fixedDeltaTime)
 
 void Scene::Update(float _deltaTime)
 {
-	assert(m_inputManager);
-
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->Update(_deltaTime,m_inputManager);
+			iter->Update(_deltaTime);
 		}
 	}
 }
 
 void Scene::LateUpdate(float _deltaTime)
 {
-	assert(m_inputManager);
-
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->LateUpdate(_deltaTime,m_inputManager);
+			iter->LateUpdate(_deltaTime);
 		}
 	}
 }

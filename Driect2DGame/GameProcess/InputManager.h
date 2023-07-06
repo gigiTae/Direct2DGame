@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Manager.h"
+
 enum class KEY_STATE
 {
 	TAP, // 막 누른 시점
@@ -37,7 +39,7 @@ struct KeyInfo
 /// 관리하고 출력한다.
 /// 
 /// </summary>
-class InputManager
+class InputManager : public Manager
 {
 public:
 	InputManager();

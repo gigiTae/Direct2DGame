@@ -7,12 +7,15 @@
 #include "NamingManager.h"
 #include "MonoBehaviour.h"
 #include "InputManager.h"
+#include "ManagerSet.h"
 
-GameObject::GameObject(const string& _name)
+GameObject::GameObject(const string& _name, const ManagerSet* _managerSet)
 	:m_name(NamingManager::GetInstance()->GenerateName(_name))
-	,m_state(OBJECT_STATE::ALIVE)
-	,m_destoryTime(0.f)
-{}
+	, m_state(OBJECT_STATE::ALIVE)
+	, m_managerSet(_managerSet)
+	, m_destoryTime(0.f)
+{
+}
 
 GameObject::~GameObject()
 {}
@@ -152,25 +155,25 @@ void GameObject::SetParent(GameObject* _parent)
 }
 
 
-void GameObject::FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager)
+void GameObject::FixedUpdate(float _fixedDeltaTime)
 {
 	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
-			iter.second->FixedUpdate(_fixedDeltaTime, _inputManager);
+			iter.second->FixedUpdate(_fixedDeltaTime);
 		}
 	}
 }
 
-void GameObject::Update(float _deltaTime, const InputManager* _inputManager)
+void GameObject::Update(float _deltaTime)
 {
 	/// 컴포넌트를 순회하면서 정렬된 순서에 따라서 Update를 호출한다.
 	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
-			iter.second->Update(_deltaTime, _inputManager);
+			iter.second->Update(_deltaTime);
 		}
 	}
 
@@ -185,13 +188,13 @@ void GameObject::Update(float _deltaTime, const InputManager* _inputManager)
 	}
 }
 
-void GameObject::LateUpdate(float _deltaTime, const InputManager* _inputManager)
+void GameObject::LateUpdate(float _deltaTime)
 {
 	for (auto& iter : m_components)
 	{
 		if (iter.second != nullptr)
 		{
-			iter.second->LateUpdate(_deltaTime, _inputManager);
+			iter.second->LateUpdate(_deltaTime);
 		}
 	}
 }

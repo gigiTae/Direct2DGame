@@ -57,7 +57,7 @@ void Animator::Play(const wstring& _name, bool _repeat)
 	m_repeat = _repeat;
 }
 
-void Animator::LateUpdate(float _deltaTime, const InputManager* _inputManager)
+void Animator::LateUpdate(float _deltaTime)
 {
 	if (nullptr != m_currentAnimation)
 	{

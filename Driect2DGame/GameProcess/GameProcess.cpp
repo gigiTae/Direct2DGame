@@ -50,18 +50,20 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_pathManager = new PathManager();
 	m_UIManager = new UIManager();
 
+	// 매니져 집합 클래스
+	m_managerSet = new ManagerSet();
+
+	// 매니져들 연결
+	m_managerSet->Initalize(m_pathManager, m_inputManager
+		, m_timeManager, m_sceneManager, m_UIManager, m_collisionManager);
+
 	// 매니저 초기화
 	m_pathManager->Initalize();
 	m_timeManager->Initalize(m_screenSize);
 	m_inputManager->Initalize(m_hWnd);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_UIManager->Initalize(m_sceneManager);
-	m_sceneManager->Initalize(_d2DRenderer,m_inputManager, m_collisionManager);
-
-	// 매니져 셋 초기화
-	m_managerSet = new ManagerSet();
-	m_managerSet->Initalize(m_pathManager, m_inputManager
-		, m_timeManager, m_sceneManager, m_UIManager, m_collisionManager);
+	m_sceneManager->Initalize(_d2DRenderer,m_managerSet);
 
 	// 게임 루프 활성화
 	m_gameRunnig = true;

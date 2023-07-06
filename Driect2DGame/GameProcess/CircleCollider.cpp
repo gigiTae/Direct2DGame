@@ -40,7 +40,7 @@ void CircleCollider::OnCollisionStay(const Collision& _collision, const InputMan
 	GetGameObject()->OnCollisionStay(_collision, _inputManager);
 }
 
-void CircleCollider::LateUpdate(float _deltaTime, const InputManager* _inputManager)
+void CircleCollider::LateUpdate(float _deltaTime)
 {
 	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();
 	m_position = ownerPosition + m_offset;

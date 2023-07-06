@@ -25,7 +25,7 @@ void MainScene::Enter()
 	LoadSceneResources(L"MainScene");
 
 	/// 플레이어 오브젝트 추가 
-	GameObject* player = new GameObject("player");
+	GameObject* player = new GameObject("player", GetManagerSet());
 	player->CreateComponent<Transform>();
 	Transform* transform = player->GetComponent<Transform>();
 	transform->SetPosition(Vector2(0.f, 0.f));
@@ -41,7 +41,7 @@ void MainScene::Enter()
 	GameObject* tmp = player;
 	for (int i = 0; i < 10; ++i)
 	{
-		GameObject* car = new GameObject("car");
+		GameObject* car = new GameObject("car",GetManagerSet());
 		car->CreateComponent<Transform>();
 		Transform* transform1 = car->GetComponent<Transform>();
 		transform1->SetOffset(Vector2(0.f, 50.f));
@@ -55,5 +55,4 @@ void MainScene::Enter()
 
 	AddObject(player, OBJECT_TYPE::PLAYER);
 
-	GetCollisionManager()->CheckCollisionObjectType(OBJECT_TYPE::PLAYER, OBJECT_TYPE::PLAYER);
 }

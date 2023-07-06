@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Manager.h"
+
 class SceneManager;
 
-class UIManager
+class UIManager : public Manager
 {
 public:
 	UIManager();
