@@ -16,7 +16,7 @@ public:
 	~Transform();
 public:
 	/// 이벤트 관련 함수
-	void LateUpdate(float _deltaTime, InputManager* _inputManager) override;
+	void LateUpdate(float _deltaTime, const InputManager* _inputManager) override;
 	void DebugRender(D2DRenderer* _d2DRenderer) override;
 
 	/// 트랜스폼 관련 

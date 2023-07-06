@@ -10,6 +10,7 @@ class NamingManager
 {
 public:
 	static NamingManager* GetInstance();
+	static void Finalize();
 private:
 	static NamingManager* m_instance;
 

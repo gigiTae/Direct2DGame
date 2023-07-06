@@ -4,12 +4,15 @@
 /// 전방선언
 
 class D2DRenderer;
+
+class ManagerSet;
 class InputManager;
 class TimeManager;
 class CollisionManager;
 class SceneManager;
 class PathManager;
 class UIManager;
+
 
 /// <summary>
 ///  게임진행을 담당하는 클래스이다
@@ -25,7 +28,7 @@ public:
 	void Initalize(D2DRenderer* _d2DRenderer, HWND _main);
 	void Process();
 	void Finalize();
-
+	 
 	bool IsGameRunning() { return m_gameRunnig; }
 	void EndGame() { m_gameRunnig = false; }
 private:
@@ -46,6 +49,9 @@ private:
 	D2DRenderer* m_d2DRenderer;
 
 	Vector2 m_screenSize; 
+
+	// 매니져 집합
+	ManagerSet* m_managerSet;
 
 	// 매니져 
 	SceneManager* m_sceneManager;

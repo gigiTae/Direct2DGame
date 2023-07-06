@@ -6,6 +6,7 @@
 #include "RigidBody.h"
 #include "NamingManager.h"
 #include "MonoBehaviour.h"
+#include "InputManager.h"
 
 GameObject::GameObject(const string& _name)
 	:m_name(NamingManager::GetInstance()->GenerateName(_name))
@@ -151,7 +152,7 @@ void GameObject::SetParent(GameObject* _parent)
 }
 
 
-void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
+void GameObject::FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager)
 {
 	for (auto& iter : m_components)
 	{
@@ -162,7 +163,7 @@ void GameObject::FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager)
 	}
 }
 
-void GameObject::Update(float _deltaTime, InputManager* _inputManager)
+void GameObject::Update(float _deltaTime, const InputManager* _inputManager)
 {
 	/// 컴포넌트를 순회하면서 정렬된 순서에 따라서 Update를 호출한다.
 	for (auto& iter : m_components)
@@ -184,7 +185,7 @@ void GameObject::Update(float _deltaTime, InputManager* _inputManager)
 	}
 }
 
-void GameObject::LateUpdate(float _deltaTime, InputManager* _inputManager)
+void GameObject::LateUpdate(float _deltaTime, const InputManager* _inputManager)
 {
 	for (auto& iter : m_components)
 	{

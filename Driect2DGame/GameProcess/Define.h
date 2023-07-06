@@ -55,5 +55,3 @@ enum class COLLIDER_TYPE
 	CIRCLE,
 	BOX,
 };
-
-

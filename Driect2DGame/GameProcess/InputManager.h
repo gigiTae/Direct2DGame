@@ -48,7 +48,7 @@ public:
 	void Finalize();
 
 	KEY_STATE GetKeyState(KEY _key)const { return m_keyInfo[static_cast<int>(_key)].state; }
-	bool IsKeyState(KEY _key, KEY_STATE _state) const;
+	bool IsKeyState(const KEY& _key, const KEY_STATE& _state) const;
 private:
 
 	// 메인 윈도우 핸들

@@ -8,6 +8,7 @@ SceneManager::SceneManager()
 	:m_currentScene(nullptr)
 	,m_d2DRenderer(nullptr)
 	,m_sceneList{}
+	,m_gameRun(false)
 {
 }
 
@@ -17,6 +18,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::Initalize(D2DRenderer* _d2DRenderer, InputManager* _inputManager, CollisionManager* _collisionManager)
 {
+	m_gameRun = true;
 	m_d2DRenderer = _d2DRenderer;
 
 	// 씬 메모리 공간할당
@@ -79,12 +81,11 @@ void SceneManager::ChangeScene(SCENE_TYPE _nextScene)
 
 	if (_nextScene == SCENE_TYPE::END)
 	{
-		
+		m_gameRun = false;
 		return;
 	}
 
 	m_currentScene = m_sceneList[static_cast<int>(_nextScene)];
-
 	m_currentScene->Enter();
 }
 

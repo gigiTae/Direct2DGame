@@ -13,6 +13,10 @@ D2DRenderer::D2DRenderer()
 	,m_tempBrush(nullptr)
 	,m_screenMatrix{}
 	,m_camera(nullptr)
+	,m_writeFactory(nullptr)
+	,m_textFormat(nullptr)
+	,m_imagingFactorty(nullptr)
+	,m_finalMatrix{}
 {
 }
 
@@ -273,6 +277,7 @@ D2DTexture* D2DRenderer::LoadBitMap(const wstring& _key, const wchar_t* _filePat
 {
 	HRESULT hr = S_OK;
 
+	// 이미 만들어둔 텍스처이면 로드하지 않는다.
 	auto iter = m_textures.find(_key);
 	if (iter != m_textures.end())
 	{
@@ -282,6 +287,8 @@ D2DTexture* D2DRenderer::LoadBitMap(const wstring& _key, const wchar_t* _filePat
 	ID2D1Bitmap* bitmap = nullptr;
 
 	hr = LoadBitmapFromFile(_filePath, 0, 0, &bitmap);
+
+	assert(bitmap || !L"비트맵 불러오기에 실패하였습니다");
 
 	/// 비트맵 로드에 성공
 	if (!SUCCEEDED(hr))

@@ -13,6 +13,9 @@
 #include <d2d1.h>
 #include <wincodec.h>
 
+// 메모릭 추적
+#include <crtdbg.h>
+
 #pragma comment(lib, "d2d1.lib")
 #include <assert.h>
 

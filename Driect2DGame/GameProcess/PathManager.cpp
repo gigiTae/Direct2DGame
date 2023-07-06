@@ -30,7 +30,7 @@ void PathManager::Initalize()
 const wchar_t* PathManager::GetRelativPath()
 {
 	assert(m_relativePath[0] != L'\0'
-	|| !L"초기화하지 않았습니다");
+	|| !L"패스매니저를 초기화하지 않았습니다");
 
 	return m_relativePath;
 }

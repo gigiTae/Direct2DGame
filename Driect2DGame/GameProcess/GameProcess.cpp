@@ -7,22 +7,24 @@
 #include "SceneManager.h"
 #include "UIManager.h"
 #include "PathManager.h"
+#include "NamingManager.h"
+#include "ManagerSet.h"
 
 GameProcess::GameProcess()
 	:m_collisionManager(nullptr)
 	, m_sceneManager(nullptr)
 	, m_inputManager(nullptr)
 	, m_timeManager(nullptr)
-	,m_pathManager(nullptr)
+	, m_pathManager(nullptr)
 	, m_d2DRenderer(nullptr)
 	, m_hWnd(nullptr)
-	,m_UIManager(nullptr)
-	,m_elapsedTime(0.f)
-	,m_gameRunnig(false)
-	,m_showDebug(false)
-	,m_screenSize{}
-{
-}
+	, m_UIManager(nullptr)
+	, m_elapsedTime(0.f)
+	, m_gameRunnig(false)
+	, m_showDebug(false)
+	, m_screenSize{}
+	, m_managerSet(nullptr)
+{}
 
 GameProcess::~GameProcess()
 {
@@ -55,6 +57,11 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_UIManager->Initalize(m_sceneManager);
 	m_sceneManager->Initalize(_d2DRenderer,m_inputManager, m_collisionManager);
+
+	// 매니져 셋 초기화
+	m_managerSet = new ManagerSet();
+	m_managerSet->Initalize(m_pathManager, m_inputManager
+		, m_timeManager, m_sceneManager, m_UIManager, m_collisionManager);
 
 	// 게임 루프 활성화
 	m_gameRunnig = true;
@@ -106,6 +113,9 @@ void GameProcess::Process()
 	// =============== 후속처리 =================
 	// ex) 오브젝트 삭제, 추가, 씬 변경
 	m_sceneManager->ProcessEvent();
+	
+	/// 게임을 종료
+	m_gameRunnig = m_sceneManager->IsGameRun();
 }
 
 void GameProcess::Finalize()
@@ -115,6 +125,8 @@ void GameProcess::Finalize()
 	m_inputManager->Finalize();
 	m_timeManager->Finalize();
 	m_UIManager->Finalize();
+	
+	NamingManager::Finalize();
 
 	// 메모리 해제
 	delete m_sceneManager;

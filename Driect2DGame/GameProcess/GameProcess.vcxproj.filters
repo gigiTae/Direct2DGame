@@ -2,252 +2,257 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="TimeManager.h">
-      <Filter>GameProcess\04.Manager\TimeManager</Filter>
+      <Filter>04.Manager\TimeManager</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>GameProcess\04.Manager\CollisionManager</Filter>
+      <Filter>04.Manager\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>GameProcess\04.Manager\InputManager</Filter>
+      <Filter>04.Manager\InputManager</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>GameProcess\04.Manager\SceneManager</Filter>
+      <Filter>04.Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>GameProcess\05.Scene</Filter>
+      <Filter>05.Scene</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>GameProcess\03.Component\Transform</Filter>
+      <Filter>03.Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
-      <Filter>GameProcess\03.Component\Collider\CircleCollider</Filter>
+      <Filter>03.Component\Physics2D\Collider\CircleCollider</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>GameProcess\03.Component\Collider\BoxColider</Filter>
+      <Filter>03.Component\Physics2D\Collider\BoxColider</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>GameProcess\02.GameObject</Filter>
+      <Filter>02.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>GameProcess\01.Define</Filter>
+      <Filter>01.Define</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
-      <Filter>GameProcess\05.Scene\MainScene</Filter>
+      <Filter>05.Scene\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>GameProcess\03.Component\Collider</Filter>
+      <Filter>03.Component\Physics2D\Collider</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
-      <Filter>GameProcess\03.Component\RigidBody</Filter>
+      <Filter>03.Component\Physics2D\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="PathManager.h">
-      <Filter>GameProcess\04.Manager\PathManager</Filter>
+      <Filter>04.Manager\PathManager</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>GameProcess\03.Component</Filter>
+      <Filter>03.Component</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
-      <Filter>GameProcess\01.Define\GameWorld</Filter>
+      <Filter>01.Define\GameWorld</Filter>
     </ClInclude>
     <ClInclude Include="MonoBehaviour.h">
-      <Filter>GameProcess\03.Component\UserScripts\MonoBehaviour</Filter>
+      <Filter>03.Component\UserScripts\MonoBehaviour</Filter>
     </ClInclude>
     <ClInclude Include="GameProcessPCH.h">
-      <Filter>GameProcess\01.Define</Filter>
+      <Filter>01.Define</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
-      <Filter>GameProcess\04.Manager\UIManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProcess.h">
-      <Filter>GameProcess</Filter>
+      <Filter>04.Manager\UIManager</Filter>
     </ClInclude>
     <ClInclude Include="Movement.h">
-      <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
+      <Filter>03.Component\UserScripts\Movement</Filter>
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
     <ClInclude Include="BoxRender.h">
-      <Filter>GameProcess\03.Component\RendererComponent\BoxRender</Filter>
+      <Filter>03.Component\Renderer\BoxRender</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
-      <Filter>GameProcess\04.Manager\FileManager</Filter>
+      <Filter>04.Manager\FileManager</Filter>
     </ClInclude>
     <ClInclude Include="NamingManager.h">
-      <Filter>GameProcess\04.Manager\NamingManager</Filter>
+      <Filter>04.Manager\NamingManager</Filter>
     </ClInclude>
     <ClInclude Include="TextureRenderer.h">
-      <Filter>GameProcess\03.Component\RendererComponent\TextureRenderer</Filter>
+      <Filter>03.Component\Renderer\TextureRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
-      <Filter>GameProcess\03.Component\Animator</Filter>
+      <Filter>03.Component\Animator</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>GameProcess\03.Component\Animator\Animation</Filter>
+      <Filter>03.Component\Animator\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProcess.h" />
+    <ClInclude Include="ManagerSet.h">
+      <Filter>04.Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="GameProcess">
-      <UniqueIdentifier>{2af1f3ec-85ef-42e7-acd0-bf7532839980}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component">
-      <UniqueIdentifier>{41a77953-21b6-4692-9e59-8c1c78138e77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Transform">
-      <UniqueIdentifier>{122f0a72-211a-4a8e-a929-0f4b2c234b59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Collider">
-      <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Collider\CircleCollider">
-      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Collider\BoxColider">
-      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\RigidBody">
-      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\UserScripts">
-      <UniqueIdentifier>{48423338-0c84-40ef-bd2b-bd26b559f3c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\UserScripts\MonoBehaviour">
-      <UniqueIdentifier>{9be08951-87a8-4b20-bf6c-dba8bac66dc7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager">
-      <UniqueIdentifier>{cce74b3c-9b80-46f1-ac05-915ac072855c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\TimeManager">
-      <UniqueIdentifier>{13218e19-062b-456c-809b-39536336000f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\InputManager">
-      <UniqueIdentifier>{971b1822-3ac0-4eb5-9f2c-1965f78e71cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\SceneManager">
-      <UniqueIdentifier>{23ef4742-1acb-4c58-a7ad-70d434bb4e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\CollisionManager">
-      <UniqueIdentifier>{163362dd-7a68-4529-87ba-f370a1a9b99f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\PathManager">
-      <UniqueIdentifier>{0e845db7-a4d9-4863-a5e6-8377ab6b19e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\05.Scene">
-      <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\05.Scene\MainScene">
-      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\UIManager">
-      <UniqueIdentifier>{51c7efd8-d59f-483d-b087-423dd369d8f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Define">
+    <Filter Include="01.Define">
       <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\01.Define\GameWorld">
+    <Filter Include="01.Define\GameWorld">
       <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Component\UserScripts\Movement">
+    <Filter Include="02.GameObject">
+      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component">
+      <UniqueIdentifier>{41a77953-21b6-4692-9e59-8c1c78138e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Transform">
+      <UniqueIdentifier>{122f0a72-211a-4a8e-a929-0f4b2c234b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\UserScripts">
+      <UniqueIdentifier>{48423338-0c84-40ef-bd2b-bd26b559f3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\UserScripts\MonoBehaviour">
+      <UniqueIdentifier>{9be08951-87a8-4b20-bf6c-dba8bac66dc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\UserScripts\Movement">
       <UniqueIdentifier>{0087a112-0433-446a-998f-37d30e27ed82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Component\Animator">
+    <Filter Include="03.Component\Animator">
       <UniqueIdentifier>{07f911db-c510-4562-8792-b11a9806651c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\04.Manager\FileManager">
-      <UniqueIdentifier>{ac5b2feb-0562-4e36-b57a-12255b91cc49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\04.Manager\NamingManager">
-      <UniqueIdentifier>{b17557d3-8854-4522-bcab-ee40b865ac3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\RendererComponent">
-      <UniqueIdentifier>{06a8e95b-9714-4ccd-b1c9-082f4d23e540}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\RendererComponent\TextureRenderer">
-      <UniqueIdentifier>{5fecc3ea-62d9-4788-ba15-c84bfc82df13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\RendererComponent\BoxRender">
-      <UniqueIdentifier>{83c46ca2-a10c-4b88-b044-cde43e044e23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Animator\Animation">
+    <Filter Include="03.Component\Animator\Animation">
       <UniqueIdentifier>{83077952-d581-4522-b7e3-168017f72d55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\02.GameObject">
-      <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{cce74b3c-9b80-46f1-ac05-915ac072855c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\TimeManager">
+      <UniqueIdentifier>{13218e19-062b-456c-809b-39536336000f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\InputManager">
+      <UniqueIdentifier>{971b1822-3ac0-4eb5-9f2c-1965f78e71cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\SceneManager">
+      <UniqueIdentifier>{23ef4742-1acb-4c58-a7ad-70d434bb4e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\CollisionManager">
+      <UniqueIdentifier>{163362dd-7a68-4529-87ba-f370a1a9b99f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\UIManager">
+      <UniqueIdentifier>{51c7efd8-d59f-483d-b087-423dd369d8f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\FileManager">
+      <UniqueIdentifier>{ac5b2feb-0562-4e36-b57a-12255b91cc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\NamingManager">
+      <UniqueIdentifier>{b17557d3-8854-4522-bcab-ee40b865ac3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\PathManager">
+      <UniqueIdentifier>{0e845db7-a4d9-4863-a5e6-8377ab6b19e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Scene">
+      <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Scene\MainScene">
+      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Physics2D">
+      <UniqueIdentifier>{db292c11-5456-43a0-b98c-7daf07cce6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Physics2D\RigidBody">
+      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Physics2D\Collider">
+      <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Physics2D\Collider\CircleCollider">
+      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Physics2D\Collider\BoxColider">
+      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Renderer">
+      <UniqueIdentifier>{06a8e95b-9714-4ccd-b1c9-082f4d23e540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Renderer\BoxRender">
+      <UniqueIdentifier>{83c46ca2-a10c-4b88-b044-cde43e044e23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\Renderer\TextureRenderer">
+      <UniqueIdentifier>{5fecc3ea-62d9-4788-ba15-c84bfc82df13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Component\UI">
+      <UniqueIdentifier>{b01f574b-c7e4-4253-abf1-9b4e68d7e29a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
-      <Filter>GameProcess\04.Manager\TimeManager</Filter>
+      <Filter>04.Manager\TimeManager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>GameProcess\04.Manager\CollisionManager</Filter>
+      <Filter>04.Manager\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>GameProcess\04.Manager\InputManager</Filter>
+      <Filter>04.Manager\InputManager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>GameProcess\04.Manager\SceneManager</Filter>
+      <Filter>04.Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>GameProcess\05.Scene</Filter>
+      <Filter>05.Scene</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>GameProcess\03.Component\Transform</Filter>
+      <Filter>03.Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
-      <Filter>GameProcess\03.Component\Collider\CircleCollider</Filter>
+      <Filter>03.Component\Physics2D\Collider\CircleCollider</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
-      <Filter>GameProcess\03.Component\Collider\BoxColider</Filter>
+      <Filter>03.Component\Physics2D\Collider\BoxColider</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>GameProcess\02.GameObject</Filter>
+      <Filter>02.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
-      <Filter>GameProcess\05.Scene\MainScene</Filter>
+      <Filter>05.Scene\MainScene</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>GameProcess\03.Component\Collider</Filter>
+      <Filter>03.Component\Physics2D\Collider</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
-      <Filter>GameProcess\03.Component\RigidBody</Filter>
+      <Filter>03.Component\Physics2D\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="PathManager.cpp">
-      <Filter>GameProcess\04.Manager\PathManager</Filter>
+      <Filter>04.Manager\PathManager</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>GameProcess\03.Component</Filter>
+      <Filter>03.Component</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
-      <Filter>GameProcess\01.Define\GameWorld</Filter>
+      <Filter>01.Define\GameWorld</Filter>
     </ClCompile>
     <ClCompile Include="MonoBehaviour.cpp">
-      <Filter>GameProcess\03.Component\UserScripts\MonoBehaviour</Filter>
+      <Filter>03.Component\UserScripts\MonoBehaviour</Filter>
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
-      <Filter>GameProcess\04.Manager\UIManager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProcess.cpp">
-      <Filter>GameProcess</Filter>
+      <Filter>04.Manager\UIManager</Filter>
     </ClCompile>
     <ClCompile Include="Movement.cpp">
-      <Filter>GameProcess\03.Component\UserScripts\Movement</Filter>
+      <Filter>03.Component\UserScripts\Movement</Filter>
     </ClCompile>
     <ClCompile Include="BoxRender.cpp">
-      <Filter>GameProcess\03.Component\RendererComponent\BoxRender</Filter>
+      <Filter>03.Component\Renderer\BoxRender</Filter>
     </ClCompile>
     <ClCompile Include="FileManager.cpp">
-      <Filter>GameProcess\04.Manager\FileManager</Filter>
+      <Filter>04.Manager\FileManager</Filter>
     </ClCompile>
     <ClCompile Include="NamingManager.cpp">
-      <Filter>GameProcess\04.Manager\NamingManager</Filter>
+      <Filter>04.Manager\NamingManager</Filter>
     </ClCompile>
     <ClCompile Include="TextureRenderer.cpp">
-      <Filter>GameProcess\03.Component\RendererComponent\TextureRenderer</Filter>
+      <Filter>03.Component\Renderer\TextureRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
-      <Filter>GameProcess\03.Component\Animator</Filter>
+      <Filter>03.Component\Animator</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>GameProcess\03.Component\Animator\Animation</Filter>
+      <Filter>03.Component\Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProcess.cpp" />
+    <ClCompile Include="ManagerSet.cpp">
+      <Filter>04.Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

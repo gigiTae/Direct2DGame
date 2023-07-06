@@ -3,6 +3,10 @@
 class GameObject;
 class InputManager;
 
+/// <summary>
+/// 컴포넌의 기본적인 인터페이스이다
+/// 
+/// </summary>
 class Component abstract
 {
 public:
@@ -11,9 +15,9 @@ public:
 
 public:
 	/// 기본적인 이벤트 함수
-	virtual void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) {};
-	virtual void Update(float _deltaTime, InputManager* _inputManager) {};
-	virtual void LateUpdate(float _deltaTime, InputManager* _inputManager) {};
+	virtual void FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager) {};
+	virtual void Update(float _deltaTime, const InputManager* _inputManager) {};
+	virtual void LateUpdate(float _deltaTime, const InputManager* _inputManager) {};
 
 	/// 컴포넌트 랜러링 관련 함수 
 	virtual void PreRender(D2DRenderer* _d2DRenderer) {};

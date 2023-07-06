@@ -13,7 +13,7 @@
 
 MainScene::MainScene()
 {
-}
+}    
 
 MainScene::~MainScene()
 {

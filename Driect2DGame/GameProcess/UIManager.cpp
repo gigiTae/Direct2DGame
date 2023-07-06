@@ -19,7 +19,7 @@ void UIManager::Initalize(SceneManager* _sceneManager)
 
 void UIManager::Update()
 {
-	Scene* currentScene = m_sceneManager->GetCurrentScene();
+	const Scene* currentScene = m_sceneManager->GetCurrentScene();
 
 }
 

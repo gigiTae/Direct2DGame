@@ -42,7 +42,7 @@ void BoxCollider::OnCollisionStay(const Collision& _collision, const InputManage
 	GetGameObject()->OnCollisionStay(_collision, _inputManager);
 }
 
-void BoxCollider::LateUpdate(float _deltaTime, InputManager* _inputManager)
+void BoxCollider::LateUpdate(float _deltaTime, const InputManager* _inputManager)
 {
 	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
 	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();

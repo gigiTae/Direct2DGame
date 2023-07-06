@@ -265,7 +265,7 @@ const CollisionID CollisionManager::CombineID(unsigned int _left, unsigned int _
 void CollisionManager::CollisionGroupUpdate(OBJECT_TYPE _left, OBJECT_TYPE _right)
 {
 	// 씬매니져를 통해서 현재씬을 받아온다.
-	Scene* currentScene = m_sceneManager->GetCurrentScene();
+	const Scene* currentScene = m_sceneManager->GetCurrentScene();
 	assert(currentScene);
 
 	// 현재 씬에서 저장하고있는 그룹을 받아온다.

@@ -13,6 +13,12 @@ NamingManager* NamingManager::GetInstance()
 	return m_instance;
 }
 
+void NamingManager::Finalize()
+{
+	NamingManager* namingManager = NamingManager::GetInstance();
+	delete namingManager;
+}
+
 NamingManager::~NamingManager()
 {
 }

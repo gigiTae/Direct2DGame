@@ -116,7 +116,7 @@ void InputManager::Finalize()
 	
 }
 
-bool InputManager::IsKeyState(KEY _key, KEY_STATE _state) const 
+bool InputManager::IsKeyState(const KEY& _key, const KEY_STATE& _state) const 
 {
 	if (_state == GetKeyState(_key))
 	{

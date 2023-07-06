@@ -21,8 +21,8 @@ public:
     virtual void Finalize() {};
 
     /// 이벤트 관련함수
-    void Update(float _deltaTime, InputManager* _inputManager) override {};
-    void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager) override {};
+    void Update(float _deltaTime, const InputManager* _inputManager) override {};
+    void FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager) override {};
     void PreRender(D2DRenderer* _d2DRenderer) override {};
     void Render(D2DRenderer* _d2DRenderer) override {};
     void PostRender(D2DRenderer* _d2DRenderer) override {};

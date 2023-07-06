@@ -240,6 +240,11 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 	}
 }
 
+void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type) const
+{
+
+}
+
 void Scene::DestoryGroupObject(OBJECT_TYPE _type)
 { 
 	for (auto iter : m_objectVector[static_cast<int>(_type)])

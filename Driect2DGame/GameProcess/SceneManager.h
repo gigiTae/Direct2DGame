@@ -14,9 +14,9 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void Initalize(D2DRenderer* _d2DRenderer,InputManager* _inputManager, CollisionManager* _collisionManager);
+	void Initalize(D2DRenderer* _d2DRenderer, InputManager* _inputManager, CollisionManager* _collisionManager);
 	void Finalize();
-	
+
 	/// 이벤트 관련
 	void FixedUpdate(float _fiexedDeltaTime);
 	void Update(float _deltaTime);
@@ -25,11 +25,14 @@ public:
 	void DebugRender(D2DRenderer* _d2DRenderer);
 	void ProcessEvent();
 
-	Scene* GetCurrentScene() { return m_currentScene; }
+	const Scene* GetCurrentScene() const{ return m_currentScene; }
 	void ChangeScene(SCENE_TYPE _nextScene);
+
+	bool IsGameRun() { return m_gameRun; }
 
 private:
 	D2DRenderer* m_d2DRenderer;
+	bool m_gameRun; 
 
 	// 모든 씬들을 관리
 	Scene* m_sceneList[static_cast<int>(SCENE_TYPE::END)];

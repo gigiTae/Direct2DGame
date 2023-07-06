@@ -53,9 +53,9 @@ public:
 	void Finalize();
 
 	/// 이벤트 함수 
-	void FixedUpdate(float _fixedDeltaTime, InputManager* _inputManager);
-	void Update(float _deltaTime, InputManager* _inputManager);
-	void LateUpdate(float _deltaTime, InputManager* _inputManager);
+	void FixedUpdate(float _fixedDeltaTime, const InputManager* _inputManager);
+	void Update(float _deltaTime, const InputManager* _inputManager);
+	void LateUpdate(float _deltaTime, const InputManager* _inputManager);
 	void PreRender(D2DRenderer* _d2DRenderer);
 	void Render(D2DRenderer* _d2DRenderer);
 	void PostRender(D2DRenderer* _d2DRenderer);
@@ -98,7 +98,6 @@ public:
 
 	template <typename T>
 	T* GetComponent();
-
 };
 
 // 여기 한번더 감싸서 Component의 메모리 관리를 게임오브젝트가 하면 편리하지 않을까?? real루다가

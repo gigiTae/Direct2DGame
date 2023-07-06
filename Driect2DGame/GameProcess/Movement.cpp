@@ -15,7 +15,7 @@ Movement::~Movement()
 
 }
 
-void Movement::Update(float _deltaTime, InputManager* _inputManager)
+void Movement::Update(float _deltaTime, const InputManager* _inputManager)
 {
 	Vector2 direct{};
 

@@ -43,12 +43,13 @@ public:
 	/// 디버그 정보를 랜더링
 	void DubugRender(D2DRenderer* _d2DRenderer);
 
-	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) 
+	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) const  
 	{ return m_objectVector[static_cast<int>(_type)]; }
 
 protected:
 	/// 자식오브젝트들도 같이 등록
 	void AddObject(GameObject* _object, OBJECT_TYPE _type); 
+	void AddObject(GameObject* _object, OBJECT_TYPE _type) const;
 	void DestoryGroupObject(OBJECT_TYPE _type);
 
 protected:
