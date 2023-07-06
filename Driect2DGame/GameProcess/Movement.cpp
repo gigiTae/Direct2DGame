@@ -3,7 +3,9 @@
 #include "InputManager.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "SceneManager.h"
 #include "TimeManager.h"
+#include "Scene.h"
 
 Movement::Movement()
 	:MonoBehaviour(typeid(this).name())
@@ -20,8 +22,7 @@ void Movement::Update(float _deltaTime)
 {
 	Vector2 direct{};
 	Transform* transform = GetComponent<Transform>();
-	const TimeManager* timeManager = GetManager<TimeManager>();
-	const InputManager* inputManager = GetManager<InputManager>();
+	const InputManager* inputManager = GetInputManager();
 
 	if (inputManager->IsKeyState(KEY::UP,KEY_STATE::HOLD))
 	{

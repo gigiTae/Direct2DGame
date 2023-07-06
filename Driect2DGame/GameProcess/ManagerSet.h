@@ -21,7 +21,7 @@ class UIManager;
 class ManagerSet
 {
 public:
-	ManagerSet() =default;
+	ManagerSet() = default;
 	~ManagerSet();
 
 	void Initalize(PathManager* _pathManager,
@@ -31,9 +31,12 @@ public:
 		UIManager* _UIManager,
 		CollisionManager* _collisionManager);
 
-	/// const로 반환해서 const 함수들만 접근이 가능하다.
-	template <typename T> 
-	const T* GetManager() const;
+	const PathManager* GetPathManager()const { return m_pathManager; }
+	const InputManager* GetInputManager()const { return m_inputManager; }
+	const TimeManager* GetTimeManager()const {return m_timeManager;}
+	const SceneManager* GetSceneManager()const { return m_sceneManager; }
+	const UIManager* GetUIManager()const { return m_UIManager; }
+	const CollisionManager* GetCollisionManager()const { return m_collisionManager; }
 
 private:
 	PathManager* m_pathManager;
@@ -43,36 +46,3 @@ private:
 	UIManager* m_UIManager;
 	CollisionManager* m_collisionManager;
 };
-
-template <typename T>
-const T* ManagerSet::GetManager() const
-{
-	string name = typeid(T).name();
-
-	if (name == "class InputManager")
-	{
-		return  reinterpret_cast<T*>(m_inputManager);
-	}
-	else if (name == "class TimeManager")
-	{
-		return reinterpret_cast<T*>(m_timeManager);
-	}
-	else if (name == "class SceneManager")
-	{
-		return reinterpret_cast<T*>(m_sceneManager);
-	}
-	else if (name == "class UIManager")
-	{
-		return  reinterpret_cast<T*>(m_UIManager);
-	} 
-	else if (name == "class CollisionManager")
-	{
-		return reinterpret_cast<T*>(m_collisionManager);
-	}
-	else if (name == "class PathManager")
-	{
-		return  reinterpret_cast<T*>(m_pathManager);
-	}
-	return nullptr;
-}
-

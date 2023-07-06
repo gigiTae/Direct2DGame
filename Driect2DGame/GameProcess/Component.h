@@ -2,6 +2,11 @@
 
 class GameObject;
 class InputManager;
+class PathManager;
+class SceneManager;
+class TimeManager;
+class UIManager;
+class CollisionManager;
 
 /// <summary>
 /// 컴포넌의 기본적인 인터페이스이다
@@ -26,6 +31,15 @@ public:
 	virtual void DebugRender(D2DRenderer* _d2DRendere) {};
 
 public:
+	/// 매니져 관련함수
+	const PathManager* GetPathManager()const;
+	const InputManager* GetInputManager()const;
+	const TimeManager* GetTimeManager()const;
+	const SceneManager* GetSceneManager()const;
+	const UIManager* GetUIManager()const;
+	const CollisionManager* GetCollisionManager()const;
+
+public:
 	void SetGameObject(GameObject* _gameObject) { m_gameObject = _gameObject; }
 	GameObject* GetGameObject() { return m_gameObject; }
 	const string& GetName() { return m_name; }
@@ -37,9 +51,6 @@ public:
 
 	template <typename T>
 	T* GetComponent();
-
-	template <typename T>
-	const T* GetManager() const;
 
 private:
 	/// 컴포넌트 호출 순서
@@ -71,8 +82,3 @@ T* Component::GetComponent()
 	return nullptr;
 }
 
-template <typename T>
-const T* Component::GetManager() const
-{
-	return m_gameObject->template GetManager<T>();
-}

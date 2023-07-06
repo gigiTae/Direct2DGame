@@ -1,16 +1,15 @@
 #pragma once
 
 #include "Component.h"
-#include "ManagerSet.h"
 
 // 전방선언
-class Transform;
-class BoxCollider;
-class CircleCollider;
+class ManagerSet;
 class InputManager;
-class Collider;
-class RigidBody;
-
+class PathManager;
+class SceneManager;
+class TimeManager;
+class UIManager;
+class CollisionManager;
 struct Collision;
 
 /// <summary>
@@ -84,8 +83,12 @@ public:
 
 public: 
 	/// 매니져 관련함수
-	template <typename T>
-	const T* GetManager() const;
+	const PathManager* GetPathManager()const;
+	const InputManager* GetInputManager()const;
+	const TimeManager* GetTimeManager()const;
+	const SceneManager* GetSceneManager()const;
+	const UIManager* GetUIManager()const;
+	const CollisionManager* GetCollisionManager()const;
 
 
 public:
@@ -108,12 +111,6 @@ private:
 	// 매니져 포인터 집합
 	const ManagerSet* m_managerSet;
 };
-
-template <typename T>
-const T* GameObject::GetManager() const
-{
-	return m_managerSet->template GetManager<T>();
-}
 
 // 여기 한번더 감싸서 Component의 메모리 관리를 게임오브젝트가 하면 편리하지 않을까?? real루다가
 // 그래서 컴포너트의 생성이 실패하면 메모리에 추가하지 않는거지!

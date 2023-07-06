@@ -155,6 +155,36 @@ void GameObject::SetParent(GameObject* _parent)
 }
 
 
+const PathManager* GameObject::GetPathManager() const
+{
+	return m_managerSet->GetPathManager();
+}
+
+const InputManager* GameObject::GetInputManager() const
+{
+	return m_managerSet->GetInputManager();
+}
+
+const TimeManager* GameObject::GetTimeManager() const
+{
+	return m_managerSet->GetTimeManager();
+}
+
+const SceneManager* GameObject::GetSceneManager() const
+{
+	return m_managerSet->GetSceneManager();
+}
+
+const UIManager* GameObject::GetUIManager() const
+{
+	return m_managerSet->GetUIManager();
+}
+
+const CollisionManager* GameObject::GetCollisionManager() const
+{
+	return m_managerSet->GetCollisionManager();
+}
+
 void GameObject::FixedUpdate(float _fixedDeltaTime)
 {
 	for (auto& iter : m_components)
