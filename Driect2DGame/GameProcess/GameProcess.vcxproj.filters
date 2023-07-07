@@ -58,9 +58,6 @@
     <ClInclude Include="UIManager.h">
       <Filter>04.Manager\UIManager</Filter>
     </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>03.Component\UserScripts\Movement</Filter>
-    </ClInclude>
     <ClInclude Include="ReadMe.h" />
     <ClInclude Include="BoxRender.h">
       <Filter>03.Component\Renderer\BoxRender</Filter>
@@ -84,6 +81,12 @@
     <ClInclude Include="ManagerSet.h">
       <Filter>04.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>03.Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>04.Manager\CameraManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01.Define">
@@ -106,9 +109,6 @@
     </Filter>
     <Filter Include="03.Component\UserScripts\MonoBehaviour">
       <UniqueIdentifier>{9be08951-87a8-4b20-bf6c-dba8bac66dc7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Component\UserScripts\Movement">
-      <UniqueIdentifier>{0087a112-0433-446a-998f-37d30e27ed82}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.Component\Animator">
       <UniqueIdentifier>{07f911db-c510-4562-8792-b11a9806651c}</UniqueIdentifier>
@@ -176,6 +176,9 @@
     <Filter Include="03.Component\UI">
       <UniqueIdentifier>{b01f574b-c7e4-4253-abf1-9b4e68d7e29a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Manager\CameraManager">
+      <UniqueIdentifier>{20bce861-c09f-4cd6-99f7-a241c34c17e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -229,9 +232,6 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>04.Manager\UIManager</Filter>
     </ClCompile>
-    <ClCompile Include="Movement.cpp">
-      <Filter>03.Component\UserScripts\Movement</Filter>
-    </ClCompile>
     <ClCompile Include="BoxRender.cpp">
       <Filter>03.Component\Renderer\BoxRender</Filter>
     </ClCompile>
@@ -253,6 +253,12 @@
     <ClCompile Include="GameProcess.cpp" />
     <ClCompile Include="ManagerSet.cpp">
       <Filter>04.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>03.Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>04.Manager\CameraManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

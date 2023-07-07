@@ -10,7 +10,7 @@ ManagerSet::~ManagerSet()
 void ManagerSet::Initalize(PathManager* _pathManager,
 	InputManager* _inputManager, TimeManager* _timeManager,
 	SceneManager* _sceneManager, UIManager* _UIManager,
-	CollisionManager* _collisionManager)
+	CollisionManager* _collisionManager, CameraManager* _cameraManager)
 {
 	/// 매니져들 받아오기
 	m_pathManager = _pathManager;
@@ -18,4 +18,5 @@ void ManagerSet::Initalize(PathManager* _pathManager,
 	m_sceneManager = _sceneManager;
 	m_UIManager = _UIManager;
 	m_collisionManager = _collisionManager;
+	m_cameraManager = _cameraManager;
 }

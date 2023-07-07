@@ -9,6 +9,7 @@
 #include "PathManager.h"
 #include "NamingManager.h"
 #include "ManagerSet.h"
+#include "CameraManager.h"
 
 GameProcess::GameProcess()
 	:m_collisionManager(nullptr)
@@ -24,6 +25,7 @@ GameProcess::GameProcess()
 	, m_showDebug(false)
 	, m_screenSize{}
 	, m_managerSet(nullptr)
+	,m_cameraManager(nullptr)
 {}
 
 GameProcess::~GameProcess()
@@ -49,20 +51,23 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_sceneManager = new SceneManager();
 	m_pathManager = new PathManager();
 	m_UIManager = new UIManager();
+	m_cameraManager = new CameraManager();
 
 	// 매니져 집합 클래스
 	m_managerSet = new ManagerSet();
 
 	// 매니져들 연결
 	m_managerSet->Initalize(m_pathManager, m_inputManager
-		, m_timeManager, m_sceneManager, m_UIManager, m_collisionManager);
+		, m_timeManager, m_sceneManager, m_UIManager
+		, m_collisionManager,m_cameraManager);
 
 	// 매니저 초기화
 	m_pathManager->Initalize();
 	m_timeManager->Initalize(m_screenSize);
-	m_inputManager->Initalize(m_hWnd);
+	m_inputManager->Initalize(m_hWnd,m_cameraManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
-	m_UIManager->Initalize(m_sceneManager);
+	m_cameraManager->Initalize(m_d2DRenderer, m_screenSize);
+	m_UIManager->Initalize(m_sceneManager,m_managerSet);
 	m_sceneManager->Initalize(_d2DRenderer,m_managerSet,m_sceneManager);
 
 	// 게임 루프 활성화

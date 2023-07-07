@@ -1,5 +1,6 @@
 #include "GameProcessPCH.h"
 #include "InputManager.h"
+#include "CameraManager.h"
 
 InputManager::InputManager()
 	:m_matchVK{
@@ -27,6 +28,7 @@ InputManager::InputManager()
 	}
 	, m_keyInfo{}
 	,m_hwnd(nullptr)
+	,m_cameraManager(nullptr)
 {
 }
 
@@ -34,9 +36,10 @@ InputManager::~InputManager()
 {
 }
 
-void InputManager::Initalize(HWND _main)
+void InputManager::Initalize(HWND _main, CameraManager* _cameraManager)
 {
 	m_hwnd = _main;
+	m_cameraManager = _cameraManager;
 
 	for (int i = 0; i < static_cast<int>(KEY::LAST); ++i)
 	{
@@ -89,6 +92,8 @@ void InputManager::Update()
 		m_mousePosition = Vector2(static_cast<float>(mousePosition.x)
 			, static_cast<float>(mousePosition.y));
 
+		// 월드 좌표계로 변환
+		m_mousePosition = m_cameraManager->ScreenToWorld(m_mousePosition);
 	}
 	// 포커스해제되어 예외처리 진행
 	else

@@ -10,6 +10,7 @@ class SceneManager;
 class TimeManager;
 class UIManager;
 class CollisionManager;
+class CameraManager;
 struct Collision;
 
 /// <summary>
@@ -66,13 +67,6 @@ public:
 	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) {};
 
 public:
-	/// 마우스 입력 함수
-	void OnMouse();
-	void OnMouseUp();
-	void OnMouseDown();
-	void OnMouseClicked();
-
-public:
 	/// 자식 오브젝트 
 	void AddChild(GameObject* _child);
 	GameObject* GetChild(int _index);
@@ -84,12 +78,19 @@ public:
 public: 
 	/// 매니져 관련함수
 	const ManagerSet* GetManagerSet()const { return m_managerSet; }
+	const CameraManager* GetCameraManager()const;
 	const PathManager* GetPathManager()const;
 	const InputManager* GetInputManager()const;
 	const TimeManager* GetTimeManager()const;
 	const SceneManager* GetSceneManager()const;
 	const UIManager* GetUIManager()const;
 	const CollisionManager* GetCollisionManager()const;
+
+	/// 마우스 입력 함수
+	void OnMouse();
+	void OnMouseUp();
+	void OnMouseDown();
+	void OnMouseClicked();
 
 public:
 	/// 컴포넌트 관련 함수 

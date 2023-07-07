@@ -7,6 +7,7 @@
 #include "NamingManager.h"
 #include "MonoBehaviour.h"
 #include "InputManager.h"
+#include "CameraManager.h"
 #include "ManagerSet.h"
 
 GameObject::GameObject(const string& _name, const ManagerSet* _managerSet)
@@ -154,6 +155,11 @@ void GameObject::SetParent(GameObject* _parent)
 	transform->SetParent(_parent);
 }
 
+
+const CameraManager* GameObject::GetCameraManager() const
+{
+	return m_managerSet->GetCameraManager();
+}
 
 const PathManager* GameObject::GetPathManager() const
 {

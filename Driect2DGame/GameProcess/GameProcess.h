@@ -11,6 +11,7 @@ class TimeManager;
 class CollisionManager;
 class SceneManager;
 class PathManager;
+class CameraManager;
 class UIManager;
 
 
@@ -54,6 +55,7 @@ private:
 	ManagerSet* m_managerSet;
 
 	// ¸Å´ÏÁ® 
+	CameraManager* m_cameraManager;
 	SceneManager* m_sceneManager;
 	InputManager* m_inputManager;
 	TimeManager* m_timeManager;

@@ -1,5 +1,6 @@
 #pragma once
 
+///  ================= 씬관련 ===========================
 
 enum class SCENE_TYPE
 {
@@ -10,6 +11,8 @@ enum class SCENE_TYPE
 	NONE, // 다음씬이 없다는 표시
 	END, // 게임 종료시에 호출
 };
+
+/// ===================== 오브젝트 ==============================
 
 /// <summary>
 /// 오브젝트의 타입의 번호가 작을수록 모든 이벤트에서
@@ -22,7 +25,8 @@ enum class OBJECT_TYPE
 	MONSTER,
 	PLAYER,
 
-	
+	/// 아래의 오브젝트 타입부터는 마우스 이벤트가 발생함
+	CONTROL_UI = 31,
 	UI = 31,
 	END = 32,
 };
@@ -56,4 +60,30 @@ enum class COLLIDER_TYPE
 {
 	CIRCLE,
 	BOX,
+};
+
+///  ================================== 키입력관련 =================================
+enum class KEY_STATE
+{
+	TAP, // 막 누른 시점
+	HOLD, // 누르고 있는
+	AWAY, // 막 뗀 시점
+	NONE, // 눌리지 않았고, 이전에도 눌리지 않은 상태
+};
+
+enum class KEY
+{
+	LEFT, RIGHT, UP, DOWN,
+
+	Q, W, E, R, T, Y, U, O, P,
+	A, S, D, F, G, H, J, K, L,
+	Z, X, C, V, B, N, M,
+
+	ALT, CTRL, LSHIFT,
+	SPACE, ENTER, ESC, TAB,
+
+	LMOUSE, RMOUSE,
+	F1, F2, F3, F4, F5,
+
+	LAST, //enum의 끝
 };

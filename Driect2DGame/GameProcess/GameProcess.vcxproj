@@ -136,6 +136,7 @@
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="BoxRender.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -148,7 +149,6 @@
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="ManagerSet.h" />
     <ClInclude Include="MonoBehaviour.h" />
-    <ClInclude Include="Movement.h" />
     <ClInclude Include="NamingManager.h" />
     <ClInclude Include="PathManager.h" />
     <ClInclude Include="ReadMe.h" />
@@ -160,6 +160,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +168,7 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="BoxRender.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -179,7 +181,6 @@
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="ManagerSet.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
-    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NamingManager.cpp" />
     <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="RigidBody.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="TextureRenderer.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>

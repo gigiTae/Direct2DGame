@@ -22,6 +22,11 @@ const ManagerSet* Component::GetManagerSet() const
 	return m_gameObject->GetManagerSet();
 }
 
+const CameraManager* Component::GetCameraManager() const
+{
+	return m_gameObject->GetCameraManager();
+}
+
 const PathManager* Component::GetPathManager() const
 {
 	return m_gameObject->GetPathManager();

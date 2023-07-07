@@ -7,7 +7,9 @@ class SceneManager;
 class TimeManager;
 class UIManager;
 class CollisionManager;
+class CameraManager;
 class ManagerSet;
+
 
 /// <summary>
 /// 컴포넌의 기본적인 인터페이스이다
@@ -34,6 +36,7 @@ public:
 public:
 	const ManagerSet* GetManagerSet()const;
 	/// 매니져 관련함수
+	const CameraManager* GetCameraManager()const;
 	const PathManager* GetPathManager()const;
 	const InputManager* GetInputManager()const;
 	const TimeManager* GetTimeManager()const;
