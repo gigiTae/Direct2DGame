@@ -3,12 +3,17 @@
 #include "GameObject.h"
 #include "PathManager.h"
 #include "FileManager.h"
+#include "ManagerSet.h"
+#include "SceneManager.h"
 
 Scene::Scene()
 	:m_d2DRenderer(nullptr)
 	,m_managerSet(nullptr)
 	,m_objectVector{}
 	,m_loadResources(false)
+	,m_nextScene(SCENE_TYPE::NONE)
+	,m_addObjectList{}
+	,m_scneneManager(nullptr)
 {
 }
 
@@ -16,9 +21,9 @@ Scene::~Scene()
 {
 }
 
-
-void Scene::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet)
+void Scene::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet, SceneManager* _sceneManager)
 {
+	m_scneneManager = _sceneManager;
 	m_managerSet = _managerSet;
 	m_d2DRenderer = _d2DRenderer;
 }
@@ -60,9 +65,16 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 	}
 }
 
-void Scene::ProcessEvent()
+void Scene::ProcessEvent(float _deltaTime)
 {
-	/// 오브젝트 삭제관리 // 점점 게임프로세스가 무거워지는데 괜찮은가? 
+	/// 씬변경 이벤트
+	if (m_nextScene != SCENE_TYPE::NONE)
+	{
+		m_scneneManager->ChangeScene(m_nextScene);
+		return;
+	}
+
+	/// 오브젝트 삭제관리 
 	/// 오브젝트 풀링도 고민해봐야?
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
@@ -104,9 +116,38 @@ void Scene::ProcessEvent()
 				++iter;
 			}
 		}
-
 	}
 
+	/// 오브젝트 추가 관리 
+	auto iter = m_addObjectList.begin();
+
+	while (iter != m_addObjectList.end())
+	{
+		iter->delayTime -= _deltaTime;
+		if (iter->delayTime <= 0.f)
+		{
+			AddObject(iter->object, iter->type);
+			iter = m_addObjectList.erase(iter);
+		}
+		else
+			++iter;
+	}
+}
+
+void Scene::RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime) const
+{
+	/// 추가해야하는 오브젝트 정보
+	AddObjectInfomation info{};
+	info.type = _type;
+	info.delayTime = _delayTime;
+	info.object = _object;
+
+	m_addObjectList.push_back(std::move(info));
+}
+
+void Scene::RegisterNextScene(SCENE_TYPE _nextScene) const
+{
+	m_nextScene = _nextScene;
 }
 
 void Scene::DubugRender(D2DRenderer* _d2DRenderer)
@@ -126,6 +167,20 @@ void Scene::Exit()
 	{
 		DestoryGroupObject(static_cast<OBJECT_TYPE>(i));
 	}
+
+	/// 추가하는 오브젝트 목록 초기화
+	for (auto& info : m_addObjectList)
+	{
+		GameObject* object = info.object;
+		if (object != nullptr)
+		{
+			delete object;
+		}
+	}
+	m_addObjectList.clear();
+
+	// 다음씬 지정 해제
+	m_nextScene = SCENE_TYPE::NONE;
 }
 
 void Scene::LoadSceneResources(const wstring& _sceneName)
@@ -138,7 +193,10 @@ void Scene::LoadSceneResources(const wstring& _sceneName)
 
 	/// 리소스 파일로 경로를 연결한다
 	vector<wstring> filesPath{}, fileName{};
-	wstring parentFilePath = PathManager::GetRelativPath();
+	const PathManager* pathManager = m_managerSet->GetPathManager();
+
+	wstring parentFilePath = pathManager->GetRelativPath();
+
 	parentFilePath += L"\\Resource\\" + _sceneName;
 
 	FileManager::GetFileMemberPath(filesPath, parentFilePath, false);
@@ -232,11 +290,6 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 	}
 }
 
-void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type) const
-{
-
-}
-
 void Scene::DestoryGroupObject(OBJECT_TYPE _type)
 { 
 	for (auto iter : m_objectVector[static_cast<int>(_type)])
@@ -244,4 +297,7 @@ void Scene::DestoryGroupObject(OBJECT_TYPE _type)
 		iter->Finalize();
 		delete iter;
 	}
+	
+	// 배열 초기화
+	m_objectVector[static_cast<int>(_type)].clear();
 }

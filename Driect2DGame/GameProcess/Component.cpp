@@ -17,6 +17,11 @@ Component::~Component()
 
 }
 
+const ManagerSet* Component::GetManagerSet() const
+{
+	return m_gameObject->GetManagerSet();
+}
+
 const PathManager* Component::GetPathManager() const
 {
 	return m_gameObject->GetPathManager();

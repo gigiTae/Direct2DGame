@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Manager.h"
 
 enum class KEY_STATE
 {
@@ -39,7 +38,7 @@ struct KeyInfo
 /// 관리하고 출력한다.
 /// 
 /// </summary>
-class InputManager : public Manager
+class InputManager
 {
 public:
 	InputManager();

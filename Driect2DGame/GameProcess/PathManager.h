@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Manager.h"
 
 /// <summary>
 /// 파일 경로를 받아오는 매니져 
@@ -10,17 +9,17 @@
 /// 
 /// 다시보니 너무 쓸데없는거 같다 
 /// </summary>
-class PathManager : public Manager
+class PathManager 
 {
 public:
 	PathManager();
 	~PathManager();
 
 	void Initalize();
-
-	static const wchar_t* GetRelativPath();
+	void Finalize();
+	const wchar_t* GetRelativPath() const;
 
 private:
-	static wchar_t m_relativePath[256];
+	wchar_t m_relativePath[256];
 };
 

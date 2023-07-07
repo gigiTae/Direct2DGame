@@ -1,10 +1,8 @@
 #include "GameProcessPCH.h"
 #include "PathManager.h"
 
-
-wchar_t PathManager::m_relativePath[256] = {};
-
 PathManager::PathManager()
+	:m_relativePath{}
 {
 }
 
@@ -27,10 +25,15 @@ void PathManager::Initalize()
 	}
 }
 
-const wchar_t* PathManager::GetRelativPath()
+void PathManager::Finalize()
+{
+
+}
+
+const wchar_t* PathManager::GetRelativPath() const
 {
 	assert(m_relativePath[0] != L'\0'
-	|| !L"패스매니저를 초기화하지 않았습니다");
+		|| !L"패스매니저를 초기화하지 않았습니다");
 
 	return m_relativePath;
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Manager.h"
-
 // 전방선언
 class D2DRenderer;
 class InputManager;

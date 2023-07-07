@@ -84,9 +84,6 @@
     <ClInclude Include="ManagerSet.h">
       <Filter>04.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>04.Manager</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01.Define">
@@ -255,9 +252,6 @@
     </ClCompile>
     <ClCompile Include="GameProcess.cpp" />
     <ClCompile Include="ManagerSet.cpp">
-      <Filter>04.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager.cpp">
       <Filter>04.Manager</Filter>
     </ClCompile>
   </ItemGroup>

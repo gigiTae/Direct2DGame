@@ -83,13 +83,13 @@ public:
 
 public: 
 	/// 매니져 관련함수
+	const ManagerSet* GetManagerSet()const { return m_managerSet; }
 	const PathManager* GetPathManager()const;
 	const InputManager* GetInputManager()const;
 	const TimeManager* GetTimeManager()const;
 	const SceneManager* GetSceneManager()const;
 	const UIManager* GetUIManager()const;
 	const CollisionManager* GetCollisionManager()const;
-
 
 public:
 	/// 컴포넌트 관련 함수 

@@ -1,8 +1,7 @@
 #pragma once
-#include "Manager.h"
 
 // deltaTime을 계산해주는 클래스
-class TimeManager : public Manager
+class TimeManager
 {
 public:
 	TimeManager();
@@ -14,6 +13,8 @@ public:
 	double Update();
 	void DebugRender(D2DRenderer* _d2dRenderer);
 	void Finalize();
+
+	float GetDeltaTime() const{ return static_cast<float>(m_deltaTime); }
 
 private:
 	LARGE_INTEGER m_curentCount;

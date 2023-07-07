@@ -7,6 +7,7 @@ class SceneManager;
 class TimeManager;
 class UIManager;
 class CollisionManager;
+class ManagerSet;
 
 /// <summary>
 /// 컴포넌의 기본적인 인터페이스이다
@@ -31,6 +32,7 @@ public:
 	virtual void DebugRender(D2DRenderer* _d2DRendere) {};
 
 public:
+	const ManagerSet* GetManagerSet()const;
 	/// 매니져 관련함수
 	const PathManager* GetPathManager()const;
 	const InputManager* GetInputManager()const;

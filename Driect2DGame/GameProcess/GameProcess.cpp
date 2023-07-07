@@ -63,7 +63,7 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_inputManager->Initalize(m_hWnd);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_UIManager->Initalize(m_sceneManager);
-	m_sceneManager->Initalize(_d2DRenderer,m_managerSet);
+	m_sceneManager->Initalize(_d2DRenderer,m_managerSet,m_sceneManager);
 
 	// 게임 루프 활성화
 	m_gameRunnig = true;
@@ -114,7 +114,7 @@ void GameProcess::Process()
 
 	// =============== 후속처리 =================
 	// ex) 오브젝트 삭제, 추가, 씬 변경
-	m_sceneManager->ProcessEvent();
+	m_sceneManager->ProcessEvent(deltaTime);
 	
 	/// 게임을 종료
 	m_gameRunnig = m_sceneManager->IsGameRun();
@@ -131,6 +131,7 @@ void GameProcess::Finalize()
 	NamingManager::Finalize();
 
 	// 메모리 해제
+	delete m_managerSet;
 	delete m_sceneManager;
 	delete m_pathManager;
 	delete m_collisionManager;

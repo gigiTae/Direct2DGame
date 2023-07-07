@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Manager.h"
-
 // 전방선언
 class Collider;
 class BoxCollider;
@@ -35,7 +33,7 @@ union CollisionID
 /// 그에 맞게 매니져는 collider의 종류에 따라서 
 /// 충돌정보를 생성하고 전달해준다.
 /// </summary>
-class CollisionManager : public Manager
+class CollisionManager
 {
 public:
 	// ColliderID를 발급하는 함수

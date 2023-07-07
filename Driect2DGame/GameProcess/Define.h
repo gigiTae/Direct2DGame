@@ -6,7 +6,9 @@ enum class SCENE_TYPE
 	MAIN,
 	TOOL,
 
-	END,
+
+	NONE, // 다음씬이 없다는 표시
+	END, // 게임 종료시에 호출
 };
 
 /// <summary>
