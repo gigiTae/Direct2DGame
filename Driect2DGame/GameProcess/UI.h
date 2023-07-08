@@ -13,12 +13,19 @@ public:
     UI();
     ~UI();
 
-    void Render(D2DRenderer* _d2DRenderer);
     void LateUpdate(float _deltaTime) override;
 
+public:
+    bool IsMouseOn() { return m_mouseOn; }
+    bool IsLBtnDown() { return m_LBtnDown; }
+
+    void Render(D2DRenderer* _d2DRenderer) override;
+
+    void SetMouseOn(bool _isMouseOn) { m_mouseOn = _isMouseOn; }
+    void SetLBtnDown(bool _isLBtnDown) { m_LBtnDown = _isLBtnDown; }
 private:
     bool m_mouseOn; // UI 위에 마우스가 있는지
-    bool m_lBtnDown; // UI에 왼쪽 마우스 버튼이 눌린적이 있는지
+    bool m_LBtnDown; // UI에 왼쪽 마우스 버튼이 눌린적이 있는지
 
 };
 

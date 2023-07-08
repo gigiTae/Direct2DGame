@@ -135,7 +135,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="BoxRender.h" />
+    <ClInclude Include="BoxRenderer.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
@@ -167,7 +167,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="BoxRender.cpp" />
+    <ClCompile Include="BoxRenderer.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />

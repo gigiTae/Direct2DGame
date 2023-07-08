@@ -132,11 +132,12 @@ void GameProcess::Finalize()
 	m_inputManager->Finalize();
 	m_timeManager->Finalize();
 	m_UIManager->Finalize();
-	
+
 	NamingManager::Finalize();
 
 	// 메모리 해제
 	delete m_managerSet;
+	delete m_cameraManager;
 	delete m_sceneManager;
 	delete m_pathManager;
 	delete m_collisionManager;

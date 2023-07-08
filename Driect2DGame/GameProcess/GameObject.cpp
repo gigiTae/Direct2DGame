@@ -244,6 +244,13 @@ void GameObject::PreRender(D2DRenderer* _d2DRenderer)
 			iter.second->PreRender(_d2DRenderer);
 		}
 	}
+
+	/// 자식오브젝트 랜더링
+	vector<GameObject*> chilren = GetChildren();
+	for (auto child : chilren)
+	{
+		child->PreRender(_d2DRenderer);
+	}
 }
 
 void GameObject::Render(D2DRenderer* _d2DRenderer)
@@ -254,6 +261,13 @@ void GameObject::Render(D2DRenderer* _d2DRenderer)
 		{
 			iter.second->Render(_d2DRenderer);
 		}
+	}
+
+	/// 자식오브젝트 랜더링
+	vector<GameObject*> chilren = GetChildren();
+	for (auto child : chilren)
+	{
+		child->Render(_d2DRenderer);
 	}
 }
 
@@ -266,6 +280,14 @@ void GameObject::PostRender(D2DRenderer* _d2DRenderer)
 			iter.second->PostRender(_d2DRenderer);
 		}
 	}
+
+	/// 자식오브젝트 랜더링
+	vector<GameObject*> chilren = GetChildren();
+	for (auto child : chilren)
+	{
+		child->PostRender(_d2DRenderer);
+	}
+
 }
 
 void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
@@ -276,6 +298,13 @@ void GameObject::DebugRender(D2DRenderer* _d2dRenderer)
 		{
 			iter.second->DebugRender(_d2dRenderer);
 		}
+	}
+
+	/// 자식오브젝트 랜더링
+	vector<GameObject*> chilren = GetChildren();
+	for (auto child : chilren)
+	{
+		child->DebugRender(_d2dRenderer);
 	}
 }
 

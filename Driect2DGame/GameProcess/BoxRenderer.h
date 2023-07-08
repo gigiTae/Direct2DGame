@@ -1,12 +1,14 @@
 #pragma once
 #include "MonoBehaviour.h"
-class BoxRender :
+class BoxRenderer :
     public MonoBehaviour
 {
 public:
-    BoxRender();
-    ~BoxRender();
+    BoxRenderer();
+    ~BoxRenderer();
 
     void Render(D2DRenderer* _d2DRenderer) override;
+
+private:
 };
 

@@ -1,20 +1,20 @@
 #include "GameProcessPCH.h"
-#include "BoxRender.h"
+#include "BoxRenderer.h"
 #include "Transform.h"
 #include "GameObject.h"
 
-BoxRender::BoxRender()
+BoxRenderer::BoxRenderer()
 	:MonoBehaviour(typeid(this).name())
 {
 
 }
 
-BoxRender::~BoxRender()
+BoxRenderer::~BoxRenderer()
 {
 
 }
 
-void BoxRender::Render(D2DRenderer* _d2DRenderer)
+void BoxRenderer::Render(D2DRenderer* _d2DRenderer)
 {
 	Transform* transform = GetComponent<Transform>();
 

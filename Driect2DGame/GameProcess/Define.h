@@ -26,8 +26,9 @@ enum class OBJECT_TYPE
 	PLAYER,
 
 	/// 아래의 오브젝트 타입부터는 마우스 이벤트가 발생함
-	CONTROL_UI = 31,
-	UI = 31,
+
+	BACK_UI = 30,	/// 항상 FRONT UI보다 뒤에 그려진다
+	FRONT_UI = 31,
 	END = 32,
 };
 

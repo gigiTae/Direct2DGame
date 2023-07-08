@@ -6,7 +6,7 @@
 #include "CameraManager.h"
 
 UI::UI():Component(CALL_ORDER::UI,typeid(this).name())
-	,m_lBtnDown(false)
+	,m_LBtnDown(false)
 	,m_mouseOn(false)
 {
 
@@ -19,8 +19,22 @@ UI::~UI()
 
 void UI::Render(D2DRenderer* _d2DRenderer)
 {
-	if (m_mouseOn)
-		_d2DRenderer->DrawLine(Vector2::Zero, Vector2(1000.f, 1000.f));
+	Transform* transform = GetComponent<Transform>();
+	Vector2 position = transform->GetPosition();
+	Vector2 scale = transform->GetScale();
+
+	Vector2 leftTop{ position.x - scale.x * 0.5f , position.y + scale.y * 0.5f };
+	Vector2 rightBottom{ position.x + scale.x * 0.5f, position.y - scale.y * 0.5f };
+
+	if (m_LBtnDown)
+	{
+		_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::Red);
+	}
+	else
+	{
+		_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::Green);
+	}
+	
 }
 
 void UI::LateUpdate(float _deltaTime)

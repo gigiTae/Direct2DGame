@@ -11,7 +11,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
    // 메모리 누수검사하기
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-   // _CrtSetBreakAlloc(215);
+    //_CrtSetBreakAlloc(282);
     
     D2DEngine* engine = new D2DEngine();
 

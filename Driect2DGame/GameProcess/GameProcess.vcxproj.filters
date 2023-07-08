@@ -59,7 +59,7 @@
       <Filter>04.Manager\UIManager</Filter>
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
-    <ClInclude Include="BoxRender.h">
+    <ClInclude Include="BoxRenderer.h">
       <Filter>03.Component\Renderer\BoxRender</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
@@ -232,7 +232,7 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>04.Manager\UIManager</Filter>
     </ClCompile>
-    <ClCompile Include="BoxRender.cpp">
+    <ClCompile Include="BoxRenderer.cpp">
       <Filter>03.Component\Renderer\BoxRender</Filter>
     </ClCompile>
     <ClCompile Include="FileManager.cpp">

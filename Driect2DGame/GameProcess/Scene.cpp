@@ -40,11 +40,13 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 {
 	assert(_d2DRenderer);
 
+	/// 랜더링은 부모 오브가 자식 오브젝트의 랜더링까지 담당한다.
 	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->PreRender(_d2DRenderer);
+			if (iter->GetParent() == nullptr)
+				iter->PreRender(_d2DRenderer);
 		}
 	}
 
@@ -52,7 +54,8 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->Render(_d2DRenderer);
+			if (iter->GetParent() == nullptr)
+				iter->Render(_d2DRenderer);
 		}
 	}
 
@@ -60,7 +63,8 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 	{
 		for (auto iter : m_objectVector[i])
 		{
-			iter->PostRender(_d2DRenderer);
+			if (iter->GetParent() == nullptr)
+				iter->PostRender(_d2DRenderer);
 		}
 	}
 }

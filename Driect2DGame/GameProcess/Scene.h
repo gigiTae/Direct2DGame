@@ -57,6 +57,17 @@ public: //후속 이벤트
 	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) const  
 	{ return m_objectVector[static_cast<int>(_type)]; }
 
+	vector<GameObject*>& GetUIGroupObject(OBJECT_TYPE _type) 
+	{
+		if (_type == OBJECT_TYPE::BACK_UI || _type == OBJECT_TYPE::FRONT_UI)
+			return m_objectVector[static_cast<int>(_type)];
+		else
+		{
+			assert(nullptr);
+			return m_objectVector[static_cast<int>(_type)];
+		}
+	}
+
 protected:
 	/// 자식오브젝트들도 같이 등록
 	void AddObject(GameObject* _object, OBJECT_TYPE _type); 

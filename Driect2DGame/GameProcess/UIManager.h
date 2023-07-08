@@ -24,7 +24,7 @@ private:
 	GameObject* GetTargetedUI(GameObject* _parent);
 
 private:
-	GameObject* m_foucsedUI; // 현재 포커스 중인 오브젝트
+	GameObject* m_focusedUI; // 현재 포커스 중인 오브젝트
 	SceneManager* m_sceneManager;
 	ManagerSet* m_managerSet;
 };

@@ -4,10 +4,13 @@
 #include "Scene.h"
 #include "ManagerSet.h"
 #include "InputManager.h"
+#include "Component.h"
+#include "GameObject.h"
+#include "UI.h"
 
 UIManager::UIManager()
 	:m_sceneManager(nullptr)
-	,m_foucsedUI(nullptr)
+	,m_focusedUI(nullptr)
 	,m_managerSet(nullptr)
 {}
 
@@ -24,22 +27,43 @@ void UIManager::Initalize(SceneManager* _sceneManager, ManagerSet* _managerSet)
 void UIManager::Update()
 {
 	/// 현재 포커스 중인 UI 확인
-	m_foucsedUI = GetFocusedUI();
+	m_focusedUI = GetFocusedUI();
 
 	// 현재 포커스 중인 UI가 없는 경우
-	if (!m_foucsedUI)
+	if (!m_focusedUI)
 		return;
 
 	const InputManager* input = m_managerSet->GetInputManager();
 
-	GameObject* targetUI = GetTargetedUI(m_foucsedUI);
+	/// 부모오브젝트의 자식중에 실제로  포커스된 UI
+	GameObject* targetUI = GetTargetedUI(m_focusedUI);
 
 	if (targetUI == nullptr)
 		return;
 
-	bool leftAway = input->IsKeyState(KEY::LMOUSE, KEY_STATE::AWAY);
-	bool leftTap = input->IsKeyState(KEY::LMOUSE, KEY_STATE::TAP);
+	KEY_STATE LBtnState = input->GetKeyState(KEY::LMOUSE);
+	UI* ui = targetUI->GetComponent<UI>();
+	assert(ui);
 
+	/// 마우스 온 함수 호출
+	targetUI->OnMouse();
+
+	if (LBtnState == KEY_STATE::TAP)
+	{
+		targetUI->OnMouseDown();
+		ui->SetLBtnDown(true);
+	}
+	else if (LBtnState == KEY_STATE::AWAY)
+	{
+		targetUI->OnMouseUp();
+
+		if (ui->IsLBtnDown())
+		{
+			targetUI->OnMouseClicked();
+		}
+
+		ui->SetLBtnDown(false);
+	}
 }
 
 void UIManager::Finalize()
@@ -49,10 +73,121 @@ void UIManager::Finalize()
 
 GameObject* UIManager::GetFocusedUI()
 {
-	return nullptr;
+	const InputManager* input = m_managerSet->GetInputManager();
+	
+	// LMouse 입력이 있으면 포커스중인 UI를 갱신한다.
+	if (!input->IsKeyState(KEY::LMOUSE, KEY_STATE::TAP))
+	{
+		return m_focusedUI;
+	}
+
+	// 이전프레임에 포커스 중인 UI
+	GameObject* focusedUI = m_focusedUI;
+
+	// 현재 포커스중인 UI 찾기
+	Scene* scene = m_sceneManager->GetCurrentScene();
+	
+	/// BAKC_UI는 FRONT_UI보다 항상 뒤에 레이어 그려져야 한다.
+	vector<GameObject*>& backUIGroup = scene->GetUIGroupObject(OBJECT_TYPE::BACK_UI);
+	
+	auto targetBack = backUIGroup.end();
+
+	for (auto iter = backUIGroup.begin(); iter != backUIGroup.end(); ++iter)
+	{
+		UI* ui = (*iter)->GetComponent<UI>();
+		if (ui->IsMouseOn())
+		{
+			targetBack = iter;
+		}
+	}
+
+	/// FRONT_UI는 항상 앞에 그려지는 오브젝트 타입이다.
+	vector<GameObject*>& frontUIGroup = scene->GetUIGroupObject(OBJECT_TYPE::FRONT_UI);
+
+	auto targetFront = frontUIGroup.end();
+
+	for (auto iter = frontUIGroup.begin(); iter != frontUIGroup.end(); ++iter)
+	{
+		UI* ui = (*iter)->GetComponent<UI>();
+		// 마우스가 올라간 상태와 부모UI인 경우만
+		if (ui->IsMouseOn() && (*iter)->GetParent() == nullptr)
+		{
+			targetFront = iter;
+		}
+	}
+
+	// 이벤에 포커스된 UI가 없는 경우
+	if (targetBack == backUIGroup.end() && targetFront == frontUIGroup.end())
+	{
+		return nullptr;
+	}
+
+	/// 그룹백테내에서 가장 후순위로 빼기 
+	/// 포커스된 frontUI가 있는 경우
+	if (targetFront != frontUIGroup.end())
+	{
+		focusedUI = (*targetFront);
+		frontUIGroup.erase(targetFront);
+		frontUIGroup.push_back(focusedUI);
+	}
+	else /// 포커스된 backUI만 있는경우
+	{
+		focusedUI = (*targetBack);
+		backUIGroup.erase(targetBack);
+		backUIGroup.push_back(focusedUI);
+	}
+	return focusedUI;
 }
 
 GameObject* UIManager::GetTargetedUI(GameObject* _parent)
 {
-	return nullptr;
+	const InputManager* input = m_managerSet->GetInputManager();
+	KEY_STATE LBtnState = input->GetKeyState(KEY::LMOUSE);
+
+	// 부모 UI포함, 자식UI들중 실제 타겟팅된 UI를 가져온다
+	GameObject* targetUI = nullptr;
+
+	list<GameObject*> q;
+	vector<GameObject*> noneTarget;
+
+	q.push_back(_parent);
+	
+
+	while (!q.empty())
+	{
+		GameObject* object = q.front();
+		q.pop_front();
+
+		UI* ui = object->GetComponent<UI>();
+
+		if (ui->IsMouseOn())
+		{
+			if (nullptr != targetUI)
+			{
+				noneTarget.push_back(targetUI);
+			}
+
+			targetUI = object;
+		}
+		else
+		{
+			noneTarget.push_back(object);
+		}
+
+		vector<GameObject*>& children = object->GetChildren();
+		for (auto child : children)
+		{
+			q.push_back(child);
+		}
+	}
+
+	if (LBtnState == KEY_STATE::AWAY)
+	{
+		for (auto object : noneTarget)
+		{
+			UI* ui = object->GetComponent<UI>();
+			ui->SetLBtnDown(false);
+		}
+	}
+	return targetUI;
 }
