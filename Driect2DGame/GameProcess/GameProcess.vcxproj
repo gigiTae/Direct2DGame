@@ -141,7 +141,9 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="FileManager.h" />
+    <ClInclude Include="FlyMovement.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameProcessPCH.h" />
     <ClInclude Include="GameProcess.h" />
@@ -162,6 +164,8 @@
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitMovement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -173,7 +177,9 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="FlyMovement.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameProcess.cpp" />
     <ClCompile Include="GameWorld.cpp" />
@@ -191,6 +197,8 @@
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitMovement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MathModule\MathModule.vcxproj">

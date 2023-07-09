@@ -8,6 +8,8 @@
 #include "Animator.h"
 #include "TextureRenderer.h"
 #include "UI.h"
+#include "Unit.h"
+#include "Controller.h"
 
 MainScene::MainScene()
 {
@@ -22,41 +24,43 @@ void MainScene::Enter()
 	/// 리소스 로드
 	LoadSceneResources(L"MainScene");
 
-	for (int i = 0; i < 3; ++i)
+
+	/// 배경
+	GameObject* background = new GameObject("background",GetManagerSet());
+	background->CreateComponent<Transform>()->SetPosition(Vector2(0.f, 0.f));
+	background->CreateComponent<TextureRenderer>()->SetKey(L"background");
+
+	AddObject(background, OBJECT_TYPE::BACKGROUND);
+
+	/// UI
+	GameObject* frontUI = new GameObject("frontUI", GetManagerSet());
+	frontUI->SetCameraAffected(false);
+	frontUI->CreateComponent<Transform>()->SetPosition(Vector2(0.f, -440.f));
+	frontUI->GetComponent<Transform>()->SetScale(Vector2(1920.f, 200.f));
+	frontUI->CreateComponent<TextureRenderer>()->SetKey(L"FrontUI");
+	frontUI->CreateComponent<UI>();
+	AddObject(frontUI, OBJECT_TYPE::FRONT_UI);
+	
+	/// 컨트롤러
+	GameObject* controller = new GameObject("controller", GetManagerSet());
+	controller->CreateComponent<Transform>()->SetPosition(Vector2(0.f, 0.f));
+	controller->GetComponent<Transform>()->SetScale(Vector2(1920.f, 1080.f));
+	controller->CreateComponent<UI>();
+	controller->CreateComponent<Controller>();
+	controller->SetCameraAffected(false);
+
+	AddObject(controller, OBJECT_TYPE::BACK_UI);
+
+	/// 
+	for (int i = 0; i < 10; ++i)
 	{
-		GameObject* ui = new GameObject("ui", GetManagerSet());
+		GameObject* marine = new GameObject("marine", GetManagerSet());
+		Transform* marineT =marine->CreateComponent<Transform>();
+		marineT->SetPosition(Vector2(100.f * i, 0.f));
+		marineT->SetScale(Vector2(100.f, 100.f));
+		marine->CreateComponent<TextureRenderer>()->SetKey(L"FlySlime");
+		marine->CreateComponent<Unit>();
 
-		ui->CreateComponent<Transform>()->SetScale(Vector2(500.f, 500.f));
-		ui->GetComponent<Transform>()->SetPosition(Vector2(100.f*i, 10.f*i));
-		ui->CreateComponent<UI>();
-		ui->CreateComponent<TextureRenderer>()->SetKey(L"dsd");
-
-		GameObject* ui4 = new GameObject("ui", GetManagerSet());
-
-		ui4->CreateComponent<Transform>()->SetScale(Vector2(64.f, 64.f));
-		ui4->GetComponent<Transform>()->SetPosition(Vector2(-20.f, -10.f));
-		ui4->CreateComponent<UI>();
-
-		GameObject* ui2 = new GameObject("ui", GetManagerSet());
-
-		ui2->CreateComponent<Transform>()->SetScale(Vector2(64.f, 64.f));
-		ui2->GetComponent<Transform>()->SetPosition(Vector2(50.f, 0.f));
-		ui2->CreateComponent<UI>();
-
-		GameObject* ui3 = new GameObject("ui", GetManagerSet());
-
-		ui3->CreateComponent<Transform>()->SetScale(Vector2(64.f, 64.f));
-		ui3->GetComponent<Transform>()->SetOffset(Vector2(100.f, 100.f));
-		ui3->CreateComponent<UI>();
-		ui3->CreateComponent<TextureRenderer>()->SetKey(L"car");
-
-		ui->AddChild(ui2);
-		ui->AddChild(ui3);
-		ui->AddChild(ui4);
-
-		if (i == 1)
-			AddObject(ui, OBJECT_TYPE::BACK_UI);
-		else
-			AddObject(ui, OBJECT_TYPE::FRONT_UI);
+		AddObject(marine, OBJECT_TYPE::GROUND_UNIT);
 	}
 }

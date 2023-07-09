@@ -21,7 +21,7 @@ void D2DCamera::RotateCamera(float _radian)
 void D2DCamera::MoveCamera(Vector2 _distance)
 {
 	// 스크린 좌표계로 변환
-	m_position += _distance.ToScreenPoint();
+	m_position -= _distance.ChangeYSign();
 	CalculateMatrix();
 }
 
@@ -38,13 +38,88 @@ void D2DCamera::ZoomCamera(Vector2 _scale)
 	CalculateMatrix();
 }
 
-void D2DCamera::ResetCamera()
+void D2DCamera::ResetCamera(Vector2 _screenSize)
 {
 	m_rotation = 0.f;
 	m_position = Vector2(0.f, 0.f);
 	m_scale = Vector2(1.f, 1.f);
+	m_screenSize = _screenSize;
 
 	m_cameraMatrix = D2D1::Matrix3x2F::Identity();
+}
+
+Vector2 D2DCamera::ScreenToWorld(const Vector2& _screen)
+{
+	Vector2 camera = ScreenToCamera(_screen);
+
+	return CameraToWorld(camera);
+}
+
+Vector2 D2DCamera::ScreenToCamera(const Vector2& _screen)
+{
+	// y좌표 반대, 중심점 좌표 이동
+	Vector2 camera{};
+	camera.x = _screen.x  - m_screenSize.x *0.5f;
+	camera.y = -_screen.y + m_screenSize.y * 0.5f; 
+
+	return camera;
+}
+
+
+Vector2 D2DCamera::CameraToScreen(const Vector2& _camera)
+{
+	Vector2 screen{};
+	 
+	screen.x = _camera.x + m_screenSize.x *0.5f;
+	screen.y = -_camera.y + m_screenSize.y * 0.5f;
+
+	return screen;
+}
+
+Vector2 D2DCamera::CameraToWorld(const Vector2& _camera)
+{
+	Vector2 world{};
+
+	// 이동
+	// 카메라 반대방향은 빼줘야하고 y좌표는 부호가 반대이므로 아래과 같은 식이 나온다
+	world.x = _camera.x - m_position.x;
+	world.y = _camera.y + m_position.y;
+
+	// 회전
+	world = Vector2::RotateRadian(world, Vector2::Zero, m_rotation);
+
+	// 크기
+	world.x = world.x / m_scale.x;
+	world.y = world.y / m_scale.y;
+
+	return world;
+}
+
+
+Vector2 D2DCamera::WorldToCamera(const Vector2& _world)
+{
+	Vector2 camera{};
+
+	// 크기
+	camera.x = _world.x * m_scale.x;
+	camera.y = _world.y * m_scale.y;
+
+	// 회전
+	camera = Vector2::RotateRadian(camera, Vector2::Zero, -m_rotation);
+
+	// 이동
+	camera.x = camera.x + m_position.x;
+	camera.y = camera.y - m_position.y;
+
+	return camera;
+}
+
+
+Vector2 D2DCamera::WorldtoScreen(const Vector2& _world)
+{
+	Vector2 camera = WorldToCamera(_world);
+
+	return CameraToScreen(camera);
 }
 
 void D2DCamera::CalculateMatrix()

@@ -14,6 +14,7 @@ GameObject::GameObject(const string& _name, const ManagerSet* _managerSet)
 	:m_name(NamingManager::GetInstance()->GenerateName(_name))
 	, m_state(OBJECT_STATE::ALIVE)
 	, m_managerSet(_managerSet)
+	, m_cameraAffected(true)
 	, m_destoryTime(0.f)
 {
 }

@@ -43,7 +43,7 @@ void UI::LateUpdate(float _deltaTime)
 	const InputManager* input = GetInputManager();
 	Transform* transform = GetComponent<Transform>();
 	
-	Vector2 mousePosition = input->GetMousePosition();
+	Vector2 mousePosition = input->GetCameraMousePosition();
 	Vector2 scale = transform->GetScale();
 	Vector2 position = transform->GetPosition();
 

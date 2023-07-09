@@ -66,7 +66,7 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 	m_timeManager->Initalize(m_screenSize);
 	m_inputManager->Initalize(m_hWnd,m_cameraManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
-	m_cameraManager->Initalize(m_d2DRenderer, m_screenSize);
+	m_cameraManager->Initalize(m_d2DRenderer, m_screenSize,m_inputManager);
 	m_UIManager->Initalize(m_sceneManager,m_managerSet);
 	m_sceneManager->Initalize(_d2DRenderer,m_managerSet,m_sceneManager);
 
@@ -101,6 +101,9 @@ void GameProcess::Process()
 	
 	// ============= UI 이벤트 ====================== 
 	m_UIManager->Update();
+
+	// ============== 카메라 이동 ===================
+	m_cameraManager->Update(deltaTime);
 	
 	// ================= 랜더링 ===================
 	// 랜더링은 BegineRender와 EndRender 사이에 해야한다.

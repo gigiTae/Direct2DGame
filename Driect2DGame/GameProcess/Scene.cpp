@@ -45,26 +45,16 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 	{
 		for (auto iter : m_objectVector[i])
 		{
+			bool isCameraAffectedObject = iter->IsCameraAffected();
+
+			_d2DRenderer->SetCameraAffected(isCameraAffectedObject);
+
 			if (iter->GetParent() == nullptr)
+			{
 				iter->PreRender(_d2DRenderer);
-		}
-	}
-
-	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
-	{
-		for (auto iter : m_objectVector[i])
-		{
-			if (iter->GetParent() == nullptr)
 				iter->Render(_d2DRenderer);
-		}
-	}
-
-	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
-	{
-		for (auto iter : m_objectVector[i])
-		{
-			if (iter->GetParent() == nullptr)
 				iter->PostRender(_d2DRenderer);
+			}
 		}
 	}
 }
@@ -148,7 +138,7 @@ void Scene::RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayT
 
 	m_addObjectList.push_back(std::move(info));
 }
-
+ 
 void Scene::RegisterNextScene(SCENE_TYPE _nextScene) const
 {
 	m_nextScene = _nextScene;
@@ -160,6 +150,10 @@ void Scene::DubugRender(D2DRenderer* _d2DRenderer)
 	{
 		for (auto iter : m_objectVector[i])
 		{
+			bool isCameraAffectedObject = iter->IsCameraAffected();
+
+			_d2DRenderer->SetCameraAffected(isCameraAffectedObject);
+
 			iter->DebugRender(_d2DRenderer);
 		}
 	}

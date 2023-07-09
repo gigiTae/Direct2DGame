@@ -27,10 +27,10 @@ public:
 	void DebugRender(D2DRenderer* _d2DRenderer);
 	void ProcessEvent(float _deltaTime);
 
-	Scene* GetCurrentScene() { return m_currentScene; }
+	Scene* GetCurrentScene()const { return m_currentScene; }
 	void ChangeScene(SCENE_TYPE _nextScene);
 
-	void RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime) const;
+	void RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime =0.f) const;
 	void RegisterNextScene(SCENE_TYPE _nextScene)const;
 
 	bool IsGameRun() { return m_gameRun; }

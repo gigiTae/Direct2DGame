@@ -61,6 +61,11 @@ public:
 	void IntergrateForces(float _fixedDeltaTime);
 
 public:
+	/// 카메라에 영향을 받는 오브젝트인지 
+	bool IsCameraAffected() { return m_cameraAffected; }
+	void SetCameraAffected(bool _isAffected) { m_cameraAffected = _isAffected; }
+
+public:
 	/// 충돌 이벤트 함수
 	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};
 	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) {};
@@ -109,6 +114,8 @@ private:
 	float m_destoryTime;
 	const string m_name;
 
+	// 카메라에 영향을 받는 오브젝트인지 
+	bool m_cameraAffected;
 	// 매니져 포인터 집합
 	const ManagerSet* m_managerSet;
 };

@@ -19,11 +19,14 @@ public:
 	void BeginRender();
 	void EndRender();
 
+public:
+	// 화면에 오보젝트가 카메라에 영향을 받는지 확인하는 함수
+	void SetCameraAffected(bool _isAffected);
+
 private:
 	void SetTransform(float _radian, Vector2 _point);
 	// 기본 행렬로 변환
 	void SetTransform() { m_renderTarget->SetTransform(m_finalMatrix); }
-
 public:
 	/// 그리기 관련 함수들
 
@@ -92,6 +95,8 @@ private:
 	D2D1_SIZE_F m_renderTargetSize;
 
 private:
+	bool m_cameraAffected;
+
 	/// 비트맵 관련 
 	IWICImagingFactory* m_imagingFactorty;
 

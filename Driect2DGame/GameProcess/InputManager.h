@@ -24,7 +24,10 @@ public:
 	void Update();
 	void Finalize();
 
-	Vector2 GetMousePosition() const { return m_mousePosition; }
+	Vector2 GetWorldMousePosition() const { return m_worldMousePosition; }
+	Vector2 GetScreendMousePosition() const { return m_screenMousePosition; }
+	Vector2 GetCameraMousePosition() const { return m_cameraMousePosition; }
+
 	KEY_STATE GetKeyState(KEY _key)const { return m_keyInfo[static_cast<int>(_key)].state; }
 	bool IsKeyState(const KEY& _key, const KEY_STATE& _state) const;
 private:
@@ -34,7 +37,9 @@ private:
 	HWND m_hwnd;
 
 	// 이번 프레임 마우스 위치
-	Vector2 m_mousePosition;
+	Vector2 m_worldMousePosition;
+	Vector2 m_cameraMousePosition;
+	Vector2 m_screenMousePosition;
 
 	// 키 정보들을 담은 배열
 	vector<KeyInfo> m_keyInfo;

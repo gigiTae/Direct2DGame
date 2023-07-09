@@ -98,7 +98,7 @@ void D2DRenderer::Initalize(HWND _hwnd)
 
 	/// 카메라 생성
 	m_camera = new D2DCamera();
-	m_camera->ResetCamera();
+	m_camera->ResetCamera(Vector2(m_renderTargetSize.width,m_renderTargetSize.height));
 }
 
 void D2DRenderer::BeginRender()
@@ -114,7 +114,6 @@ void D2DRenderer::BeginRender()
 		m_renderTarget->BeginDraw();
 
 		/// 최종 행렬 계산
-		
 		D2D1_MATRIX_3X2_F cameraMatix = m_camera->GetCameraMatrix();
 		m_finalMatrix = cameraMatix * m_screenMatrix;
 
@@ -141,6 +140,26 @@ void D2DRenderer::EndRender()
 	}
 }
 
+
+void D2DRenderer::SetCameraAffected(bool _isAffected)
+{
+	if (m_cameraAffected != _isAffected)
+	{
+		m_cameraAffected = _isAffected;
+
+		// 카메라에 영향을 받는 경우
+		if (m_cameraAffected)
+		{
+			m_finalMatrix = m_camera->GetCameraMatrix() * m_screenMatrix;
+		}
+		else // 받지 않는 경우
+		{
+			m_finalMatrix = m_screenMatrix;
+		}
+
+		SetTransform();
+	}
+}
 
 void D2DRenderer::Finalize()
 {
@@ -184,8 +203,8 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
-	Vector2 point1 = _point1.ToScreenPoint();
-	Vector2 point2 = _point2.ToScreenPoint();
+	Vector2 point1 = _point1.ChangeYSign();
+	Vector2 point2 = _point2.ChangeYSign();
 
 	D2D1_POINT_2F start = point1.ToPoint2F();
 	D2D1_POINT_2F end = point2.ToPoint2F();
@@ -200,7 +219,7 @@ void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 {
-	Vector2 point = _point.ToScreenPoint();
+	Vector2 point = _point.ChangeYSign();
 
 	D2D1_ELLIPSE region{};
 	region.point = point.ToPoint2F();
@@ -217,7 +236,7 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 
 void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 {
-	Vector2 point = _point.ToScreenPoint();
+	Vector2 point = _point.ChangeYSign();
 
 	D2D1_ELLIPSE region{};
 	region.point = point.ToPoint2F();
@@ -234,8 +253,8 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 
 void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color,float _rotation)
 {
-	Vector2 leftTop = _leftTop.ToScreenPoint();
-	Vector2 rightBottom = _rightBottom.ToScreenPoint();
+	Vector2 leftTop = _leftTop.ChangeYSign();
+	Vector2 rightBottom = _rightBottom.ChangeYSign();
 
 	D2D1_RECT_F rt{};
 	rt.left = leftTop.x;
@@ -259,8 +278,8 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom
 	, COLORREF _color /*= D2D1::ColorF::White*/)
 {
-	Vector2 leftTop = _leftTop.ToScreenPoint();
-	Vector2 rightBottom = _rightBottom.ToScreenPoint();
+	Vector2 leftTop = _leftTop.ChangeYSign();
+	Vector2 rightBottom = _rightBottom.ChangeYSign();
 
 	// 글자 출력범위
 	D2D1_RECT_F rect = D2D1::RectF(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
@@ -315,7 +334,7 @@ void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position
 	assert(iter != m_textures.end() || !L"텍스처 파일이 로드되지 않았습니다");
 
 	D2DTexture* texture = iter->second;
-	Vector2 position = _position.ToScreenPoint();
+	Vector2 position = _position.ChangeYSign();
 	Vector2 halfSize = texture->GetSize() * 0.5f;
 
 	D2D1_RECT_F rect{};
@@ -344,7 +363,7 @@ void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position
 	D2DTexture* texture = iter->second;
 
 	// 스크린 좌표계로 변환 
-	Vector2 position = _position.ToScreenPoint();
+	Vector2 position = _position.ChangeYSign();
 	Vector2 halfSize = _sliceSize * 0.5f;
 
 	// 화면에 출력하는 용도

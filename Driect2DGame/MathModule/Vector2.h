@@ -45,6 +45,8 @@ public:
 	// 극좌표계 -> 직교좌표계 변환
 	inline Vector2 ToCartesianCoordinate() const;
 
+	inline Vector2 ChangeYSign ( );
+
 	// 내적연산
 	inline constexpr float Dot(const Vector2& _other) const;
 	// 외적 연산
@@ -60,15 +62,18 @@ public:
 	// 선분과 점사이의 최단경로를 반환
 	static float PointToLineSegment ( const Vector2& point , const Vector2& line1 ,const  Vector2& line2 );
 
-	/// y좌표 부호 변환
-	inline Vector2 ToScreenPoint();
-
 	// 정적멤버변수
 	static const Vector2 UnitX;
 	static const Vector2 UnitY;
 	static const Vector2 One;
 	static const Vector2 Zero;
 };
+
+
+inline Vector2 Vector2::ChangeYSign ( )
+{
+	return Vector2 ( x , -y );
+}
 
 inline D2D1_POINT_2F Vector2::ToPoint2F()
 {
@@ -89,11 +94,6 @@ inline Vector2 Vector2::RotateRadian(const Vector2& _point, const Vector2& _cent
 	rotated.y = _center.y + relative.x * sinTheta + relative.y * cosTheta;
 
 	return rotated;
-}
-
-inline Vector2 Vector2::ToScreenPoint ( )
-{
-	return Vector2 ( x , -y );
 }
 
 

@@ -83,14 +83,27 @@ void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 	RegisterClass(&wndclass);
 	
 	// 윈도우 창 시작좌표 (좌상단 기준)
-	constexpr int left = 100;
-	constexpr int top = 100;
+	constexpr int left = 0;
+	constexpr int top = 0;
 	
-	// 윈도우 창 생성
+
+	DWORD dwStyle = WS_OVERLAPPEDWINDOW; // 기본 윈도우 스타일
+	DWORD dwExStyle = 0; // 기본 확장 윈도우 스타일
+
+	// 천체 화면 모드로 변경
+	dwStyle = WS_POPUP; // 팝업 스타일
+	dwExStyle = WS_EX_TOPMOST; // 최상위 윈도우 스타일
+
 	m_hWnd = CreateWindow(title, title
-		, WS_OVERLAPPEDWINDOW // 창이 겹침
+		, dwStyle | dwExStyle // 스타일과 확장 스타일을 결합하여 사용
 		, left, top, m_screenWidth, m_screenHeight
 		, NULL, NULL, _hInstance, NULL);
+
+	//// 윈도우 창 생성
+	//m_hWnd = CreateWindow(title, title
+	//	, WS_OVERLAPPEDWINDOW // 창이 겹침
+	//	, left, top, m_screenWidth, m_screenHeight
+	//	, NULL, NULL, _hInstance, NULL);
 
 	// 방어적코드
 	assert(m_hWnd);
@@ -98,10 +111,10 @@ void D2DEngine::WindowInitalize(HINSTANCE _hInstance, int _nCmdShow)
 	ShowWindow(m_hWnd, _nCmdShow);
 	UpdateWindow(m_hWnd);
 
-	// 화면해상도에 맞게 window 좌표계를 설정한다
-	RECT rt = { 0, 0,(long)m_screenWidth, (long)m_screenHeight };
-	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false); // window 설정스타일에 맞는 rt값을 반환해준다.
-	SetWindowPos(m_hWnd, nullptr, left, top, rt.right - rt.left, rt.bottom - rt.top, 0);
+	//// 화면해상도에 맞게 window 좌표계를 설정한다
+	//RECT rt = { 0, 0,(long)m_screenWidth, (long)m_screenHeight };
+	//AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false); // window 설정스타일에 맞는 rt값을 반환해준다.
+	//SetWindowPos(m_hWnd, nullptr, left, top, rt.right - rt.left, rt.bottom - rt.top, 0);
 
 }
 

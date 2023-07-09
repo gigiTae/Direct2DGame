@@ -28,6 +28,7 @@ InputManager::InputManager()
 	}
 	, m_keyInfo{}
 	,m_hwnd(nullptr)
+	,m_worldMousePosition{}
 	,m_cameraManager(nullptr)
 {
 }
@@ -87,13 +88,15 @@ void InputManager::Update()
 		POINT mousePosition{};
 		GetCursorPos(&mousePosition);
 
+		// 스크린 좌표계의 마우스 위치
 		ScreenToClient(m_hwnd, &mousePosition);
-
-		m_mousePosition = Vector2(static_cast<float>(mousePosition.x)
+		m_screenMousePosition = Vector2(static_cast<float>(mousePosition.x)
 			, static_cast<float>(mousePosition.y));
 
 		// 월드 좌표계로 변환
-		m_mousePosition = m_cameraManager->ScreenToWorld(m_mousePosition);
+		m_cameraMousePosition = m_cameraManager->ScreenToCamera(m_screenMousePosition);
+
+		m_worldMousePosition = m_cameraManager->CameraToWorld(m_cameraMousePosition);
 	}
 	// 포커스해제되어 예외처리 진행
 	else
