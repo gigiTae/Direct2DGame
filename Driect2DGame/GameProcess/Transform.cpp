@@ -90,10 +90,8 @@ void Transform::DebugRender(D2DRenderer* _d2DRenderer)
 	nameW.assign(nameA.begin(), nameA.end());
 
 	wstring info = nameW + L"\nX:" + std::to_wstring(static_cast<int>(pos.x))
-		+ L"\nY:" + std::to_wstring(static_cast<int>(pos.y))
-		+ L"\nAngle:" + std::to_wstring(static_cast<int>(FMath::Rad2Deg(rotation)));
-
-	_d2DRenderer->DrawTextW(info, pos, Vector2(pos.x + 200.f, pos.y), D2D1::ColorF::White);
+		+ L"\nY:" + std::to_wstring(static_cast<int>(pos.y));
+	_d2DRenderer->DrawTextW(info, pos, Vector2(pos.x + 200.f, pos.y), D2D1::ColorF::DarkSlateGray);
 }
 
 GameObject* Transform::GetChild(int _index)

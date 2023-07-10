@@ -19,9 +19,6 @@ public:
 	void LateUpdate(float _deltaTime) override;
 	void DebugRender(D2DRenderer* _d2DRenderer) override;
 
-	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) override;
-	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) override;
-	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) override;
 public:
 	void SetActive(bool _isAtive) { m_active = _isAtive; }
 	void SetPosition(Vector2 _position) { m_position = _position; }
@@ -36,9 +33,7 @@ public:
 private:
 	Vector2 m_offset;
 	Vector2 m_position; 
-	
-	// 현재 충돌중인 콜라이더 갯수
-	int m_currentCollision;
+
 	float m_radius;
 
 	// 콜라이더 활성화 여부

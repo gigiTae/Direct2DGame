@@ -85,9 +85,6 @@
     <ClInclude Include="CameraManager.h">
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClInclude>
-    <ClInclude Include="ReadMe.h">
-      <Filter>GameProcess\01.Define</Filter>
-    </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>StarcrafScripts\UI</Filter>
     </ClInclude>
@@ -103,6 +100,7 @@
     <ClInclude Include="FlyMovement.h">
       <Filter>StarcrafScripts\Unit\UnitMovement\FlyMovement</Filter>
     </ClInclude>
+    <ClInclude Include="ReadMe.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="StarcrafScripts">

@@ -17,6 +17,7 @@ D2DRenderer::D2DRenderer()
 	,m_textFormat(nullptr)
 	,m_imagingFactorty(nullptr)
 	,m_finalMatrix{}
+	,m_cameraAffected(true)
 {
 }
 

@@ -64,6 +64,18 @@ void CameraManager::Update(float _deltaTime)
 
 	m_camera->MoveCamera(distance);
 
+	/// 카메라 확대 
+
+	if(m_inputManager->IsKeyState(KEY::F1, KEY_STATE::TAP))
+	{
+		m_camera->ZoomCamera(Vector2(0.1f, 0.1f));
+	}
+	if (m_inputManager->IsKeyState(KEY::F2, KEY_STATE::TAP))
+	{
+		m_camera->ZoomCamera(Vector2(-0.1f, -0.1f));
+	}
+
+
 }
 
 Vector2 CameraManager::ScreenToWorld(const Vector2& _screen) const

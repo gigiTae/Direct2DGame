@@ -109,6 +109,42 @@ void GameObject::OnMouseClicked()
 	}
 }
 
+void GameObject::OnCollisionEnter(const Collision& _collision)
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnCollisionEnter(_collision);
+		}
+	}
+}
+
+void GameObject::OnCollisionExit(const Collision& _collision)
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnCollisionExit(_collision);
+		}
+	}
+}
+
+void GameObject::OnCollisionStay(const Collision& _collision)
+{
+	for (auto& iter : m_components)
+	{
+		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
+		if (monoBehaviour != nullptr)
+		{
+			monoBehaviour->OnCollisionStay(_collision);
+		}
+	}
+}
+
 void GameObject::AddChild(GameObject* _child)
 {
 	Transform* transform = GetComponent<Transform>();

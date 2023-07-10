@@ -38,15 +38,35 @@ void Controller::Update(float _deltaTime)
 	if (input->IsKeyState(KEY::RMOUSE, KEY_STATE::TAP))
 	{
 		const SceneManager* sceneMgr = GetSceneManager();
-		Vector2 mousePosition = input->GetCameraMousePosition();
+		
+		// 카메라 좌표계의 마우스 포지션
+		Vector2 cameraMousePosition = input->GetCameraMousePosition();
 
 		GameObject* effect1 = new GameObject("mouseEffect", GetManagerSet());
 		effect1->CreateComponent<TextureRenderer>()->SetKey(L"MouseEffect1");
-		effect1->CreateComponent<Transform>()->SetPosition(mousePosition);
+		effect1->CreateComponent<Transform>()->SetPosition(cameraMousePosition);
 		effect1->Destory(0.1f);
 		effect1->SetCameraAffected(false);
 		sceneMgr->RegisterObject(effect1, OBJECT_TYPE::MOUSE_EFFECT);
+
+		// 오브젝트에게 이동명령을 지시한다.
+
+		Vector2 worldMousePostion = input->GetWorldMousePosition();
+
+		for (auto object : m_selectUnits)
+		{			Unit* unit = object->GetComponent<Unit>();
+			unit->MoveUnit(worldMousePostion);
+		}
 	}	
+	else if (input->IsKeyState(KEY::H, KEY_STATE::HOLD))
+	{
+		// 지정된 부대에게 정지 명령을 지시한다.
+		for (auto object : m_selectUnits)
+		{
+			Unit* unit = object->GetComponent<Unit>();
+			unit->HoldUnit();
+		}
+	}
 
 }
 
@@ -98,27 +118,61 @@ void Controller::GetUnits()
 	// 차례대로 사각형내부에 있는지 판단한다
 	vector<GameObject*> selectObject;
 
-	for (int i = static_cast<int>(OBJECT_TYPE::GROUND_UNIT);
-		i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
+	// Area크기가 작으면 한개의 오브젝트만 선택한다
+	if (maxArea.x - minArea.x <= 5.f && maxArea.y - minArea.y <= 5.f)
 	{
-		const vector<GameObject*>& groupObject
-			= scene->GetGroupObject(static_cast<OBJECT_TYPE>(i));
-
-		for (auto object : groupObject)
+		for (int i = static_cast<int>(OBJECT_TYPE::GROUND_UNIT);
+			i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
 		{
-			// AABB충돌검사 
-			Transform* transform = object->GetComponent<Transform>();
-			Vector2 position = transform->GetPosition();
-			Vector2 scale = transform->GetScale();
+			const vector<GameObject*>& groupObject
+				= scene->GetGroupObject(static_cast<OBJECT_TYPE>(i));
 
-			Vector2 objectMin = position - scale * 0.5f;
-			Vector2 objectMax = position + scale * 0.5f;
-
-			// 사각형 내부에 있으면
-			if (minArea.x <= objectMax.x && maxArea.x >= objectMin.x
-				&& minArea.y <= objectMax.y && maxArea.y >= objectMin.y)
+			for (auto object : groupObject)
 			{
-				selectObject.push_back(object);
+				// AABB충돌검사 
+				Transform* transform = object->GetComponent<Transform>();
+				Vector2 position = transform->GetPosition();
+				Vector2 scale = transform->GetScale();
+
+				Vector2 objectMin = position - scale * 0.5f;
+				Vector2 objectMax = position + scale * 0.5f;
+
+				// 사각형 내부에 있으면
+				if (minArea.x <= objectMax.x && maxArea.x >= objectMin.x
+					&& minArea.y <= objectMax.y && maxArea.y >= objectMin.y)
+				{
+					if (!selectObject.empty())
+						selectObject.pop_back();
+
+					selectObject.push_back(object);
+				}
+			}
+		}
+	}
+	else
+	{
+		for (int i = static_cast<int>(OBJECT_TYPE::GROUND_UNIT);
+			i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
+		{
+			const vector<GameObject*>& groupObject
+				= scene->GetGroupObject(static_cast<OBJECT_TYPE>(i));
+
+			for (auto object : groupObject)
+			{
+				// AABB충돌검사 
+				Transform* transform = object->GetComponent<Transform>();
+				Vector2 position = transform->GetPosition();
+				Vector2 scale = transform->GetScale();
+
+				Vector2 objectMin = position - scale * 0.5f;
+				Vector2 objectMax = position + scale * 0.5f;
+
+				// 사각형 내부에 있으면
+				if (minArea.x <= objectMax.x && maxArea.x >= objectMin.x
+					&& minArea.y <= objectMax.y && maxArea.y >= objectMin.y)
+				{
+					selectObject.push_back(object);
+				}
 			}
 		}
 	}

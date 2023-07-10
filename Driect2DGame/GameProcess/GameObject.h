@@ -66,12 +66,6 @@ public:
 	void SetCameraAffected(bool _isAffected) { m_cameraAffected = _isAffected; }
 
 public:
-	/// 충돌 이벤트 함수
-	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};
-	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) {};
-	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) {};
-
-public:
 	/// 자식 오브젝트 
 	void AddChild(GameObject* _child);
 	GameObject* GetChild(int _index);
@@ -96,6 +90,12 @@ public:
 	void OnMouseUp();
 	void OnMouseDown();
 	void OnMouseClicked();
+
+	/// 충돌 관련함수
+	void OnCollisionEnter(const Collision& _collision);
+	void OnCollisionExit(const Collision& _collision);
+	void OnCollisionStay(const Collision& _collision);
+
 
 public:
 	/// 컴포넌트 관련 함수 

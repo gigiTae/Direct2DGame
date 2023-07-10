@@ -23,6 +23,7 @@ public:
 	void ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector);
 
 	void SetMass(float _mass);
+	float GetMass() { return m_mass; }
 
 	Vector2 GetVelocity() { return m_velocity; }
 

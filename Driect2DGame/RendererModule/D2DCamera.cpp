@@ -29,8 +29,8 @@ void D2DCamera::ZoomCamera(Vector2 _scale)
 {
 	m_scale += _scale;
 
-	constexpr float Min = 0.1f;
-	constexpr float Max = 5.f;
+	constexpr float Min = 0.5f;
+	constexpr float Max = 2.f;
 
 	m_scale.x = FMath::Clamp(m_scale.x, Min, Max);
 	m_scale.y = FMath::Clamp(m_scale.y, Min, Max);
@@ -80,17 +80,17 @@ Vector2 D2DCamera::CameraToWorld(const Vector2& _camera)
 {
 	Vector2 world{};
 
-	// 이동
-	// 카메라 반대방향은 빼줘야하고 y좌표는 부호가 반대이므로 아래과 같은 식이 나온다
-	world.x = _camera.x - m_position.x;
-	world.y = _camera.y + m_position.y;
-
+	// 스케일
+	world.x = _camera.x / m_scale.x;
+	world.y = _camera.y / m_scale.y;
+	
 	// 회전
 	world = Vector2::RotateRadian(world, Vector2::Zero, m_rotation);
 
-	// 크기
-	world.x = world.x / m_scale.x;
-	world.y = world.y / m_scale.y;
+	// 이동
+	// 카메라 반대방향은 빼줘야하고 y좌표는 부호가 반대이므로 아래과 같은 식이 나온다
+	world.x -= m_position.x;
+	world.y += m_position.y;
 
 	return world;
 }
@@ -110,7 +110,7 @@ Vector2 D2DCamera::WorldToCamera(const Vector2& _world)
 	// 이동
 	camera.x = camera.x + m_position.x;
 	camera.y = camera.y - m_position.y;
-
+		
 	return camera;
 }
 

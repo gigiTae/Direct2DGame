@@ -15,13 +15,16 @@ public:
 	~Collider();
 
 public:
-	virtual void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) abstract;
-	virtual void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) abstract;
-	virtual void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) abstract;
+	void OnCollisionEnter(const Collision& _collision);
+	void OnCollisionExit(const Collision& _collision);
+	void OnCollisionStay(const Collision& _collision);
 
-	const unsigned int GetID() const{ return m_ID; }
+	const unsigned int GetID() const { return m_ID; }
+
+	int GetCurrentCollison() { return m_currentCollision; }
 
 private:
 	// 충돌체의 아이디는 고유한 값을 가진다.
 	const unsigned int m_ID;
+	int m_currentCollision; // 현재 충돌중이 충돌체 
 };

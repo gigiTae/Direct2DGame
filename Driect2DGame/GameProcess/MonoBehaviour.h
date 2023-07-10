@@ -28,9 +28,9 @@ public:
     void PostRender(D2DRenderer* _d2DRenderer) override {};
 
     /// 충돌 관련 함수
-	virtual void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) {};
-	virtual void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) {};
-	virtual void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) {};
+	virtual void OnCollisionStay(const Collision& _collision) {};
+	virtual void OnCollisionEnter(const Collision& _collision) {};
+	virtual void OnCollisionExit(const Collision& _collision) {};
 
     /// 마우스 입력 함수
     virtual void OnMouse() {};

@@ -50,7 +50,7 @@ public:
 public:
 
 	// 오브젝트 타입과 타입간의 충돌설정을 한다.
-	void CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right);
+	void CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right) const;
 	
 private:
 
@@ -76,6 +76,6 @@ private:
 	// 이전 프레임 충돌정보들을 저장
 	map<unsigned long long, bool> m_prevCollisionInfo;
 	// 오브젝트 타입별로 충돌을 판단
-	int m_collisionCheck[static_cast<int>(OBJECT_TYPE::END)];
+	mutable int m_collisionCheck[static_cast<int>(OBJECT_TYPE::END)];
 };
 

@@ -12,11 +12,6 @@ struct Collision;
 class BoxCollider :public Collider
 {
 public:
-	void OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager) override;
-	void OnCollisionExit(const Collision& _collision, const InputManager* _inputManager) override;
-	void OnCollisionStay(const Collision& _collision, const InputManager* _inputManager) override;
-
-public:
 	BoxCollider();
 	~BoxCollider();
 
@@ -45,9 +40,6 @@ private:
 	Vector2 m_position;
 	Vector2 m_offset;
 	Vector2 m_scale;
-
-	// 현재 충돌중인 콜라이더 갯수
-	int m_currentCollision;
 
 	// 회전가능한 박스인지 여부를 체크해서 AABB,OBB등의 처리를 해준다
 	bool m_isRotatable;

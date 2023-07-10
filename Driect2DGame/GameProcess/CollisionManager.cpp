@@ -45,7 +45,7 @@ void CollisionManager::Finalize()
 {
 }
 
-void CollisionManager::CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right)
+void CollisionManager::CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right) const
 {
 	// 비트 연산자를 통해서 그룹간의 충돌정보를 관리한다.
 	m_collisionCheck[static_cast<int>(_left)] |= (1 << static_cast<int>(_right));
@@ -224,13 +224,13 @@ void CollisionManager::OnCollisionProcess(bool _isCollision
 	{
 		if (leftObject->IsAlive() && rightObject->IsAlive())
 		{
-			_leftCollider->OnCollisionStay(leftCollision, m_inputManager);
-			_rightCollider->OnCollisionStay(rightCollision, m_inputManager);
+			_leftCollider->OnCollisionStay(leftCollision);
+			_rightCollider->OnCollisionStay(rightCollision);
 		}
 		else // 둘중하나가 삭제예정이라면 예외처리
 		{ 
-			_leftCollider->OnCollisionExit(leftCollision, m_inputManager);
-			_rightCollider->OnCollisionExit(rightCollision, m_inputManager);
+			_leftCollider->OnCollisionExit(leftCollision);
+			_rightCollider->OnCollisionExit(rightCollision);
 			iter->second = false;
 		}
 	}
@@ -239,15 +239,15 @@ void CollisionManager::OnCollisionProcess(bool _isCollision
 		// 둘중하나가 삭제 예정이라면 충돌하지 않은것으로 취급
 		if (leftObject->IsAlive() && rightObject->IsAlive())
 		{
-			_leftCollider->OnCollisionEnter(leftCollision, m_inputManager);
-			_rightCollider->OnCollisionEnter(rightCollision, m_inputManager);
+			_leftCollider->OnCollisionEnter(leftCollision);
+			_rightCollider->OnCollisionEnter(rightCollision);
 			iter->second = true;
 		}
 	}
 	else if (!_isCollision && isPrevCollison)
 	{
-		_leftCollider->OnCollisionExit(leftCollision, m_inputManager);
-		_rightCollider->OnCollisionExit(rightCollision, m_inputManager);
+		_leftCollider->OnCollisionExit(leftCollision);
+		_rightCollider->OnCollisionExit(rightCollision);
 		iter->second = false;
 	}
 

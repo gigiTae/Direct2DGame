@@ -3,6 +3,8 @@
 
 UnitMovement::UnitMovement()
 	:m_moveSpeed(0.f)
+	, m_gameoject(nullptr)
+	,m_unitComponent(nullptr)
 {
 
 }

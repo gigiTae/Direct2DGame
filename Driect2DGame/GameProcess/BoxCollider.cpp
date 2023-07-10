@@ -8,7 +8,6 @@
 BoxCollider::BoxCollider()
 	:Collider(typeid(this).name())
 	,m_offset{}
-	, m_currentCollision(0)
 	, m_position{}
 	, m_rotation(0.f)
 	, m_scale{}
@@ -19,27 +18,6 @@ BoxCollider::BoxCollider()
 
 BoxCollider::~BoxCollider()
 {
-}
-
-void BoxCollider::OnCollisionEnter(const Collision& _collision, const InputManager* _inputManager)
-{
-	++m_currentCollision;
-	assert(m_currentCollision >= 0);
-
-	GetGameObject()->OnCollisionEnter(_collision, _inputManager);
-}
-
-void BoxCollider::OnCollisionExit(const Collision& _collision, const InputManager* _inputManager)
-{
-	--m_currentCollision;
-	assert(m_currentCollision >= 0);
-
-	GetGameObject()->OnCollisionExit(_collision, _inputManager);
-}
-
-void BoxCollider::OnCollisionStay(const Collision& _collision, const InputManager* _inputManager)
-{
-	GetGameObject()->OnCollisionStay(_collision, _inputManager);
 }
 
 void BoxCollider::LateUpdate(float _deltaTime)
@@ -68,7 +46,7 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	Vector2 postion = GetComponent<Transform>()->GetPosition();
 
 	// 충돌상황에 따라서 랜더링
-	if (m_currentCollision == 0)
+	if (GetCurrentCollison() == 0)
 	{ 
 		_d2DRenderer->DrawRectangle(leftTop, rightBottom,D2D1::ColorF::LightGreen);
 	}

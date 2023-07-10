@@ -44,7 +44,7 @@ void RigidBody::LateUpdate(float _deltaTime)
 void RigidBody::SetMass(float _mass)
 {
 	m_mass = _mass;
-	if (m_mass < FLT_MAX)
+	if (m_mass < FLT_MAX )
 	{
 		m_invMass = 1.0f / m_mass;
 		m_I = m_mass;// *_scale.LengthSquared() / 12.0f;

@@ -13,12 +13,18 @@ public:
 	~UnitMovement();
 
 public:
-	virtual void Move(float _deltaTime) abstract; 
+	/// 유닛에게 움직이라는 명령을 내린다 도착하면 true를 반환한다.
+	virtual bool Move(float _deltaTime) abstract; 
 	void Initalize(GameObject* _object, Unit* _unitComponent, float _movespeed);
+
+	void SetDestination(const Vector2& _destination) { m_destination = _destination; }
+
 
 protected:
 	float m_moveSpeed; // 이동속도
 	GameObject* m_gameoject;
 	Unit* m_unitComponent;
+
+	Vector2 m_destination; // 유닛의 최종 목적지
 };
 
