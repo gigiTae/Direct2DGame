@@ -27,6 +27,7 @@ union CollisionID
 	unsigned long long ID;
 };
 
+
 /// <summary>
 ///  충동을 관리하는 매니져이다.
 /// 추가기능으로는 다양한 collider를 구현하고 

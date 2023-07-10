@@ -28,7 +28,6 @@ void MainScene::Enter()
 	/// 리소스 로드
 	LoadSceneResources(L"MainScene");
 
-
 	/// 배경
 	GameObject* background = new GameObject("background",GetManagerSet());
 	background->CreateComponent<Transform>()->SetPosition(Vector2(0.f, 0.f));
@@ -56,7 +55,7 @@ void MainScene::Enter()
 	AddObject(controller, OBJECT_TYPE::BACK_UI);
 
 	///
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 150; ++i)
 	{
 		GameObject* marine = new GameObject("FlyingSlime", GetManagerSet());
 		Transform* marineT = marine->CreateComponent<Transform>();
@@ -71,10 +70,7 @@ void MainScene::Enter()
 		marine->CreateComponent<Unit>()->Initalize(movement);
 
 
-		if (i ==0)
-		{
-			marine->GetComponent<RigidBody>()->SetMass(FLT_MAX);
-		}
+		marine->GetComponent<RigidBody>()->SetMass(FLT_MAX);
 
 		AddObject(marine, OBJECT_TYPE::AIR_UNIT);
 		

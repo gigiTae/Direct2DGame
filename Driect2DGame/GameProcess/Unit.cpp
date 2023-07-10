@@ -110,15 +110,22 @@ void Unit::OnCollisionStay(const Collision& _collision)
 	float otherMass = rigid->GetMass();
 	if (otherMass == FLT_MAX) // 고정된 오브젝트 
 	{
+		float otherRadius = _collision.otherObject->GetComponent<CircleCollider>()->GetRadius();
+		float radius = GetComponent<CircleCollider>()->GetRadius();
+		
+		Vector2 pushDistance = direct * (otherRadius + radius - (position - otherPos).Length());
 
+		transform->AddPosition(pushDistance);
 	}
+
 	else // 움직이느 오브젝트
 	{
+		return;
 		// 완전히 같은 위치에 있으면 랜던함 방향으로 밀어내기 
 		if (direct == Vector2::Zero)
 		{
 		}
-		const float power = 100.f;
+		constexpr float power = 100.f;
 		Vector2 force = direct * power;
 
 		rigid->AddForce(force);

@@ -101,6 +101,15 @@
       <Filter>StarcrafScripts\Unit\UnitMovement\FlyMovement</Filter>
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
+    <ClInclude Include="Broadphase.h">
+      <Filter>Broadphase</Filter>
+    </ClInclude>
+    <ClInclude Include="AABBTree.h">
+      <Filter>Broadphase\AABBTree</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Broadphase\AABB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="StarcrafScripts">
@@ -211,6 +220,15 @@
     <Filter Include="StarcrafScripts\Unit\UnitMovement\FlyMovement">
       <UniqueIdentifier>{2a5aeda3-cff4-4bce-9bee-a16da9bfeb87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Broadphase">
+      <UniqueIdentifier>{b867e988-545a-4edf-b93a-fbe1467b570f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Broadphase\AABBTree">
+      <UniqueIdentifier>{c3d8ba6a-b843-49fd-8d80-4f27c4df56ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Broadphase\AABB">
+      <UniqueIdentifier>{43d5e70b-0e06-489a-b709-331c24dad265}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -305,6 +323,15 @@
     </ClCompile>
     <ClCompile Include="FlyMovement.cpp">
       <Filter>StarcrafScripts\Unit\UnitMovement\FlyMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="Broadphase.cpp">
+      <Filter>Broadphase</Filter>
+    </ClCompile>
+    <ClCompile Include="AABBTree.cpp">
+      <Filter>Broadphase\AABBTree</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Broadphase\AABB</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
