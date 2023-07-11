@@ -30,12 +30,21 @@ public:
 	Vector2 GetScale() { return m_scale; }
 
 	// 회전각도를 반환
-	float GetRotation() { return m_rotation; }
+	float GetRotation() const { return m_rotation; }
 	// 회전가능한 박스인지 아닌지
-	bool IsRotatable() { return m_isRotatable; }
-
+	bool IsRotatable() const { return m_isRotatable; }
 
 	void DebugRender(D2DRenderer* _d2DRenderer);
+
+public:
+	bool Collides(Vector2 _position) override;
+	bool Collides(CircleCollider* _circle) override;
+	bool Collides(BoxCollider* _box) override;
+
+public:
+	Vector2 GetMinPoint()const override;
+	Vector2 GetMaxPoint()const override;
+
 private:
 	Vector2 m_position;
 	Vector2 m_offset;

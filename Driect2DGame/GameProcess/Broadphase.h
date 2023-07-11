@@ -4,6 +4,7 @@ class Collider;
 
 typedef std::pair<Collider*, Collider*> ColliderPair;
 typedef std::list<ColliderPair> ColliderPairList;
+typedef std::vector<Collider*> ColliderVector;
 
 struct AABB;
 
@@ -17,7 +18,10 @@ public:
 
 	// add a new AABB to the broadphase
 	// 새로운 AABB를 삽입
-	virtual void Add(AABB* _aabb) = 0;
+	virtual void Add(Collider* _collider) = 0;
+
+	// 기존에 있던 AABB 삭제
+	virtual void Remove(Collider* _collider) = 0;
 	
 	// update broadphase to react to changes to AABB 
 	// AABB의 변경사항에 반응하도록 broadphase을 업데이트
@@ -31,14 +35,12 @@ public:
 	// returns null if no such collider exists
 	// 점과 충돌하는 충돌체를 반환한다.
 	// 그러한 충돌체가 존재하지 않으면 null을 반환합니다.
-	virtual Collider* Pick(const Vector2& _point) const = 0;
+	virtual void Pick(const Vector2& _point, ColliderVector& _colliderVector) = 0;
 
 	// returns a list of colliders whose AABBs collide
 	// with a query AABB
 	// AABB가 충돌하는 충돌체 목록을 반환 합니다. 쿼리 AABB 사용
-	typedef std::vector<Collider*> ColliderVector;
 	virtual void Query(const AABB& _aabb, ColliderVector& _output) const = 0;
 
-	
 
 };

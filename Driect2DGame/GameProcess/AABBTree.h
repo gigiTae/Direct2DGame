@@ -2,30 +2,32 @@
 
 #include "Broadphase.h"
 #include "AABB.h"
-
+#include "Collider.h"
 struct Node;
 
 /// <summary>
 /// 충돌 체크 알고리즘 AABBTree
+/// 각각의 콜라이더를 AABB사각형으로 확장하고
+/// 확장한 사각형을 m_margin만큼 확장한후에 
+/// 면적에따라서 Tree를 구성하고 정렬한다
 /// 
 /// </summary>
 class AABBTree :
     public Broadphase
 {
 public:
-    AABBTree();
+    AABBTree(float _margin);
     ~AABBTree();
 
-    void Add(AABB* _aabb) override;
-    virtual void ReMove(AABB* _aabb);
+    void Add(Collider* _collider) override;
+    void Remove(Collider* _collider) override;
     void Update() override;
     ColliderPairList& ComputePairs() override;
-    Collider* Pick(const Vector2& _point)const override;
+    void Pick(const Vector2& _point, ColliderVector& _colliderVector) override;
     void Query(const AABB& _aabb, ColliderVector& _output) const override;
 
 private:
     typedef std::vector<Node*> NodeVector;
-
     void UpdateNodeHelper(Node* _node, NodeVector& _invalidNodes);
     void InsertNode(Node* _node, Node** _parent);
     void RemoveNode(Node* _node);
@@ -35,14 +37,19 @@ private:
 
     Node* m_root;
     ColliderPairList m_pairs;
-    float m_margin;
-    NodeVector m_invalidNodes;
+    const float m_margin;
 
+    NodeVector m_invalidNodes;
 };
 
 struct Node
 {
-    Node();
+    Node() :parent(nullptr)
+        , collider(nullptr)
+        , children{ nullptr,nullptr } 
+        , childrebCrossed(false)
+        , aabb()
+    {}
     
     bool IsLeaf()const
     {
@@ -60,9 +67,9 @@ struct Node
     }
 
     // Leaf노드로 만든다
-    void SetLeaf(AABB* _data)
+    void SetLeaf(Collider* _collider)
     {
-        this->data = data;
+        this->collider = _collider;
  
         children[0] = nullptr;
         children[1] = nullptr;
@@ -75,8 +82,8 @@ struct Node
             // make fat AABB
             // 확장한 AABB생성
             const Vector2 marginVec(_margin, _margin);
-            aabb.minPoint = data->minPoint - marginVec;
-            aabb.maxPoint = data->maxPoint + marginVec;
+            aabb.minPoint = collider->GetMinPoint() - marginVec;
+            aabb.maxPoint = collider->GetMaxPoint() + marginVec;
         }
         else
         {
@@ -89,6 +96,7 @@ struct Node
     // 형제 반환
     Node* GetSibling() const
     {
+        assert(parent);
         return this == parent->children[0] ? parent->children[1] : parent->children[0];
     }
 
@@ -98,5 +106,5 @@ struct Node
 
     bool childrebCrossed;
     AABB aabb;
-    AABB* data;
+    Collider* collider;
 }; 

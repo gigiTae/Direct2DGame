@@ -4,6 +4,7 @@
 #include "CollisionManager.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "CircleCollider.h"
 
 BoxCollider::BoxCollider()
 	:Collider(typeid(this).name())
@@ -33,7 +34,7 @@ void BoxCollider::LateUpdate(float _deltaTime)
 	}
 }
 
-void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
+void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer) 
 {
 	Vector2 leftTop;
 	leftTop.x = m_position.x + m_scale.x * 0.5f;
@@ -54,5 +55,147 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	{
 		_d2DRenderer->DrawRectangle(leftTop, rightBottom, D2D1::ColorF::Red);
 	}
+}
+
+bool BoxCollider::Collides(Vector2 _position)
+{
+	Vector2 maxPoint = GetMaxPoint();
+	Vector2 minPoint = GetMinPoint();
+
+	if (_position.x <= maxPoint.x && _position.x >= minPoint.x
+		&& _position.y <= maxPoint.y && _position.y >= minPoint.y)
+		return true;
+
+	return false;
+}
+
+bool BoxCollider::Collides(CircleCollider* _circle)
+{
+	// 박스 
+	Vector2 boxPosition = GetPosition();
+	Vector2 boxHalfScale = GetScale() * 0.5f;
+
+	// 원
+	Vector2 circlePoisiton = _circle->GetPosition();
+	float radius = _circle->GetRadius();
+
+	// 회전된 사각형과 원의 충돌 -> 역으로 원을 돌려서 계산함
+	if (IsRotatable())
+	{
+		float rotation = GetRotation();
+		circlePoisiton = Vector2::RotateRadian(circlePoisiton, boxPosition, -rotation);
+	}
+
+	float minBoxX = boxPosition.x - boxHalfScale.x;
+	float maxBoxX = boxPosition.x + boxHalfScale.x;
+	float minBoxY = boxPosition.y - boxHalfScale.y;
+	float maxBoxY = boxPosition.y + boxHalfScale.y;
+
+	// 1. 먼저 사각형의 변들을 반지름만큼 확장해서 원의 중심좌표와 비교해서 판단
+	if ((minBoxX - radius <= circlePoisiton.x && maxBoxX + radius >= circlePoisiton.x
+		&& minBoxY <= circlePoisiton.y && maxBoxY >= circlePoisiton.y) ||
+		(minBoxX <= circlePoisiton.x && maxBoxX >= circlePoisiton.x
+			&& maxBoxY + radius >= circlePoisiton.y && minBoxY - radius <= circlePoisiton.y))
+	{
+		return true;
+	}
+
+	// 2. 가장 가까운 사각형의 꼭지점 좌표를 계산해서 원과의 거리를 계산 
+	Vector2 boxVertex{};
+	boxVertex.x = (boxPosition.x < circlePoisiton.x) ? maxBoxX : minBoxX;
+	boxVertex.y = (boxPosition.y < circlePoisiton.y) ? maxBoxY : minBoxY;
+
+	float distanceSquared = (boxVertex - circlePoisiton).LengthSquared();
+	if (distanceSquared <= radius * radius)
+	{
+		return true;
+	}
+
+	// 충돌하지 않음
+	return false;
+}
+
+bool BoxCollider::Collides(BoxCollider* _box)
+{
+	// 박스
+	Vector2 leftPosition = GetPosition();
+	Vector2 leftScale = GetScale();
+
+	// 박스
+	Vector2 rightPosition = _box->GetPosition();
+	Vector2 rightScale = _box->GetScale();
+
+	// OBB 충돌처리 
+	if (IsRotatable() || _box->IsRotatable())
+	{
+		// 회전각도
+		float leftRotation = GetRotation();
+		float rightRotation = _box->GetRotation();
+
+		Vector2 boxToBox = rightPosition - leftPosition;
+
+		// 각각의 가로세로 벡터를 구한다.
+		Vector2 leftWidth = Vector2::RotateRadian(Vector2(leftScale.x * 0.5f, 0.f), Vector2::Zero, leftRotation);
+		Vector2 leftHeight = Vector2::RotateRadian(Vector2(0.f, leftScale.y * 0.5f), Vector2::Zero, leftRotation);
+		Vector2 rightWidth = Vector2::RotateRadian(Vector2(rightScale.x * 0.5f, 0.f), Vector2::Zero, rightRotation);
+		Vector2 rightHeight = Vector2::RotateRadian(Vector2(0.f, rightScale.y * 0.5f), Vector2::Zero, rightRotation);
+
+		vector<Vector2> basis{ leftWidth, leftHeight, rightWidth, rightHeight };
+
+		for (int i = 0; i < 4; ++i)
+		{
+			float sum = 0.f;
+			Vector2 normal = basis[i].GetNormalize();
+			for (int j = 0; j < 4; ++j)
+			{
+				sum += abs(normal.Dot(basis[j]));
+			}
+
+			float distance = abs(boxToBox.Dot(normal));
+			if (distance >= sum)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	// AABB 충돌
+	else
+	{
+		Vector2 leftMin = leftPosition - leftScale * 0.5f;
+		Vector2 leftMax = leftPosition + leftScale * 0.5f;
+		Vector2 rightMin = rightPosition - rightScale * 0.5f;
+		Vector2 rightMax = rightPosition + rightScale * 0.5f;
+
+		if (leftMin.x <= rightMax.x && leftMax.x >= rightMin.x
+			&& leftMin.y <= rightMax.y && leftMax.y >= rightMin.y)
+			return true;
+	}
+	return false;
+}
+
+Vector2 BoxCollider::GetMinPoint() const
+{
+	// OBB인 경우
+	if (m_isRotatable)
+	{
+		// TODO : OBB MinPoint
+	}
+	// AABB
+	
+	return Vector2(m_position.x - m_scale.x * 0.5f
+		, m_position.y - m_scale.y * 0.5f);
+}
+
+Vector2 BoxCollider::GetMaxPoint() const
+{
+	// OBB
+	if (m_isRotatable)
+	{
+		// TODO : OBB MaxPoint
+	}
+	// AABB
+	return Vector2(m_position.x + m_scale.x * 0.5f
+		, m_position.y + m_scale.y * 0.5f);
 }
 

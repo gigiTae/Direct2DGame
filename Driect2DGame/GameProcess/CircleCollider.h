@@ -30,6 +30,15 @@ public:
 	Vector2 GetPosition() { return m_position; }
 	float GetRadius() { return m_radius; }
 
+public:
+	bool Collides(Vector2 _position) override;
+	bool Collides(CircleCollider* _circle) override;
+	bool Collides(BoxCollider* _box) override;
+
+public:
+	Vector2 GetMinPoint() const override;
+	Vector2 GetMaxPoint() const override;
+
 private:
 	Vector2 m_offset;
 	Vector2 m_position; 

@@ -28,9 +28,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameProcess\02.GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>GameProcess\01.Define</Filter>
-    </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>GameProcess\05.Scene\MainScene</Filter>
     </ClInclude>
@@ -104,11 +101,14 @@
     <ClInclude Include="Broadphase.h">
       <Filter>Broadphase</Filter>
     </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Broadphase\AABB</Filter>
+    </ClInclude>
     <ClInclude Include="AABBTree.h">
       <Filter>Broadphase\AABBTree</Filter>
     </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>Broadphase\AABB</Filter>
+    <ClInclude Include="Define.h">
+      <Filter>GameProcess\01.Define\GameWorld</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ class CircleCollider;
 class InputManager;
 class SceneManager;
 class GameObject;
-
+class AABBTree;
 
 // 충돌정보 
 struct Collision
@@ -56,7 +56,8 @@ public:
 private:
 
 	// 충돌체간의 ID를 조합해서 ID에 해당하는 이터레이터를 반환
-	void CheckID(const Collider* _left, const Collider* _right, map<unsigned long long, bool>::iterator& iter);
+	void CheckID(const Collider* _left, const Collider* _right
+		, map<unsigned long long, bool>::iterator& iter);
 
 	// 두 충돌체가 충돌한지 판단하는 함수 
     bool IsCollision(BoxCollider* _leftBox, BoxCollider* _rightBox) const ;
@@ -64,7 +65,9 @@ private:
 	bool IsCollision(CircleCollider* _leftCircle, CircleCollider* _rightCircle) const ;
 
 	// 충돌을 판단한후에 각각의 콜라이더들에게 충돌처리후 정보들을 전달
-	void OnCollisionProcess(bool _istCollision, map<unsigned long long, bool>::iterator& iter, Collider* _left, Collider* _right);
+	void OnCollisionProcess(bool _istCollision
+		, map<unsigned long long, bool>::iterator& iter
+		, Collider* _left, Collider* _right);
 
 	// 충돌체간의 ID를 조합하는 함수
 	const CollisionID CombineID(unsigned int _left, unsigned int _right);
@@ -74,6 +77,8 @@ private:
 	InputManager* m_inputManager;
 	SceneManager* m_sceneManager;
 
+	//
+	AABBTree* m_aabbTree; 
 	// 이전 프레임 충돌정보들을 저장
 	map<unsigned long long, bool> m_prevCollisionInfo;
 	// 오브젝트 타입별로 충돌을 판단
