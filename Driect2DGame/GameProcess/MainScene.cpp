@@ -14,6 +14,7 @@
 #include "Controller.h"
 #include "FlyMovement.h"
 #include "ManagerSet.h"
+#include "BoxCollider.h"
 
 MainScene::MainScene()
 {
@@ -55,22 +56,22 @@ void MainScene::Enter()
 	AddObject(controller, OBJECT_TYPE::BACK_UI);
 
 	///
-	for (int i = 0; i < 150; ++i)
+	for (int i = 0; i < 300; ++i)
 	{
 		GameObject* marine = new GameObject("FlyingSlime", GetManagerSet(),OBJECT_TYPE::AIR_UNIT);
 		Transform* marineT = marine->CreateComponent<Transform>();
-		marineT->SetPosition(Vector2(100.f * i, 0.f));
+		marineT->SetPosition(Vector2(5.f * i, 0.f));
 		marineT->SetScale(Vector2(100.f, 100.f));
 		marine->CreateComponent<TextureRenderer>()->SetKey(L"river");
 		FlyMovement* movement = new FlyMovement();
 
 		marine->CreateComponent<RigidBody>();
-		marine->CreateComponent<CircleCollider>()->SetRadius(20.f);
-
+		//marine->CreateComponent<CircleCollider>()->SetRadius(20.f);
+		marine->CreateComponent<BoxCollider>()->SetScale(Vector2(100.f, 100.f));
 		marine->CreateComponent<Unit>()->Initalize(movement);
 
 
-		marine->GetComponent<RigidBody>()->SetMass(FLT_MAX);
+		marine->GetComponent<RigidBody>()->SetMass(1.f);//FLT_MAX);
 
 		AddObject(marine, OBJECT_TYPE::AIR_UNIT);
 		

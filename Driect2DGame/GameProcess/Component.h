@@ -22,6 +22,8 @@ public:
 	virtual ~Component();
 
 public:
+
+	virtual void Finalize() {};
 	/// 기본적인 이벤트 함수
 	virtual void FixedUpdate(float _fixedDeltaTime) {};
 	virtual void Update(float _deltaTime) {};

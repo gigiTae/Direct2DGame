@@ -16,7 +16,25 @@ AABBTree::AABBTree(float _margin, CollisionManager* _collisionManager)
 
 AABBTree::~AABBTree()
 {
-	// TODO : 메모리해제 
+	// BFS 소멸 
+	queue<Node*> q;
+
+	if (m_root)
+		q.push(m_root);
+
+	while (!q.empty())
+	{
+		Node* node =q.front();
+		q.pop();
+
+		if (node->children[0])
+		{
+			q.push(node->children[0]);
+			q.push(node->children[1]);
+		}
+		delete node;
+	}
+
 
 }
 
@@ -97,7 +115,7 @@ void AABBTree::UpdateNodeHelper(Node* _node, NodeVector& _invalidNodes)
 		{
 			Remove(_node->collider);
 		}
-		else if (_node->aabb.Contains(_node->collider))
+		else if (!_node->aabb.Contains(_node->collider))
 		{
 			// check if fat AABB dosen't contain the collider's AABB anymore
 			// 확장한 AABB박스에서 콜라이더가 벗어나면 invalidNodes에 데이터를 추가한다
@@ -218,7 +236,9 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		// 2 leaves, check proxies instead of fat AABBs
 		if (_n1->IsLeaf())
 		{
-			if (_n0->collider->Collides(_n1->collider))
+			// 충돌하는 타입인지 확인하고, 실제로 충돌하는 지 확인한다
+			if (m_collisionManager->IsCollision(_n0->collider, _n1->collider)
+				&& _n0->collider->Collides(_n1->collider))
 			{
 				m_pairs.push_back(std::make_pair(_n0->collider, _n1->collider));
 			}
@@ -227,7 +247,6 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		else
 		{
 			CrossChildren(_n1);
-
 			if (!_n0->aabb.IsCollision(_n1->aabb))
 				return;
 
@@ -240,21 +259,23 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		// 1branch / l leaf, 2 cross checks
 		if (_n1->IsLeaf())
 		{
+			CrossChildren(_n0);
 			if (!_n0->aabb.IsCollision(_n1->aabb))
 				return;
 
-			CrossChildren(_n0);
-			ComputePairsHelper(_n0->children[0], _n1);
+			ComputePairsHelper(_n0->children[0], _n1); 
 			ComputePairsHelper(_n0->children[1], _n1);
 		}
-		// 2 branches, 4 cross checks
+		// 2 branches, 4 cross check
 		else
 		{
+			CrossChildren(_n0);
+			CrossChildren(_n1);
+			
+			// 자식끼리 확인한후에 서로가 충돌하면 4쌍을 비교한다
 			if (!_n0->aabb.IsCollision(_n1->aabb))
 				return;
 
-			CrossChildren(_n0);
-			CrossChildren(_n1);
 			ComputePairsHelper(_n0->children[0], _n1->children[0]);
 			ComputePairsHelper(_n0->children[0], _n1->children[1]);
 			ComputePairsHelper(_n0->children[1], _n1->children[0]);
@@ -343,5 +364,36 @@ void AABBTree::Query(const AABB& _aabb, ColliderVector& _output) const
 		}
 	}
 	
+}
+
+void AABBTree::DebugRender(D2DRenderer* _d2DRenderer)
+{
+	std::queue<Node*> q;
+
+	_d2DRenderer->SetCameraAffected(true);
+	if (m_root)
+		q.push(m_root);
+	
+	while (!q.empty())
+	{
+		Node* node = q.front();
+		q.pop();
+
+		// 랜더링
+	
+		if (node->IsLeaf())
+		{
+			_d2DRenderer->DrawRectangle(node->aabb.minPoint, node->aabb.maxPoint
+				,D2D1::ColorF::Blue);
+		}
+		else
+		{
+			_d2DRenderer->DrawRectangle(node->aabb.minPoint, node->aabb.maxPoint);
+			q.push(node->children[0]);
+			q.push(node->children[1]);
+		}
+		
+	}
+
 }
 

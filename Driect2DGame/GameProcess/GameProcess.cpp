@@ -114,9 +114,10 @@ void GameProcess::Process()
 	// 디버그정보 랜더링
 	if (ShowDubg())
 	{
+		m_collisionManager->DebugRender(m_d2DRenderer);
 		m_sceneManager->DebugRender(m_d2DRenderer);
-		m_timeManager->DebugRender(m_d2DRenderer);
 	}
+	m_timeManager->DebugRender(m_d2DRenderer);
 
 	m_d2DRenderer->EndRender();
 

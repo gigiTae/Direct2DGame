@@ -23,7 +23,7 @@ public:
     ~Unit();
 
     void Initalize(UnitMovement* _movement);
-    void Finalize();
+    void Finalize() override;
 
 	void PreRender(D2DRenderer* _d2DRenderer) override;
 	void SetSelct(bool _isSelect) { m_isSelect = _isSelect; }

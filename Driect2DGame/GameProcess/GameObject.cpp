@@ -8,6 +8,7 @@
 #include "MonoBehaviour.h"
 #include "InputManager.h"
 #include "CameraManager.h"
+#include "Component.h"
 #include "ManagerSet.h"
 
 
@@ -50,6 +51,7 @@ void GameObject::DestroyAllComponent()
 	{
 		if (iter.second != nullptr)
 		{
+			iter.second->Finalize();
 			delete iter.second;
 		}
 	}

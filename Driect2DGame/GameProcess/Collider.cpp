@@ -42,8 +42,8 @@ void Collider::OnCollisionStay(const Collision& _collision)
 
 bool Collider::Collides(Collider* _collider)
 {
-	static const string box = typeid(BoxCollider).name();
-	static const string circle = typeid(CircleCollider).name();
+	static const string box = typeid(BoxCollider*).name();
+	static const string circle = typeid(CircleCollider*).name();
 
 	const string& name = _collider->GetName();
 

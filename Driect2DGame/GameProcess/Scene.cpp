@@ -5,6 +5,9 @@
 #include "FileManager.h"
 #include "ManagerSet.h"
 #include "SceneManager.h"
+#include "BoxCollider.h"
+#include "CircleCollider.h"
+#include "CollisionManager.h"
 
 Scene::Scene()
 	:m_d2DRenderer(nullptr)
@@ -281,6 +284,17 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 		m_objectVector[static_cast<int>(_type)].push_back(tmp);
 		
 		BoxCollider* box = tmp->GetComponent<BoxCollider>();
+		CircleCollider* circle = tmp->GetComponent<CircleCollider>();
+
+		if (box != nullptr)
+		{
+			collisionMgr->AddColider(box);
+		}
+		if (circle != nullptr)
+		{
+			collisionMgr->AddColider(circle);
+		}
+
 
 		for (auto child : tmp->GetChildren())
 		{

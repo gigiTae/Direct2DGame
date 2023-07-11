@@ -170,6 +170,7 @@ bool BoxCollider::Collides(BoxCollider* _box)
 		if (leftMin.x <= rightMax.x && leftMax.x >= rightMin.x
 			&& leftMin.y <= rightMax.y && leftMax.y >= rightMin.y)
 			return true;
+			
 	}
 	return false;
 }

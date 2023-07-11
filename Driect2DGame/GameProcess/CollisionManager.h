@@ -72,17 +72,15 @@ public:
 	void Update();
 	void Finalize();
 
+	void DebugRender(D2DRenderer* _d2DRenderer);
+
+	// 두 오브젝트가 충돌하는 타입인지 반환하는 함수
+	bool IsCollision(Collider* _left, Collider* _right);
 public:
 
 	// 오브젝트 타입과 타입간의 충돌설정을 한다.
 	void CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right) const;
 	void AddColider(Collider* _collider) const;
-
-private:
-
-	// 두 오브젝트가 충돌하는 타입인지 반환하는 함수
-	bool IsCollisionType(OBJECT_TYPE _left, OBJECT_TYPE _right);
-
 	
 private:
 	InputManager* m_inputManager;
@@ -91,7 +89,7 @@ private:
 	// Boradphase 알고리즘 
 	AABBTree* m_aabbTree; 
 	// 이전 프레임 충돌정보들을 저장
-	map<ColliderKey, CollisionInfomation> m_collisionInfo;
+	map<ColliderKey, CollisionInfomation> m_collisionInfomations;
 
 	// 오브젝트 타입별로 충돌을 판단 const 매니져에서 수정가능하게 mutable로 오픈
 	mutable int m_collisionCheck[static_cast<int>(OBJECT_TYPE::END)];

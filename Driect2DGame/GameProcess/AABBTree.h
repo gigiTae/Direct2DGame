@@ -27,6 +27,7 @@ public:
     void Pick(const Vector2& _point, ColliderVector& _colliderVector) override;
     void Query(const AABB& _aabb, ColliderVector& _output) const override;
 
+    void DebugRender(D2DRenderer* _d2DRenderer);
 private:
     typedef std::vector<Node*> NodeVector;
     void UpdateNodeHelper(Node* _node, NodeVector& _invalidNodes);
