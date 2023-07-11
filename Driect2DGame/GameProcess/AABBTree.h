@@ -4,6 +4,7 @@
 #include "AABB.h"
 #include "Collider.h"
 struct Node;
+class CollisionManager;
 
 /// <summary>
 /// 충돌 체크 알고리즘 AABBTree
@@ -16,7 +17,7 @@ class AABBTree :
     public Broadphase
 {
 public:
-    AABBTree(float _margin);
+    AABBTree(float _margin, CollisionManager* _collisionManager);
     ~AABBTree();
 
     void Add(Collider* _collider) override;
@@ -39,6 +40,7 @@ private:
     ColliderPairList m_pairs;
     const float m_margin;
 
+    CollisionManager* m_collisionManager; 
     NodeVector m_invalidNodes;
 };
 

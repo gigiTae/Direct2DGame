@@ -23,7 +23,7 @@ class GameObject
 
 public:
 	/// 생성자 단계에서 오브젝트의 이름을 결정
-	GameObject(const string& _name, const ManagerSet* _managerSet);
+	GameObject(const string& _name, const ManagerSet* _managerSet, OBJECT_TYPE _type);
 	virtual ~GameObject();
 
 public:
@@ -38,6 +38,8 @@ public:
 	void SetObjectState(OBJECT_STATE _state) { m_state = _state; }
 	OBJECT_STATE GetObjectState() { return m_state; }
 	
+	OBJECT_TYPE GetObjectType() { return m_type; }
+
 	// 몇초후 삭제예정인지 반환
 	float GetDestroyTime() { return m_destoryTime; }
 
@@ -111,6 +113,8 @@ private:
 
 private:
 	OBJECT_STATE m_state;
+	OBJECT_TYPE m_type;
+
 	float m_destoryTime;
 	const string m_name;
 

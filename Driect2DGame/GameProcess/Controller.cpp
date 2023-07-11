@@ -42,7 +42,7 @@ void Controller::Update(float _deltaTime)
 		// 카메라 좌표계의 마우스 포지션
 		Vector2 cameraMousePosition = input->GetCameraMousePosition();
 
-		GameObject* effect1 = new GameObject("mouseEffect", GetManagerSet());
+		GameObject* effect1 = new GameObject("mouseEffect", GetManagerSet(),OBJECT_TYPE::MOUSE_EFFECT);
 		effect1->CreateComponent<TextureRenderer>()->SetKey(L"MouseEffect1");
 		effect1->CreateComponent<Transform>()->SetPosition(cameraMousePosition);
 		effect1->Destory(0.1f);
@@ -176,6 +176,7 @@ void Controller::GetUnits()
 			}
 		}
 	}
+
 	/// 만약 사각형 내부에 오브젝트가 없으면 원래 부대를 그대로 사용
 	if (selectObject.empty())
 	{

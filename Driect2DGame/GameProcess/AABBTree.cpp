@@ -1,17 +1,22 @@
 #include "GameProcessPCH.h"
+#include "GameObject.h"
 #include "AABBTree.h"
+#include "CollisionManager.h"
 
-AABBTree::AABBTree(float _margin)
+
+AABBTree::AABBTree(float _margin, CollisionManager* _collisionManager)
 	:m_margin(_margin)
-	,m_root(nullptr)
-	,m_invalidNodes{}
-	,m_pairs{}
+	, m_root(nullptr)
+	, m_invalidNodes{}
+	, m_pairs{}
+	,m_collisionManager(_collisionManager)
 {
 
 }
 
 AABBTree::~AABBTree()
 {
+	// TODO : 메모리해제 
 
 }
 
@@ -44,6 +49,7 @@ void AABBTree::Update()
 		{
 			// grab all invalid nodes
 			// 모든 유효하지 않는 노드를 가져옵니다
+			// 삭제된 오브젝트도 추가하자 
 			m_invalidNodes.clear();
 			UpdateNodeHelper(m_root, m_invalidNodes);
 
@@ -55,8 +61,8 @@ void AABBTree::Update()
 				// (pointer to the pointer that points to parent)
 				// 부모 링크 잡기 (부모를 가리키는 포인터를 가리키는 포인터)
 				Node* parent = node->parent;
-				Node* siblibg = node->GetSibling();
-				Node** parentLink = parent->parent
+				Node* siblibg = node->GetSibling();  
+				Node** parentLink = parent->parent 
 					? (parent == parent->parent->children[0]
 						? &parent->parent->children[0]
 						: &parent->parent->children[1])
@@ -86,13 +92,18 @@ void AABBTree::UpdateNodeHelper(Node* _node, NodeVector& _invalidNodes)
 {
 	if (_node->IsLeaf())
 	{
-		// check if fat AABB dosen't contain the collider's AABB anymore
-		// 확장한 AABB박스에서 콜라이더가 벗어나면 invalidNodes에 데이터를 추가한다
-		if (true)
+		// 삭제 예정인 오브젝트
+		if (!_node->collider->GetGameObject()->IsAlive())
 		{
+			Remove(_node->collider);
+		}
+		else if (_node->aabb.Contains(_node->collider))
+		{
+			// check if fat AABB dosen't contain the collider's AABB anymore
+			// 확장한 AABB박스에서 콜라이더가 벗어나면 invalidNodes에 데이터를 추가한다
 			_invalidNodes.push_back(_node);
 		}
-	}
+ 	}
 	else
 	{
 		UpdateNodeHelper(_node->children[0], _invalidNodes);
@@ -140,7 +151,7 @@ void AABBTree::InsertNode(Node* _node, Node** _parent)
 
 void AABBTree::Remove(Collider* _collider)
 {
-	Node* node = static_cast<Node*>(_collider->GetNode());
+	Node* node = _collider->GetNode();
 	     
 	// remove two-way link
 	node->collider = nullptr;
@@ -216,6 +227,10 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		else
 		{
 			CrossChildren(_n1);
+
+			if (!_n0->aabb.IsCollision(_n1->aabb))
+				return;
+
 			ComputePairsHelper(_n0, _n1->children[0]);
 			ComputePairsHelper(_n0, _n1->children[1]);
 		}
@@ -225,6 +240,9 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		// 1branch / l leaf, 2 cross checks
 		if (_n1->IsLeaf())
 		{
+			if (!_n0->aabb.IsCollision(_n1->aabb))
+				return;
+
 			CrossChildren(_n0);
 			ComputePairsHelper(_n0->children[0], _n1);
 			ComputePairsHelper(_n0->children[1], _n1);
@@ -232,6 +250,9 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		// 2 branches, 4 cross checks
 		else
 		{
+			if (!_n0->aabb.IsCollision(_n1->aabb))
+				return;
+
 			CrossChildren(_n0);
 			CrossChildren(_n1);
 			ComputePairsHelper(_n0->children[0], _n1->children[0]);

@@ -274,10 +274,13 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 	queue<GameObject*> q;
 	q.push(_object);
 
+	const CollisionManager* collisionMgr = m_managerSet->GetCollisionManager();
 	while (!q.empty())
 	{
 		GameObject* tmp = q.front();
 		m_objectVector[static_cast<int>(_type)].push_back(tmp);
+		
+		BoxCollider* box = tmp->GetComponent<BoxCollider>();
 
 		for (auto child : tmp->GetChildren())
 		{

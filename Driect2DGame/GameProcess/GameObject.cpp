@@ -10,13 +10,16 @@
 #include "CameraManager.h"
 #include "ManagerSet.h"
 
-GameObject::GameObject(const string& _name, const ManagerSet* _managerSet)
+
+GameObject::GameObject(const string& _name, const ManagerSet* _managerSet, OBJECT_TYPE _type)
 	:m_name(NamingManager::GetInstance()->GenerateName(_name))
 	, m_state(OBJECT_STATE::ALIVE)
 	, m_managerSet(_managerSet)
 	, m_cameraAffected(true)
 	, m_destoryTime(0.f)
+	, m_type(_type)
 {
+
 }
 
 GameObject::~GameObject()

@@ -29,14 +29,14 @@ void MainScene::Enter()
 	LoadSceneResources(L"MainScene");
 
 	/// 배경
-	GameObject* background = new GameObject("background",GetManagerSet());
+	GameObject* background = new GameObject("background",GetManagerSet(),OBJECT_TYPE::BACKGROUND);
 	background->CreateComponent<Transform>()->SetPosition(Vector2(0.f, 0.f));
 	background->CreateComponent<TextureRenderer>()->SetKey(L"background");
 
 	AddObject(background, OBJECT_TYPE::BACKGROUND);
 
 	/// UI
-	GameObject* frontUI = new GameObject("frontUI", GetManagerSet());
+	GameObject* frontUI = new GameObject("frontUI", GetManagerSet(),OBJECT_TYPE::FRONT_UI);
 	frontUI->SetCameraAffected(false);
 	frontUI->CreateComponent<Transform>()->SetPosition(Vector2(0.f, -440.f));
 	frontUI->GetComponent<Transform>()->SetScale(Vector2(1920.f, 200.f));
@@ -45,7 +45,7 @@ void MainScene::Enter()
 	AddObject(frontUI, OBJECT_TYPE::FRONT_UI);
 	
 	/// 컨트롤러
-	GameObject* controller = new GameObject("controller", GetManagerSet());
+	GameObject* controller = new GameObject("controller", GetManagerSet(),OBJECT_TYPE::BACK_UI);
 	controller->CreateComponent<Transform>()->SetPosition(Vector2(0.f, 0.f));
 	controller->GetComponent<Transform>()->SetScale(Vector2(1920.f, 1080.f));
 	controller->CreateComponent<UI>();
@@ -57,7 +57,7 @@ void MainScene::Enter()
 	///
 	for (int i = 0; i < 150; ++i)
 	{
-		GameObject* marine = new GameObject("FlyingSlime", GetManagerSet());
+		GameObject* marine = new GameObject("FlyingSlime", GetManagerSet(),OBJECT_TYPE::AIR_UNIT);
 		Transform* marineT = marine->CreateComponent<Transform>();
 		marineT->SetPosition(Vector2(100.f * i, 0.f));
 		marineT->SetScale(Vector2(100.f, 100.f));
