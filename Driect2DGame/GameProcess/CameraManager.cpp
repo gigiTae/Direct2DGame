@@ -74,7 +74,10 @@ void CameraManager::Update(float _deltaTime)
 	{
 		m_camera->ZoomCamera(Vector2(-0.1f, -0.1f));
 	}
-
+	if (m_inputManager->IsKeyState(KEY::F3, KEY_STATE::HOLD))
+	{
+		m_camera->RotateCamera(_deltaTime);
+	}
 
 }
 

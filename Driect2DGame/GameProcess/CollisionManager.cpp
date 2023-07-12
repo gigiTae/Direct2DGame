@@ -28,7 +28,7 @@ void CollisionManager::Initalize(InputManager* _inputManager, SceneManager* _sce
 	m_sceneManager = _sceneManager;
 
 	// AABBTree 생성 
-	m_aabbTree = new AABBTree(30.f,this);
+	m_aabbTree = new AABBTree(25.f,this);
 }
 
 void CollisionManager::Finalize()
@@ -45,8 +45,8 @@ void CollisionManager::DebugRender(D2DRenderer* _d2DRenderer)
 
 void CollisionManager::Update()
 {
-	// 새로추가된 콜라이더를 AABBTree에 추가는 오브젝트가 담당하는 하자 
-	
+	// 새로추가된 콜라이더를 AABBTree에 추가는 오브젝트가 담당한다 
+
 	// AABBTree 삭제예정인 오브젝트, 확장한 사각형을 벗어난경우 처리
 	m_aabbTree->Update();
 
@@ -57,17 +57,19 @@ void CollisionManager::Update()
 	for (auto& colldierPair : pairList)
 	{
 		ColliderKey key(colldierPair.first, colldierPair.second);
-		
+
 		auto iter = m_collisionInfomations.find(key);
-		
+
 		// 새로운 정보 삽입
 		if (iter == m_collisionInfomations.end())
 		{
 			// 이전프레임 전프레임 충돌하지 않음 설정
-			CollisionInfomation info = { false,true };
+			CollisionInfomation info = { colldierPair.first
+				,colldierPair.second
+				,false,true };
 			m_collisionInfomations.insert(std::make_pair(key, std::move(info)));
 		}
-		else 
+		else
 		{
 			// 이번 프레임 충돌
 			iter->second.currentCollision = true;
@@ -78,26 +80,26 @@ void CollisionManager::Update()
 	for (auto& iter : m_collisionInfomations)
 	{
 		Collision c1{};
-		c1.otherCollider = iter.first.collider2;
-		c1.otherObject = iter.first.collider2->GetGameObject();
+		c1.otherCollider = iter.second.collider2;
+		c1.otherObject = iter.second.collider2->GetGameObject();
 
 		Collision c2{};
-		c2.otherCollider = iter.first.collider1;
-		c2.otherObject = iter.first.collider1->GetGameObject();
+		c2.otherCollider = iter.second.collider1;
+		c2.otherObject = iter.second.collider1->GetGameObject();
 
 		if (iter.second.currentCollision)
 		{
 			if (iter.second.prevCollision)
 			{
 				// Stay
-				iter.first.collider1->OnCollisionStay(c1);
-				iter.first.collider2->OnCollisionStay(c2);
+				iter.second.collider1->OnCollisionStay(c1);
+				iter.second.collider2->OnCollisionStay(c2);
 			}
 			else
 			{
 				// Enter
-				iter.first.collider1->OnCollisionEnter(c1);
-				iter.first.collider2->OnCollisionEnter(c2);
+				iter.second.collider1->OnCollisionEnter(c1);
+				iter.second.collider2->OnCollisionEnter(c2);
 			}
 		}
 		else
@@ -105,9 +107,8 @@ void CollisionManager::Update()
 			if (iter.second.prevCollision)
 			{
 				// Exit
-					// Enter
-				iter.first.collider1->OnCollisionExit(c1);
-				iter.first.collider2->OnCollisionExit(c2);
+				iter.second.collider1->OnCollisionExit(c1);
+				iter.second.collider2->OnCollisionExit(c2);
 			}
 		}
 
@@ -129,15 +130,21 @@ void CollisionManager::AddColider(Collider* _collider) const
 	m_aabbTree->Add(_collider);
 }
 
+void CollisionManager::Clear()
+{
+	m_collisionInfomations.clear();
+	m_aabbTree->Clear();
+}
+
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 {
 	OBJECT_TYPE left = _left->GetGameObject()->GetObjectType();
 	OBJECT_TYPE right = _right->GetGameObject()->GetObjectType();
 
-	int min = FMath::Min(static_cast<int>(left), static_cast<int>(right));
-	int max = FMath::Max(static_cast<int>(left), static_cast<int>(right));
+	int leftIndex = static_cast<int>(left);
+	int rightIndex = static_cast<int>(right);
 
-	if (m_collisionCheck[min] & (1 << max))
+	if (m_collisionCheck[leftIndex] & (1 << rightIndex))
 		return true;
 
 	return false;

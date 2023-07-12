@@ -62,13 +62,14 @@ void GameProcess::Initalize(D2DRenderer* _d2DRenderer, HWND _main)
 		, m_collisionManager,m_cameraManager);
 
 	// 매니저 초기화
+	// 매니저들의 의존관계를 Initalize단계에서 표현
 	m_pathManager->Initalize();
 	m_timeManager->Initalize(m_screenSize);
 	m_inputManager->Initalize(m_hWnd,m_cameraManager);
 	m_collisionManager->Initalize(m_inputManager, m_sceneManager);
 	m_cameraManager->Initalize(m_d2DRenderer, m_screenSize,m_inputManager);
 	m_UIManager->Initalize(m_sceneManager,m_managerSet);
-	m_sceneManager->Initalize(_d2DRenderer,m_managerSet,m_sceneManager);
+	m_sceneManager->Initalize(_d2DRenderer,m_managerSet,m_collisionManager);
 
 	// 게임 루프 활성화
 	m_gameRunnig = true;
@@ -99,7 +100,7 @@ void GameProcess::Process()
 	//  ======== 충돌처리 ============================
 	m_collisionManager->Update();
 	
-	// ============= UI 이벤트 ====================== 
+	// ============= UI 이벤트 ======================	
 	m_UIManager->Update();
 
 	// ============== 카메라 이동 ===================

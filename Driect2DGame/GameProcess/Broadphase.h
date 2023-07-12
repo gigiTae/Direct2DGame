@@ -9,6 +9,17 @@ typedef std::vector<Collider*> ColliderVector;
 struct AABB;
 
 /// <summary>
+/// 레이캐스트에 대한 결과
+/// </summary>
+struct RayCastResult
+{
+	bool hit;
+	Collider* collider;
+	Vector2 position;
+	Vector2 normal;
+};
+
+/// <summary>
 /// 광역 충돌체크 알고리즘 인터페이스이다 
 /// 
 /// </summary>
@@ -42,5 +53,12 @@ public:
 	// AABB가 충돌하는 충돌체 목록을 반환 합니다. 쿼리 AABB 사용
 	virtual void Query(const AABB& _aabb, ColliderVector& _output) const = 0;
 
+	/// <summary>
+	/// 레이캐스트 함수
+	/// </summary>
+	/// <param name="_ray">레이의 방향정보</param>
+	/// <param name="_center">중심점 좌표</param>
+	/// <returns></returns>
+	virtual RayCastResult RayCast(const Vector2& _direct, const Vector2& _center, float _maxDistance = 0.f) const =0;
 
 };

@@ -9,8 +9,9 @@ class CircleCollider;
 class BoxCollider;
 struct Node;
 
-
-// 부모 충돌체 
+/// <summary>
+/// 충돌체 인터페이스
+/// </summary>
 class Collider abstract
 	:public Component
 {
@@ -25,7 +26,7 @@ public:
 
 	unsigned int GetID() const { return m_ID; }
 
-	// 현재 충돌중인 충돌체 갯수 반환
+	// 현재 충돌중인 충돌체 개수 반환
 	int GetCurrentCollison() { return m_currentCollision; }
 
 	/// 충돌관련함수 
@@ -53,3 +54,30 @@ private:
 	// AABBTree에 해당하는 노드의 포인터를 type별로 가진다.
 	Node* m_node;
 };
+
+/// 콜라이더 충돌쌍을 가지고 Key값을 만든다
+union ColliderKey
+{
+	ColliderKey(Collider* _c1, Collider* _c2) :Key(0)
+	{
+		ColliderID1 = FMath::Min(_c1->GetID(), _c2->GetID());
+		ColliderID2 = FMath::Max(_c1->GetID(), _c2->GetID());
+	}
+
+	struct
+	{
+		unsigned int ColliderID1;
+		unsigned int ColliderID2;
+	};
+
+	unsigned long long Key;
+};
+
+/// ColliderKey의 맵에서 사용하는 정렬알고리즘
+inline bool operator <(const ColliderKey& c1, const ColliderKey& c2)
+{
+	if (c1.Key < c2.Key)
+		return true;
+
+	return false;
+}

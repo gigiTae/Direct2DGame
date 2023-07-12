@@ -3,6 +3,10 @@
 #include "Scene.h"
 #include "MainScene.h"
 #include "InputManager.h"
+#include "ManagerSet.h"
+#include "CameraManager.h"
+#include "CollisionManager.h"
+#include "UIManager.h"
 
 SceneManager::SceneManager()
 	:m_currentScene(nullptr)
@@ -10,6 +14,7 @@ SceneManager::SceneManager()
 	,m_sceneList{}
 	,m_gameRun(false)
 	,m_managerSet(nullptr)
+	,m_collisionManager(nullptr)
 {
 }
 
@@ -17,17 +22,18 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet, SceneManager* _sceneManager)
+void SceneManager::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet, CollisionManager* _collisionManager)
 {
 	m_gameRun = true;
 	m_d2DRenderer = _d2DRenderer;
 	m_managerSet = _managerSet;
+	m_collisionManager = _collisionManager;
 
 	// 씬 메모리 공간할당
 	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)] = new MainScene();
 
 	// 씬 명시적 초기화
-	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_d2DRenderer,m_managerSet,_sceneManager);
+	m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)]->Initalize(_d2DRenderer, m_managerSet, this);
 
 	// 현재씬을 지정한다
 	m_currentScene = m_sceneList[static_cast<int>(SCENE_TYPE::MAIN)];
@@ -38,6 +44,9 @@ void SceneManager::Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet,
 void SceneManager::ChangeScene(SCENE_TYPE _nextScene)
 {
 	m_currentScene->Exit();
+	m_collisionManager->Clear();
+	m_managerSet->GetUIManager()->SetFocusedUI(nullptr);
+	//m_managerSet->GetCameraManager()->Initalize();
 
 	if (_nextScene == SCENE_TYPE::END)
 	{

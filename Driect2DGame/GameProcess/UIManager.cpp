@@ -68,7 +68,21 @@ void UIManager::Update()
 
 void UIManager::Finalize()
 {
+	
+}
 
+void UIManager::SetFocusedUI(GameObject* _object) const
+{
+	if (m_focusedUI == _object || nullptr == _object)
+	{
+		m_focusedUI = _object;
+		return;
+	}
+
+	// TODO 처리해야함 
+	// 포커스된 오브젝트를 배열의 마지막으로 보내기 
+	m_focusedUI = _object;
+	Scene* currentScene = m_sceneManager->GetCurrentScene();
 }
 
 GameObject* UIManager::GetFocusedUI()

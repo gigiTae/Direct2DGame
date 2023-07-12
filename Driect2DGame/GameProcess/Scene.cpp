@@ -205,7 +205,7 @@ void Scene::LoadSceneResources(const wstring& _sceneName)
 
 	assert(filesPath.size() == fileName.size()); 
 
-	/// 확장자명 제거하고 Key값으로 만들기 
+	/// 확장자명 제거하고 Key값으로 만들기  ex) apple.png -> apple
 	for (int i = 0; i < static_cast<int>(fileName.size()); ++i)
 	{
 		while (true)
@@ -216,7 +216,7 @@ void Scene::LoadSceneResources(const wstring& _sceneName)
 			if (tmp == L'.') break;
 
 			/// 확장자명을 확인해야할 필요가 있을듯
-			assert(fileName.size() != 0);
+			assert(fileName.size() != 0 || !L"파일의 확장자 키워드가 없습니다.");
 		}
 	}
 
@@ -278,11 +278,14 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 	q.push(_object);
 
 	const CollisionManager* collisionMgr = m_managerSet->GetCollisionManager();
+
+
 	while (!q.empty())
 	{
 		GameObject* tmp = q.front();
 		m_objectVector[static_cast<int>(_type)].push_back(tmp);
 		
+		/// 충돌체를 가지는 경우에는 충돌매니저의 트리에 충돌체를 추가한다.
 		BoxCollider* box = tmp->GetComponent<BoxCollider>();
 		CircleCollider* circle = tmp->GetComponent<CircleCollider>();
 
@@ -294,7 +297,6 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 		{
 			collisionMgr->AddColider(circle);
 		}
-
 
 		for (auto child : tmp->GetChildren())
 		{

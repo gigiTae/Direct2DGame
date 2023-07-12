@@ -37,7 +37,6 @@ public:
 	/// !!경고!! 오브젝를 삭제하고 싶으면 Destory를 사용
 	void SetObjectState(OBJECT_STATE _state) { m_state = _state; }
 	OBJECT_STATE GetObjectState() { return m_state; }
-	
 	OBJECT_TYPE GetObjectType() { return m_type; }
 
 	// 몇초후 삭제예정인지 반환
@@ -97,7 +96,6 @@ public:
 	void OnCollisionEnter(const Collision& _collision);
 	void OnCollisionExit(const Collision& _collision);
 	void OnCollisionStay(const Collision& _collision);
-
 
 public:
 	/// 컴포넌트 관련 함수 
@@ -167,6 +165,7 @@ T* GameObject::GetComponent()
 			return component;
 		}
 	}
+
 	return nullptr;
 }
 

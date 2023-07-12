@@ -31,6 +31,5 @@ private:
 
     /// 지정된 사각형내에 있는 오브젝트들 불러오기
     void GetUnits();
-
 };
 

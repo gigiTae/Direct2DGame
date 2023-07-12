@@ -34,21 +34,17 @@ public:
 protected:
 	// 씬에 들어가기전에 필요한 리소스들을 로드한다.
 	void LoadSceneResources(const wstring& _sceneName);
-private:
-	// 리소스들을 로드했는지
-	bool m_loadResources;
 
 public:
 	void FixedUpdate(float _fixedDeltaTime);
 	void Update(float deltaTime);
 	void LateUpdate(float _deltaTime);
 	void Render(D2DRenderer* _d2DRenderer);
-
-	/// 디버그 정보를 랜더링
 	void DubugRender(D2DRenderer* _d2DRenderer);
-
-public: //후속 이벤트 
+	
+	//후속 이벤트 처리
 	void ProcessEvent(float _deltaTime);
+public: 
 
 	/// 씬에 오브젝트 추가를 요청
 	void RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime)const;
@@ -79,11 +75,15 @@ private:
 	D2DRenderer* m_d2DRenderer;
 	ManagerSet* m_managerSet;
 
+	// 리소스들을 로드했는지
+	bool m_loadResources;
+
 	// 씬이 오브젝트 타입에 따라서 오브젝트들을 관리한다.
 	vector<GameObject*> m_objectVector[static_cast<int>(OBJECT_TYPE::END)];
 	// 다음씬을 타입을 가진다 NONE타입이면 지정하지 않음
 	mutable SCENE_TYPE m_nextScene;
 	// 씬에 추가해야하는 오브젝트들을 추가하는 시간과 함께 가지고 있는다.
 	mutable list<AddObjectInfomation> m_addObjectList;
+
 };
 

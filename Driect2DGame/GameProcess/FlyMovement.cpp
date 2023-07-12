@@ -24,7 +24,7 @@ bool FlyMovement::Move(float _deltaTime)
 	// 근사적으로 도착했다고 판단
 	if (direction.LengthSquared() <= 0.001f)
 	{
-//		return true;
+		return true;
 	}
 
 	direction.Normalize();

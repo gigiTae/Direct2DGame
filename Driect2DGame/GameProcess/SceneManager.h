@@ -2,7 +2,7 @@
 
 class GameObject;
 class InputManager;
-class SceneManager;
+class CollisionManager;
 class ManagerSet;
 class Scene;
 
@@ -16,7 +16,8 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void Initalize(D2DRenderer* _d2DRenderer, ManagerSet* _managerSet,SceneManager* _sceneManager);
+	void Initalize(D2DRenderer* _d2DRenderer
+		, ManagerSet* _managerSet, CollisionManager* _collisionManager);
 	void Finalize();
 
 	/// 이벤트 관련
@@ -36,6 +37,7 @@ public:
 	bool IsGameRun() { return m_gameRun; }
 
 private:
+	CollisionManager* m_collisionManager;
 	D2DRenderer* m_d2DRenderer;
 	ManagerSet* m_managerSet;
 	bool m_gameRun; 

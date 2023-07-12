@@ -16,43 +16,29 @@ AABBTree::AABBTree(float _margin, CollisionManager* _collisionManager)
 
 AABBTree::~AABBTree()
 {
-	// BFS 소멸 
-	queue<Node*> q;
-
-	if (m_root)
-		q.push(m_root);
-
-	while (!q.empty())
-	{
-		Node* node =q.front();
-		q.pop();
-
-		if (node->children[0])
-		{
-			q.push(node->children[0]);
-			q.push(node->children[1]);
-		}
-		delete node;
-	}
-
-
+	Clear();
 }
 
-void AABBTree::Add(Collider* _aabb)
+void AABBTree::Add(Collider* _collider)
 {
+	Node* node = new Node();
+	
+	// Node 와 Collider 연결
+	_collider->SetNode(node);
+	node->collider = _collider;
+
 	if (m_root)
 	{
 		// not first node, insert node to tree
-		Node* node = new Node();
-		node->SetLeaf(_aabb);
+		node->SetLeaf(_collider);
 		node->UpdateAABB(m_margin);
 		InsertNode(node, &m_root);
 	}
 	else
 	{
 		// first node, make root
-		m_root = new Node();
-		m_root->SetLeaf(_aabb);
+		m_root = node;
+		m_root->SetLeaf(_collider);
 		m_root->UpdateAABB(m_margin);
 	}
 }
@@ -62,14 +48,28 @@ void AABBTree::Update()
 	if (m_root)
 	{
 		if (m_root->IsLeaf())
-			m_root->UpdateAABB(m_margin);
+		{
+			// 루트 노드가 삭제예정인 경우
+			if (!m_root->collider->GetGameObject()->IsAlive())
+				Remove(m_root->collider);
+			else
+				m_root->UpdateAABB(m_margin);
+
+		}
 		else
 		{
 			// grab all invalid nodes
 			// 모든 유효하지 않는 노드를 가져옵니다
 			// 삭제된 오브젝트도 추가하자 
 			m_invalidNodes.clear();
-			UpdateNodeHelper(m_root, m_invalidNodes);
+			m_removeNodes.clear();
+			UpdateNodeHelper(m_root);
+
+			// 삭제예정인 오브젝트를 트리에서 제거
+			for (Node* node : m_removeNodes)
+			{
+				Remove(node->collider);
+			}
 
 			// re-insert all invalid nodes
 			// 유효하지 않는 모든 노드를 다시 삽입
@@ -101,31 +101,32 @@ void AABBTree::Update()
 				InsertNode(node, &m_root);
 			}
 			m_invalidNodes.clear();
+			m_removeNodes.clear();
 		}
 
 	}
 }
 
-void AABBTree::UpdateNodeHelper(Node* _node, NodeVector& _invalidNodes)
+void AABBTree::UpdateNodeHelper(Node* _node)
 {
 	if (_node->IsLeaf())
 	{
 		// 삭제 예정인 오브젝트
 		if (!_node->collider->GetGameObject()->IsAlive())
 		{
-			Remove(_node->collider);
+			m_removeNodes.push_back(_node);
 		}
 		else if (!_node->aabb.Contains(_node->collider))
 		{
 			// check if fat AABB dosen't contain the collider's AABB anymore
 			// 확장한 AABB박스에서 콜라이더가 벗어나면 invalidNodes에 데이터를 추가한다
-			_invalidNodes.push_back(_node);
+			m_invalidNodes.push_back(_node);
 		}
  	}
 	else
 	{
-		UpdateNodeHelper(_node->children[0], _invalidNodes);
-		UpdateNodeHelper(_node->children[1], _invalidNodes);
+		UpdateNodeHelper(_node->children[0]);
+		UpdateNodeHelper(_node->children[1]);
 	}
 }
 
@@ -173,7 +174,7 @@ void AABBTree::Remove(Collider* _collider)
 	     
 	// remove two-way link
 	node->collider = nullptr;
-	_collider->SetNode(node);
+	_collider->SetNode(nullptr);
 
 	RemoveNode(node);
 }
@@ -364,6 +365,54 @@ void AABBTree::Query(const AABB& _aabb, ColliderVector& _output) const
 		}
 	}
 	
+}
+
+RayCastResult AABBTree::RayCast(const Vector2& _direct
+	, const Vector2& _center
+	, float _maxDistance /*= 0.f*/) const
+{
+	RayCastResult result{};
+	result.hit = false;
+	result.collider = nullptr;
+	
+	queue<Node*> q;
+	if (m_root)
+	{
+		q.push(m_root);
+	}
+
+	while (!q.empty())
+	{
+		Node* node = q.front();
+		q.pop();
+
+		AABB& aabb = node->aabb;
+	}
+	return result;
+}
+
+void AABBTree::Clear()
+{
+	// BFS 소멸 
+	queue<Node*> q;
+
+	if (m_root)
+		q.push(m_root);
+
+	while (!q.empty())
+	{
+		Node* node = q.front();
+		q.pop();
+
+		if (node->children[0])
+		{
+			q.push(node->children[0]);
+			q.push(node->children[1]);
+		}
+		delete node;
+	}
+
+	m_root = nullptr;
 }
 
 void AABBTree::DebugRender(D2DRenderer* _d2DRenderer)

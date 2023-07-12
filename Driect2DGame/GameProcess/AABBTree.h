@@ -26,23 +26,32 @@ public:
     ColliderPairList& ComputePairs() override;
     void Pick(const Vector2& _point, ColliderVector& _colliderVector) override;
     void Query(const AABB& _aabb, ColliderVector& _output) const override;
+    
+	RayCastResult RayCast(const Vector2& _direct
+        , const Vector2& _center, float _maxDistance = 0.f) const override;
+
+
+    // 트리를 초기화한다.
+    void Clear();
 
     void DebugRender(D2DRenderer* _d2DRenderer);
 private:
     typedef std::vector<Node*> NodeVector;
-    void UpdateNodeHelper(Node* _node, NodeVector& _invalidNodes);
+    void UpdateNodeHelper(Node* _node);
     void InsertNode(Node* _node, Node** _parent);
     void RemoveNode(Node* _node);
     void ComputePairsHelper(Node* _n0, Node* _n1);
     void ClearChildrenCrossFlagHelper(Node* _node);
     void CrossChildren(Node* _node);
 
-    Node* m_root;
+private:
+    Node* m_root; 
     ColliderPairList m_pairs;
     const float m_margin;
 
     CollisionManager* m_collisionManager; 
     NodeVector m_invalidNodes;
+    NodeVector m_removeNodes;
 };
 
 struct Node

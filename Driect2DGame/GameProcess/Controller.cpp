@@ -32,6 +32,17 @@ void Controller::Render(D2DRenderer* _d2DRenderer)
 
 void Controller::Update(float _deltaTime)
 {
+	// 삭제 예정인 오브젝트 처리
+	for (auto iter = m_selectUnits.begin(); iter != m_selectUnits.end();)
+	{
+		if (!(*iter)->IsAlive())
+		{
+			iter = m_selectUnits.erase(iter);
+		}
+		else
+			++iter;
+	}
+
 	const InputManager* input = GetInputManager();
 	
 	// 부대 이동 이벤트 발생
@@ -54,7 +65,8 @@ void Controller::Update(float _deltaTime)
 		Vector2 worldMousePostion = input->GetWorldMousePosition();
 
 		for (auto object : m_selectUnits)
-		{			Unit* unit = object->GetComponent<Unit>();
+		{			
+			Unit* unit = object->GetComponent<Unit>();
 			unit->MoveUnit(worldMousePostion);
 		}
 	}	
@@ -67,7 +79,12 @@ void Controller::Update(float _deltaTime)
 			unit->HoldUnit();
 		}
 	}
-
+	
+	if (input->IsKeyState(KEY::F4, KEY_STATE::TAP))
+	{
+		const SceneManager* sceneMgr = GetSceneManager();
+		sceneMgr->RegisterNextScene(SCENE_TYPE::MAIN);
+	}
 }
 
 void Controller::OnMouseDown()
@@ -92,7 +109,7 @@ void Controller::OnMouse()
 void Controller::OnMouseUp()
 {
 	m_isDragging = false;
-
+	
 	/// 부대 지정 함수 추가
 	GetUnits();
 }
@@ -129,6 +146,10 @@ void Controller::GetUnits()
 
 			for (auto object : groupObject)
 			{
+				// 삭제 예정인 오브젝트는 처리하지 않는다
+				if(!object->IsAlive())
+					continue;
+
 				// AABB충돌검사 
 				Transform* transform = object->GetComponent<Transform>();
 				Vector2 position = transform->GetPosition();
@@ -159,6 +180,9 @@ void Controller::GetUnits()
 
 			for (auto object : groupObject)
 			{
+				if(!object->IsAlive())
+					continue;
+					
 				// AABB충돌검사 
 				Transform* transform = object->GetComponent<Transform>();
 				Vector2 position = transform->GetPosition();
