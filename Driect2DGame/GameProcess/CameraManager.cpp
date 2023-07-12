@@ -29,40 +29,40 @@ void CameraManager::Initalize(D2DRenderer* _renderer, Vector2 _screenSize, Input
 
 void CameraManager::Update(float _deltaTime)
 {
-	/// 카메라 이동
-	Vector2 screenPosition = m_inputManager->GetScreendMousePosition();
+	///// 카메라 이동
+	//Vector2 screenPosition = m_inputManager->GetScreendMousePosition();
 
-	/// 1. 맵사이즈 제한해서 카메라 움직이기
-	/// 2. 특정영역에 마우스가 있으면 카메라 움직이기 
-	Vector2 mouseScreenPos = m_inputManager->GetScreendMousePosition();
+	///// 1. 맵사이즈 제한해서 카메라 움직이기
+	///// 2. 특정영역에 마우스가 있으면 카메라 움직이기 
+	//Vector2 mouseScreenPos = m_inputManager->GetScreendMousePosition();
 
-	Vector2 direction = Vector2::Zero;
-	// 상단 이동
-	if (mouseScreenPos.y <= 50.f)
-	{
-		++direction.y;
-	}
-	// 하단 이동
-	if (mouseScreenPos.y >=  m_screenSize.y-50.f)
-	{
-		--direction.y;
-	}
-	// 좌 이동
-	if (mouseScreenPos.x <= 50.f)
-	{
-		--direction.x;
-	}
-	// 우 이동
-	if (mouseScreenPos.x >=  m_screenSize.x-50.f)
-	{
-		++direction.x;
-	}
+	//Vector2 direction = Vector2::Zero;
+	//// 상단 이동
+	//if (mouseScreenPos.y <= 50.f)
+	//{
+	//	++direction.y;
+	//}
+	//// 하단 이동
+	//if (mouseScreenPos.y >=  m_screenSize.y-50.f)
+	//{
+	//	--direction.y;
+	//}
+	//// 좌 이동
+	//if (mouseScreenPos.x <= 50.f)
+	//{
+	//	--direction.x;
+	//}
+	//// 우 이동
+	//if (mouseScreenPos.x >=  m_screenSize.x-50.f)
+	//{
+	//	++direction.x;
+	//}
 
-	direction.Normalize();
+	//direction.Normalize();
 
-	Vector2 distance = direction * m_moveSpeed * _deltaTime;
+	//Vector2 distance = direction * m_moveSpeed * _deltaTime;
 
-	m_camera->MoveCamera(distance);
+	//m_camera->MoveCamera(distance);
 
 	/// 카메라 확대 
 
@@ -73,10 +73,6 @@ void CameraManager::Update(float _deltaTime)
 	if (m_inputManager->IsKeyState(KEY::F2, KEY_STATE::TAP))
 	{
 		m_camera->ZoomCamera(Vector2(-0.1f, -0.1f));
-	}
-	if (m_inputManager->IsKeyState(KEY::F3, KEY_STATE::HOLD))
-	{
-		m_camera->RotateCamera(_deltaTime);
 	}
 
 }
@@ -112,4 +108,9 @@ Vector2 CameraManager::CameraToScreen(const Vector2& _camera) const
 Vector2 CameraManager::CameraToWorld(const Vector2& _camera) const
 {
 	return m_camera->CameraToWorld(_camera);
+}
+
+void CameraManager::ResetCamera() const
+{
+	m_camera->ResetCamera(m_screenSize);
 }

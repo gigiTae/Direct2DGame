@@ -138,7 +138,7 @@ void Controller::GetUnits()
 	// Area크기가 작으면 한개의 오브젝트만 선택한다
 	if (maxArea.x - minArea.x <= 5.f && maxArea.y - minArea.y <= 5.f)
 	{
-		for (int i = static_cast<int>(OBJECT_TYPE::GROUND_UNIT);
+		for (int i = static_cast<int>(OBJECT_TYPE::UNIT);
 			i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
 		{
 			const vector<GameObject*>& groupObject
@@ -172,7 +172,7 @@ void Controller::GetUnits()
 	}
 	else
 	{
-		for (int i = static_cast<int>(OBJECT_TYPE::GROUND_UNIT);
+		for (int i = static_cast<int>(OBJECT_TYPE::UNIT);
 			i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
 		{
 			const vector<GameObject*>& groupObject

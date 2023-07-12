@@ -33,6 +33,7 @@ public:
 	// 카메라 좌표계에서 월드 좌표계 변환 
 	Vector2 CameraToWorld(const Vector2& _camera) const;
 	
+	void ResetCamera()const;
 private:
 	D2DCamera* m_camera;
 	D2DRenderer* m_d2DRenderer;

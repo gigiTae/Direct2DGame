@@ -46,7 +46,7 @@ void SceneManager::ChangeScene(SCENE_TYPE _nextScene)
 	m_currentScene->Exit();
 	m_collisionManager->Clear();
 	m_managerSet->GetUIManager()->SetFocusedUI(nullptr);
-	//m_managerSet->GetCameraManager()->Initalize();
+	m_managerSet->GetCameraManager()->ResetCamera();
 
 	if (_nextScene == SCENE_TYPE::END)
 	{

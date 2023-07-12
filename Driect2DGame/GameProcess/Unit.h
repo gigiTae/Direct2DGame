@@ -42,6 +42,8 @@ private:
     bool m_isSelect; // 부대지정된 유닛인지 
     UNIT_STATE m_state;
 
+    GameObject* m_target; // 현재 공격중인 오브젝트
+
     float m_hp; // 유닛 체력
 
     UnitMovement* m_movement; // 유닛의 움직임을 담당하는 컴포넌트 

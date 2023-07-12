@@ -22,8 +22,9 @@ enum class SCENE_TYPE
 enum class OBJECT_TYPE
 {
 	BACKGROUND,
-	GROUND_UNIT,
-	AIR_UNIT,
+	UNIT,
+	ENEMY,
+
 
 	MOUSE_EFFECT,
 	/// 아래의 오브젝트 타입부터는 마우스 이벤트가 발생함

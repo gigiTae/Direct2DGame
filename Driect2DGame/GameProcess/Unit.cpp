@@ -66,6 +66,11 @@ void Unit::Update(float _deltaTime)
 		break;
 	case UNIT_STATE::ATTACK:
 	{
+		// 적이 시야에서 벗어난지 확인
+
+
+		// 적을 공격한다 
+
 	}
 		break;
 	case UNIT_STATE::MOVE:
@@ -108,16 +113,15 @@ void Unit::OnCollisionStay(const Collision& _collision)
 	direct.Normalize();
 
 	float otherMass = rigid->GetMass();
-	if (false)//otherMass == FLT_MAX) // 고정된 오브젝트 
+	if (otherMass == FLT_MAX) // 고정된 오브젝트 
 	{
 		float otherRadius = _collision.otherObject->GetComponent<CircleCollider>()->GetRadius();
 		float radius = GetComponent<CircleCollider>()->GetRadius();
-		
+
 		Vector2 pushDistance = direct * (otherRadius + radius - (position - otherPos).Length());
 
 		transform->AddPosition(pushDistance);
 	}
-
 	else // 움직이느 오브젝트
 	{
 		//return;
@@ -131,5 +135,10 @@ void Unit::OnCollisionStay(const Collision& _collision)
 		rigid->AddForce(force);
 	}
 
-
+	/// 적을 인지해서 공격한다 
+	if (_collision.otherObject->GetObjectType() == OBJECT_TYPE::ENEMY && !m_target)
+	{
+		m_target = _collision.otherObject;
+		m_state = UNIT_STATE::ATTACK;
+	}
 }

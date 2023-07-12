@@ -108,7 +108,7 @@
       <Filter>Broadphase\AABBTree</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>GameProcess\01.Define\GameWorld</Filter>
+      <Filter>GameProcess\01.Define</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
