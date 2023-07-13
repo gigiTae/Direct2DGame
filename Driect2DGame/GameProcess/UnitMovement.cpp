@@ -1,10 +1,11 @@
 #include "GameProcessPCH.h"
 #include "UnitMovement.h"
+#include "GameObject.h"
 
-UnitMovement::UnitMovement()
-	:m_moveSpeed(0.f)
-	, m_gameoject(nullptr)
-	,m_unitComponent(nullptr)
+UnitMovement::UnitMovement(const string& _name)
+	:MonoBehaviour(_name)
+	,m_destination{}
+	,m_unit(nullptr)
 {
 
 }
@@ -14,9 +15,13 @@ UnitMovement::~UnitMovement()
 
 }
 
-void UnitMovement::Initalize(GameObject* _object, Unit* _unitComponent, float _movespeed)
+void UnitMovement::Start()
 {
-	m_gameoject = _object;
-	m_unitComponent = _unitComponent;
-	m_moveSpeed = _movespeed;
+	//m_unit = GetComponent<Unit>();
+	
+}
+
+void UnitMovement::SetDestination(Vector2 _dest)
+{
+	m_destination = _dest;
 }

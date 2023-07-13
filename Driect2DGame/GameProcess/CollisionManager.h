@@ -8,12 +8,6 @@ class GameObject;
 class AABBTree;
 union ColliderKey;
 
-// 충돌정보 
-struct Collision
-{
-	GameObject* otherObject;
-	Collider* otherCollider;
-};
 
 // 충돌처리에 필요한 정보를 가진다.
 struct CollisionInfomation

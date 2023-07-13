@@ -12,7 +12,7 @@ class ManagerSet;
 
 
 /// <summary>
-/// 컴포넌의 기본적인 인터페이스이다
+/// 컴포넌의 기본적인 부모 클래스이다
 /// 
 /// </summary>
 class Component abstract
@@ -22,7 +22,7 @@ public:
 	virtual ~Component();
 
 public:
-
+	virtual void Start() {};
 	virtual void Finalize() {};
 	/// 기본적인 이벤트 함수
 	virtual void FixedUpdate(float _fixedDeltaTime) {};

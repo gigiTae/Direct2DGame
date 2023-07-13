@@ -1,5 +1,8 @@
 #pragma once
 
+class GameObject;
+class Collider;
+
 ///  ================= 씬관련 ===========================
 
 enum class SCENE_TYPE
@@ -25,7 +28,7 @@ enum class OBJECT_TYPE
 	UNIT,
 	ENEMY,
 
-
+	ATTACK_EFFECT,
 	MOUSE_EFFECT,
 	/// 아래의 오브젝트 타입부터는 마우스 이벤트가 발생함
 	BACK_UI = 30,	/// 항상 FRONT UI보다 뒤에 그려진다
@@ -56,14 +59,24 @@ enum class CALL_ORDER
 	COLLIDER,
 	UI
 };
-
-
 /// =================================== 컴포넌트 관련 ==============================
 enum class COLLIDER_TYPE
 {
 	CIRCLE,
 	BOX,
 };
+
+
+/// ========================= 충돌 관련 =========================================
+// 충돌정보 
+struct Collision
+{
+	GameObject* otherObject;
+	Collider* otherCollider;
+
+	Collider* myCollider;
+};
+
 
 
 

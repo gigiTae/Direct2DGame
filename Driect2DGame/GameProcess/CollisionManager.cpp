@@ -82,10 +82,12 @@ void CollisionManager::Update()
 		Collision c1{};
 		c1.otherCollider = iter.second.collider2;
 		c1.otherObject = iter.second.collider2->GetGameObject();
+		c1.myCollider = iter.second.collider1;
 
 		Collision c2{};
 		c2.otherCollider = iter.second.collider1;
 		c2.otherObject = iter.second.collider1->GetGameObject();
+		c2.myCollider = iter.second.collider2;
 
 		if (iter.second.currentCollision)
 		{

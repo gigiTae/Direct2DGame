@@ -31,7 +31,7 @@ public:
 	Scene* GetCurrentScene()const { return m_currentScene; }
 	void ChangeScene(SCENE_TYPE _nextScene);
 
-	void RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime =0.f) const;
+	void RegisterObject(GameObject* _object, float _delayTime =0.f) const;
 	void RegisterNextScene(SCENE_TYPE _nextScene)const;
 
 	bool IsGameRun() { return m_gameRun; }

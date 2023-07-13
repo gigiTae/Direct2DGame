@@ -57,6 +57,14 @@ void GameObject::DestroyAllComponent()
 	}
 }
 
+void GameObject::Start()
+{
+	for (auto& component : m_components)
+	{
+		component.second->Start();
+	}
+}
+
 void GameObject::IntergrateForces(float _fixedDeltaTime)
 {
 	RigidBody* rigidBody = GetComponent<RigidBody>();

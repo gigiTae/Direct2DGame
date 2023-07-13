@@ -75,9 +75,9 @@ void SceneManager::RegisterNextScene(SCENE_TYPE _nextScene) const
 	m_currentScene->RegisterNextScene(_nextScene);
 }
  
-void SceneManager::RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime) const
+void SceneManager::RegisterObject(GameObject* _object, float _delayTime /*=0.f*/) const
 {
-	m_currentScene->RegisterObject(_object, _type, _delayTime);
+	m_currentScene->RegisterObject(_object, _delayTime);
 }
 
 

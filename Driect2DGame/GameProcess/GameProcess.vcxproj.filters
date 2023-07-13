@@ -20,22 +20,22 @@
       <Filter>GameProcess\03.Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
-      <Filter>GameProcess\03.Component\Physics2D\Collider\CircleCollider</Filter>
+      <Filter>GameProcess\03.Component\Collider\CircleCollider</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>GameProcess\03.Component\Physics2D\Collider\BoxColider</Filter>
+      <Filter>GameProcess\03.Component\Collider\BoxColider</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameProcess\02.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
-      <Filter>GameProcess\05.Scene\MainScene</Filter>
+      <Filter>StarcratScripts\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>GameProcess\03.Component\Physics2D\Collider</Filter>
+      <Filter>GameProcess\03.Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
-      <Filter>GameProcess\03.Component\Physics2D\RigidBody</Filter>
+      <Filter>GameProcess\03.Component\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="PathManager.h">
       <Filter>GameProcess\04.Manager\PathManager</Filter>
@@ -44,13 +44,13 @@
       <Filter>GameProcess\03.Component</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
-      <Filter>GameProcess\01.Define\GameWorld</Filter>
+      <Filter>GameProcess\Define\GameWorld</Filter>
     </ClInclude>
     <ClInclude Include="MonoBehaviour.h">
       <Filter>GameProcess\03.Component\MonoBehaviour</Filter>
     </ClInclude>
     <ClInclude Include="GameProcessPCH.h">
-      <Filter>GameProcess\01.Define</Filter>
+      <Filter>GameProcess\Define</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>GameProcess\04.Manager\UIManager</Filter>
@@ -83,19 +83,19 @@
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
-      <Filter>StarcrafScripts\UI</Filter>
+      <Filter>StarcratScripts\Controller</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
-      <Filter>StarcrafScripts\Unit</Filter>
+      <Filter>StarcratScripts\Unit</Filter>
     </ClInclude>
     <ClInclude Include="UnitMovement.h">
-      <Filter>StarcrafScripts\Unit\UnitMovement</Filter>
+      <Filter>StarcratScripts\Unit\UnitMovement</Filter>
     </ClInclude>
     <ClInclude Include="GameProcess.h">
       <Filter>GameProcess</Filter>
     </ClInclude>
     <ClInclude Include="FlyMovement.h">
-      <Filter>StarcrafScripts\Unit\UnitMovement\FlyMovement</Filter>
+      <Filter>StarcratScripts\Unit\UnitMovement\FlyMovement</Filter>
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
     <ClInclude Include="Broadphase.h">
@@ -108,39 +108,33 @@
       <Filter>Broadphase\AABBTree</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>GameProcess\01.Define</Filter>
+      <Filter>GameProcess\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitDefine.h">
+      <Filter>StarcratScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitSensor.h">
+      <Filter>StarcratScripts\Unit\UnitSensor</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitAttack.h">
+      <Filter>StarcratScripts\Unit\UnitAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootBullet.h">
+      <Filter>StarcratScripts\ShootBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="StarcrafScripts">
-      <UniqueIdentifier>{48423338-0c84-40ef-bd2b-bd26b559f3c4}</UniqueIdentifier>
+    <Filter Include="Broadphase">
+      <UniqueIdentifier>{b867e988-545a-4edf-b93a-fbe1467b570f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcrafScripts\UI">
-      <UniqueIdentifier>{bf57707f-9640-4f53-9c72-7b8095ad7f91}</UniqueIdentifier>
+    <Filter Include="Broadphase\AABBTree">
+      <UniqueIdentifier>{c3d8ba6a-b843-49fd-8d80-4f27c4df56ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcrafScripts\Unit">
-      <UniqueIdentifier>{b8aac14f-d0f5-4722-94d0-d93e6a630208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StarcrafScripts\Unit\UnitMovement">
-      <UniqueIdentifier>{7a48098b-aa61-4ccd-a7e6-7ea75b2c1b31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StarcrafScripts\Unit\UnitAttack">
-      <UniqueIdentifier>{ba14f2a4-15e7-4407-b293-d740484208c4}</UniqueIdentifier>
+    <Filter Include="Broadphase\AABB">
+      <UniqueIdentifier>{43d5e70b-0e06-489a-b709-331c24dad265}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess">
       <UniqueIdentifier>{6c9be842-729d-438b-b73d-9c1237256ebd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\05.Scene">
-      <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\05.Scene\MainScene">
-      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Define">
-      <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\01.Define\GameWorld">
-      <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\02.GameObject">
       <UniqueIdentifier>{9a295eb7-f4fc-4ec7-ad8c-ce618e8e254c}</UniqueIdentifier>
@@ -157,21 +151,6 @@
     <Filter Include="GameProcess\03.Component\Animator\Animation">
       <UniqueIdentifier>{83077952-d581-4522-b7e3-168017f72d55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProcess\03.Component\Physics2D">
-      <UniqueIdentifier>{db292c11-5456-43a0-b98c-7daf07cce6e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Physics2D\RigidBody">
-      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Physics2D\Collider">
-      <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Physics2D\Collider\CircleCollider">
-      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\Physics2D\Collider\BoxColider">
-      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProcess\03.Component\Renderer">
       <UniqueIdentifier>{06a8e95b-9714-4ccd-b1c9-082f4d23e540}</UniqueIdentifier>
     </Filter>
@@ -186,6 +165,18 @@
     </Filter>
     <Filter Include="GameProcess\03.Component\MonoBehaviour">
       <UniqueIdentifier>{9be08951-87a8-4b20-bf6c-dba8bac66dc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\Collider">
+      <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\Collider\CircleCollider">
+      <UniqueIdentifier>{c0fa8c9a-6566-432a-8f85-96127ac73db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\Collider\BoxColider">
+      <UniqueIdentifier>{0d48476f-073d-4585-8416-b2a7f0cb012e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\RigidBody">
+      <UniqueIdentifier>{aae82191-adf2-4fda-a20a-d09b07ece5ae}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\04.Manager">
       <UniqueIdentifier>{cce74b3c-9b80-46f1-ac05-915ac072855c}</UniqueIdentifier>
@@ -217,17 +208,41 @@
     <Filter Include="GameProcess\04.Manager\CameraManager">
       <UniqueIdentifier>{20bce861-c09f-4cd6-99f7-a241c34c17e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcrafScripts\Unit\UnitMovement\FlyMovement">
+    <Filter Include="GameProcess\05.Scene">
+      <UniqueIdentifier>{7b4f96fe-7a1b-4471-b680-522834fdc430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Define">
+      <UniqueIdentifier>{50c9ea73-f45c-4eba-88a9-20ebeb8de1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\Define\GameWorld">
+      <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StarcratScripts">
+      <UniqueIdentifier>{48423338-0c84-40ef-bd2b-bd26b559f3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StarcratScripts\Unit">
+      <UniqueIdentifier>{b8aac14f-d0f5-4722-94d0-d93e6a630208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StarcratScripts\Unit\UnitMovement">
+      <UniqueIdentifier>{7a48098b-aa61-4ccd-a7e6-7ea75b2c1b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StarcratScripts\Unit\UnitMovement\FlyMovement">
       <UniqueIdentifier>{2a5aeda3-cff4-4bce-9bee-a16da9bfeb87}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Broadphase">
-      <UniqueIdentifier>{b867e988-545a-4edf-b93a-fbe1467b570f}</UniqueIdentifier>
+    <Filter Include="StarcratScripts\Unit\UnitAttack">
+      <UniqueIdentifier>{ba14f2a4-15e7-4407-b293-d740484208c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Broadphase\AABBTree">
-      <UniqueIdentifier>{c3d8ba6a-b843-49fd-8d80-4f27c4df56ca}</UniqueIdentifier>
+    <Filter Include="StarcratScripts\MainScene">
+      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Broadphase\AABB">
-      <UniqueIdentifier>{43d5e70b-0e06-489a-b709-331c24dad265}</UniqueIdentifier>
+    <Filter Include="StarcratScripts\Controller">
+      <UniqueIdentifier>{bf57707f-9640-4f53-9c72-7b8095ad7f91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StarcratScripts\Unit\UnitSensor">
+      <UniqueIdentifier>{600fa25c-b2f6-4df2-a273-a9f70168a780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StarcratScripts\ShootBullet">
+      <UniqueIdentifier>{b28b94e6-fcc1-402b-b111-efb97037faf0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -250,22 +265,22 @@
       <Filter>GameProcess\03.Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
-      <Filter>GameProcess\03.Component\Physics2D\Collider\CircleCollider</Filter>
+      <Filter>GameProcess\03.Component\Collider\CircleCollider</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
-      <Filter>GameProcess\03.Component\Physics2D\Collider\BoxColider</Filter>
+      <Filter>GameProcess\03.Component\Collider\BoxColider</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameProcess\02.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
-      <Filter>GameProcess\05.Scene\MainScene</Filter>
+      <Filter>StarcratScripts\MainScene</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>GameProcess\03.Component\Physics2D\Collider</Filter>
+      <Filter>GameProcess\03.Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
-      <Filter>GameProcess\03.Component\Physics2D\RigidBody</Filter>
+      <Filter>GameProcess\03.Component\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="PathManager.cpp">
       <Filter>GameProcess\04.Manager\PathManager</Filter>
@@ -274,7 +289,7 @@
       <Filter>GameProcess\03.Component</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
-      <Filter>GameProcess\01.Define\GameWorld</Filter>
+      <Filter>GameProcess\Define\GameWorld</Filter>
     </ClCompile>
     <ClCompile Include="MonoBehaviour.cpp">
       <Filter>GameProcess\03.Component\MonoBehaviour</Filter>
@@ -310,19 +325,19 @@
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
-      <Filter>StarcrafScripts\UI</Filter>
+      <Filter>StarcratScripts\Controller</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>StarcrafScripts\Unit</Filter>
+      <Filter>StarcratScripts\Unit</Filter>
     </ClCompile>
     <ClCompile Include="UnitMovement.cpp">
-      <Filter>StarcrafScripts\Unit\UnitMovement</Filter>
+      <Filter>StarcratScripts\Unit\UnitMovement</Filter>
     </ClCompile>
     <ClCompile Include="GameProcess.cpp">
       <Filter>GameProcess</Filter>
     </ClCompile>
     <ClCompile Include="FlyMovement.cpp">
-      <Filter>StarcrafScripts\Unit\UnitMovement\FlyMovement</Filter>
+      <Filter>StarcratScripts\Unit\UnitMovement\FlyMovement</Filter>
     </ClCompile>
     <ClCompile Include="Broadphase.cpp">
       <Filter>Broadphase</Filter>
@@ -332,6 +347,18 @@
     </ClCompile>
     <ClCompile Include="AABB.cpp">
       <Filter>Broadphase\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="Define.cpp">
+      <Filter>GameProcess\Define</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitSensor.cpp">
+      <Filter>StarcratScripts\Unit\UnitSensor</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitAttack.cpp">
+      <Filter>StarcratScripts\Unit\UnitAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootBullet.cpp">
+      <Filter>StarcratScripts\ShootBullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

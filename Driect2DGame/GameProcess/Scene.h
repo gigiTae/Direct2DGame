@@ -8,7 +8,6 @@ class SceneManager;
 struct AddObjectInfomation
 {
 	GameObject* object;
-	OBJECT_TYPE type;
 	float delayTime;
 };
 
@@ -47,7 +46,7 @@ public:
 public: 
 
 	/// 씬에 오브젝트 추가를 요청
-	void RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime)const;
+	void RegisterObject(GameObject* _object, float _delayTime)const;
 	void RegisterNextScene(SCENE_TYPE _nextScene) const;
 
 	const vector<GameObject*>& GetGroupObject(OBJECT_TYPE _type) const  
@@ -66,7 +65,7 @@ public:
 
 protected:
 	/// 자식오브젝트들도 같이 등록
-	void AddObject(GameObject* _object, OBJECT_TYPE _type); 
+	void AddObject(GameObject* _object); 
 	void DestoryGroupObject(OBJECT_TYPE _type);
 	const ManagerSet* GetManagerSet() { return m_managerSet; }
 

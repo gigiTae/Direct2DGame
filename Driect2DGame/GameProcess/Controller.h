@@ -23,6 +23,7 @@ public:
     
 private:
     bool m_isDragging; // 드래그 중인지
+
     Vector2 m_dragStart; 
     Vector2 m_dragEnd;
 

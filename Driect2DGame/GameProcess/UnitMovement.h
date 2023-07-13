@@ -1,30 +1,27 @@
 #pragma once
 
+#include "MonoBehaviour.h"
+
 class Unit;
 class GameObject;
+
 /// <summary>
-/// 유닛의 움직임을 담당하는 컴포넌트의 인터페이스
+/// 유닛의 움직임을 담당하는 컴포넌트 
 /// 
 /// </summary>
-class UnitMovement abstract
+class UnitMovement : public MonoBehaviour 
 {
 public:
-	UnitMovement();
+	UnitMovement(const string& _name);
 	~UnitMovement();
 
+	void Start() override;
+	void SetDestination(Vector2 _dest);
+	virtual bool Move(float _deltaTime) =0;
+
 public:
-	/// 유닛에게 움직이라는 명령을 내린다 도착하면 true를 반환한다.
-	virtual bool Move(float _deltaTime) abstract; 
-	void Initalize(GameObject* _object, Unit* _unitComponent, float _movespeed);
+	Unit* m_unit;
+	Vector2 m_destination; // 최종목적지
 
-	void SetDestination(const Vector2& _destination) { m_destination = _destination; }
-
-
-protected:
-	float m_moveSpeed; // 이동속도
-	GameObject* m_gameoject;
-	Unit* m_unitComponent;
-
-	Vector2 m_destination; // 유닛의 최종 목적지
 };
 

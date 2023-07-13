@@ -239,7 +239,8 @@ void AABBTree::ComputePairsHelper(Node* _n0, Node* _n1)
 		{
 			// 충돌하는 타입인지 확인하고, 실제로 충돌하는 지 확인한다
 			if (m_collisionManager->IsCollision(_n0->collider, _n1->collider)
-				&& _n0->collider->Collides(_n1->collider))
+				&& _n0->collider->Collides(_n1->collider)
+				&& _n0->collider->GetGameObject() != _n1->collider->GetGameObject())
 			{
 				m_pairs.push_back(std::make_pair(_n0->collider, _n1->collider));
 			}

@@ -28,7 +28,6 @@ void CircleCollider::LateUpdate(float _deltaTime)
 
 void CircleCollider::DebugRender(D2DRenderer* _d2DRenderer)
 {
-	_d2DRenderer->DrawRectangle(GetMinPoint(), GetMaxPoint(), D2D1::ColorF::Black);
 
 	if (GetCurrentCollison() == 0)
 	{

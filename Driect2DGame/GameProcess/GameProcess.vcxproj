@@ -160,6 +160,7 @@
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ShootBullet.h" />
     <ClInclude Include="TextureRenderer.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Transform.h" />
@@ -168,7 +169,10 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitAttack.h" />
+    <ClInclude Include="UnitDefine.h" />
     <ClInclude Include="UnitMovement.h" />
+    <ClInclude Include="UnitSensor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
@@ -184,6 +188,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Define.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="FlyMovement.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -198,13 +203,16 @@
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ShootBullet.cpp" />
     <ClCompile Include="TextureRenderer.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitAttack.cpp" />
     <ClCompile Include="UnitMovement.cpp" />
+    <ClCompile Include="UnitSensor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MathModule\MathModule.vcxproj">

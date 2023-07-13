@@ -123,7 +123,7 @@ void Scene::ProcessEvent(float _deltaTime)
 		iter->delayTime -= _deltaTime;
 		if (iter->delayTime <= 0.f)
 		{
-			AddObject(iter->object, iter->type);
+			AddObject(iter->object);
 			iter = m_addObjectList.erase(iter);
 		}
 		else
@@ -131,11 +131,10 @@ void Scene::ProcessEvent(float _deltaTime)
 	}
 }
 
-void Scene::RegisterObject(GameObject* _object, OBJECT_TYPE _type, float _delayTime) const
+void Scene::RegisterObject(GameObject* _object, float _delayTime) const
 {
 	/// 추가해야하는 오브젝트 정보
 	AddObjectInfomation info{};
-	info.type = _type;
 	info.delayTime = _delayTime;
 	info.object = _object;
 
@@ -272,7 +271,7 @@ void Scene::LateUpdate(float _deltaTime)
 	}
 }
 
-void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
+void Scene::AddObject(GameObject* _object)
 {
 	queue<GameObject*> q;
 	q.push(_object);
@@ -283,12 +282,13 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 	while (!q.empty())
 	{
 		GameObject* tmp = q.front();
-		m_objectVector[static_cast<int>(_type)].push_back(tmp);
+		OBJECT_TYPE type = tmp->GetObjectType();
+
+		m_objectVector[static_cast<int>(type)].push_back(tmp);
 		
 		/// 충돌체를 가지는 경우에는 충돌매니저의 트리에 충돌체를 추가한다.
 		BoxCollider* box = tmp->GetComponent<BoxCollider>();
 		CircleCollider* circle = tmp->GetComponent<CircleCollider>();
-
 		if (box != nullptr)
 		{
 			collisionMgr->AddColider(box);
@@ -297,6 +297,8 @@ void Scene::AddObject(GameObject* _object, OBJECT_TYPE _type)
 		{
 			collisionMgr->AddColider(circle);
 		}
+
+		tmp->Start();
 
 		for (auto child : tmp->GetChildren())
 		{

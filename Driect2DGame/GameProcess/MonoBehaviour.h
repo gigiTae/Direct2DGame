@@ -17,8 +17,8 @@ public:
     ~MonoBehaviour() override;
 
     /// 생성 관련 함수
-    virtual void Initalize() {};
-    virtual void Finalize() {};
+    void Start() override {};
+    void Finalize() override {};
 
     /// 이벤트 관련함수
     void Update(float _deltaTime) override {};

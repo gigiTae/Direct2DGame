@@ -58,7 +58,7 @@ void Controller::Update(float _deltaTime)
 		effect1->CreateComponent<Transform>()->SetPosition(cameraMousePosition);
 		effect1->Destory(0.1f);
 		effect1->SetCameraAffected(false);
-		sceneMgr->RegisterObject(effect1, OBJECT_TYPE::MOUSE_EFFECT);
+		sceneMgr->RegisterObject(effect1);
 
 		// 오브젝트에게 이동명령을 지시한다.
 
@@ -77,6 +77,15 @@ void Controller::Update(float _deltaTime)
 		{
 			Unit* unit = object->GetComponent<Unit>();
 			unit->HoldUnit();
+		}
+	}
+	else if (input->IsKeyState(KEY::A, KEY_STATE::TAP))
+	{
+		// 지정된 부대에게 정지 명령을 지시한다.
+		for (auto object : m_selectUnits)
+		{
+			Unit* unit = object->GetComponent<Unit>();
+			unit->AttackUnit(m_selectUnits[0]);
 		}
 	}
 	
@@ -139,7 +148,7 @@ void Controller::GetUnits()
 	if (maxArea.x - minArea.x <= 5.f && maxArea.y - minArea.y <= 5.f)
 	{
 		for (int i = static_cast<int>(OBJECT_TYPE::UNIT);
-			i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
+			i < static_cast<int>(OBJECT_TYPE::ATTACK_EFFECT); ++i)
 		{
 			const vector<GameObject*>& groupObject
 				= scene->GetGroupObject(static_cast<OBJECT_TYPE>(i));
@@ -173,7 +182,7 @@ void Controller::GetUnits()
 	else
 	{
 		for (int i = static_cast<int>(OBJECT_TYPE::UNIT);
-			i < static_cast<int>(OBJECT_TYPE::BACK_UI); ++i)
+			i < static_cast<int>(OBJECT_TYPE::ATTACK_EFFECT); ++i)
 		{
 			const vector<GameObject*>& groupObject
 				= scene->GetGroupObject(static_cast<OBJECT_TYPE>(i));

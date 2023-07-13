@@ -46,7 +46,7 @@ public:
 	void DestroyAllComponent();
 
 	///  명시적 초기화
-	void Initalize() {};
+	void Start();
 	void Finalize();
 
 	/// 이벤트 함수 
