@@ -32,6 +32,10 @@ public:
     void MoveUnit(Vector2 _destination);
     // 유닛에게 고정명령을 지시
     void HoldUnit();
+    
+    // 공격을 받으면 호출하는 함수
+    void TakeDamage(float _damage);
+
 
     const UnitInfomaiton& GetUnitInfomation() { return m_infomation; }
 

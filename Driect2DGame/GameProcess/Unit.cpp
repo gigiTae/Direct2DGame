@@ -76,7 +76,21 @@ void Unit::PreRender(D2DRenderer* _d2DRenderer)
 
 void Unit::Update(float _deltaTime)
 {
-	
+	// 체력이 없으면 유닛을 삭제한다
+	if (m_infomation.hp <= 0.f)
+	{
+		GetGameObject()->Destory();
+		return;
+	}
+
+	if (m_target != nullptr)
+	{
+		if (!m_target->IsAlive())
+		{
+			m_target = nullptr;
+			m_infomation.state = UNIT_STATE::HOLD;
+		}
+	}
 
 	switch (m_infomation.state)
 	{
@@ -99,7 +113,7 @@ void Unit::Update(float _deltaTime)
 			m_movement->SetDestination(targetPos);
 			m_movement->Move(_deltaTime);
 
-			// 공격범위내에 오면 공격한다
+			// 공격범위내에 오면 공격한다	
 			if (m_unitSensor->IsSeneseUnit(m_target))
 			{
 				m_infomation.state = UNIT_STATE::ATTACK;
@@ -165,6 +179,11 @@ void Unit::MoveUnit(Vector2 _destination)
 void Unit::HoldUnit()
 {
 	m_infomation.state = UNIT_STATE::HOLD;
+}
+
+void Unit::TakeDamage(float _damage)
+{
+	m_infomation.hp -= _damage;
 }
 
 //void Unit::OnCollisionStay(const Collision& _collision)

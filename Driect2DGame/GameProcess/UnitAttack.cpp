@@ -75,18 +75,15 @@ void UnitAttack::Start()
 void UnitAttack::Shoot(GameObject* _target)
 {
 	Transform* transform = GetComponent<Transform>();
-	Transform* targetTf = _target->GetComponent<Transform>();
-
+	
 	Vector2 unitPos = transform->GetPosition();
-	Vector2 targetPos = targetTf->GetPosition();
-	Vector2 shootDir = targetPos - unitPos;
-
+	
 	// ÃÑ¾Ë »ý¼º
 	GameObject* bullet = new GameObject("bullet", GetManagerSet(),OBJECT_TYPE::ATTACK_EFFECT);
 
 	bullet->CreateComponent<Transform>()->SetPosition(unitPos);
 	bullet->CreateComponent<TextureRenderer>()->SetKey(L"attack1");
-	bullet->CreateComponent<ShootBullet>()->Shoot(shootDir, 700.f);
+	bullet->CreateComponent<ShootBullet>()->Shoot(_target, 1000.f);
 
 	const SceneManager* sceneMgr = GetSceneManager();
 	sceneMgr->RegisterObject(bullet);

@@ -75,6 +75,8 @@ GameObject* SC::Factory::CreateFlySlime(Vector2 _position)
 
 	UnitInfomaiton info{};
 	info.attackSpeed = 0.5f;
+	info.hp = 100.f;
+	info.attackRange;
 	info.attackType = ATTACK_TYPE::GUN;
 	info.state = UNIT_STATE::HOLD;
 	flySlime->CreateComponent<Unit>()->Initalize(info);

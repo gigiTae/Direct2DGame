@@ -5,7 +5,6 @@ class ManagerSet;
 
 namespace SC
 {
-
 	class Factory : public IFactory
 	{
 	public:

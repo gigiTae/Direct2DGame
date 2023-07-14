@@ -121,7 +121,7 @@ void InputManager::Update()
 
 void InputManager::Finalize()
 {
-	
+	m_keyInfo.clear();
 }
 
 bool InputManager::IsKeyState(const KEY& _key, const KEY_STATE& _state) const 
