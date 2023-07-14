@@ -191,7 +191,7 @@ void D2DRenderer::Finalize()
 void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 {
 	/// radian이 증가할수록 반시계방향으로 회전한다
-	float angle = -FMath::Rad2Deg(_radian);
+	float angle = -FMath::RadToDeg(_radian);
 
 	// 행렬변환
 	D2D1_MATRIX_3X2_F matrix = D2D1::Matrix3x2F::Rotation(angle, _point.ToPoint2F());

@@ -1,6 +1,7 @@
 #include "GameProcessPCH.h"
 #include "UnitSensor.h"
 #include "GameObject.h"
+#include "CircleCollider.h"
 #include "BoxCollider.h"
 
 UnitSensor::UnitSensor()
@@ -33,8 +34,8 @@ void UnitSensor::Update(float _deltaTime)
 
 void UnitSensor::OnCollisionEnter(const Collision& _collision)
 {
-	BoxCollider* circle =dynamic_cast<BoxCollider*>(_collision.myCollider);
-	if (circle == nullptr)
+	BoxCollider* box =dynamic_cast<BoxCollider*>(_collision.myCollider);
+	if (box == nullptr)
 		return;
 
 	// 감지한 오브젝트를 맵에 추가한다.
@@ -52,9 +53,16 @@ void UnitSensor::OnCollisionEnter(const Collision& _collision)
 
 void UnitSensor::OnCollisionExit(const Collision& _collision)
 {
-	BoxCollider* circle = dynamic_cast<BoxCollider*>(_collision.myCollider);
-	if (circle == nullptr)
+	// UnitSensor에서 벗어나는 경우는 나의 원형콜라이더에서 상대의 사각형 콜라이더가 벗어난 시점이다.
+
+	BoxCollider* box = dynamic_cast<BoxCollider*>(_collision.myCollider);
+	if (box == nullptr)
 		return;
+
+	BoxCollider* otherBox = dynamic_cast<BoxCollider*>(_collision.otherCollider);
+	if (otherBox != nullptr)
+		return;
+	
 
 	// 유닛이 범위밖으로 나간경우
 	GameObject* exitObj = _collision.otherObject;

@@ -8,7 +8,7 @@
 
 BoxCollider::BoxCollider()
 	:Collider(typeid(this).name())
-	,m_offset{}
+	,m_positionOffset{}
 	, m_position{}
 	, m_rotation(0.f)
 	, m_scale{}
@@ -25,7 +25,7 @@ void BoxCollider::LateUpdate(float _deltaTime)
 {
 	// 오브젝트의 위치에 따라서 같이 콜라이더 이동
 	Vector2 ownerPosition = GetComponent<Transform>()->GetPosition();
-	m_position = ownerPosition + m_offset;
+	m_position = ownerPosition + m_positionOffset;
 	// 오브젝트 회전에 따라서 콜라이더도 같이 회전
 	if (m_isRotatable)
 	{

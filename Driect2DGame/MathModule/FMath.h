@@ -7,12 +7,12 @@ namespace FMath
 	static constexpr float InvPI = 0.31830988618f;
 
 
-	inline static constexpr float Deg2Rad(float _degree)
+	inline static constexpr float DegToRad(float _degree)
 	{
 		return _degree * PI / 180.f;
 	}
 
-	inline static constexpr float Rad2Deg(float _radian)
+	inline static constexpr float RadToDeg(float _radian)
 	{
 		return _radian * 180.f * InvPI;
 	}

@@ -22,11 +22,6 @@ RigidBody::~RigidBody()
 
 void RigidBody::LateUpdate(float _deltaTime)
 {
-	if (m_transform == nullptr)
-	{
-		m_transform = GetComponent<Transform>();
-	}
-
 	// 현재의 속도를 가지고 오브젝트의 위치를 갱신한다.
 	if (m_invMass == 0.f)
 		return;
@@ -70,6 +65,13 @@ void RigidBody::IntegrateForces(float _fixedDeltaTime)
 
 	m_velocity *= std::exp(-GameWorld::linearDamping * _fixedDeltaTime);
 	m_angularVelocity *= std::exp(-GameWorld::angularDamping * _fixedDeltaTime);
+}
+
+void RigidBody::Start()
+{
+	m_transform = GetComponent<Transform>();
+
+	assert(m_transform);
 }
 
 void RigidBody::ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector)

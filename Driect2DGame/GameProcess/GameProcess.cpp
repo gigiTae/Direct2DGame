@@ -93,12 +93,12 @@ void GameProcess::Process()
 		m_sceneManager->FixedUpdate(FIXED_DELTA_TIME);
 	}
 
+	//  ======== 충돌처리 ============================
+	m_collisionManager->Update();
+
 	// ========== 게임오브젝트 업데이트 ==============
 	m_sceneManager->Update(deltaTime);
 	m_sceneManager->LateUpdate(deltaTime);
-	
-	//  ======== 충돌처리 ============================
-	m_collisionManager->Update();
 	
 	// ============= UI 이벤트 ======================	
 	m_UIManager->Update();
@@ -111,11 +111,10 @@ void GameProcess::Process()
 	m_d2DRenderer->BeginRender();
 
 	m_sceneManager->Render(m_d2DRenderer);
-
+	 
 	// 디버그정보 랜더링
 	if (ShowDubg())
 	{
-		
 	  	//m_collisionManager->DebugRender(m_d2DRenderer); // AABB Tree 
 		m_sceneManager->DebugRender(m_d2DRenderer);
 	}

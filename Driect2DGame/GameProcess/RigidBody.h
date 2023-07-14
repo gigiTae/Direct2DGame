@@ -18,6 +18,8 @@ public:
 	void LateUpdate(float _deltaTime) override;
 	void IntegrateForces(float _fixedDeltaTime);
 
+	void Start() override;
+
 	void AddForce(const Vector2& _force) { m_force += _force; }
 	void AddToque(const float& _toque) { m_torque += _toque; }
 	void ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector);

@@ -22,6 +22,8 @@ public:
 	virtual ~Component();
 
 public:
+
+	/// 씬에 오브젝트가 추가 직전에 한번만 호출하는 함수
 	virtual void Start() {};
 	virtual void Finalize() {};
 	/// 기본적인 이벤트 함수

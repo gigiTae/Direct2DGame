@@ -124,7 +124,7 @@ Vector2 D2DCamera::WorldtoScreen(const Vector2& _world)
 
 void D2DCamera::CalculateMatrix()
 {
-	float angle = FMath::Rad2Deg(m_rotation);
+	float angle = FMath::RadToDeg(m_rotation);
 	D2D1_MATRIX_3X2_F rotation = D2D1::Matrix3x2F::Rotation(angle);
 	D2D1_MATRIX_3X2_F scale = D2D1::Matrix3x2F::Scale(m_scale.x, m_scale.y);
 	D2D1_MATRIX_3X2_F position = D2D1::Matrix3x2F::Translation(m_position.x, m_position.y);

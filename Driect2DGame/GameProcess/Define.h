@@ -30,6 +30,9 @@ enum class OBJECT_TYPE
 
 	ATTACK_EFFECT,
 	MOUSE_EFFECT,
+
+
+
 	/// 아래의 오브젝트 타입부터는 마우스 이벤트가 발생함
 	BACK_UI = 30,	/// 항상 FRONT UI보다 뒤에 그려진다
 	FRONT_UI = 31,
@@ -59,6 +62,7 @@ enum class CALL_ORDER
 	COLLIDER,
 	UI
 };
+
 /// =================================== 컴포넌트 관련 ==============================
 enum class COLLIDER_TYPE
 {
@@ -66,6 +70,39 @@ enum class COLLIDER_TYPE
 	BOX,
 };
 
+// 가장 기본적인 트랜스폼 컴포넌트의 정보를 저장한다.
+struct TransformInfo
+{
+	TransformInfo() = default;
+	TransformInfo(Vector2 _position, Vector2 _scale, float _rotation = 0.f)
+		:position(_position), scale(_scale), rotation(_rotation)
+	{}
+
+	Vector2 position = Vector2::Zero;
+	Vector2 scale = Vector2::One;
+	float rotation = 0.f;
+};
+
+struct BoxColliderInfo
+{
+	BoxColliderInfo(Vector2 _offset = Vector2::Zero, Vector2 _scale =Vector2::Zero, bool _rotatable = false)
+		: offsetPosition(_offset),scale(_scale),rotatable(_rotatable)
+	{}
+
+	Vector2 offsetPosition;
+	Vector2 scale;
+	bool rotatable = false;
+};
+
+struct CircleInfo
+{
+	CircleInfo(Vector2 _offset, float _radius)
+		:radius(_radius), positionOffset(_offset)
+	{}
+
+	Vector2 positionOffset = Vector2::Zero;
+	float radius = 0.f;
+};
 
 /// ========================= 충돌 관련 =========================================
 // 충돌정보 

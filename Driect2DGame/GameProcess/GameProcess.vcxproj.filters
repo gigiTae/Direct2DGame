@@ -29,7 +29,7 @@
       <Filter>GameProcess\02.GameObject</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
-      <Filter>StarcratScripts\MainScene</Filter>
+      <Filter>Starcraft\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>GameProcess\03.Component\Collider</Filter>
@@ -83,19 +83,19 @@
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
-      <Filter>StarcratScripts\Controller</Filter>
+      <Filter>Starcraft\Scripts\Controller</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
-      <Filter>StarcratScripts\Unit</Filter>
+      <Filter>Starcraft\Scripts\Unit</Filter>
     </ClInclude>
     <ClInclude Include="UnitMovement.h">
-      <Filter>StarcratScripts\Unit\UnitMovement</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitMovement</Filter>
     </ClInclude>
     <ClInclude Include="GameProcess.h">
       <Filter>GameProcess</Filter>
     </ClInclude>
     <ClInclude Include="FlyMovement.h">
-      <Filter>StarcratScripts\Unit\UnitMovement\FlyMovement</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitMovement\FlyMovement</Filter>
     </ClInclude>
     <ClInclude Include="ReadMe.h" />
     <ClInclude Include="Broadphase.h">
@@ -111,16 +111,22 @@
       <Filter>GameProcess\Define</Filter>
     </ClInclude>
     <ClInclude Include="UnitDefine.h">
-      <Filter>StarcratScripts</Filter>
+      <Filter>Starcraft</Filter>
     </ClInclude>
     <ClInclude Include="UnitSensor.h">
-      <Filter>StarcratScripts\Unit\UnitSensor</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitSensor</Filter>
     </ClInclude>
     <ClInclude Include="UnitAttack.h">
-      <Filter>StarcratScripts\Unit\UnitAttack</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitAttack</Filter>
     </ClInclude>
     <ClInclude Include="ShootBullet.h">
-      <Filter>StarcratScripts\ShootBullet</Filter>
+      <Filter>Starcraft\Scripts\ShootBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="IFactory.h">
+      <Filter>GameProcess\06.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Starcraft\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +168,6 @@
     </Filter>
     <Filter Include="GameProcess\03.Component\UI">
       <UniqueIdentifier>{b01f574b-c7e4-4253-abf1-9b4e68d7e29a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProcess\03.Component\MonoBehaviour">
-      <UniqueIdentifier>{9be08951-87a8-4b20-bf6c-dba8bac66dc7}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProcess\03.Component\Collider">
       <UniqueIdentifier>{9c95c688-e3c0-4043-a354-208973825208}</UniqueIdentifier>
@@ -217,32 +220,44 @@
     <Filter Include="GameProcess\Define\GameWorld">
       <UniqueIdentifier>{097c4383-6b24-464e-8b33-b8b3732cab90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcratScripts">
+    <Filter Include="GameProcess\03.Component\MonoBehaviour">
+      <UniqueIdentifier>{9be08951-87a8-4b20-bf6c-dba8bac66dc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\06.Factory">
+      <UniqueIdentifier>{f6721a3f-2b3c-471a-8428-266f8415a04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft">
       <UniqueIdentifier>{48423338-0c84-40ef-bd2b-bd26b559f3c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcratScripts\Unit">
-      <UniqueIdentifier>{b8aac14f-d0f5-4722-94d0-d93e6a630208}</UniqueIdentifier>
+    <Filter Include="Starcraft\Scripts">
+      <UniqueIdentifier>{93f8382e-7587-48ce-99ec-32645cb34e81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcratScripts\Unit\UnitMovement">
-      <UniqueIdentifier>{7a48098b-aa61-4ccd-a7e6-7ea75b2c1b31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StarcratScripts\Unit\UnitMovement\FlyMovement">
-      <UniqueIdentifier>{2a5aeda3-cff4-4bce-9bee-a16da9bfeb87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StarcratScripts\Unit\UnitAttack">
-      <UniqueIdentifier>{ba14f2a4-15e7-4407-b293-d740484208c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StarcratScripts\MainScene">
-      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StarcratScripts\Controller">
+    <Filter Include="Starcraft\Scripts\Controller">
       <UniqueIdentifier>{bf57707f-9640-4f53-9c72-7b8095ad7f91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcratScripts\Unit\UnitSensor">
+    <Filter Include="Starcraft\Scripts\ShootBullet">
+      <UniqueIdentifier>{b28b94e6-fcc1-402b-b111-efb97037faf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft\Scripts\Unit">
+      <UniqueIdentifier>{b8aac14f-d0f5-4722-94d0-d93e6a630208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft\Scripts\Unit\UnitMovement">
+      <UniqueIdentifier>{7a48098b-aa61-4ccd-a7e6-7ea75b2c1b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft\Scripts\Unit\UnitMovement\FlyMovement">
+      <UniqueIdentifier>{2a5aeda3-cff4-4bce-9bee-a16da9bfeb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft\Scripts\Unit\UnitAttack">
+      <UniqueIdentifier>{ba14f2a4-15e7-4407-b293-d740484208c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft\Scripts\Unit\UnitSensor">
       <UniqueIdentifier>{600fa25c-b2f6-4df2-a273-a9f70168a780}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StarcratScripts\ShootBullet">
-      <UniqueIdentifier>{b28b94e6-fcc1-402b-b111-efb97037faf0}</UniqueIdentifier>
+    <Filter Include="Starcraft\Factory">
+      <UniqueIdentifier>{9642accf-2859-46e7-9c0c-a15b4406e146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Starcraft\Scene">
+      <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -274,7 +289,7 @@
       <Filter>GameProcess\02.GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
-      <Filter>StarcratScripts\MainScene</Filter>
+      <Filter>Starcraft\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>GameProcess\03.Component\Collider</Filter>
@@ -325,19 +340,19 @@
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
-      <Filter>StarcratScripts\Controller</Filter>
+      <Filter>Starcraft\Scripts\Controller</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>StarcratScripts\Unit</Filter>
+      <Filter>Starcraft\Scripts\Unit</Filter>
     </ClCompile>
     <ClCompile Include="UnitMovement.cpp">
-      <Filter>StarcratScripts\Unit\UnitMovement</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitMovement</Filter>
     </ClCompile>
     <ClCompile Include="GameProcess.cpp">
       <Filter>GameProcess</Filter>
     </ClCompile>
     <ClCompile Include="FlyMovement.cpp">
-      <Filter>StarcratScripts\Unit\UnitMovement\FlyMovement</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitMovement\FlyMovement</Filter>
     </ClCompile>
     <ClCompile Include="Broadphase.cpp">
       <Filter>Broadphase</Filter>
@@ -352,13 +367,19 @@
       <Filter>GameProcess\Define</Filter>
     </ClCompile>
     <ClCompile Include="UnitSensor.cpp">
-      <Filter>StarcratScripts\Unit\UnitSensor</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitSensor</Filter>
     </ClCompile>
     <ClCompile Include="UnitAttack.cpp">
-      <Filter>StarcratScripts\Unit\UnitAttack</Filter>
+      <Filter>Starcraft\Scripts\Unit\UnitAttack</Filter>
     </ClCompile>
     <ClCompile Include="ShootBullet.cpp">
-      <Filter>StarcratScripts\ShootBullet</Filter>
+      <Filter>Starcraft\Scripts\ShootBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="IFactory.cpp">
+      <Filter>GameProcess\06.Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory.cpp">
+      <Filter>Starcraft\Factory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
