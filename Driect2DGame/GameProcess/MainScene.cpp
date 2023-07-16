@@ -29,9 +29,9 @@ void MainScene::Enter()
 	GameObject* controller = factory.CreateController();
 	AddObject(controller);
 
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
-		GameObject* attaker = factory.CreateFlySlime(Vector2(-510.f + i*25.f, 10.f));
+		GameObject* attaker = factory.CreateFlySlime(Vector2(-510.f + i*125.f, 10.f));
 		AddObject(attaker);
 	}
 

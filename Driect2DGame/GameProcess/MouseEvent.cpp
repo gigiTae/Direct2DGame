@@ -1,23 +1,23 @@
 #include "GameProcessPCH.h"
-#include "UI.h"
+#include "MouseEvent.h"
 #include "InputManager.h"
 #include "GameObject.h"
 #include "Transform.h"
 #include "CameraManager.h"
 
-UI::UI():Component(CALL_ORDER::UI,typeid(this).name())
+MouseEvent::MouseEvent():Component(CALL_ORDER::UI,typeid(this).name())
 	,m_LBtnDown(false)
 	,m_mouseOn(false)
 {
 
 }
 
-UI::~UI()
+MouseEvent::~MouseEvent()
 {
 
 }
 
-void UI::Render(D2DRenderer* _d2DRenderer)
+void MouseEvent::Render(D2DRenderer* _d2DRenderer)
 {
 	Transform* transform = GetComponent<Transform>();
 	Vector2 position = transform->GetPosition();
@@ -37,7 +37,7 @@ void UI::Render(D2DRenderer* _d2DRenderer)
 	
 }
 
-void UI::LateUpdate(float _deltaTime)
+void MouseEvent::LateUpdate(float _deltaTime)
 {
 	/// 마우스 온 체크 
 	const InputManager* input = GetInputManager();

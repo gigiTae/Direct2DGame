@@ -5,6 +5,7 @@
 class UnitMovement;
 class UnitSensor;
 class UnitAttack;
+class BarUI;
 
 /// <summary>
 /// 기본적으로 스타크래프트 유닛이 가지는 컴포넌트이다
@@ -39,11 +40,15 @@ public:
 
     const UnitInfomaiton& GetUnitInfomation() { return m_infomation; }
 
+private:
+    // 유닛 업데이트 관련 
+    void UpdateHpBar();
 
 private:
     bool m_isSelect; // 부대지정된 유닛인지 
     GameObject* m_target; //  현재 타겟팅중인 오브젝트
 
+    BarUI* m_hpBar; // hpBar
     UnitAttack* m_attack; // 유닛의 공격을 담당한다.
     UnitInfomaiton m_infomation; // 유닛 정보
     UnitSensor* m_unitSensor; // 유닛의 인식정보들을 담당한다.

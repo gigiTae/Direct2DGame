@@ -7,7 +7,7 @@
 #include "CircleCollider.h"
 #include "RigidBody.h"
 #include "TextureRenderer.h"
-#include "UI.h"
+#include "MouseEvent.h"
 
 IFactory::~IFactory()
 {
@@ -72,6 +72,6 @@ void IFactory::CreateTextureRenderer(GameObject* _object
 
 void IFactory::CreateUI(GameObject* _object)
 {
-	_object->CreateComponent<UI>();
+	_object->CreateComponent<MouseEvent>();
 }
 

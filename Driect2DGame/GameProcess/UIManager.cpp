@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include "Component.h"
 #include "GameObject.h"
-#include "UI.h"
+#include "MouseEvent.h"
 
 UIManager::UIManager()
 	:m_sceneManager(nullptr)
@@ -42,7 +42,7 @@ void UIManager::Update()
 		return;
 
 	KEY_STATE LBtnState = input->GetKeyState(KEY::LMOUSE);
-	UI* ui = targetUI->GetComponent<UI>();
+	MouseEvent* ui = targetUI->GetComponent<MouseEvent>();
 	assert(ui);
 
 	/// 마우스 온 함수 호출
@@ -108,7 +108,7 @@ GameObject* UIManager::GetFocusedUI()
 
 	for (auto iter = backUIGroup.begin(); iter != backUIGroup.end(); ++iter)
 	{
-		UI* ui = (*iter)->GetComponent<UI>();
+		MouseEvent* ui = (*iter)->GetComponent<MouseEvent>();
 		if (ui->IsMouseOn())
 		{
 			targetBack = iter;
@@ -122,7 +122,7 @@ GameObject* UIManager::GetFocusedUI()
 
 	for (auto iter = frontUIGroup.begin(); iter != frontUIGroup.end(); ++iter)
 	{
-		UI* ui = (*iter)->GetComponent<UI>();
+		MouseEvent* ui = (*iter)->GetComponent<MouseEvent>();
 		// 마우스가 올라간 상태와 부모UI인 경우만
 		if (ui->IsMouseOn() && (*iter)->GetParent() == nullptr)
 		{
@@ -172,7 +172,7 @@ GameObject* UIManager::GetTargetedUI(GameObject* _parent)
 		GameObject* object = q.front();
 		q.pop_front();
 
-		UI* ui = object->GetComponent<UI>();
+		MouseEvent* ui = object->GetComponent<MouseEvent>();
 
 		if (ui->IsMouseOn())
 		{
@@ -199,7 +199,7 @@ GameObject* UIManager::GetTargetedUI(GameObject* _parent)
 	{
 		for (auto object : noneTarget)
 		{
-			UI* ui = object->GetComponent<UI>();
+			MouseEvent* ui = object->GetComponent<MouseEvent>();
 			ui->SetLBtnDown(false);
 		}
 	}

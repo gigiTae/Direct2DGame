@@ -44,6 +44,13 @@ public:
 	void DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom
 		, COLORREF color = D2D1::ColorF::White, float _rotation = 0.f);
 
+	// 내부를 채우는 사각형 그리기
+	void DrawFillRectangle(Vector2 _position, Vector2 _scale
+		, ColorF color = D2D1::ColorF(ColorF::White,1.f), float _rotation = 0.f);
+
+	void DrawFillRectangle2(Vector2 _leftTop, Vector2 _rightBottom
+		, ColorF color = ColorF(ColorF::WhiteSmoke),float _rotation = 0.f);
+
 	/// 쓰기 관련 함수
 	void DrawTextW(const std::wstring& _str, Vector2 _leftTop
 		, Vector2 _rightBottom, COLORREF _color = D2D1::ColorF::White);

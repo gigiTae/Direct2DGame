@@ -11,6 +11,7 @@
 #include "Transform.h"
 #include "UnitSensor.h"
 #include "UnitAttack.h"
+#include "BarUI.h"
 
 Unit::Unit()
 	:MonoBehaviour(typeid(this).name())
@@ -42,7 +43,8 @@ void Unit::Start()
 	m_attack = GetComponent<UnitAttack>();
 	assert(m_attack);
 
-
+	m_hpBar = GetComponent<BarUI>();
+	assert(m_hpBar);
 }
 
 void Unit::Finalize()
@@ -52,6 +54,12 @@ void Unit::Finalize()
 void Unit::Initalize(UnitInfomaiton _info)
 {
 	m_infomation = std::move(_info);
+
+	assert(m_infomation.maxHP >= 0.f);
+
+
+	// 체력 조정
+	FMath::Clamp(m_infomation.currentHP, 0.f, m_infomation.maxHP);
 }
 
 void Unit::PreRender(D2DRenderer* _d2DRenderer)
@@ -76,8 +84,11 @@ void Unit::PreRender(D2DRenderer* _d2DRenderer)
 
 void Unit::Update(float _deltaTime)
 {
+	// 체력바 업데이트 
+	UpdateHpBar();
+
 	// 체력이 없으면 유닛을 삭제한다
-	if (m_infomation.hp <= 0.f)
+	if (m_infomation.currentHP <= 0.f)
 	{
 		GetGameObject()->Destory();
 		return;
@@ -183,7 +194,19 @@ void Unit::HoldUnit()
 
 void Unit::TakeDamage(float _damage)
 {
-	m_infomation.hp -= _damage;
+	m_infomation.currentHP -= _damage;
+
+	// 체력  조정
+	FMath::Clamp(m_infomation.currentHP, 0.f, m_infomation.maxHP);
+}
+
+void Unit::UpdateHpBar()
+{
+	// 현재 체력 비율 계산
+	float ratio =  m_infomation.currentHP/ m_infomation.maxHP;
+
+	// 체력바 체력비율로 길이 갱신
+	m_hpBar->SetBarLength(ratio);
 }
 
 //void Unit::OnCollisionStay(const Collision& _collision)

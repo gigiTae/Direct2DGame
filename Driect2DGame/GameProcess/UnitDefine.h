@@ -25,7 +25,8 @@ enum class ATTACK_TYPE
 struct UnitInfomaiton
 {
 	UNIT_STATE state; // 유닛 상태
-	float hp; // 체력
+	float currentHP; // 현재 체력
+	float maxHP; // 최대 체력
 	float moveSpeed; // 이동속도
 
 	/// 전투관련

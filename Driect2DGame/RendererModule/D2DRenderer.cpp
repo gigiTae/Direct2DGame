@@ -202,6 +202,7 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 }
 
 
+
 void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 {
 	Vector2 point1 = _point1.ChangeYSign();
@@ -252,7 +253,8 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 	SafeRelease(&m_tempBrush);
 }
 
-void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF color,float _rotation)
+void D2DRenderer::DrawRectangle(Vector2 _leftTop
+	, Vector2 _rightBottom, COLORREF color,float _rotation)
 {
 	Vector2 leftTop = _leftTop.ChangeYSign();
 	Vector2 rightBottom = _rightBottom.ChangeYSign();
@@ -270,6 +272,53 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop, Vector2 _rightBottom, COLORREF
 	SetTransform(_rotation, middle);
 
 	m_renderTarget->DrawRectangle(rt, m_tempBrush, 2.f);
+
+	SetTransform();
+
+	SafeRelease(&m_tempBrush);
+}
+
+
+void D2DRenderer::DrawFillRectangle(Vector2 _position, Vector2 _scale, ColorF color /*= D2D1::ColorF(ColorF::White,1.f)*/, float _rotation /*= 0.f*/)
+{
+	Vector2 position = _position.ChangeYSign();
+
+	D2D1_RECT_F rt{};
+	rt.left = position.x - _scale.x * 0.5f;
+	rt.top = position.y - _scale.y * 0.5f;
+	rt.right = position.x + _scale.x * 0.5f;
+	rt.bottom = position.y + _scale.y * 0.5f;
+
+	m_renderTarget->CreateSolidColorBrush(color, &m_tempBrush);
+	assert(m_tempBrush);
+
+	SetTransform(_rotation, position);
+
+	m_renderTarget->FillRectangle(rt, m_tempBrush);
+
+	SetTransform(); 
+
+	SafeRelease(&m_tempBrush);
+}
+
+void D2DRenderer::DrawFillRectangle2(Vector2 _leftTop, Vector2 _rightBottom, ColorF color /*= ColorF(ColorF::WhiteSmoke)*/, float _rotation /*= 0.f*/)
+{
+	Vector2 leftTop = _leftTop.ChangeYSign();
+	Vector2 rightBottom = _rightBottom.ChangeYSign();
+
+	D2D1_RECT_F rt{};
+	rt.left = leftTop.x;
+	rt.top = leftTop.y;
+	rt.right = rightBottom.x;
+	rt.bottom = rightBottom.y;
+
+	m_renderTarget->CreateSolidColorBrush(color, &m_tempBrush);
+	assert(m_tempBrush);
+
+	Vector2 middle((rightBottom.x + leftTop.x) * 0.5f, (leftTop.y + rightBottom.y) * 0.5f);
+	SetTransform(_rotation, middle);
+
+	m_renderTarget->FillRectangle(rt, m_tempBrush);
 
 	SetTransform();
 

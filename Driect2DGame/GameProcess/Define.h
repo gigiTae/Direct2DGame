@@ -104,6 +104,20 @@ struct CircleInfo
 	float radius = 0.f;
 };
 
+// BarUI를 만드는데 필요한 정보들
+struct BarUIInfo
+{
+	Vector2 positionOffset; // object와 떨어진 거리
+	Vector2 innerBarOffset; // 내부바와 가장자리 바의 오프셋
+	Vector2 barScale; // 바의 크기 
+	float barLength; // 현재 바의 길이 0.f~ 1.f
+	
+	D2D1::ColorF innerFillBarColor = D2D1::ColorF(ColorF::Black);  // 내부를 채우는 바의 색
+	D2D1::ColorF innerEmptyBarColor = D2D1::ColorF(ColorF::Red); // 내부빈공간 바의 색
+	D2D1::ColorF edgeColor = D2D1::ColorF(ColorF::White);// 외부 바의 색
+};
+
+
 /// ========================= 충돌 관련 =========================================
 // 충돌정보 
 struct Collision

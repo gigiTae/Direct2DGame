@@ -20,6 +20,7 @@ private:
     
     GameObject* m_target; // 타겟
 
+    float m_prevDistance; // 이전 위치 차이
     float m_shootSpeed;
 };
 

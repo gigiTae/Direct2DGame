@@ -6,12 +6,12 @@
 /// 마우스 입력에 관한 함수 호출을 담당한다.
 /// 
 /// </summary>
-class UI :
+class MouseEvent :
     public Component
 {
 public:
-    UI();
-    ~UI();
+    MouseEvent();
+    ~MouseEvent();
 
     void LateUpdate(float _deltaTime) override;
 

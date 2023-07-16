@@ -76,9 +76,6 @@
     <ClInclude Include="ManagerSet.h">
       <Filter>GameProcess\04.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>GameProcess\03.Component\UI</Filter>
-    </ClInclude>
     <ClInclude Include="CameraManager.h">
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClInclude>
@@ -127,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Starcraft\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseEvent.h">
+      <Filter>GameProcess\03.Component\UI\MouseEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="BarUI.h">
+      <Filter>GameProcess\03.Component\UI\BarUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +262,12 @@
     <Filter Include="Starcraft\Scene">
       <UniqueIdentifier>{e0ab6187-b4a4-4de3-9bd5-1edbe61f9b5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProcess\03.Component\UI\MouseEvent">
+      <UniqueIdentifier>{01fb424a-e940-4078-a113-ac37ff5fab3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProcess\03.Component\UI\BarUI">
+      <UniqueIdentifier>{709152f7-3840-4a83-a693-9f027852b209}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -333,9 +342,6 @@
     <ClCompile Include="ManagerSet.cpp">
       <Filter>GameProcess\04.Manager</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>GameProcess\03.Component\UI</Filter>
-    </ClCompile>
     <ClCompile Include="CameraManager.cpp">
       <Filter>GameProcess\04.Manager\CameraManager</Filter>
     </ClCompile>
@@ -380,6 +386,12 @@
     </ClCompile>
     <ClCompile Include="Factory.cpp">
       <Filter>Starcraft\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseEvent.cpp">
+      <Filter>GameProcess\03.Component\UI\MouseEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="BarUI.cpp">
+      <Filter>GameProcess\03.Component\UI\BarUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
