@@ -60,6 +60,14 @@ public:
 	
 	// 씬을 변경할때, 게임이 종료할때 호출
 	void Clear();
+
+public:
+	// 점과 충돌하는 모든 충돌체 반환
+	void DetectPointToCollider(const Vector2& _point, vector<Collider*>& _colliderVector) const;
+
+	// 박스와 충돌하는 모든 충돌체를 반환한다.
+	void DetectBoxToCollider(const Vector2& _minPoint, const Vector2& _maxPoint, vector<Collider*>& _colliderVector) const;
+
 private:
 	InputManager* m_inputManager;
 	SceneManager* m_sceneManager;

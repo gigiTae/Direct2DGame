@@ -9,6 +9,8 @@
 
 UnitAttack::UnitAttack()
 	:MonoBehaviour(typeid(this).name())
+	,m_attackCoolTime(0.f)
+	,m_attackSpeed(0.f)
 	,m_unit(nullptr)
 	,m_attackType(ATTACK_TYPE::NONE)
 {
@@ -77,13 +79,14 @@ void UnitAttack::Shoot(GameObject* _target)
 	Transform* transform = GetComponent<Transform>();
 	
 	Vector2 unitPos = transform->GetPosition();
-	
+	float danmage = m_unit->GetUnitInfomation().attackPower;
+
 	// ÃÑ¾Ë »ý¼º
 	GameObject* bullet = new GameObject("bullet", GetManagerSet(),OBJECT_TYPE::ATTACK_EFFECT);
 
 	bullet->CreateComponent<Transform>()->SetPosition(unitPos);
 	bullet->CreateComponent<TextureRenderer>()->SetKey(L"attack1");
-	bullet->CreateComponent<ShootBullet>()->Shoot(_target, 1000.f);
+	bullet->CreateComponent<ShootBullet>()->Shoot(_target, 1000.f, danmage);
 
 	const SceneManager* sceneMgr = GetSceneManager();
 	sceneMgr->RegisterObject(bullet);

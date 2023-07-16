@@ -44,7 +44,6 @@ void Unit::Start()
 	assert(m_attack);
 
 	m_hpBar = GetComponent<BarUI>();
-	assert(m_hpBar);
 }
 
 void Unit::Finalize()
@@ -56,7 +55,6 @@ void Unit::Initalize(UnitInfomaiton _info)
 	m_infomation = std::move(_info);
 
 	assert(m_infomation.maxHP >= 0.f);
-
 
 	// 체력 조정
 	FMath::Clamp(m_infomation.currentHP, 0.f, m_infomation.maxHP);
@@ -202,48 +200,13 @@ void Unit::TakeDamage(float _damage)
 
 void Unit::UpdateHpBar()
 {
+	if (!m_hpBar)
+		return;
+
 	// 현재 체력 비율 계산
 	float ratio =  m_infomation.currentHP/ m_infomation.maxHP;
 
 	// 체력바 체력비율로 길이 갱신
 	m_hpBar->SetBarLength(ratio);
 }
-
-//void Unit::OnCollisionStay(const Collision& _collision)
-//{
-//
-//	/// 이거는 물리쪽에서 하는걸로 하자
-	//RigidBody* rigid = GetComponent<RigidBody>();
-
-	//Transform* transform = GetComponent<Transform>();
-	//Transform* otherTransform = _collision.otherObject->GetComponent<Transform>();
-
-	//Vector2 position = transform->GetPosition();
-	//Vector2 otherPos = otherTransform->GetPosition();
-
-	//Vector2 direct = position - otherPos;
-	//direct.Normalize();
-
-	//float otherMass = rigid->GetMass();
-	//if (otherMass == FLT_MAX) // 고정된 오브젝트 
-	//{
-	//	float otherRadius = _collision.otherObject->GetComponent<CircleCollider>()->GetRadius();
-	//	float radius = GetComponent<CircleCollider>()->GetRadius();
-
-	//	Vector2 pushDistance = direct * (otherRadius + radius - (position - otherPos).Length());
-
-	//	transform->AddPosition(pushDistance);
-	//}
-	//else // 움직이느 오브젝트
-	//{
-	//	//return;
-	//	// 완전히 같은 위치에 있으면 랜던함 방향으로 밀어내기 
-	//	if (direct == Vector2::Zero)
-	//	{
-	//	}
-	//	constexpr float power = 500.f;
-	//	Vector2 force = direct * power;
-
-	//	rigid->AddForce(force);
-	//}
 

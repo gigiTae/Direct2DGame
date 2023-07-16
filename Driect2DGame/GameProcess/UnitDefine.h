@@ -21,9 +21,18 @@ enum class ATTACK_TYPE
 	GUN, // 총
 };
 
+
+enum class LAND_TYPE
+{
+	GROUND, // 지상
+	SKY, // 하늘
+	WATER, // 아마 여기까지는 구현 안할듯
+};
+
 // 가장 기본적인 유닛의 정보
 struct UnitInfomaiton
 {
+	LAND_TYPE landType; // 유닛이 어디에 속하는지
 	UNIT_STATE state; // 유닛 상태
 	float currentHP; // 현재 체력
 	float maxHP; // 최대 체력

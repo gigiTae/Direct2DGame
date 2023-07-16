@@ -43,6 +43,7 @@ void IFactory::CreateBoxCollider(GameObject* _object, BoxColliderInfo _info)
 	}
 	box->SetOffset(_info.offsetPosition);
 	box->SetRotatble(_info.rotatable);
+	box->SetTrigger(_info.isTrigger);
 
 }
 
@@ -52,6 +53,7 @@ void IFactory::CreateCircleColldier(GameObject* _object, CircleInfo _intfo)
 
 	circle->SetRadius(_intfo.radius);
 	circle->SetOffset(_intfo.positionOffset);
+	circle->SetTrigger(_intfo.isTrigger);
 }
 
 void IFactory::CreateRigidBody(GameObject* _object, float _mass /*= 1.f*/)

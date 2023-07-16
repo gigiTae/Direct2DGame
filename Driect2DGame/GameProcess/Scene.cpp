@@ -6,8 +6,10 @@
 #include "ManagerSet.h"
 #include "SceneManager.h"
 #include "BoxCollider.h"
+#include "Transform.h"
 #include "CircleCollider.h"
 #include "CollisionManager.h"
+#include "GameObjectSort.h" // 게임 오브젝트 정렬 알고리즘
 
 Scene::Scene()
 	:m_d2DRenderer(nullptr)
@@ -41,6 +43,8 @@ void Scene::Finalize()
 
 void Scene::Render(D2DRenderer* _d2DRenderer)
 {
+	SortObjectVector();
+
 	assert(_d2DRenderer);
 
 	/// 랜더링은 부모 오브가 자식 오브젝트의 랜더링까지 담당한다.
@@ -55,7 +59,33 @@ void Scene::Render(D2DRenderer* _d2DRenderer)
 			if (iter->GetParent() == nullptr)
 			{
 				iter->PreRender(_d2DRenderer);
+			}
+		}
+	}
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		for (auto iter : m_objectVector[i])
+		{
+			bool isCameraAffectedObject = iter->IsCameraAffected();
+
+			_d2DRenderer->SetCameraAffected(isCameraAffectedObject);
+
+			if (iter->GetParent() == nullptr)
+			{
 				iter->Render(_d2DRenderer);
+			}
+		}
+	}
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		for (auto iter : m_objectVector[i])
+		{
+			bool isCameraAffectedObject = iter->IsCameraAffected();
+
+			_d2DRenderer->SetCameraAffected(isCameraAffectedObject);
+
+			if (iter->GetParent() == nullptr)
+			{
 				iter->PostRender(_d2DRenderer);
 			}
 		}
@@ -128,6 +158,16 @@ void Scene::ProcessEvent(float _deltaTime)
 		}
 		else
 			++iter;
+	}
+}
+
+
+void Scene::SortObjectVector()
+{
+	// 랜더링을 위한 정렬
+	for (int i = 0; i < static_cast<int>(OBJECT_TYPE::END); ++i)
+	{
+		std::sort(m_objectVector[i].begin(), m_objectVector[i].end(), SortFunction);
 	}
 }
 

@@ -79,45 +79,69 @@ void CollisionManager::Update()
 	// 오브젝트에게 충돌 이벤트 호출
 	for (auto& iter : m_collisionInfomations)
 	{
-		Collision c1{};
-		c1.otherCollider = iter.second.collider2;
-		c1.otherObject = iter.second.collider2->GetGameObject();
-		c1.myCollider = iter.second.collider1;
+		Collision collision1{};
+		collision1.otherCollider = iter.second.collider2;
+		collision1.otherObject = iter.second.collider2->GetGameObject();
+		collision1.myCollider = iter.second.collider1;
 
-		Collision c2{};
-		c2.otherCollider = iter.second.collider1;
-		c2.otherObject = iter.second.collider1->GetGameObject();
-		c2.myCollider = iter.second.collider2;
+		Collision collision2{};
+		collision2.otherCollider = iter.second.collider1;
+		collision2.otherObject = iter.second.collider1->GetGameObject();
+		collision2.myCollider = iter.second.collider2;
 
-		if (iter.second.currentCollision)
+		if (iter.second.currentCollision) // 이번프레임 충돌중
 		{
-			if (iter.second.prevCollision)
+			if (iter.second.prevCollision) // 이전프레임 충돌
 			{
 				// Stay
-				iter.second.collider1->OnCollisionStay(c1);
-				iter.second.collider2->OnCollisionStay(c2);
+				if (iter.second.collider1->IsTrigger() || iter.second.collider2->IsTrigger())
+				{
+					iter.second.collider1->OnTriggerStay(collision1);
+					iter.second.collider2->OnTriggerStay(collision2);
+				}
+				else
+				{
+					iter.second.collider1->OnCollisionStay(collision1);
+					iter.second.collider2->OnCollisionStay(collision2);
+				}
 			}
-			else
+			else // 이전프레임에는 충돌하지않음
 			{
 				// Enter
-				iter.second.collider1->OnCollisionEnter(c1);
-				iter.second.collider2->OnCollisionEnter(c2);
+				if (iter.second.collider1->IsTrigger() || iter.second.collider2->IsTrigger())
+				{
+					iter.second.collider1->OnTriggerEnter(collision1);
+					iter.second.collider2->OnTriggerEnter(collision2);
+				}
+				else
+				{
+					iter.second.collider1->OnCollisionEnter(collision1);
+					iter.second.collider2->OnCollisionEnter(collision2);
+				}
 			}
 		}
-		else
+		else // 이번 프레임 충돌하지 않음
 		{
-			if (iter.second.prevCollision)
+			if (iter.second.prevCollision) // 이전 프레임에는 충돌함
 			{
 				// Exit
-				iter.second.collider1->OnCollisionExit(c1);
-				iter.second.collider2->OnCollisionExit(c2);
+				if (iter.second.collider1->IsTrigger() || iter.second.collider2->IsTrigger())
+				{
+					iter.second.collider1->OnTriggerExit(collision1);
+					iter.second.collider2->OnTriggerExit(collision2);
+				}
+				else
+				{
+					iter.second.collider1->OnCollisionExit(collision1);
+					iter.second.collider2->OnCollisionExit(collision2);
+				}
 			}
 		}
 
+		// 이번 프레임의 정보를 저장한다.
 		iter.second.prevCollision = iter.second.currentCollision;
 		iter.second.currentCollision = false;
 	}
-
 }
 
 void CollisionManager::CheckCollisionObjectType(OBJECT_TYPE _left, OBJECT_TYPE _right) const
@@ -136,6 +160,22 @@ void CollisionManager::Clear()
 {
 	m_collisionInfomations.clear();
 	m_aabbTree->Clear();
+}
+
+void CollisionManager::DetectPointToCollider(const Vector2& _point, vector<Collider*>& _colliderVector) const
+{
+	m_aabbTree->Pick(_point, _colliderVector);
+}
+
+void CollisionManager::DetectBoxToCollider(const Vector2& _minPoint, const Vector2& _maxPoint, vector<Collider*>& _colliderVector) const
+{
+	AABB aabb{};
+	aabb.minPoint.x = _minPoint.x;
+	aabb.minPoint.y = _minPoint.y;
+	aabb.maxPoint.x = _maxPoint.x;
+	aabb.maxPoint.y = _maxPoint.y;
+
+	m_aabbTree->Query(aabb, _colliderVector);
 }
 
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)

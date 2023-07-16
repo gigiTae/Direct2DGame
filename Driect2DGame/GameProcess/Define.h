@@ -85,21 +85,26 @@ struct TransformInfo
 
 struct BoxColliderInfo
 {
-	BoxColliderInfo(Vector2 _offset = Vector2::Zero, Vector2 _scale =Vector2::Zero, bool _rotatable = false)
+	BoxColliderInfo(Vector2 _offset = Vector2::Zero, Vector2 _scale =Vector2::Zero
+		, bool _rotatable = false, bool _isTrigger = false)
 		: offsetPosition(_offset),scale(_scale),rotatable(_rotatable)
+		, isTrigger(_isTrigger)
 	{}
 
 	Vector2 offsetPosition;
 	Vector2 scale;
-	bool rotatable = false;
+	bool isTrigger; 
+	bool rotatable;
 };
 
 struct CircleInfo
 {
-	CircleInfo(Vector2 _offset, float _radius)
+	CircleInfo(Vector2 _offset, float _radius, bool _isTrigger = false)
 		:radius(_radius), positionOffset(_offset)
+		,isTrigger(_isTrigger)
 	{}
 
+	bool isTrigger;
 	Vector2 positionOffset = Vector2::Zero;
 	float radius = 0.f;
 };

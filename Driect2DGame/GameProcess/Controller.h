@@ -22,10 +22,20 @@ public:
     void OnMouseUp() override;
     
 private:
+    void OrderSelectUnits();
+
+    // 현재 마우스 위치에 있는 오브젝트를 가져온다.
+    void SearchOnMouseUnit();
+
+private:
     bool m_isDragging; // 드래그 중인지
 
     Vector2 m_dragStart; 
     Vector2 m_dragEnd;
+
+    Vector2 m_currentMousePosition;
+
+    GameObject* m_onMouseUnit;    // 현재 마우스 위치에 있는 오브젝트
 
     /// 지정한 부대를 정보를 가지는 배열
     vector<GameObject*> m_selectUnits;

@@ -97,6 +97,10 @@ public:
 	void OnCollisionExit(const Collision& _collision);
 	void OnCollisionStay(const Collision& _collision);
 
+	void OnTriggerEnter(const Collision& _collision);
+	void OnTriggerStay(const Collision& _collision);
+	void OnTriggerExit(const Collision& _collision);
+
 public:
 	/// 컴포넌트 관련 함수 
 	template <typename T>

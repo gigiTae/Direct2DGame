@@ -43,6 +43,11 @@ public:
 	
 	//후속 이벤트 처리
 	void ProcessEvent(float _deltaTime);
+
+private:
+	// 오브젝트들을 정렬한다.
+	void SortObjectVector();
+
 public: 
 
 	/// 씬에 오브젝트 추가를 요청

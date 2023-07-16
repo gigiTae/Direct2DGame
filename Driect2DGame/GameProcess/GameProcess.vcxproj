@@ -150,6 +150,7 @@
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="FlyMovement.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectSort.h" />
     <ClInclude Include="GameProcessPCH.h" />
     <ClInclude Include="GameProcess.h" />
     <ClInclude Include="IFactory.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="FlyMovement.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectSort.cpp" />
     <ClCompile Include="GameProcess.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="IFactory.cpp" />

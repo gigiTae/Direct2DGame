@@ -7,6 +7,7 @@
 #include "UnitAttack.h"
 #include "BarUI.h"
 #include "UnitMovement.h"
+#include "CircleCollider.h"
 #include "FlyMovement.h"
 
 
@@ -62,12 +63,12 @@ GameObject* SC::Factory::CreateFlySlime(Vector2 _position)
 		, OBJECT_TYPE::ENEMY,transformInfo);
 
 	CreateTextureRenderer(flySlime, L"FlySlime");
-	CreateRigidBody(flySlime,1.f);
+	CreateRigidBody(flySlime,50.f);
 
-	BoxColliderInfo boxInfo(Vector2::Zero, Vector2(32.f, 32.f));
+	BoxColliderInfo boxInfo(Vector2::Zero, Vector2(64.f, 64.f) , true);
 	CreateBoxCollider(flySlime, boxInfo);
 	
-	CircleInfo circleInfo(Vector2::Zero, 150.f);
+	CircleInfo circleInfo(Vector2::Zero, 150.f,true);
 	CreateCircleColldier(flySlime, circleInfo);
 
 	flySlime->CreateComponent<UnitSensor>();
@@ -79,6 +80,7 @@ GameObject* SC::Factory::CreateFlySlime(Vector2 _position)
 	info.maxHP = 100.f;
 	info.currentHP = 100.f;
 	info.attackRange;
+	info.attackPower = 0.01f;
 	info.attackType = ATTACK_TYPE::GUN;
 	info.state = UNIT_STATE::HOLD;
 	flySlime->CreateComponent<Unit>()->Initalize(info);

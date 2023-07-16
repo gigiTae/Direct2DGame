@@ -7,7 +7,7 @@
 #include "CollisionManager.h"
 
 CircleCollider::CircleCollider()
-	:Collider(typeid(this).name())
+	:Collider(typeid(this).name(),COLLIDER_TYPE::CIRCLE)
 	,m_position{}
 	,m_offset{}
 	,m_active(false)

@@ -43,7 +43,10 @@ void ShootBullet::Update(float _deltaTime)
 
 	if (m_prevDistance <= currentDistance && GetGameObject()->GetObjectState() == OBJECT_STATE::ALIVE)
 	{
+		// 총알 삭제
 		GetGameObject()->Destory();
+		
+		// 대미지 이펙트
 		GameObject* effect = new GameObject("effect", GetManagerSet(), OBJECT_TYPE::ATTACK_EFFECT);
 		effect->CreateComponent<Transform>()->SetPosition(position);
 		effect->CreateComponent<Animator>()->CreateAnimation(L"hitAnimation1", L"hitEffect1"
@@ -53,18 +56,20 @@ void ShootBullet::Update(float _deltaTime)
 		GetManagerSet()->GetSceneManager()->RegisterObject(effect);
 		effect->Destory(0.3f);
 	
+		// 대미지 전달
 		if (m_target != nullptr)
-			m_target->GetComponent<Unit>()->TakeDamage(10.f);
+			m_target->GetComponent<Unit>()->TakeDamage(m_damage);
 	}
 
 	m_prevDistance = currentDistance;
 }
 
 
-void ShootBullet::Shoot(GameObject* _target, float _speed)
+void ShootBullet::Shoot(GameObject* _target, float _speed, float _damage)
 {
 	m_target = _target;
 	m_shootSpeed = _speed;
+	m_damage = _damage;
 
 	// 현재 발사위치
 	Transform* transform = GetComponent<Transform>();

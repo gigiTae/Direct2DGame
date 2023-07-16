@@ -15,6 +15,8 @@ using std::vector;
 #include <list>
 using std::list;
 
+#include <algorithm>
+
 #include <string>
 using std::string;
 using std::wstring;

@@ -81,17 +81,17 @@ void Transform::LateUpdate(float _deltaTime)
 
 void Transform::DebugRender(D2DRenderer* _d2DRenderer)
 {
-	Vector2 pos = GetPosition();
-	float rotation = GetRotation();
+	//Vector2 pos = GetPosition();
+	//float rotation = GetRotation();
 
-	string nameA = GetGameObject()->GetName();
-	wstring nameW;
+	//string nameA = GetGameObject()->GetName();
+	//wstring nameW;
 
-	nameW.assign(nameA.begin(), nameA.end());
+	//nameW.assign(nameA.begin(), nameA.end());
 
-	wstring info = nameW + L"\nX:" + std::to_wstring(static_cast<int>(pos.x))
-		+ L"\nY:" + std::to_wstring(static_cast<int>(pos.y));
-	_d2DRenderer->DrawTextW(info, pos, Vector2(pos.x + 200.f, pos.y), D2D1::ColorF::DarkSlateGray);
+	//wstring info = nameW + L"\nX:" + std::to_wstring(static_cast<int>(pos.x))
+	//	+ L"\nY:" + std::to_wstring(static_cast<int>(pos.y));
+	//_d2DRenderer->DrawTextW(info, pos, Vector2(pos.x + 200.f, pos.y), D2D1::ColorF::DarkSlateGray);
 }
 
 GameObject* Transform::GetChild(int _index)

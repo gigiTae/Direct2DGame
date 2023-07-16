@@ -24,7 +24,11 @@ public:
     void Remove(Collider* _collider) override;
     void Update() override;
     ColliderPairList& ComputePairs() override;
+    
+    // 점과 충돌하는 충돌체들 반환
     void Pick(const Vector2& _point, ColliderVector& _colliderVector) override;
+
+    // 사각형 내부에 충돌하는  Collider 반환
     void Query(const AABB& _aabb, ColliderVector& _output) const override;
     
 	RayCastResult RayCast(const Vector2& _direct

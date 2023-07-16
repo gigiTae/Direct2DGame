@@ -231,7 +231,7 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawEllipse(region, m_tempBrush,2.f);
+	m_renderTarget->DrawEllipse(region, m_tempBrush,1.f);
 
 	SafeRelease(&m_tempBrush);
 }

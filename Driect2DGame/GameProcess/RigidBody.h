@@ -22,6 +22,7 @@ public:
 
 	void AddForce(const Vector2& _force) { m_force += _force; }
 	void AddToque(const float& _toque) { m_torque += _toque; }
+	void SetVelocity(Vector2 _velocity) { m_velocity = _velocity; }
 	void ApplyImpulse(const Vector2& _impulse, const Vector2& _contactVector);
 
 	void SetMass(float _mass);

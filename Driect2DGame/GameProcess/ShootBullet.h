@@ -12,7 +12,7 @@ public:
     ~ShootBullet();
 
     void Update(float _deltaTime) override;
-    void Shoot(GameObject* _target, float _speed);
+    void Shoot(GameObject* _target, float _speed, float _damage);
 
 private:
     Vector2 m_direct; // 이동방향
@@ -21,6 +21,7 @@ private:
     GameObject* m_target; // 타겟
 
     float m_prevDistance; // 이전 위치 차이
-    float m_shootSpeed;
+    float m_damage; // 총알 대미지
+    float m_shootSpeed; // 총알 스피드
 };
 

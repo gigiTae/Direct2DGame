@@ -22,6 +22,8 @@ RigidBody::~RigidBody()
 
 void RigidBody::LateUpdate(float _deltaTime)
 {
+	IntegrateForces(_deltaTime);
+
 	// 현재의 속도를 가지고 오브젝트의 위치를 갱신한다.
 	if (m_invMass == 0.f)
 		return;

@@ -16,7 +16,7 @@ class Collider abstract
 	:public Component
 {
 public:
-	Collider(string _name);
+	Collider(string _name, COLLIDER_TYPE _type);
 	~Collider();
 
 public:
@@ -24,7 +24,13 @@ public:
 	void OnCollisionExit(const Collision& _collision);
 	void OnCollisionStay(const Collision& _collision);
 
+	void OnTriggerEnter(const Collision& _collision);
+	void OnTriggerStay(const Collision& _collision);
+	void OnTriggerExit(const Collision& _collision);
+
+
 	unsigned int GetID() const { return m_ID; }
+	COLLIDER_TYPE GetColliderType() const { return m_type; }
 
 	// 현재 충돌중인 충돌체 개수 반환
 	int GetCurrentCollison() { return m_currentCollision; }
@@ -45,14 +51,20 @@ public:
 	void SetNode(Node* _node)
 	{ m_node = _node; }
 
+	void SetTrigger(bool _isTrigger) { m_isTrigger = _isTrigger; }
+	bool IsTrigger() const{ return m_isTrigger; }
 private:
 	// 충돌체의 아이디는 고유한 값을 가진다.
 	const unsigned int m_ID;
 	int m_currentCollision; // 현재 충돌중이 충돌체 갯수 
 
+	COLLIDER_TYPE m_type;
 	// ObjectType 만큼 자신과 대응하는 노드가 있으므로
 	// AABBTree에 해당하는 노드의 포인터를 type별로 가진다.
 	Node* m_node;
+
+	// 물리적 효과를 받지 않는 트리거 인지
+	bool m_isTrigger; 
 };
 
 /// 콜라이더 충돌쌍을 가지고 Key값을 만든다

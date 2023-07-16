@@ -31,7 +31,7 @@ void MainScene::Enter()
 
 	for (int i = 0; i < 10; ++i)
 	{
-		GameObject* attaker = factory.CreateFlySlime(Vector2(-510.f + i*125.f, 10.f));
+		GameObject* attaker = factory.CreateFlySlime(Vector2(-510.f + i*10.f, 10.f));
 		AddObject(attaker);
 	}
 

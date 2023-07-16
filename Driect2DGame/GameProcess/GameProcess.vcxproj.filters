@@ -49,9 +49,6 @@
     <ClInclude Include="MonoBehaviour.h">
       <Filter>GameProcess\03.Component\MonoBehaviour</Filter>
     </ClInclude>
-    <ClInclude Include="GameProcessPCH.h">
-      <Filter>GameProcess\Define</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>GameProcess\04.Manager\UIManager</Filter>
     </ClInclude>
@@ -130,6 +127,10 @@
     </ClInclude>
     <ClInclude Include="BarUI.h">
       <Filter>GameProcess\03.Component\UI\BarUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProcessPCH.h" />
+    <ClInclude Include="GameObjectSort.h">
+      <Filter>GameProcess\Define\GameObjectSort</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +269,9 @@
     <Filter Include="GameProcess\03.Component\UI\BarUI">
       <UniqueIdentifier>{709152f7-3840-4a83-a693-9f027852b209}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProcess\Define\GameObjectSort">
+      <UniqueIdentifier>{126dc004-9bef-4d21-883e-913b5fd22d66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -392,6 +396,9 @@
     </ClCompile>
     <ClCompile Include="BarUI.cpp">
       <Filter>GameProcess\03.Component\UI\BarUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectSort.cpp">
+      <Filter>GameProcess\Define\GameObjectSort</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

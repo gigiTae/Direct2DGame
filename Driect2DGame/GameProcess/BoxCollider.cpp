@@ -7,7 +7,7 @@
 #include "CircleCollider.h"
 
 BoxCollider::BoxCollider()
-	:Collider(typeid(this).name())
+	:Collider(typeid(this).name(), COLLIDER_TYPE::BOX)
 	,m_positionOffset{}
 	, m_position{}
 	, m_rotation(0.f)

@@ -32,9 +32,10 @@ void UnitSensor::Update(float _deltaTime)
 
 }
 
-void UnitSensor::OnCollisionEnter(const Collision& _collision)
+
+void UnitSensor::OnTriggerEnter(const Collision& _collision)
 {
-	BoxCollider* box =dynamic_cast<BoxCollider*>(_collision.myCollider);
+	BoxCollider* box = dynamic_cast<BoxCollider*>(_collision.myCollider);
 	if (box == nullptr)
 		return;
 
@@ -42,27 +43,23 @@ void UnitSensor::OnCollisionEnter(const Collision& _collision)
 	GameObject* inObj = _collision.otherObject;
 	const string& name = inObj->GetName();
 
-	auto iter= m_senseObjects.find(inObj->GetName());
+	auto iter = m_senseObjects.find(inObj->GetName());
 
 	if (iter == m_senseObjects.end())
 	{
 		m_senseObjects.insert(std::make_pair(name, inObj));
 	}
 
-  }
+}
 
-void UnitSensor::OnCollisionExit(const Collision& _collision)
+void UnitSensor::OnTriggerExit(const Collision& _collision)
 {
 	// UnitSensor에서 벗어나는 경우는 나의 원형콜라이더에서 상대의 사각형 콜라이더가 벗어난 시점이다.
-
-	BoxCollider* box = dynamic_cast<BoxCollider*>(_collision.myCollider);
-	if (box == nullptr)
+	if (_collision.myCollider->GetColliderType() == COLLIDER_TYPE::BOX)
 		return;
 
-	BoxCollider* otherBox = dynamic_cast<BoxCollider*>(_collision.otherCollider);
-	if (otherBox != nullptr)
+	if (_collision.otherCollider->GetColliderType() == COLLIDER_TYPE::CIRCLE)
 		return;
-	
 
 	// 유닛이 범위밖으로 나간경우
 	GameObject* exitObj = _collision.otherObject;
