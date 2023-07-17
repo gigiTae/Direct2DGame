@@ -27,15 +27,13 @@ public:
 	// 현재 충돌중인 충돌체 개수 반환
 	int GetCurrentCollison() { return m_currentCollision; }
 
-	/// 충돌관련함수 
+	/// 충돌체크관련함수 
 	virtual bool Collides(Vector2 _position) = 0;
 	virtual bool Collides(CircleCollider* _circle) = 0;
 	virtual bool Collides(BoxCollider* _box) = 0;
-
 	bool Collides(Collider* _collider);
 
 	/// Broadphase 관련
-
 	virtual Vector2 GetMinPoint()const = 0;
 	virtual Vector2 GetMaxPoint()const = 0;
 
@@ -43,12 +41,15 @@ public:
 	void SetNode(Node* _node)
 	{ m_node = _node; }
 
+	/// 트리거 관련
 	void SetTrigger(bool _isTrigger) { m_isTrigger = _isTrigger; }
 	bool IsTrigger() const{ return m_isTrigger; }
+
+protected:
+	int m_currentCollision; // 현재 충돌중이 충돌체 갯수 
 private:
 	// 충돌체의 아이디는 고유한 값을 가진다.
 	const unsigned int m_ID;
-	int m_currentCollision; // 현재 충돌중이 충돌체 갯수 
 
 	COLLIDER_TYPE m_type;
 	// ObjectType 만큼 자신과 대응하는 노드가 있으므로

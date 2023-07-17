@@ -132,6 +132,9 @@
     <ClInclude Include="GameObjectSort.h">
       <Filter>GameProcess\Define\GameObjectSort</Filter>
     </ClInclude>
+    <ClInclude Include="BackgroundEffect.h">
+      <Filter>Starcraft\Scripts\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Broadphase">
@@ -272,6 +275,9 @@
     <Filter Include="GameProcess\Define\GameObjectSort">
       <UniqueIdentifier>{126dc004-9bef-4d21-883e-913b5fd22d66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Starcraft\Scripts\Effect">
+      <UniqueIdentifier>{e0b8d05f-eb94-49eb-9ee7-d37398dfc65a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TimeManager.cpp">
@@ -399,6 +405,9 @@
     </ClCompile>
     <ClCompile Include="GameObjectSort.cpp">
       <Filter>GameProcess\Define\GameObjectSort</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundEffect.cpp">
+      <Filter>Starcraft\Scripts\Effect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -25,6 +25,8 @@ void CameraManager::Initalize(D2DRenderer* _renderer, Vector2 _screenSize, Input
 	m_inputManager = _inputManager;
 
 	m_moveSpeed = 300.f;
+
+	m_camera->ZoomCamera(Vector2(-0.5f, -0.5f));
 }
 
 void CameraManager::Update(float _deltaTime)
@@ -66,14 +68,14 @@ void CameraManager::Update(float _deltaTime)
 
 	/// 카메라 확대 
 
-	if(m_inputManager->IsKeyState(KEY::F1, KEY_STATE::TAP))
-	{
-		m_camera->ZoomCamera(Vector2(0.1f, 0.1f));
-	}
-	if (m_inputManager->IsKeyState(KEY::F2, KEY_STATE::TAP))
-	{
-		m_camera->ZoomCamera(Vector2(-0.1f, -0.1f));
-	}
+	//if(m_inputManager->IsKeyState(KEY::F1, KEY_STATE::TAP))
+	//{
+	//	m_camera->ZoomCamera(Vector2(0.1f, 0.1f));
+	//}
+	//if (m_inputManager->IsKeyState(KEY::F2, KEY_STATE::TAP))
+	//{
+	//	m_camera->ZoomCamera(Vector2(-0.1f, -0.1f));
+	//}
 
 }
 

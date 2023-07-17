@@ -38,11 +38,9 @@ void Unit::Start()
 	m_movement = GetComponent<UnitMovement>();
 	assert(m_movement);
 
-	m_unitSensor = GetComponent<UnitSensor>();
-	assert(m_unitSensor);
-
 	m_attack = GetComponent<UnitAttack>();
-	assert(m_attack);
+
+	m_unitSensor = GetComponent<UnitSensor>();
 
 	m_hpBar = GetComponent<BarUI>();
 }

@@ -36,6 +36,13 @@ public:
 
 	void DebugRender(D2DRenderer* _d2DRenderer);
 
+	/// 충돌체 카운트
+	void OnCollisionEnter(const Collision& _collision) override;
+	void OnCollisionExit(const Collision& _collision) override;
+
+	void OnTriggerEnter(const Collision& _collision) override;
+	void OnTriggerExit(const Collision& _collision) override;
+
 public:
 	bool Collides(Vector2 _position) override;
 	bool Collides(CircleCollider* _circle) override;

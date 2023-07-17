@@ -203,7 +203,7 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 
 
 
-void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
+void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, ColorF color)
 {
 	Vector2 point1 = _point1.ChangeYSign();
 	Vector2 point2 = _point2.ChangeYSign();
@@ -211,7 +211,7 @@ void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, COLORREF color)
 	D2D1_POINT_2F start = point1.ToPoint2F();
 	D2D1_POINT_2F end = point2.ToPoint2F();
 
-	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	m_renderTarget->CreateSolidColorBrush(color, &m_tempBrush);
 	assert(m_tempBrush);
 
 	m_renderTarget->DrawLine(start, end, m_tempBrush, 1.0f);

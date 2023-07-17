@@ -30,6 +30,14 @@ public:
 	Vector2 GetPosition() { return m_position; }
 	float GetRadius() { return m_radius; }
 
+
+	/// 충돌체 카운트 관련
+	void OnCollisionEnter(const Collision& _collision) override;
+	void OnCollisionExit(const Collision& _collision) override;
+
+	void OnTriggerEnter(const Collision& _collision) override;
+	void OnTriggerExit(const Collision& _collision) override;
+
 public:
 	bool Collides(Vector2 _position) override;
 	bool Collides(CircleCollider* _circle) override;

@@ -29,9 +29,16 @@ enum class LAND_TYPE
 	WATER, // 아마 여기까지는 구현 안할듯
 };
 
+enum class TEAM
+{
+	ALLY, // 아군 
+	ENEMY, // 적군
+};
+
 // 가장 기본적인 유닛의 정보
 struct UnitInfomaiton
 {
+	TEAM team; //
 	LAND_TYPE landType; // 유닛이 어디에 속하는지
 	UNIT_STATE state; // 유닛 상태
 	float currentHP; // 현재 체력

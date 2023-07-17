@@ -32,7 +32,7 @@ public:
 
 	// 직선을 그리는 함수
 	void DrawLine(Vector2 _point1, Vector2 _point2
-		, COLORREF = D2D1::ColorF::White);
+		, ColorF = D2D1::ColorF::White);
 
 	void DrawEllipse(Vector2 _point, Vector2 _radius
 		, COLORREF = D2D1::ColorF::White);

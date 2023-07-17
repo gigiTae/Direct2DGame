@@ -29,7 +29,7 @@ void CircleCollider::LateUpdate(float _deltaTime)
 void CircleCollider::DebugRender(D2DRenderer* _d2DRenderer)
 {
 
-	if (GetCurrentCollison() == 0)
+	if (m_currentCollision == 0)
 	{
 		_d2DRenderer->DrawEllipse(m_position, m_radius, D2D1::ColorF::LightGreen);
 	}
@@ -37,6 +37,30 @@ void CircleCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	{
 		_d2DRenderer->DrawEllipse(m_position, m_radius, D2D1::ColorF::Red);
 	}
+}
+
+void CircleCollider::OnCollisionEnter(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		++m_currentCollision;
+}
+
+void CircleCollider::OnCollisionExit(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		--m_currentCollision;
+}
+
+void CircleCollider::OnTriggerEnter(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		++m_currentCollision;
+}
+
+void CircleCollider::OnTriggerExit(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		--m_currentCollision;
 }
 
 bool CircleCollider::Collides(Vector2 _position)

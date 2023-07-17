@@ -57,6 +57,30 @@ void BoxCollider::DebugRender(D2DRenderer* _d2DRenderer)
 	}
 }
 
+void BoxCollider::OnCollisionEnter(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		++m_currentCollision;
+}
+
+void BoxCollider::OnCollisionExit(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		--m_currentCollision;
+}
+
+void BoxCollider::OnTriggerEnter(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		++m_currentCollision;
+}
+
+void BoxCollider::OnTriggerExit(const Collision& _collision)
+{
+	if (_collision.myCollider->GetColliderType() == GetColliderType())
+		--m_currentCollision;
+}
+
 bool BoxCollider::Collides(Vector2 _position)
 {
 	Vector2 maxPoint = GetMaxPoint();

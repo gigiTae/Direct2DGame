@@ -16,6 +16,7 @@ using std::vector;
 using std::list;
 
 #include <algorithm>
+#include <random>
 
 #include <string>
 using std::string;
