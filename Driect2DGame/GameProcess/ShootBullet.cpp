@@ -12,6 +12,7 @@ ShootBullet::ShootBullet()
 	:MonoBehaviour(typeid(this).name())
 	, m_shootSpeed(0.f)
 	, m_prevDistance(0.f)
+	,m_damage(0.f)
 	,m_target(nullptr)
 {
 

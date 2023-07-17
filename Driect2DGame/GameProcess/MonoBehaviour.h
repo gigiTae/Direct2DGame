@@ -28,13 +28,13 @@ public:
     void PostRender(D2DRenderer* _d2DRenderer) override {};
 
     /// 충돌 관련 함수
-    virtual void OnCollisionStay(const Collision& _collision) {};
-    virtual void OnCollisionEnter(const Collision& _collision) {};
-    virtual void OnCollisionExit(const Collision& _collision)  {};
+    virtual void OnCollisionStay(const Collision& _collision) override {};
+    virtual void OnCollisionEnter(const Collision& _collision) override {};
+    virtual void OnCollisionExit(const Collision& _collision) override {};
 
-	virtual void OnTriggerExit(const Collision& _collision) {};
-	virtual void OnTriggerStay(const Collision& _collision) {};
-	virtual void OnTriggerEnter(const Collision& _collision) {};
+    virtual void OnTriggerExit(const Collision& _collision)override {};
+	virtual void OnTriggerStay(const Collision& _collision) override {};
+	virtual void OnTriggerEnter(const Collision& _collision) override {};
 
     /// 마우스 입력 함수
     virtual void OnMouse() {};

@@ -124,13 +124,9 @@ void GameObject::OnMouseClicked()
 
 void GameObject::OnCollisionEnter(const Collision& _collision)
 {	
-	for (auto& iter : m_components)
+	for (auto& component : m_components)
 	{
-		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
-		if (monoBehaviour != nullptr)
-		{
-			monoBehaviour->OnCollisionEnter(_collision);
-		}
+		component.second->OnCollisionEnter(_collision);
 	}
 }
 
@@ -139,13 +135,9 @@ void GameObject::OnCollisionExit(const Collision& _collision)
 	//RigidBody* rigid = GetComponent<RigidBody>();
 	//rigid->SetVelocity(Vector2::Zero);
 
-	for (auto& iter : m_components)
+	for (auto& component : m_components)
 	{
-		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
-		if (monoBehaviour != nullptr)
-		{
-			monoBehaviour->OnCollisionExit(_collision);
-		}
+		component.second->OnCollisionExit(_collision);
 	}
 }
 
@@ -186,49 +178,33 @@ void GameObject::OnCollisionStay(const Collision& _collision)
 	}
 
 
-	for (auto& iter : m_components)
+	for (auto& component : m_components)
 	{
-		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
-		if (monoBehaviour != nullptr)
-		{
-			monoBehaviour->OnCollisionStay(_collision);
-		}
+		component.second->OnCollisionStay(_collision);
 	}
 }
 
 void GameObject::OnTriggerEnter(const Collision& _collision)
 {
-	for (auto& iter : m_components)
+	for (auto& component : m_components)
 	{
-		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
-		if (monoBehaviour != nullptr)
-		{
-			monoBehaviour->OnTriggerEnter(_collision);
-		}
+		component.second->OnTriggerEnter(_collision);
 	}
 }
 
 void GameObject::OnTriggerStay(const Collision& _collision)
 {
-	for (auto& iter : m_components)
+	for (auto& component : m_components)
 	{
-		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
-		if (monoBehaviour != nullptr)
-		{
-			monoBehaviour->OnTriggerStay(_collision);
-		}
+		component.second->OnTriggerStay(_collision);
 	}
 }
 
 void GameObject::OnTriggerExit(const Collision& _collision)
 {
-	for (auto& iter : m_components)
+	for (auto& component : m_components)
 	{
-		MonoBehaviour* monoBehaviour = dynamic_cast<MonoBehaviour*>(iter.second);
-		if (monoBehaviour != nullptr)
-		{
-			monoBehaviour->OnTriggerExit(_collision);
-		}
+		component.second->OnTriggerExit(_collision);
 	}
 }
 

@@ -20,14 +20,6 @@ public:
 	~Collider();
 
 public:
-	void OnCollisionEnter(const Collision& _collision);
-	void OnCollisionExit(const Collision& _collision);
-	void OnCollisionStay(const Collision& _collision);
-
-	void OnTriggerEnter(const Collision& _collision);
-	void OnTriggerStay(const Collision& _collision);
-	void OnTriggerExit(const Collision& _collision);
-
 
 	unsigned int GetID() const { return m_ID; }
 	COLLIDER_TYPE GetColliderType() const { return m_type; }

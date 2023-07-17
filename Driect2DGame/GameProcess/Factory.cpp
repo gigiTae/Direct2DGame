@@ -85,7 +85,6 @@ GameObject* SC::Factory::CreateFlySlime(Vector2 _position)
 	info.state = UNIT_STATE::HOLD;
 	flySlime->CreateComponent<Unit>()->Initalize(info);
 
-
 	BarUIInfo barInfo{};
 	barInfo.barLength = 1.f;
 	barInfo.barScale = Vector2(50.f, 10.f);

@@ -79,44 +79,50 @@ void CollisionManager::Update()
 	// 오브젝트에게 충돌 이벤트 호출
 	for (auto& iter : m_collisionInfomations)
 	{
+		Collider* collider1 = iter.second.collider1;
+		Collider* collider2 = iter.second.collider2;
+
+		GameObject* object1 = collider1->GetGameObject();
+		GameObject* object2 = collider2->GetGameObject();
+
 		Collision collision1{};
-		collision1.otherCollider = iter.second.collider2;
-		collision1.otherObject = iter.second.collider2->GetGameObject();
-		collision1.myCollider = iter.second.collider1;
+		collision1.otherCollider = collider2;
+		collision1.otherObject = object2;
+		collision1.myCollider = collider1;
 
 		Collision collision2{};
-		collision2.otherCollider = iter.second.collider1;
-		collision2.otherObject = iter.second.collider1->GetGameObject();
-		collision2.myCollider = iter.second.collider2;
+		collision2.otherCollider = collider1;
+		collision2.otherObject = object1;
+		collision2.myCollider = collider2;
 
 		if (iter.second.currentCollision) // 이번프레임 충돌중
 		{
 			if (iter.second.prevCollision) // 이전프레임 충돌
 			{
 				// Stay
-				if (iter.second.collider1->IsTrigger() || iter.second.collider2->IsTrigger())
+				if (collider1->IsTrigger() || collider2->IsTrigger())
 				{
-					iter.second.collider1->OnTriggerStay(collision1);
-					iter.second.collider2->OnTriggerStay(collision2);
+					object1->OnTriggerStay(collision1);
+					object2->OnTriggerStay(collision2);
 				}
 				else
 				{
-					iter.second.collider1->OnCollisionStay(collision1);
-					iter.second.collider2->OnCollisionStay(collision2);
+					object1->OnCollisionStay(collision1);
+					object2->OnCollisionStay(collision2);
 				}
 			}
 			else // 이전프레임에는 충돌하지않음
 			{
 				// Enter
-				if (iter.second.collider1->IsTrigger() || iter.second.collider2->IsTrigger())
+				if (collider1->IsTrigger() || collider2->IsTrigger())
 				{
-					iter.second.collider1->OnTriggerEnter(collision1);
-					iter.second.collider2->OnTriggerEnter(collision2);
+					object1->OnTriggerEnter(collision1);
+					object2->OnTriggerEnter(collision2);
 				}
 				else
 				{
-					iter.second.collider1->OnCollisionEnter(collision1);
-					iter.second.collider2->OnCollisionEnter(collision2);
+					object1->OnCollisionEnter(collision1);
+					object2->OnCollisionEnter(collision2);
 				}
 			}
 		}
@@ -125,15 +131,15 @@ void CollisionManager::Update()
 			if (iter.second.prevCollision) // 이전 프레임에는 충돌함
 			{
 				// Exit
-				if (iter.second.collider1->IsTrigger() || iter.second.collider2->IsTrigger())
+				if (collider1->IsTrigger() || collider2->IsTrigger())
 				{
-					iter.second.collider1->OnTriggerExit(collision1);
-					iter.second.collider2->OnTriggerExit(collision2);
+					object1->OnTriggerExit(collision1);
+					object2->OnTriggerExit(collision2);
 				}
 				else
 				{
-					iter.second.collider1->OnCollisionExit(collision1);
-					iter.second.collider2->OnCollisionExit(collision2);
+					object1->OnCollisionExit(collision1);
+					object2->OnCollisionExit(collision2);
 				}
 			}
 		}

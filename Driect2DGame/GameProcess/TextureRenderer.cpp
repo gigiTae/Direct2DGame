@@ -21,10 +21,15 @@ void TextureRenderer::Render(D2DRenderer* _d2DRenderer)
 	if (m_textKey.empty())
 		return;
 
-	Transform* transform = GetComponent<Transform>();
-	
-	Vector2 position = transform->GetPosition() + m_offset;
-	float rotation = transform->GetRotation();
+	Vector2 position = m_transform->GetPosition() + m_offset;
+	float rotation = m_transform->GetRotation();
 
 	_d2DRenderer->DrawBitMap(m_textKey, position, rotation, m_alpha);
+}
+
+void TextureRenderer::Start()
+{
+	m_transform = GetComponent<Transform>();
+
+	assert(m_transform);
 }

@@ -36,6 +36,15 @@ public:
 	virtual void Render(D2DRenderer* _d2DRenderer) {};
 	virtual void PostRender(D2DRenderer* _d2DRenderer) {};
 	virtual void DebugRender(D2DRenderer* _d2DRendere) {};
+	
+	/// 충돌 관련 함수
+	virtual void OnCollisionStay(const Collision& _collision) {};
+	virtual void OnCollisionEnter(const Collision& _collision) {};
+	virtual void OnCollisionExit(const Collision& _collision) {};
+
+	virtual void OnTriggerExit(const Collision& _collision) {};
+	virtual void OnTriggerStay(const Collision& _collision) {};
+	virtual void OnTriggerEnter(const Collision& _collision) {};
 
 public:
 	const ManagerSet* GetManagerSet()const;

@@ -37,7 +37,6 @@ public:
     // 공격을 받으면 호출하는 함수
     void TakeDamage(float _damage);
 
-
     const UnitInfomaiton& GetUnitInfomation() { return m_infomation; }
 
 private:

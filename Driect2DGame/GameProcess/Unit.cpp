@@ -18,6 +18,7 @@ Unit::Unit()
 	,m_isSelect(false)
 	,m_movement(nullptr)
 	,m_infomation{}
+	,m_hpBar(nullptr)
 	,m_target(nullptr)
 	,m_attack(nullptr)
 	,m_unitSensor(nullptr)

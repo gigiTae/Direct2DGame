@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 
+class Transform;
+
 /// <summary>
 /// 텍스처를 랜더링하는 컴포넌트이다 
 /// 
@@ -15,6 +17,7 @@ public:
     ~TextureRenderer();
 
     void Render(D2DRenderer* _d2DRenderer) override;
+    void Start() override;
 
     void SetKey(const wstring& _key) { m_textKey = _key; }
     void SetOffset(const Vector2& _offset) { m_offset = _offset; }
@@ -34,5 +37,7 @@ private:
 
     // 투명도 
     float m_alpha;
+
+    Transform* m_transform;
 };
 
