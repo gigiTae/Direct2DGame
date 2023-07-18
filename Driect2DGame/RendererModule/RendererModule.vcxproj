@@ -137,6 +137,7 @@
     <ClInclude Include="D2DResource.h" />
     <ClInclude Include="D2DTexture.h" />
     <ClInclude Include="macro.h" />
+    <ClInclude Include="RendererDefine.h" />
     <ClInclude Include="RendererHeader.h" />
     <ClInclude Include="RendererPCH.h" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="D2DResource.cpp" />
     <ClCompile Include="D2DTexture.cpp" />
+    <ClCompile Include="RendererDefine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MathModule\MathModule.vcxproj">

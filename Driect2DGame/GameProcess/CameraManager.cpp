@@ -25,8 +25,6 @@ void CameraManager::Initalize(D2DRenderer* _renderer, Vector2 _screenSize, Input
 	m_inputManager = _inputManager;
 
 	m_moveSpeed = 300.f;
-
-	m_camera->ZoomCamera(Vector2(-0.5f, -0.5f));
 }
 
 void CameraManager::Update(float _deltaTime)

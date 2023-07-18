@@ -23,19 +23,15 @@ void MainScene::Enter()
 	LoadSceneResources(L"MainScene");
 
 	SC::Factory factory(GetManagerSet());
-
-	GameObject* effect = new GameObject("effect", GetManagerSet(), OBJECT_TYPE::BACKGROUND);
-	effect->CreateComponent<Transform>();
-	effect->CreateComponent<BackgroundEffect>()->SetEffect(2000.f, 0.0001f);
-	AddObject(effect);
+	
 
 	/// 컨트롤러
 	GameObject* controller = factory.CreateController();
 	AddObject(controller);
 
-	for (int i = 0; i <	1; ++i)
+	for (int i = 0; i <	2; ++i)
 	{
-		GameObject* attaker = factory.CreateFlySlime(Vector2(-1900.f, 250.f));
+		GameObject* attaker = factory.CreateFlySlime(Vector2(0.f+ i, 0.f));
 		AddObject(attaker);
 	}
 

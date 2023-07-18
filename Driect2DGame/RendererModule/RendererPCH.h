@@ -21,6 +21,15 @@ using std::map;
 #include <wincodec.h>
 #pragma comment(lib, "windowscodecs.lib") // WIC
 
+#include <d3d11.h>			// D3D11
+#include <dxgi1_2.h>		// DXGI
+#include "d2d1effects_2.h"	// Effect
+
+#pragma comment(lib, "d3d11.lib")			// D3D11
+#pragma comment(lib, "dxguid.lib")			// DXGI
+
 using namespace D2D1;
 
 #include "MathModuleHeader.h"
+
+#include "RendererDefine.h"

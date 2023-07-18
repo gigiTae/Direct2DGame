@@ -28,7 +28,7 @@ void D2DCamera::MoveCamera(Vector2 _distance)
 void D2DCamera::ZoomCamera(Vector2 _scale)
 {
 	m_scale += _scale;
-
+		
 	constexpr float Min = 0.5f;
 	constexpr float Max = 2.f;
 

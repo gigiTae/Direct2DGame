@@ -7,7 +7,6 @@
 D2DRenderer::D2DRenderer()
 	:m_hwnd(nullptr)
 	,m_factory(nullptr)
-	,m_renderTarget(nullptr)
 	,m_IsD2DResReady(S_FALSE)
 	,m_renderTargetSize{}
 	,m_tempBrush(nullptr)
@@ -18,6 +17,13 @@ D2DRenderer::D2DRenderer()
 	,m_imagingFactorty(nullptr)
 	,m_finalMatrix{}
 	,m_cameraAffected(true)
+	,m_device(nullptr)
+	,m_deviceContext(nullptr)
+	,m_dpi(0.f)
+	,m_targetBitmap(nullptr)
+	,m_featureLevel{}
+	,m_swapChain(nullptr)
+	,m_d2dEffect{}
 {
 }
 
@@ -38,9 +44,6 @@ void D2DRenderer::Initalize(HWND _hwnd)
 	// Direct2D 리소스를 만드는데 사용할 수 있는 팩터리 개체생성
 	hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED
 		, &m_factory);
-	assert(hr == S_OK);
-
-	hr = CreateDeviceResources();
 	assert(hr == S_OK);
 
 	/// WIC팩토리 생성
@@ -88,7 +91,11 @@ void D2DRenderer::Initalize(HWND _hwnd)
 		m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
 	}
 
-	m_renderTargetSize = m_renderTarget->GetSize();
+	hr = CreateDeviceResources();
+	assert(hr == S_OK);
+
+
+	m_renderTargetSize = m_deviceContext->GetSize();
 
 	/// 원점을 윈도우 중앙좌표로 이동하는 행렬
 	Vector2 translation{m_renderTargetSize.width * 0.5f, m_renderTargetSize.height * 0.5f };
@@ -100,6 +107,9 @@ void D2DRenderer::Initalize(HWND _hwnd)
 	/// 카메라 생성
 	m_camera = new D2DCamera();
 	m_camera->ResetCamera(Vector2(m_renderTargetSize.width,m_renderTargetSize.height));
+
+	// 이펙트 생성
+	CreateEffects();
 }
 
 void D2DRenderer::BeginRender()
@@ -107,29 +117,36 @@ void D2DRenderer::BeginRender()
 	m_IsD2DResReady = CreateDeviceResources();
 
 	// 디바이스 종속적 자원들이 문제 없고, 랜더링을 할 수 있는 상황일 때 
-	if(SUCCEEDED(m_IsD2DResReady) &&
-		!(m_renderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
+	if(SUCCEEDED(m_IsD2DResReady))
 	{
-		m_renderTargetSize = m_renderTarget->GetSize();
+		m_renderTargetSize = m_deviceContext->GetSize();
 
-		m_renderTarget->BeginDraw();
+		m_deviceContext->BeginDraw();
 
 		/// 최종 행렬 계산
 		D2D1_MATRIX_3X2_F cameraMatix = m_camera->GetCameraMatrix();
 		m_finalMatrix = cameraMatix * m_screenMatrix;
 
-		m_renderTarget->SetTransform(m_finalMatrix);
+		m_deviceContext->SetTransform(m_finalMatrix);
 
-		m_renderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
+		m_deviceContext->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 	}
 }
 
 void D2DRenderer::EndRender()
 {
-	if (SUCCEEDED(m_IsD2DResReady) &&
-		!(m_renderTarget->CheckWindowState() & D2D1_WINDOW_STATE_OCCLUDED))
+	if (SUCCEEDED(m_IsD2DResReady))
 	{
-		HRESULT hr = m_renderTarget->EndDraw();
+		HRESULT hr = m_deviceContext->EndDraw();
+
+		DXGI_PRESENT_PARAMETERS parameters{};
+		parameters.DirtyRectsCount = 0;
+		parameters.pDirtyRects = nullptr;
+		parameters.pScrollOffset = nullptr;
+		parameters.pScrollRect = nullptr;
+
+		m_swapChain->Present1(1, 0, &parameters);
+
 
 		//복구할 수 있는 프레젠테이션 오류가 있습니다. 호출자는 다시 만들고
 		//전체 프레임을 다시 렌더링하고, 현재를 다시 시도해야 합니다.
@@ -176,7 +193,7 @@ void D2DRenderer::Finalize()
 	SafeRelease(&m_writeFactory);
 	SafeRelease(&m_textFormat);
 	SafeRelease(&m_imagingFactorty);
-	SafeRelease(&m_renderTarget);
+	SafeRelease(&m_deviceContext);
 	SafeRelease(&m_factory);
 	
 	// 카메라 해제
@@ -198,7 +215,7 @@ void D2DRenderer::SetTransform(float _radian, Vector2 _point)
 	
 	matrix = matrix * m_finalMatrix;
 
-	m_renderTarget->SetTransform(matrix);
+	m_deviceContext->SetTransform(matrix);
 }
 
 
@@ -211,10 +228,10 @@ void D2DRenderer::DrawLine(Vector2 _point1, Vector2 _point2, ColorF color)
 	D2D1_POINT_2F start = point1.ToPoint2F();
 	D2D1_POINT_2F end = point2.ToPoint2F();
 
-	m_renderTarget->CreateSolidColorBrush(color, &m_tempBrush);
+	m_deviceContext->CreateSolidColorBrush(color, &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawLine(start, end, m_tempBrush, 1.0f);
+	m_deviceContext->DrawLine(start, end, m_tempBrush, 1.0f);
 
 	SafeRelease(&m_tempBrush);
 }
@@ -228,10 +245,10 @@ void D2DRenderer::DrawEllipse(Vector2 _point , Vector2 _scale, COLORREF color)
 	region.radiusX = _scale.x * 0.5f;
 	region.radiusY = _scale.y * 0.5f;
 
-	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	m_deviceContext->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawEllipse(region, m_tempBrush,1.f);
+	m_deviceContext->DrawEllipse(region, m_tempBrush,1.f);
 
 	SafeRelease(&m_tempBrush);
 }
@@ -245,16 +262,16 @@ void D2DRenderer::DrawEllipse(Vector2 _point, float _radius, COLORREF color)
 	region.radiusX = _radius;
 	region.radiusY = _radius;
 
-	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	m_deviceContext->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
 	assert(m_tempBrush);
 
-	m_renderTarget->DrawEllipse(region, m_tempBrush, 2.f);
+	m_deviceContext->DrawEllipse(region, m_tempBrush, 2.f);
 
 	SafeRelease(&m_tempBrush);
 }
 
 void D2DRenderer::DrawRectangle(Vector2 _leftTop
-	, Vector2 _rightBottom, COLORREF color,float _rotation)
+	, Vector2 _rightBottom, ColorF color,float _rotation)
 {
 	Vector2 leftTop = _leftTop.ChangeYSign();
 	Vector2 rightBottom = _rightBottom.ChangeYSign();
@@ -263,15 +280,15 @@ void D2DRenderer::DrawRectangle(Vector2 _leftTop
 	rt.left = leftTop.x;
 	rt.top = leftTop.y;
 	rt.right = rightBottom.x;
-	rt.bottom = rightBottom.y;
-	 
-	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color), &m_tempBrush);
+	rt.bottom = rightBottom.y;	
+
+	m_deviceContext->CreateSolidColorBrush(color, &m_tempBrush);
 	assert(m_tempBrush);
 
 	Vector2 middle((rightBottom.x + leftTop.x) * 0.5f, (leftTop.y + rightBottom.y) * 0.5f);
 	SetTransform(_rotation, middle);
 
-	m_renderTarget->DrawRectangle(rt, m_tempBrush, 2.f);
+	m_deviceContext->DrawRectangle(rt, m_tempBrush, 2.f);
 
 	SetTransform();
 
@@ -289,12 +306,12 @@ void D2DRenderer::DrawFillRectangle(Vector2 _position, Vector2 _scale, ColorF co
 	rt.right = position.x + _scale.x * 0.5f;
 	rt.bottom = position.y + _scale.y * 0.5f;
 
-	m_renderTarget->CreateSolidColorBrush(color, &m_tempBrush);
+	m_deviceContext->CreateSolidColorBrush(color, &m_tempBrush);
 	assert(m_tempBrush);
 
 	SetTransform(_rotation, position);
 
-	m_renderTarget->FillRectangle(rt, m_tempBrush);
+	m_deviceContext->FillRectangle(rt, m_tempBrush);
 
 	SetTransform(); 
 
@@ -312,13 +329,13 @@ void D2DRenderer::DrawFillRectangle2(Vector2 _leftTop, Vector2 _rightBottom, Col
 	rt.right = rightBottom.x;
 	rt.bottom = rightBottom.y;
 
-	m_renderTarget->CreateSolidColorBrush(color, &m_tempBrush);
+	m_deviceContext->CreateSolidColorBrush(color, &m_tempBrush);
 	assert(m_tempBrush);
 
 	Vector2 middle((rightBottom.x + leftTop.x) * 0.5f, (leftTop.y + rightBottom.y) * 0.5f);
 	SetTransform(_rotation, middle);
 
-	m_renderTarget->FillRectangle(rt, m_tempBrush);
+	m_deviceContext->FillRectangle(rt, m_tempBrush);
 
 	SetTransform();
 
@@ -326,7 +343,7 @@ void D2DRenderer::DrawFillRectangle2(Vector2 _leftTop, Vector2 _rightBottom, Col
 }
 
 void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 _rightBottom
-	, COLORREF _color /*= D2D1::ColorF::White*/)
+	, ColorF _color /*= D2D1::ColorF::White*/)
 {
 	Vector2 leftTop = _leftTop.ChangeYSign();
 	Vector2 rightBottom = _rightBottom.ChangeYSign();
@@ -335,9 +352,9 @@ void D2DRenderer::DrawTextW(const std::wstring& _str, Vector2 _leftTop, Vector2 
 	D2D1_RECT_F rect = D2D1::RectF(leftTop.x, leftTop.y, rightBottom.x, rightBottom.y);
 
 	// 브러쉬 생성
-	m_renderTarget->CreateSolidColorBrush(D2D1::ColorF(_color), &m_tempBrush);
+	m_deviceContext->CreateSolidColorBrush(D2D1::ColorF(_color), &m_tempBrush);
 	assert(m_tempBrush);
-	m_renderTarget->DrawTextW(_str.c_str(), static_cast<UINT32>(_str.length())
+	m_deviceContext->DrawTextW(_str.c_str(), static_cast<UINT32>(_str.length())
 		, m_textFormat, rect, m_tempBrush);
 
 }
@@ -396,8 +413,11 @@ void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position
 	if (_rotation != 0.f)
 		SetTransform(_rotation, position);
 
-	m_renderTarget->DrawBitmap(texture->GetBitmap(), rect
+	m_deviceContext->DrawBitmap(texture->GetBitmap(), rect
 		, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, nullptr);
+
+	m_d2dEffect[0]->SetInput(0, texture->GetBitmap(),false);
+	m_deviceContext->DrawImage(m_d2dEffect[0], Point2F(rect.left,rect.bottom));
 
 	if (_rotation != 0.f)
 		SetTransform();
@@ -433,7 +453,7 @@ void D2DRenderer::DrawBitMap(const wstring& _key, Vector2 _position
 	if (_rotation != 0.f)
 		SetTransform(_rotation, position);
 
-	m_renderTarget->DrawBitmap(texture->GetBitmap(), screen
+	m_deviceContext->DrawBitmap(texture->GetBitmap(), screen
 		, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, textureRect);
 
 	if (_rotation != 0.f)
@@ -528,7 +548,7 @@ HRESULT D2DRenderer::LoadBitmapFromFile(PCWSTR _filePath
 	if (SUCCEEDED(hr))
 	{
 		// Create a Direct2D bitmap from the WIC bitmap.
-		hr = m_renderTarget->CreateBitmapFromWicBitmap(
+		hr = m_deviceContext->CreateBitmapFromWicBitmap(
 			converter,
 			NULL,
 			_bitmap
@@ -544,26 +564,157 @@ HRESULT D2DRenderer::LoadBitmapFromFile(PCWSTR _filePath
 	return hr;
 }
 
+void D2DRenderer::CreateEffects()
+{
+	// 가우시안 블러 이펙트 테스트
+	m_deviceContext->CreateEffect(CLSID_D2D1GaussianBlur, &m_d2dEffect[0]);
+	m_d2dEffect[0]->SetValue(D2D1_GAUSSIANBLUR_PROP_STANDARD_DEVIATION, 100.f);
+
+	// 크로마키 이펙트 테스트.
+	m_deviceContext->CreateEffect(CLSID_D2D1ChromaKey, &m_d2dEffect[1]);
+	m_d2dEffect[1]->SetValue(D2D1_CHROMAKEY_PROP_COLOR, D2D1::Vector3F(1.0f, 0.0f, 1.0f)); // 크로마키로 제거하려는 생삭을 지정
+	m_d2dEffect[1]->SetValue(D2D1_CHROMAKEY_PROP_TOLERANCE, 0.2f); //색상 제거의 허용 범위를 지정한다.
+	m_d2dEffect[1]->SetValue(D2D1_CHROMAKEY_PROP_INVERT_ALPHA, false);
+	m_d2dEffect[1]->SetValue(D2D1_CHROMAKEY_PROP_FEATHER, false);
+}
+
 HRESULT D2DRenderer::CreateDeviceResources()
 {
 	
 	HRESULT hr = S_OK;
-	if (m_renderTarget == nullptr)
+
+	if (m_deviceContext == nullptr)
 	{
-		RECT rc{};
+		// This flag adds support for surfaces with a different color channel ordering than the API default.
+		// You need it for compatibility with Direct2D.
+		UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 
-		// 창 클라이언트 영역 좌표
-		GetClientRect(m_hwnd, &rc);
+		// This array defines the set of DirectX hardware feature levels this app  supports.
+		// The ordering is important and you should  preserve it.
+		// Don't forget to declare your app's minimum required feature level in its
+		// description.  All apps are assumed to support 9.1 unless otherwise stated.
+		D3D_FEATURE_LEVEL featureLevels[] =
+		{
+			D3D_FEATURE_LEVEL_11_1,
+			D3D_FEATURE_LEVEL_11_0,
+			D3D_FEATURE_LEVEL_10_1,
+			D3D_FEATURE_LEVEL_10_0,
+			D3D_FEATURE_LEVEL_9_3,
+			D3D_FEATURE_LEVEL_9_2,
+			D3D_FEATURE_LEVEL_9_1
+		};
 
-		D2D1_SIZE_U size = D2D1::SizeU(
-			rc.right - rc.left
-			, rc.bottom - rc.top);
+		// Create the DX11 API device object, and get a corresponding context.
+		ID3D11Device* _D3D11Device;
+		ID3D11DeviceContext* _D3D11DeviceContext;		// DirectX Core Objects. Required for 2D and 3D.
 
-		// 렌더 타겟생성
-		hr = m_factory->CreateHwndRenderTarget(
-			D2D1::RenderTargetProperties()
-			, D2D1::HwndRenderTargetProperties(m_hwnd, size,D2D1_PRESENT_OPTIONS_IMMEDIATELY)
-			, &m_renderTarget);
+		D3D11CreateDevice(
+			nullptr,                    // specify null to use the default adapter
+			D3D_DRIVER_TYPE_HARDWARE,
+			0,
+			creationFlags,              // optionally set debug and Direct2D compatibility flags
+			featureLevels,              // list of feature levels this app can support
+			ARRAYSIZE(featureLevels),   // number of possible feature levels
+			D3D11_SDK_VERSION,
+			&_D3D11Device,              // returns the Direct3D device created
+			&m_featureLevel,            // returns feature level of device created
+			&_D3D11DeviceContext		// returns the device immediate context
+		);
+
+		assert(_D3D11Device);
+
+		// Obtain the underlying DXGI device of the Direct3D11 device.
+		IDXGIDevice* dxgiDevice;
+		_D3D11Device->QueryInterface(&dxgiDevice);	/// ComPtr.As()
+		assert(dxgiDevice);
+
+		// Obtain the Direct2D device for 2-D rendering.
+		m_factory->CreateDevice(dxgiDevice, &m_device);
+
+		// Get Direct2D device's corresponding device context object.
+		hr = m_device->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE,
+			&m_deviceContext);
+
+		//if (SUCCEEDED(hr))
+		//{
+		//	// Create brushes.
+		//	hr = m_deviceContext->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &m_pWhiteBrush);
+		//	hr = m_deviceContext->CreateSolidColorBrush(ColorF(1.0f, 1.0f, 0.f), &m_pYellowBrush);
+		//	hr = m_deviceContext->CreateSolidColorBrush(ColorF(1.0f, 1.0f, 1.0f), &m_pNowBrush);
+		//}
+
+		// Allocate a descriptor.
+		DXGI_SWAP_CHAIN_DESC1 swapChainDesc = { 0 };
+		swapChainDesc.Width = 0;                           // 0 : use automatic sizing
+		swapChainDesc.Height = 0;
+		swapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM; // this is the most common swapchain format
+		swapChainDesc.Stereo = false;
+		swapChainDesc.SampleDesc.Count = 1;                // don't use multi-sampling
+		swapChainDesc.SampleDesc.Quality = 0;
+		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		swapChainDesc.BufferCount = 2;                     // use double buffering to enable flip
+		swapChainDesc.Scaling = DXGI_SCALING_STRETCH;
+		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL; // all apps must use this SwapEffect
+		swapChainDesc.Flags = 0;
+
+		// Identify the physical adapter (GPU or card) this device is runs on.
+		IDXGIAdapter* dxgiAdapter;
+		dxgiDevice->GetAdapter(&dxgiAdapter);
+
+		// Get the factory object that created the DXGI device.
+		IDXGIFactory2* dxgiFactory;
+		dxgiAdapter->GetParent(IID_PPV_ARGS(&dxgiFactory));
+
+		// Get the final swap chain for this window from the DXGI factory.
+		DXGI_RATIONAL rate{};
+		rate.Denominator = 60;
+		rate.Numerator = 1;
+
+		DXGI_SWAP_CHAIN_FULLSCREEN_DESC swapChainDescFull{};
+		swapChainDescFull.RefreshRate = rate;
+		swapChainDescFull.Scaling = DXGI_MODE_SCALING_STRETCHED;
+		swapChainDescFull.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST;
+		swapChainDescFull.Windowed = true;
+
+		dxgiFactory->CreateSwapChainForHwnd(_D3D11Device,
+			m_hwnd,
+			&swapChainDesc,
+			&swapChainDescFull, // 전체화면 스왑체인 설정
+			nullptr,
+			&m_swapChain);
+
+		// Ensure that DXGI doesn't queue more than one frame at a time.
+		///dxgiDevice->SetMaximumFrameLatency(1);
+
+		// Get the backbuffer for this window which is be the final 3D render target.
+		ID3D11Texture2D* _backBuffer;
+		m_swapChain->GetBuffer(0, IID_PPV_ARGS(&_backBuffer));
+
+		// Now we set up the Direct2D render target bitmap linked to the swapchain. 
+		// Whenever we render to this bitmap, it is directly rendered to the 
+		// swap chain associated with the window.
+		D2D1_BITMAP_PROPERTIES1 _bitmapProperties =
+			BitmapProperties1(
+				D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW,
+				PixelFormat(DXGI_FORMAT_B8G8R8A8_UNORM, D2D1_ALPHA_MODE_IGNORE),
+				m_dpi,
+				m_dpi
+			);
+
+		// Direct2D needs the dxgi version of the backbuffer surface pointer.
+		IDXGISurface* dxgiBackBuffer;
+		m_swapChain->GetBuffer(0, IID_PPV_ARGS(&dxgiBackBuffer));
+		assert(dxgiBackBuffer);
+
+		// Get a D2D surface from the DXGI back buffer to use as the D2D render target.
+		m_deviceContext->CreateBitmapFromDxgiSurface(
+			dxgiBackBuffer,
+			&_bitmapProperties,
+			&m_targetBitmap
+		);
+
+		// Now we can set the Direct2D render target.
+		m_deviceContext->SetTarget(m_targetBitmap);
 	}
 
 	return hr;
@@ -571,5 +722,5 @@ HRESULT D2DRenderer::CreateDeviceResources()
 
 void D2DRenderer::DiscardDeviceResources()
 {
-	SafeRelease(&m_renderTarget);
+	SafeRelease(&m_deviceContext);
 }
