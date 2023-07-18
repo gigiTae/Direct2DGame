@@ -569,6 +569,7 @@ void D2DRenderer::CreateEffects()
 	// 가우시안 블러 이펙트 테스트
 	m_deviceContext->CreateEffect(CLSID_D2D1GaussianBlur, &m_d2dEffect[0]);
 	m_d2dEffect[0]->SetValue(D2D1_GAUSSIANBLUR_PROP_STANDARD_DEVIATION, 100.f);
+	m_d2dEffect[0]->SetValue(D2D1_BORDER_MODE_HARD, 1);
 
 	// 크로마키 이펙트 테스트.
 	m_deviceContext->CreateEffect(CLSID_D2D1ChromaKey, &m_d2dEffect[1]);
